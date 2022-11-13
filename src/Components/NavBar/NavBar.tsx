@@ -41,7 +41,12 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
         {user !== null ? userBar() : " "}
         <li>
           <Link to="/konto" className="nav-link link-light dropdown-item ">
-            Moje konto
+            Moje dane
+          </Link>
+        </li>
+        <li>
+          <Link to="/kartoteka" className="nav-link link-light dropdown-item ">
+            Kartoteka pracownicza
           </Link>
         </li>
         <li>
@@ -102,16 +107,6 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
               </Link>
             </li>
             <li className="nav-item shadow">
-              <Link to="/wyciagi" className="nav-link link-light active">
-                Wyciągi
-              </Link>
-            </li>
-            <li className="nav-item shadow">
-              <Link to="/cennik" className="nav-link link-light active">
-                Cennik
-              </Link>
-            </li>
-            <li className="nav-item shadow">
               <Link to="/kontakt" className="nav-link link-light active">
                 Kontakt
               </Link>
@@ -124,11 +119,6 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
             <li className="nav-item shadow">
               <Link to="/pomoc" className="nav-link link-light active">
                 Pomoc
-              </Link>
-            </li>
-            <li className="nav-item shadow">
-              <Link to="/karnety-online" className="nav-link link-light active">
-                Karnety online
               </Link>
             </li>
             {isAuthenticated ? authLink() : guestLink()}

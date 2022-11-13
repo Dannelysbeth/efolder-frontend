@@ -76,10 +76,11 @@ const LoginPage = ({ login, isAuthenticated, errors }) => {
                       </div>
 
                       {/* <div className="checkbox mb-4 mt-3">
-            <label>
-              <input type="checkbox" value="remember-me" /> Zapamiętaj mnie!
-            </label>
-          </div> */}
+                        <label>
+                          <input type="checkbox" value="remember-me" />{" "}
+                          Zapamiętaj mnie!
+                        </label>
+                      </div> */}
                       <p>
                         <p></p>
                       </p>

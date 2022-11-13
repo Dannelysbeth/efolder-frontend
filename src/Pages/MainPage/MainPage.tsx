@@ -96,7 +96,7 @@ const MainPage = () => {
               naszych klientów w świecie cyfrowym na wyższy poziom.
             </p>
             <p>
-              <Link to="/wyciagi" className="btn button-blue active">
+              <Link to="/wyciagi" className="btn button-blue-2 active">
                 Czytaj więcej &raquo;
               </Link>
             </p>
@@ -105,9 +105,9 @@ const MainPage = () => {
             <Link to="/wyciagi">
               <img
                 className="img-featurette image-main-border img-fluid mx-auto"
-                src="https://i.imgur.com/vv73HTm.jpg"
+                src="https://i.imgur.com/4Oj1aoh.jpg"
                 alt="Generic placeholder image"
-                width="400"
+                width="500"
                 height="600"
               />
             </Link>
@@ -124,7 +124,7 @@ const MainPage = () => {
               jazdy przepiękną malowniczą scenerię górską.
             </p>
             <p>
-              <Link to="/wyciagi" className="btn button-blue active">
+              <Link to="/wyciagi" className="btn button-blue-2 active">
                 Czytaj więcej &raquo;
               </Link>
             </p>
@@ -135,7 +135,7 @@ const MainPage = () => {
                 className="img-featurette image-main-border img-fluid mx-auto"
                 src="https://i.imgur.com/Ux4KQ5n.jpg"
                 alt="Generic placeholder image"
-                width="730"
+                width="800"
                 height="500"
               />
             </Link>
@@ -147,15 +147,14 @@ const MainPage = () => {
         <div className="row justify-content-center">
           <div className="col-md-5">
             <h2 className="featurette-heading">
-              Sporty zimowe dla dużych i małych!
+              Poznaj wartości naszej firmy!
             </h2>
             <p className="lead">
-              Bez względu na to czy jesteś już zaawansowanym narciarzem, czy
-              dopiero rozpoczynasz swoją przygodę z nartami, mamy dla ciebie
-              przygotowane atrakcje, które na pewno spełnią twoje oczekiwania.
+              Nasze osobiste wyzwanie i misja: przenosimy konkurencyjność
+              naszych klientów w świecie cyfrowym na wyższy poziom.
             </p>
             <p>
-              <Link to="/wyciagi" className="btn button-blue active">
+              <Link to="/wyciagi" className="btn button-blue-2 active">
                 Czytaj więcej &raquo;
               </Link>
             </p>
@@ -164,35 +163,35 @@ const MainPage = () => {
             <Link to="/wyciagi">
               <img
                 className="img-featurette image-main-border img-fluid mx-auto"
-                src="https://i.imgur.com/Ik3bCYH.jpg"
+                src="https://i.imgur.com/vv73HTm.jpg"
                 alt="Generic placeholder image"
-                width="400"
-                height="600"
+                width="250"
+                height="300"
               />
             </Link>
           </div>
         </div>
       </div>
-      <div className="divider"></div>
+      {/* <div className="divider"></div>
       <div className="featurette-divider"></div>
       <div className="container row">
         <div className="col-lg-4">
           <Link to="/godziny-otwarcia">
             <img
-              className="rounded-circle"
-              src="https://i.imgur.com/U6eIJDg.jpg"
+              className="img-featurette image-main-border img-fluid "
+              src="https://i.imgur.com/4Oj1aoh.jpg"
               alt="Generic placeholder image"
-              width="140"
-              height="140"
+              // width="140"
+              // height="140"
             />
           </Link>
-          <h2>Zmiana godzin otwarcia!</h2>
+          <h2>Czym jest eFolder?</h2>
           <p>
             Przyszedł czas na zmianę sezonu, a co za tym idzie zmianę godzin
             otwarcia naszych stoków!{" "}
           </p>
           <p>
-            <Link to="/godziny-otwarcia" className="btn button-blue active">
+            <Link to="/godziny-otwarcia" className="btn button-blue-2 active">
               Czytaj więcej &raquo;
             </Link>
           </p>
@@ -216,7 +215,7 @@ const MainPage = () => {
             Żaden problem nasza wyporzyczalnie ma wszystko czego potrzebujesz!
           </p>
           <p>
-            <Link to="/o-nas" className="btn button-blue active">
+            <Link to="/o-nas" className="btn button-blue-2 active">
               Czytaj więcej &raquo;
             </Link>
           </p>
@@ -238,13 +237,13 @@ const MainPage = () => {
             stację - w żadnym wypadku.
           </p>
           <p>
-            <Link to="/aktualnosci" className="btn button-blue active">
+            <Link to="/aktualnosci" className="btn button-blue-2 active">
               Czytaj więcej &raquo;
             </Link>
           </p>
         </div>
       </div>
-      <div className="divider"></div>
+      <div className="divider"></div> */}
     </div>
   );
 };

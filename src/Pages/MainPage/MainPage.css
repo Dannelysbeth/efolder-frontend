@@ -6,7 +6,8 @@
   background-color: #1d2223;
 }
 .main {
-  background-color: azure;
+  background: url("https://i.imgur.com/oD7H6I5.png?1");
+  background-size: cover;
 }
 .divider {
   height: 3rem;
@@ -82,13 +83,13 @@ hr {
   transform: scale(1.05);
 }
 
-.button-blue {
+.button-blue-2 {
   background-color: #1d2223;
   color: #ffffff;
   border: none;
 }
-.button-blue:hover {
-  background-color: #1d2223;
+.button-blue-2:hover {
+  background-color: #607d8b;
   color: #ffffff;
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
