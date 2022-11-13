@@ -1,0 +1,26 @@
+.footer {
+  margin-bottom: 0;
+  background-color: #1d2223;
+  position: relative;
+  clear: both;
+}
+
+.scrollToTop {
+  padding: 8px 14px;
+  text-align: center;
+  background: #607d8b;
+  border-radius: 50%;
+  font-weight: 700;
+  color: #fff;
+  position: fixed;
+  bottom: 40px;
+  right: 35px;
+}
+
+.Logo {
+  margin-top: 30px;
+}
+
+.footer-space {
+  margin-top: 30px;
+}

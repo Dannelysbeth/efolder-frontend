@@ -1,0 +1,62 @@
+.navbar-custom {
+  background-color: #1d2223;
+}
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+.navbar-toggler:focus {
+  text-decoration: none;
+  outline: 0;
+  box-shadow: 0 0 0 0.05rem;
+}
+
+.navbar-toggler {
+  border-color: white;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background-color: transparent;
+  border-radius: 0.25rem;
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.navbar-toggler-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.2em;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+.nav-item {
+  font-size: larger;
+  padding: 0.5rem;
+  border-radius: 20px;
+}
+
+.nav-item:hover {
+  background-color: #607d8b;
+}
+
+.navbar-dropdown-icon {
+  font-size: larger;
+  padding: 1rem;
+  border-radius: 20px;
+  margin-top: 8px;
+}
+.navbar-dropdown {
+  background-color: #1d2223;
+}
+.dropdown-item:hover {
+  background-color: #607d8b;
+}
+.greetings {
+  color: #f8f9fa;
+  margin: 8px;
+}
+.NavbarLogo {
+  margin-left: 100px;
+}

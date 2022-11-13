@@ -1,0 +1,31 @@
+body {
+    background-color: white;
+}
+
+.form-signin{
+    width: 100%;
+    max-width: 380px;
+    padding: 20px;
+    margin: auto;
+    background-color: #edf7fe;
+    border-radius: 8px;
+}
+
+.top-space{
+    margin-top: 50px;
+}
+
+.form-myBox{
+    margin-top: 10px;
+}
+
+.button-blue {
+    background-color: #002e3f;
+    color: #ffffff;
+    border: none;
+}
+.button-blue:hover {
+    background-color: #007cbb;
+    color: #ffffff;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
