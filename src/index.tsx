@@ -26,6 +26,7 @@ import HelpPage from "./Pages/HelpPage/HelpPage";
 import OAuth2RedirectPage from "./Pages/OAuth2RedirectPage/OAuth2RedirectPage";
 import EndpaymentPage from "./Pages/EndpaymentPage/EndpaymentPage";
 import CancelPaymentPage from "./Pages/CancelPaymentPage/CancelPaymentPage";
+import MyDocumentsPage from "./Pages/MyDocumentsPage/MyDocumentsPage";
 
 const routing = (
   <div>
@@ -40,6 +41,7 @@ const routing = (
             <Route>
               <Route path="/konto" element={<UserPage />} />
               <Route path="/o-nas" element={<AboutUsPage />} />
+              <Route path="/kartoteka" element={<MyDocumentsPage />} />
             </Route>
             {/* route that doesnt exist */}
             <Route path="*" element={<PageNotFound />}></Route>

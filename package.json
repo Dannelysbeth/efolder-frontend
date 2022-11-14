@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@react-google-maps/api": "^2.10.2",
     "@reduxjs/toolkit": "^1.8.1",
     "@rive-app/react-canvas": "^3.0.32",
@@ -49,6 +52,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/jquery": "^3.5.14",
     "@types/leaflet": "^1.7.9"
   }
 }

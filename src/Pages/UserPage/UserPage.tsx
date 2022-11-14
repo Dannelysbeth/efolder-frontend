@@ -3,13 +3,15 @@ import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./UserPage.css";
 import { connect } from "react-redux";
+import documents from "../../Data/documentsA";
 import { saveAs } from "file-saver";
 
 const UserPage = ({ user }) => {
   // const [vouchers, setVouchers] = useState([]);
+  const [files, setFiles] = useState(documents);
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(true);
 
   // const getProfilePicture = () => {
   //   return (
@@ -166,6 +168,26 @@ const UserPage = ({ user }) => {
       </div>
     </div>
   );
+  const adressInfo = () => (
+    <div className="row">
+      <div className="column col-lg-3">
+        <p>ul. Akademicka 16</p>
+        <p>44-100 Gliwice</p>
+        <p>Polska</p>
+        {/* <p>E-mail:</p>
+        <p>{user.gender ? "Płeć:" : ""}</p>
+        <p>{user.birthdate ? "Data urodzenia:" : ""}</p> */}
+      </div>
+      {/* <div className="column col-lg-3">
+        <p>Polska</p>
+        <p>Śląskie</p>
+        <p>Gliwice</p>
+        <p>{user.email}</p>
+        <p>{user.gender ? user.gender : ""}</p>
+        <p>{user.birthdate ? user.birthdate : ""}</p>
+      </div> */}
+    </div>
+  );
 
   return (
     <div className="backgd d-flex flex-column min-vh-100">
@@ -175,84 +197,20 @@ const UserPage = ({ user }) => {
         <h4 className="userPage-text mt-3">
           {user !== null ? infoOfUser() : "Osoba niezalogowana "}
         </h4>
+      </div>
+      <div className="user-container top-space bottom-space">
+        <h1 className="caption">Infomacje o zatrudnieniu</h1>
         <hr></hr>
-        {/* <h1 className="caption">Zdjęcie profilowe</h1> */}
-        {/* <hr></hr> */}
         <h4 className="userPage-text mt-3">
-          {/* <img style={this.style} src={{ uri: this.state.base64 }} /> */}
+          {user !== null ? adressInfo() : "Osoba niezalogowana "}
         </h4>
-        {/* {tickets.length === 0 ? (
-          ""
-        ) : (
-          <table className="table table-hover">
-            <thead>
-              <tr>
-                <th className="active text-center">ilość wejść</th>
-                <th className="active text-center">wyciąg</th>
-              </tr>
-            </thead>
-            <tbody>
-              {!loading &&
-                !error &&
-                tickets.map((ticket) => (
-                  <tr>
-                    <td className="text-center" data-title="">
-                      {ticket["entryAmount"]}
-                    </td>
-                    <td className="text-center" data-title="">
-                      {ticket["skiLiftName"]}
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        )} */}
-        {/* <h1 className="caption">Moje karnety</h1>
-                <hr></hr>
-                <h4 className="userPage-text mt-3">Przejazdy pojedyńcze:{tickets.length === 0 ? " Brak" : ""}</h4>
-                { tickets.length === 0 ? "" :
-                    <table className='table table-hover'>
-                        <thead>
-                            <tr>
-                                <th className='active text-center'>ilość wejść</th>
-                                <th className='active text-center'>wyciąg</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        { !loading && !error && tickets.map(ticket => 
-                        <tr>
-                            <td className='text-center' data-title=''>{ticket["entryAmount"]}</td>
-                            <td className='text-center' data-title=''>{ticket["skiLiftName"]}</td>
-                        </tr>
-                            )}
-                        </tbody>
-                    </table>
-                }
-                <h4 className="userPage-text mt-3">Karnety czasowe: {vouchers.length === 0 ? " Brak" : ""}</h4>
-                { vouchers.length === 0 ? "" : 
-                    <table className='table table-hover'>
-                        <thead>
-                            <tr>
-                                <th className='active text-center'>od</th>
-                                <th className='active text-center'>do</th>
-                                <th className='active text-center'>Czy aktywny</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        { !loading && !error && vouchers.map(voucher => 
-                        <tr>
-                            <td className='text-center' data-title=''>{voucher["startDate"] !== null ? voucher["startDate"] : "Jeszcze nie użyto"}</td>
-                            <td className='text-center' data-title=''>{voucher["expireDate"]  !== null ? voucher["expireDate"] : "Jeszcze nie użyto"}</td>
-                            <td className='text-center' data-title=''>{voucher["active"] === true ? "tak" : "nie"}</td>
-                        </tr>
-                            )}
-                        </tbody>
-                    </table>
-                } */}
-        {/* <hr></hr>
-                <h1 className="caption">Pobierz raport</h1>
-                <button className="btn button-blue active ms-4" onClick={() => getReport()}>Pobierz</button>
-                <hr></hr> */}
+      </div>
+      <div className="user-container top-space bottom-space">
+        <h1 className="column col-lg-3 caption">Adres</h1>
+        <hr></hr>
+        <h4 className="userPage-text mt-3">
+          {user !== null ? adressInfo() : "Osoba niezalogowana "}
+        </h4>
       </div>
     </div>
   );
