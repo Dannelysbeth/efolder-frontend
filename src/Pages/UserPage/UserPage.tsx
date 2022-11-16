@@ -143,9 +143,12 @@ const UserPage = ({ user }) => {
     <div className="row">
       <div className="column col-lg-3">
         <img
-          src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-          className="rounded-circle no-padding "
+          src={
+            user.imageUrl ? user.imageUrl : "https://i.imgur.com/teiJw8H.png"
+          }
+          className="profile-pic rounded-circle no-padding "
           height="200"
+          width="200"
           alt="Profile picture"
           loading="lazy"
         />

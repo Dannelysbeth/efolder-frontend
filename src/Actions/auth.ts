@@ -153,7 +153,8 @@ export const signup =
     lastName: string,
     middleName: string,
     birthdate: Date,
-    gender: string
+    gender: string,
+    imageUrl: string
   ) =>
   async (dispatch) => {
     const config = {
@@ -171,6 +172,7 @@ export const signup =
       middleName,
       birthdate,
       gender,
+      imageUrl,
     });
 
     try {

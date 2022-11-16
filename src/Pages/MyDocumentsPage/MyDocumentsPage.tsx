@@ -2,7 +2,8 @@ import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import documents from "../../Data/documentsA";
+import a_documents from "../../Data/documentsA";
+import b_documents from "../../Data/documentsA";
 import { saveAs } from "file-saver";
 import List from "./DocumentList";
 
@@ -11,10 +12,8 @@ import List from "./DocumentList";
 // });
 
 const MyDocumentPage = () => {
-  //   $(document).ready(function () {
-  //     ($(".treeview-animated") as any).mdbTreeview();
-  //   });
-  const [files, setFiles] = useState(documents);
+  const [aFiles, setAFiles] = useState(a_documents);
+  const [bFiles, setBFiles] = useState(b_documents);
   //   const [info, setInfo] = useState([]);
   //   const [loading, setLoading] = useState(true);
   //   const [error, setError] = useState(true);
@@ -25,15 +24,17 @@ const MyDocumentPage = () => {
         <h1 className="caption">Moja Kartoteka</h1>
         <hr></hr>
         <ul className="treeview-animated-list mb-3">
-          <li className="treeview-animated-items">
+          <li className="list-unstyled treeview-animated-items">
             <a className="closed">
               <i className="fas fa-angle-right"></i>
               <span>
-                <i className="far fa-folder-open ic-w mx-1"></i>Inbox
+                <i className="far fa-folder-open ic-w mx-1"></i>A
               </span>
             </a>
             <ul className="nested">
-              <List documents={files} />
+              <li className="list-unstyled treeview-animated-items">
+                <List documents={aFiles} />
+              </li>
             </ul>
           </li>
         </ul>
@@ -83,6 +84,95 @@ const MyDocumentPage = () => {
     //         </ul>
     //       </li>
     //     </ul>
+    //   </div>
+    // </div>
+
+    // //////////////////
+    // <div className="accordion accordion-borderless" id="accordionFlushExampleX">
+    //   <div className="accordion-item">
+    //     <h2 className="accordion-header" id="flush-headingOneX">
+    //       <button
+    //         className="accordion-button"
+    //         type="button"
+    //         data-mdb-toggle="collapse"
+    //         data-mdb-target="#flush-collapseOneX"
+    //         aria-expanded="true"
+    //         aria-controls="flush-collapseOneX"
+    //       >
+    //         Accordion Item #1
+    //       </button>
+    //     </h2>
+    //     <div
+    //       id="flush-collapseOneX"
+    //       className="accordion-collapse collapse show"
+    //       aria-labelledby="flush-headingOneX"
+    //       data-mdb-parent="#accordionFlushExampleX"
+    //     >
+    //       <div className="accordion-body">
+    //         Placeholder content for this accordion, which is intended to
+    //         demonstrate the
+    //         <code>.accordion-flush</code> class. This is the first item's
+    //         accordion body.
+    //       </div>
+    //     </div>
+    //   </div>
+    //   <div className="accordion-item">
+    //     <h2 className="accordion-header" id="flush-headingTwoX">
+    //       <button
+    //         className="accordion-button collapsed"
+    //         type="button"
+    //         data-mdb-toggle="collapse"
+    //         data-mdb-target="#flush-collapseTwoX"
+    //         aria-expanded="false"
+    //         aria-controls="flush-collapseTwoX"
+    //       >
+    //         Accordion Item #2
+    //       </button>
+    //     </h2>
+    //     <div
+    //       id="flush-collapseTwoX"
+    //       className="accordion-collapse collapse"
+    //       aria-labelledby="flush-headingTwoX"
+    //       data-mdb-parent="#accordionFlushExampleX"
+    //     >
+    //       <div className="accordion-body">
+    //         Placeholder content for this accordion, which is intended to
+    //         demonstrate the
+    //         <code>.accordion-flush</code> class. This is the second item's
+    //         accordion body. Let's imagine this being filled with some actual
+    //         content.
+    //       </div>
+    //     </div>
+    //   </div>
+    //   <div className="accordion-item">
+    //     <h2 className="accordion-header" id="flush-headingThreeX">
+    //       <button
+    //         className="accordion-button collapsed"
+    //         type="button"
+    //         data-mdb-toggle="collapse"
+    //         data-mdb-target="#flush-collapseThreeX"
+    //         aria-expanded="false"
+    //         aria-controls="flush-collapseThreeX"
+    //       >
+    //         Accordion Item #3
+    //       </button>
+    //     </h2>
+    //     <div
+    //       id="flush-collapseThreeX"
+    //       className="accordion-collapse collapse"
+    //       aria-labelledby="flush-headingThreeX"
+    //       data-mdb-parent="#accordionFlushExampleX"
+    //     >
+    //       <div className="accordion-body">
+    //         Placeholder content for this accordion, which is intended to
+    //         demonstrate the
+    //         <code>.accordion-flush</code> class. This is the third item's
+    //         accordion body. Nothing more exciting happening here in terms of
+    //         content, but just filling up the space to make it look, at least at
+    //         first glance, a bit more representative of how this would look in a
+    //         real-world application.
+    //       </div>
+    //     </div>
     //   </div>
     // </div>
   );

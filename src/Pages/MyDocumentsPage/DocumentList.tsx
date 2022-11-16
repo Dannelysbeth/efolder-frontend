@@ -25,17 +25,36 @@ const List = (props) => {
     const { id, name, category, size, uploadTime } = document;
     return (
       <article key={id} className="document">
-        <div>
-          <li>
+        {/* <div>
+          <div className="fw-bold">
+            {" "}
             <i className="fa-sharp fa-solid fa-file-pdf ic-w mr-1" /> {name}
-          </li>
-          {/* <h6>File size: {fileSize}</h6>
-          <h6>Upload time: {uploadTime}</h6> */}
-          <p></p>
+          </div>
+          <div className="text-muted">File size: {size}</div>
+        </div> */}
+        {/* //// */}
+        <div className="d-flex align-items-center">
+          <i className="fa-sharp fa-solid fa-file-pdf ic-w mr-1" />
+          <div className="ms-3">
+            <p className="fw-bold mb-1">{name}</p>
+            <small>File size: {size}</small>
+          </div>
+          <a className="btn btn-link btn-rounded btn-sm" href="#" role="button">
+            View
+          </a>
         </div>
-      </article>
 
-      /////////////////////////
+        {/* <div>
+          <p>
+            <i className="fa-sharp fa-solid fa-file-pdf ic-w mr-1" /> {name}
+            <small>
+              {" "}
+              <p>File size: {size}</p>
+            </small>
+          </p>
+          <p></p>
+        </div> */}
+      </article>
     );
   });
 };

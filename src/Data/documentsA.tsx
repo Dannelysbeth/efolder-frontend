@@ -8,23 +8,23 @@ export default [
   },
   {
     id: 2,
-    name: "CV.pdf",
+    name: "Aneks-6557.pdf",
     category: "B",
     size: 1039832,
     uploadTime: "2022-11-14 18:25:17",
   },
   {
     id: 3,
-    name: "CV.pdf",
+    name: "Oświadczenie_Lekarskie.pdf",
     category: "A",
     size: "10.87MB",
     uploadTime: "2022-11-14 18:25:17",
   },
   {
     id: 4,
-    name: "CV.pdf",
+    name: "Zgoda_RODO.pdf",
     category: "B",
-    size: 1039832,
+    size: "182.kB",
     uploadTime: "2022-11-14 18:25:17",
   },
   {

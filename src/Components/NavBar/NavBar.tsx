@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { logout } from "../../Actions/auth";
 
 const NavBar = ({ logout, isAuthenticated, user }) => {
+  const [info, setInfo] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const navigate = useNavigate();
   const logout_user = () => {
@@ -15,11 +16,38 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
 
   const userBar = () => (
     <Fragment>
-      <li id="message" className="greetings">
-        Witaj {user.firstName}
+      <li id="message bold" className="greetings">
+        {user.firstName} {}
+        {user.lastName}
       </li>
     </Fragment>
   );
+  const userPic = () => (
+    <img
+      src={user.imageUrl ? user.imageUrl : "https://i.imgur.com/teiJw8H.png"}
+      className="profile-pic rounded-circle no-padding "
+      height="50"
+      width="50"
+      alt="Profile picture"
+      loading="lazy"
+    />
+  );
+
+  // const userPic = () => (
+  //   <Fragment>
+  //     <img
+  //       src={
+  //         user.imageUrl
+  //           ? user.imageUrl
+  //           : "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+  //       }
+  //       className="rounded-circle no-padding "
+  //       height="50"
+  //       alt="Profile picture"
+  //       loading="lazy"
+  //     />
+  //   </Fragment>
+  // );
 
   const authLink = () => (
     <li className="navbar-dropdown-icon shadow dropdown text-center">
@@ -29,13 +57,15 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <img
-          src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+        {user !== null ? userPic() : " "}
+        {/* <img
+          src="http://localhost:8080/api/profilePicture/view/3"
           className="rounded-circle no-padding "
           height="50"
           alt="Profile picture"
           loading="lazy"
-        />
+        /> */}
+        {/* {userPic()} */}
       </button>
       <ul className="dropdown-menu navbar-dropdown dropdown-menu-end">
         {user !== null ? userBar() : " "}
