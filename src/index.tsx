@@ -11,7 +11,7 @@ import PageNotFound from "./Pages/NotFoundPage/NotFoundPage";
 import MainPage from "./Pages/MainPage/MainPage";
 import NewsPage from "./Pages/NewsPage/NewsPage";
 import AboutUsPage from "./Pages/AboutUsPage/AboutUsPage";
-import UserPage from "./Pages/UserPage/UserPage";
+import UserPage from "./Pages/UserPage/UserPageDemo";
 import RulesPage from "./Pages/RulesPage/RulesPage";
 import ContactPage from "./Pages/ContactPage/ContactPage";
 import OpenHoursPage from "./Pages/OpenHoursPage/OpenHoursPage";
