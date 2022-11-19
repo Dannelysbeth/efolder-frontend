@@ -26,7 +26,7 @@ import HelpPage from "./Pages/HelpPage/HelpPage";
 import OAuth2RedirectPage from "./Pages/OAuth2RedirectPage/OAuth2RedirectPage";
 import EndpaymentPage from "./Pages/EndpaymentPage/EndpaymentPage";
 import CancelPaymentPage from "./Pages/CancelPaymentPage/CancelPaymentPage";
-import MyDocumentsPage from "./Pages/MyDocumentsPage/MyDocumentsPage";
+import MyDocumentsPage from "./Pages/UserPage/UserPage";
 
 const routing = (
   <div>
