@@ -24,6 +24,8 @@ import {
 
 const HomePage = () => {
   document.documentElement.classList.remove("nav-open");
+  window.location.reload();
+
   React.useEffect(() => {
     document.body.classList.add("profile-page");
     return function cleanup() {

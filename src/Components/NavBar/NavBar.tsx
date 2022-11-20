@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../Actions/auth";
 
-const NavBar = ({ logout, isAuthenticated, user }) => {
+const NavBar = ({ logout, isAuthenticated, user, role }) => {
   const [info, setInfo] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const navigate = useNavigate();
@@ -32,22 +32,6 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
       loading="lazy"
     />
   );
-
-  // const userPic = () => (
-  //   <Fragment>
-  //     <img
-  //       src={
-  //         user.imageUrl
-  //           ? user.imageUrl
-  //           : "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-  //       }
-  //       className="rounded-circle no-padding "
-  //       height="50"
-  //       alt="Profile picture"
-  //       loading="lazy"
-  //     />
-  //   </Fragment>
-  // );
 
   const authLink = () => (
     <li className="navbar-dropdown-icon shadow dropdown text-center">
@@ -88,6 +72,16 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
             Wyloguj
           </Link>
         </li>
+        {
+          <li>
+            <Link
+              to="/createUser"
+              className="nav-link link-light dropdown-item "
+            >
+              {user !== null ? role.roles[0].id : ""}
+            </Link>
+          </li>
+        }
       </ul>
     </li>
   );
@@ -161,6 +155,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user,
+  role: state.auth.role,
 });
 
 export default connect(mapStateToProps, { logout })(NavBar);

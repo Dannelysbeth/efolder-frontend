@@ -19,6 +19,7 @@ const LoginPage = ({ login, isAuthenticated, errors }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     login(name, password);
+    // setFormData({ name, password });
   };
 
   // const continueWithGoogle = () => {
@@ -74,13 +75,6 @@ const LoginPage = ({ login, isAuthenticated, errors }) => {
                         />
                         <label>Hasło</label>
                       </div>
-
-                      {/* <div className="checkbox mb-4 mt-3">
-                        <label>
-                          <input type="checkbox" value="remember-me" />{" "}
-                          Zapamiętaj mnie!
-                        </label>
-                      </div> */}
                       <p>
                         <p></p>
                       </p>
@@ -91,13 +85,6 @@ const LoginPage = ({ login, isAuthenticated, errors }) => {
                         Zaloguj się
                       </button>
                     </form>
-                    {/* <p className="mt-3 text-center">lub</p>
-            <button className="w-100 btn btn-lg btn-google button-blue" type="button" onClick={continueWithGoogle}>
-                <img src="https://img.icons8.com/color/16/000000/google-logo.png" /> Zaloguj się kontem <strong>Google</strong> </button>
-            <p className="mt-3 text-center">Nie masz konta?</p>
-            <Link to="/rejestracja">
-                <p className="text-center">Załóż nowe konto</p>
-            </Link> */}
                   </div>
                 </div>
               </div>

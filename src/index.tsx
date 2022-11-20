@@ -42,6 +42,7 @@ const routing = (
               <Route path="/konto" element={<UserPage />} />
               <Route path="/o-nas" element={<AboutUsPage />} />
               <Route path="/kartoteka" element={<MyDocumentsPage />} />
+              <Route path="/createUser" element={<RegisterPage />} />
             </Route>
             {/* route that doesnt exist */}
             <Route path="*" element={<PageNotFound />}></Route>

@@ -9,6 +9,8 @@ import {
   LOGOUT,
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
+  ROLE_LOADED_SUCCESS,
+  ROLE_LOADED_FAIL,
 } from "./types";
 
 export const loadUser = () => async (dispatch) => {
@@ -58,17 +60,17 @@ export const RolesLoad = () => async (dispatch) => {
       );
 
       dispatch({
-        type: USER_LOADED_SUCCESS,
+        type: ROLE_LOADED_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
       dispatch({
-        type: USER_LOADED_FAIL,
+        type: ROLE_LOADED_FAIL,
       });
     }
   } else {
     dispatch({
-      type: USER_LOADED_FAIL,
+      type: ROLE_LOADED_FAIL,
     });
   }
 };
@@ -160,6 +162,8 @@ export const signup =
     const config = {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        Accept: "*/*",
       },
     };
 
@@ -177,7 +181,7 @@ export const signup =
 
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_REMOTE_URL}/api/auth/register`,
+        `${process.env.REACT_APP_REMOTE_URL}/api/user`,
         body,
         config
       );

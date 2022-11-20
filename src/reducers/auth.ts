@@ -8,6 +8,8 @@ import {
   LOGOUT,
   SIGNUP_FAIL,
   SIGNUP_SUCCESS,
+  ROLE_LOADED_SUCCESS,
+  ROLE_LOADED_FAIL,
 } from "../Actions/types";
 
 const initialState = {
@@ -16,6 +18,8 @@ const initialState = {
   isAuthenticated: null,
   accountCreated: null,
   user: null,
+  role: null,
+  message: null,
 };
 
 export default function (state = initialState, action) {
@@ -29,33 +33,51 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
         access: payload.accessToken,
         refresh: payload.refreshToken,
+        message: "Successfully logged in",
       };
     case USER_LOADED_SUCCESS:
       return {
         ...state,
         user: payload,
+        message: "User successfully loaded",
+      };
+    case ROLE_LOADED_FAIL:
+      return {
+        ...state,
+        role: null,
+        message: payload,
+      };
+    case ROLE_LOADED_SUCCESS:
+      return {
+        ...state,
+        role: payload,
+        message: "Role successfully loaded",
       };
     case USER_LOADED_FAIL:
       return {
         ...state,
-        user: null,
+        role: null,
+        message: payload,
       };
     case AUTHENTICATED_FAIL:
       return {
         ...state,
         isAuthenticated: false,
+        message: payload,
       };
     case AUTHENTICATED_SUCCESS:
       return {
         ...state,
         isAuthenticated: true,
+        message: "User successfully authenticated",
       };
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        isAuthenticated: false,
+        // isAuthenticated: false,
         accountCreated: true,
         errors: null,
+        message: "User successfully created",
       };
     case LOGOUT:
       localStorage.removeItem("access");
@@ -67,6 +89,7 @@ export default function (state = initialState, action) {
         isAuthenticated: false,
         user: null,
         errors: null,
+        message: "User successfully logged out",
       };
     case LOGIN_FAIL:
     case SIGNUP_FAIL:
@@ -76,9 +99,10 @@ export default function (state = initialState, action) {
         ...state,
         access: null,
         refresh: null,
-        isAuthenticated: false,
+        // isAuthenticated: false,
         user: null,
         errors: payload,
+        message: payload,
       };
     default:
       return state;
