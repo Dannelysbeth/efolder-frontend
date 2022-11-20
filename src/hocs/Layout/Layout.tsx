@@ -6,22 +6,22 @@ import Footer from "../../Components/Footer/Footer";
 import {
   checkAuthenticated,
   loadUser,
-  RolesLoad,
-  signup,
+  // RolesLoad,
+  // signup,
 } from "../../Actions/auth";
 
 const Layout = ({
   checkAuthenticated,
   loadUser,
-  RolesLoad,
-  signup,
+  // RolesLoad,
+  // signup,
   children,
 }) => {
   useEffect(() => {
     checkAuthenticated();
     loadUser();
-    RolesLoad();
-    signup();
+    // RolesLoad();
+    // signup();
   }, []);
 
   console.log(window.location.pathname === "/blank");
@@ -42,6 +42,6 @@ const Layout = ({
 export default connect(null, {
   checkAuthenticated,
   loadUser,
-  RolesLoad,
-  signup,
+  // RolesLoad,
+  // signup,
 })(Layout);

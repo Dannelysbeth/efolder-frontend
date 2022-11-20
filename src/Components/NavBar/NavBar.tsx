@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../Actions/auth";
 
-const NavBar = ({ logout, isAuthenticated, user, role }) => {
+const NavBar = ({ logout, isAuthenticated, user }) => {
   const [info, setInfo] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const navigate = useNavigate();
@@ -78,7 +78,7 @@ const NavBar = ({ logout, isAuthenticated, user, role }) => {
               to="/createUser"
               className="nav-link link-light dropdown-item "
             >
-              {user !== null ? role.roles[0].id : ""}
+              {user != null ? user.roles[0] : ""}
             </Link>
           </li>
         }
@@ -155,7 +155,7 @@ const NavBar = ({ logout, isAuthenticated, user, role }) => {
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user,
-  role: state.auth.role,
+  // role: state.auth.role,
 });
 
 export default connect(mapStateToProps, { logout })(NavBar);

@@ -38,6 +38,7 @@ export default function (state = initialState, action) {
     case USER_LOADED_SUCCESS:
       return {
         ...state,
+        isAuthenticated: true,
         user: payload,
         message: "User successfully loaded",
       };
@@ -50,13 +51,14 @@ export default function (state = initialState, action) {
     case ROLE_LOADED_SUCCESS:
       return {
         ...state,
+        isAuthenticated: true,
         role: payload,
         message: "Role successfully loaded",
       };
     case USER_LOADED_FAIL:
       return {
         ...state,
-        role: null,
+        user: null,
         message: payload,
       };
     case AUTHENTICATED_FAIL:
@@ -100,7 +102,7 @@ export default function (state = initialState, action) {
         access: null,
         refresh: null,
         // isAuthenticated: false,
-        user: null,
+        // user: null,
         errors: payload,
         message: payload,
       };
