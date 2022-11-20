@@ -20,15 +20,12 @@ const UserPageDemo = ({ user }) => {
 
   const infoOfUser = () => (
     <div className="row">
-      <div className="row">
+      <div className="row user-container">
         <div className="col-xl-7 order-xl-2">
-          <div className="card-container ">
+          <div className="">
             <div className="card-header ">
               <div className="row align-items-center">
-                <div className="col-4">
-                  <h3 className="mb-0">Dane osobowe</h3>
-                </div>
-                <div className="col-5 text-left"></div>
+                <h3 className="mb-0">Dane osobowe</h3>
               </div>
             </div>
             <div className="card-body">
@@ -41,14 +38,15 @@ const UserPageDemo = ({ user }) => {
                     <div className="col-md-4">
                       <div className="form-group focused">
                         <label className="form-control-label-user-page input-username">
-                          Username
+                          Stanowisko
                         </label>
                         <input
                           type="text"
                           id="input-username"
                           className="form-control form-control-alternative"
                           placeholder="Username"
-                          value={user.username}
+                          value="Java Dev"
+                          disabled
                         />
                       </div>
                     </div>
@@ -219,52 +217,120 @@ const UserPageDemo = ({ user }) => {
               </form>
             </div>
           </div>
-        </div>
-        <div className="col-xl-3  mb-5 mb-xl-0">
-          <div className="row card-container card-profile ">
-            <div className="card-profile-image shadows ">
-              <img
-                src={
-                  user.imageUrl
-                    ? user.imageUrl
-                    : "https://i.imgur.com/teiJw8H.png"
-                }
-                className="rounded-circle user-pic shadow"
-              />
+          <div className="card-header ">
+            <div className="row align-items-center">
+              <div className="col-7">
+                <h3 className="mb-0">Dodaj dokumenty</h3>
+              </div>
             </div>
+          </div>
+          <div className="card-body">
+            <form className="was-validated">
+              <div className="form-group">
+                <select className="custom-select" required>
+                  <option value="">Wybierz kategorię dokumentu</option>
+                  <option value="1">A</option>
+                  <option value="2">B</option>
+                  <option value="3">C</option>
+                  <option value="4">D</option>
+                </select>
+                <div className="invalid-feedback">
+                  Wymagane jest podanie kategorii
+                </div>
+              </div>
 
-            <div className="row card-body pt-0 pt-md-4">
-              <div className=" text">
-                <h3>
-                  {user.firstName}
-                  {user.middleName ? " " + user.middleName + " " : " "}
-                  {user.lastName}
-                </h3>
-                <div className="h5 font-weight-300">
-                  <i className="ni location_pin mr-2"></i>Bucharest, Romania
+              <div className="custom-file">
+                <label className="custom-file-label validatedCustomFile">
+                  Wybierz dokument
+                </label>
+                <p></p>
+                <input
+                  type="file"
+                  className="custom-file-input"
+                  id="validatedCustomFile"
+                  required
+                />
+
+                <div className="invalid-feedback">
+                  Example invalid custom file feedback
                 </div>
-                <div className="h5 mt-4">
-                  <i className="ni business_briefcase-24 mr-2"></i>Solution
-                  Manager - Creative Tim Officer
-                </div>
-                <div>
-                  <i className="ni education_hat mr-2"></i>University of
-                  Computer Science
-                </div>
-                <hr className="my-4" />
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="col-xl-5  mb-5 mb-xl-0">
+          <div className="row">
+            <div className=" ">
+              <div className="card-profile-image shadows ">
+                <img
+                  src={
+                    user.imageUrl
+                      ? user.imageUrl
+                      : "https://i.imgur.com/teiJw8H.png"
+                  }
+                  className="rounded-circle user-pic shadow"
+                />
+              </div>
+
+              <div className="row card-body pt-0 pt-md-4">
+                <div className=" text">
+                  <h3>
+                    {user.firstName}
+                    {user.middleName ? " " + user.middleName + " " : " "}
+                    {user.lastName}
+                  </h3>
+                  <div className="h5 font-weight-300">
+                    <i className="ni location_pin mr-2"></i>Bucharest, Romania
+                  </div>
+                  <div className="h5 mt-4">
+                    <i className="ni business_briefcase-24 mr-2"></i>Solution
+                    Manager - Creative Tim Officer
+                  </div>
+                  <div>
+                    <i className="ni education_hat mr-2"></i>University of
+                    Computer Science
+                  </div>
+                  {/* <hr className="my-4" />
                 <p>
                   Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick
                   Murphy — writes, performs and records all of his own music.
                 </p>
-                <a href="#">Show more</a>
+                <a href="#">Show more</a> */}
+                </div>
               </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="card-header ">
+              <div className="row align-items-center">
+                <div className="col-7">
+                  <h3 className="mb-0">Moje dokumenty</h3>
+                </div>
+              </div>
+            </div>
+            <div className="card-body">
+              <ul className="treeview-animated-list mb-3">
+                <li className="list-unstyled treeview-animated-items">
+                  <a className="closed">
+                    <i className="fas fa-angle-right"></i>
+                    <span>
+                      <i className="far fa-folder-open ic-w mx-1"></i>A
+                    </span>
+                  </a>
+                  <ul className="nested">
+                    <li className="list-unstyled treeview-animated-items">
+                      <List documents={aFiles} />
+                    </li>
+                  </ul>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
       <div className="row">
         {/* Here */}
-        <div className="col-xl-3 order-xl-1">
+        {/* <div className="col-xl-3 order-xl-1">
           <div className="card-container ">
             <div className="card-header ">
               <div className="row align-items-center">
@@ -291,6 +357,47 @@ const UserPageDemo = ({ user }) => {
               </ul>
             </div>
           </div>
+        </div> */}
+        <div className="col-xl-7 order-xl-1">
+          {/* <div className="card-container ">
+            <div className="card-header ">
+              <div className="row align-items-center">
+                <div className="col-7">
+                  <h3 className="mb-0">Dodaj dokumenty</h3>
+                </div>
+              </div>
+            </div>
+            <div className="card-body">
+              <form className="was-validated">
+                <div className="form-group">
+                  <select className="custom-select" required>
+                    <option value="">Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <div className="invalid-feedback">
+                    Example invalid custom select feedback
+                  </div>
+                </div>
+
+                <div className="custom-file">
+                  <input
+                    type="file"
+                    className="custom-file-input"
+                    id="validatedCustomFile"
+                    required
+                  />
+                  <label className="custom-file-label validatedCustomFile">
+                    Choose file...
+                  </label>
+                  <div className="invalid-feedback">
+                    Example invalid custom file feedback
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div> */}
         </div>
       </div>
     </div>
