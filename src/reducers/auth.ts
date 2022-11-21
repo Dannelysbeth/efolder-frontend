@@ -95,12 +95,12 @@ export default function (state = initialState, action) {
       };
     case LOGIN_FAIL:
     case SIGNUP_FAIL:
-      localStorage.removeItem("access");
-      localStorage.removeItem("refresh");
+      // localStorage.removeItem("access");
+      // localStorage.removeItem("refresh");
       return {
         ...state,
-        access: null,
-        refresh: null,
+        // access: null,
+        // refresh: null,
         // isAuthenticated: false,
         // user: null,
         errors: payload,
