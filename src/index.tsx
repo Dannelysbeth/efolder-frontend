@@ -26,7 +26,8 @@ import HelpPage from "./Pages/HelpPage/HelpPage";
 import OAuth2RedirectPage from "./Pages/OAuth2RedirectPage/OAuth2RedirectPage";
 import EndpaymentPage from "./Pages/EndpaymentPage/EndpaymentPage";
 import CancelPaymentPage from "./Pages/CancelPaymentPage/CancelPaymentPage";
-import MyDocumentsPage from "./Pages/UserPage/UserPage";
+import MyDocumentsPage from "./Pages/UserPage/UserPage"; //AnotherUserPage
+import AnotherUserPage from "./Pages/UserPage/AnotherUserPage";
 
 const routing = (
   <div>
@@ -43,6 +44,7 @@ const routing = (
               <Route path="/o-nas" element={<AboutUsPage />} />
               <Route path="/kartoteka" element={<MyDocumentsPage />} />
               <Route path="/createUser" element={<RegisterPage />} />
+              <Route path="/user/*" element={<AnotherUserPage />} />
             </Route>
             {/* route that doesnt exist */}
             <Route path="*" element={<PageNotFound />}></Route>

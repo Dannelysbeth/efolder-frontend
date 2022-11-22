@@ -5,6 +5,8 @@ import {
   AUTHENTICATED_FAIL,
   USER_LOADED_SUCCESS,
   USER_LOADED_FAIL,
+  ANOTHER_USER_LOADED_SUCCESS,
+  ANOTHER_USER_LOADED_FAIL,
   LOGOUT,
   SIGNUP_FAIL,
   SIGNUP_SUCCESS,
@@ -19,6 +21,8 @@ const initialState = {
   accountCreated: null,
   user: null,
   role: null,
+  anotherUser: null,
+  errors: null,
   message: null,
 };
 
@@ -30,6 +34,7 @@ export default function (state = initialState, action) {
       localStorage.setItem("refresh", payload.refreshToken);
       return {
         ...state,
+        errors: null,
         isAuthenticated: true,
         access: payload.accessToken,
         refresh: payload.refreshToken,
@@ -40,8 +45,29 @@ export default function (state = initialState, action) {
         ...state,
         isAuthenticated: true,
         user: payload,
+        erros: null,
         message: "User successfully loaded",
       };
+    case USER_LOADED_FAIL:
+      return {
+        ...state,
+        user: null,
+        errors: payload,
+      };
+    case ANOTHER_USER_LOADED_FAIL:
+      return {
+        ...state,
+        anotherUser: null,
+        errors: payload,
+      };
+    case ANOTHER_USER_LOADED_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
+        anotherUser: payload,
+        message: "User successfully loaded",
+      };
+
     case ROLE_LOADED_FAIL:
       return {
         ...state,
@@ -55,12 +81,7 @@ export default function (state = initialState, action) {
         role: payload,
         message: "Role successfully loaded",
       };
-    case USER_LOADED_FAIL:
-      return {
-        ...state,
-        user: null,
-        message: payload,
-      };
+
     case AUTHENTICATED_FAIL:
       return {
         ...state,
@@ -78,6 +99,7 @@ export default function (state = initialState, action) {
         ...state,
         // isAuthenticated: false,
         accountCreated: true,
+        anotherUser: payload,
         errors: null,
         message: "User successfully created",
       };
@@ -94,6 +116,15 @@ export default function (state = initialState, action) {
         message: "User successfully logged out",
       };
     case LOGIN_FAIL:
+      return {
+        ...state,
+        // access: null,
+        // refresh: null,
+        // isAuthenticated: false,
+        // user: null,
+        errors: payload,
+        message: payload,
+      };
     case SIGNUP_FAIL:
       // localStorage.removeItem("access");
       // localStorage.removeItem("refresh");

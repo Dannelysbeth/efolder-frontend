@@ -6,6 +6,8 @@ import {
   AUTHENTICATED_FAIL,
   USER_LOADED_SUCCESS,
   USER_LOADED_FAIL,
+  ANOTHER_USER_LOADED_SUCCESS,
+  ANOTHER_USER_LOADED_FAIL,
   LOGOUT,
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
@@ -40,6 +42,37 @@ export const loadUser = () => async (dispatch) => {
   } else {
     dispatch({
       type: USER_LOADED_FAIL,
+    });
+  }
+};
+
+export const loadAnotherUser = (username: string) => async (dispatch) => {
+  if (localStorage.getItem("access")) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        Accept: "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_REMOTE_URL}/api/user/${username}`,
+        config
+      );
+
+      dispatch({
+        type: ANOTHER_USER_LOADED_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: ANOTHER_USER_LOADED_FAIL,
+      });
+    }
+  } else {
+    dispatch({
+      type: ANOTHER_USER_LOADED_FAIL,
     });
   }
 };
@@ -139,6 +172,7 @@ export const login =
         payload: res.data,
       });
     } catch (err) {
+      console.log(err.response.data);
       dispatch({
         type: LOGIN_FAIL,
         payload: err.response.data,
@@ -190,6 +224,81 @@ export const signup =
         payload: res.data,
       });
     } catch (err) {
+      console.log(err.response); //TODO
+      dispatch({
+        type: SIGNUP_FAIL,
+        payload: err.response.data,
+      });
+    }
+  };
+
+export const extendedSignup =
+  (
+    username: string,
+    password: string,
+    email: string,
+    firstName: string,
+    lastName: string,
+    middleName: string,
+    teamName: string,
+    hrManager: string,
+    positionName: string,
+    positionDescription: string,
+    country: string,
+    city: string,
+    zipcode: string,
+    street: string,
+    buildingNumber: string,
+    flatNumber: string,
+    county: string
+  ) =>
+  async (dispatch) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        Accept: "*/*",
+      },
+    };
+
+    const body = JSON.stringify({
+      user: {
+        username,
+        password,
+        email,
+        firstName,
+        lastName,
+        middleName,
+      },
+      employment: {
+        teamName,
+        hrManager,
+        positionName,
+        positionDescription,
+      },
+      address: {
+        country,
+        city,
+        zipcode,
+        street,
+        buildingNumber,
+        flatNumber,
+        county,
+      },
+    });
+
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_REMOTE_URL}/api/employment/create`,
+        body,
+        config
+      );
+      dispatch({
+        type: SIGNUP_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err.response); //TODO
       dispatch({
         type: SIGNUP_FAIL,
         payload: err.response.data,

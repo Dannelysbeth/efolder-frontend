@@ -76,7 +76,7 @@ const LoginPage = ({ login, isAuthenticated, errors }) => {
                         <label>Hasło</label>
                       </div>
                       <p>
-                        <p></p>
+                        <p>{errors !== null ? errors.message : ""}</p>
                       </p>
                       <button
                         className="w-100 btn btn-lg button-blue-lp "
