@@ -3,30 +3,30 @@ import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import "./RegisterPage.css";
 import { connect } from "react-redux";
-import { signup, extendedSignup } from "../../Actions/auth";
+import { extendedSignup } from "../../Actions/auth";
 import { checkAuthenticated } from "../../Actions/auth";
+import PeopleList from "./PeopleList";
+import {
+  MDBInput,
+  MDBBtn,
+  MDBCheckbox,
+  MDBRow,
+  MDBCol,
+} from "mdb-react-ui-kit";
 
 const RegisterPage = ({
-  signup,
   extendedSignup,
   isAuthenticated,
   errors,
   accountCreated,
   anotherUser,
-  //   user,
 }) => {
   accountCreated = false;
-  //   const [info, setInfo] = useState([]);
-  //   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(true);
-  //   const [formData, setFormData] = useState({
-  //     username: "",
-  //     password: "",
-  //     re_password: "",
-  //     email: "",
-  //     firstName: "",
-  //     lastName: "",
-  //   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [hrAdmins, setHrAdmins] = useState([]);
+  const [teams, setTeams] = useState([]);
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -49,8 +49,6 @@ const RegisterPage = ({
   });
 
   console.log(window.location.hostname);
-  //   const { username, password, re_password, email, firstName, lastName } =
-  //     formData;
   const {
     username,
     password,
@@ -73,13 +71,6 @@ const RegisterPage = ({
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  //   const onSubmit = (e) => {
-  //     e.preventDefault();
-  //     if (password === re_password) {
-  //       signup(username, password, email, firstName, lastName);
-  //       //   return <Navigate to="/" />;
-  //     }
-  //   };
   const onSubmit = (e) => {
     e.preventDefault();
     if (password === re_password) {
@@ -101,7 +92,7 @@ const RegisterPage = ({
         flatNumber,
         county
       );
-      //   return <Navigate to="/" />;
+      return <Navigate to="/" />;
     }
   };
   console.log(isAuthenticated);
@@ -113,63 +104,108 @@ const RegisterPage = ({
     return <Navigate to="/" />;
     // window.open("https://" + window.location.hostname + "/login", "_parent");
   }
+  const getHRUsers = () => {
+    return fetch(`${process.env.REACT_APP_REMOTE_URL}/api/user/employee/all`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setHrAdmins(responseJson);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(true);
+      });
+  };
+  useEffect(() => {
+    getHRUsers();
+  }, []);
+
+  const getTeams = () => {
+    return fetch(`${process.env.REACT_APP_REMOTE_URL}/api/team/all`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setTeams(responseJson);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(true);
+      });
+  };
+  useEffect(() => {
+    getHRUsers();
+    getTeams();
+  }, []);
 
   return (
     <div className="d-flex flex-column min-vh-100">
       <div className="form-signin top-space">
-        <form onSubmit={(e) => onSubmit(e)}>
+        <MDBRow className="g-3" tag="form" onSubmit={(e) => onSubmit(e)}>
           <h1 className="h3 mb-3 fw-normal text-center">Utwórz konto</h1>
 
-          <div className="form-floating">
-            <input
+          <MDBCol md="4">
+            <MDBInput
               type="text"
               className="form-control"
               id="floatingInput"
               name="firstName"
               value={firstName}
               onChange={(e) => onChange(e)}
-              placeholder="Jan"
+              placeholder="Imię"
+              label="Imię"
+              required
             />
-            <label>Imię</label>
-          </div>
-          <div className="form-floating form-myBox">
-            <input
+          </MDBCol>
+          <MDBCol md="4">
+            <MDBInput
               type="text"
               className="form-control"
               id="floatingInput"
               name="lastName"
               value={lastName}
               onChange={(e) => onChange(e)}
-              placeholder="Nowak"
+              placeholder="Nazwisko"
+              required
             />
-            <label>Nazwisko</label>
-          </div>
-          <div className="form-floating form-myBox">
-            <input
+          </MDBCol>
+          <MDBCol md="4" className="form-floating form-myBox">
+            <MDBInput
               type="text"
               className="form-control"
               id="floatingInput"
               name="username"
               value={username}
               onChange={(e) => onChange(e)}
-              placeholder="Nazwa"
+              placeholder="Nazwa użytkownika"
             />
-            <label>Nazwa użytkownika</label>
-          </div>
-          <div className="form-floating form-myBox">
-            <input
+          </MDBCol>
+          <MDBCol md="4">
+            <MDBInput
               type="email"
               className="form-control"
               id="floatingInput"
               name="email"
               value={email}
               onChange={(e) => onChange(e)}
-              placeholder="name@example.com"
+              placeholder="nazwa@przyklad.com"
             />
-            <label>Adres Email</label>
-          </div>
-          <div className="form-floating form-myBox">
-            <input
+          </MDBCol>
+          <MDBCol md="4">
+            <MDBInput
               type="password"
               className="form-control"
               id="floatingPassword"
@@ -178,46 +214,94 @@ const RegisterPage = ({
               onChange={(e) => onChange(e)}
               placeholder="Hasło"
             />
-            <label>Hasło</label>
-          </div>
-          <div className="form-floating form-myBox">
-            <input
+          </MDBCol>
+          <MDBCol md="4">
+            <MDBInput
               type="password"
               className="form-control"
               id="floatingPassword"
               name="re_password"
               value={re_password}
               onChange={(e) => onChange(e)}
-              placeholder="Hasło"
+              placeholder="Powtórz hasło"
             />
-            <label>Powtórz hasło</label>
-          </div>
-          <div className="form-floating form-myBox">
-            <input
-              type="text"
-              className="form-control"
-              id="hrManager"
-              name="hrManager"
-              value={hrManager}
-              onChange={(e) => onChange(e)}
-              placeholder="Administartor HR"
-            />
-            <label>Administartor HR</label>
-          </div>
-          <div className="form-floating form-myBox">
-            <input
-              type="text"
-              className="form-control"
-              id="teamName"
-              name="teamName"
-              value={teamName}
-              onChange={(e) => onChange(e)}
-              placeholder="Zespół"
-            />
-            <label>Zespół</label>
-          </div>
-          <div className="form-floating form-myBox">
-            <input
+          </MDBCol>
+          <MDBCol md="4">
+            {hrAdmins.length === 0 ? (
+              <select
+                className="form-select"
+                id="teamName"
+                name="teamName"
+                value={teamName}
+                onChange={(e) => onChange(e)}
+                placeholder="Zespół"
+              >
+                <option value="" disabled selected>
+                  Brak managerów HR w systemie
+                </option>
+              </select>
+            ) : (
+              <select
+                className="form-select"
+                id="teamName"
+                name="teamName"
+                value={teamName}
+                onChange={(e) => onChange(e)}
+                placeholder="Zespół"
+                required
+              >
+                <option selected disabled value="">
+                  Wybierz dział
+                </option>
+                {!loading &&
+                  !error &&
+                  teams.map((team) => (
+                    <option value={team["name"]}>
+                      {team["description"]} ({team["name"]})
+                    </option>
+                  ))}
+              </select>
+            )}
+          </MDBCol>
+          <MDBCol md="4" className="form-floating form-myBox">
+            {hrAdmins.length === 0 ? (
+              <select
+                className="form-select"
+                id="hrManager"
+                name="hrManager"
+                value={hrManager}
+                onChange={(e) => onChange(e)}
+                aria-label="Administartor HR"
+              >
+                <option value="" disabled selected>
+                  Brak managerów HR w systemie
+                </option>
+              </select>
+            ) : (
+              <select
+                className="form-select"
+                id="hrManager"
+                name="hrManager"
+                value={hrManager}
+                onChange={(e) => onChange(e)}
+                placeholder="Administartor HR"
+                required
+              >
+                <option selected disabled value="">
+                  Wybierz administratora HR
+                </option>
+                {!loading &&
+                  !error &&
+                  hrAdmins.map((hrAdmin) => (
+                    <option value={hrAdmin["username"]}>
+                      {hrAdmin["firstname"]} {hrAdmin["lastname"]}
+                    </option>
+                  ))}
+              </select>
+            )}
+          </MDBCol>
+          <MDBCol md="4" className="form-floating form-myBox">
+            <MDBInput
               type="text"
               className="form-control"
               id="positionName"
@@ -225,11 +309,11 @@ const RegisterPage = ({
               value={positionName}
               onChange={(e) => onChange(e)}
               placeholder="Stanowisko"
+              label="Stanowisko"
             />
-            <label>Stanowisko</label>
-          </div>
-          <div className="form-floating form-myBox">
-            <input
+          </MDBCol>
+          <MDBCol md="4" className="form-floating form-myBox">
+            <MDBInput
               type="text"
               className="form-control"
               id="city"
@@ -237,11 +321,11 @@ const RegisterPage = ({
               value={city}
               onChange={(e) => onChange(e)}
               placeholder="Miasto"
+              label="Miasto"
             />
-            <label>Miasto</label>
-          </div>
-          <div className="form-floating form-myBox">
-            <input
+          </MDBCol>
+          <MDBCol md="4" className="form-floating form-myBox">
+            <MDBInput
               type="text"
               className="form-control"
               id="country"
@@ -249,39 +333,23 @@ const RegisterPage = ({
               value={country}
               onChange={(e) => onChange(e)}
               placeholder="Kraj"
+              label="Kraj"
             />
-            <label>Kraj</label>
-          </div>
+          </MDBCol>
 
-          {/* <div className="checkbox mb-4 mt-3">
-            <label>
-              <input type="checkbox" value="remember-me" /> Zapamiętaj mnie!
-            </label>
-          </div> */}
-          <button className="w-100 btn btn-lg button-blue" type="submit">
+          <MDBBtn className="w-100 btn btn-lg button-blue" type="submit">
             Stwórz konto
-          </button>
+          </MDBBtn>
           {errors !== null ? (
             <div
               className="alert alert-warning alert-dismissible fade show"
               role="alert"
             >
               <strong>{errors.message}</strong>
-              {/* <button
-                type="button"
-                className="close"
-                data-dismiss="alert"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button> */}
             </div>
           ) : null}
           <p className="mt-3 text-center">Masz już konto?</p>
-          {/* <Link to="/login">
-            <p className="text-center">Zaloguj się</p>
-          </Link> */}
-        </form>
+        </MDBRow>
       </div>
     </div>
   );
@@ -292,9 +360,7 @@ const mapStateToProps = (state) => ({
   accountCreated: state.auth.accountCreated,
   errors: state.auth.errors,
   anotherUser: state.auth.anotherUser,
-  //   user: state.auth.user,
+  user: state.auth.user,
 });
 
-export default connect(mapStateToProps, { signup, extendedSignup })(
-  RegisterPage
-);
+export default connect(mapStateToProps, { extendedSignup })(RegisterPage);

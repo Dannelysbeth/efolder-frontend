@@ -2,11 +2,11 @@ import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import "./LoginPage.css";
-import { login, checkAuthenticated } from "../../Actions/auth";
+import { login, checkAuthenticated, loadUser } from "../../Actions/auth";
 import { connect } from "react-redux";
 import axios from "axios";
 
-const LoginPage = ({ login, isAuthenticated, errors }) => {
+const LoginPage = ({ login, isAuthenticated, errors, user }) => {
   const [formData, setFormData] = useState({
     name: "",
     password: "",
@@ -19,6 +19,8 @@ const LoginPage = ({ login, isAuthenticated, errors }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     login(name, password);
+    loadUser();
+
     // setFormData({ name, password });
   };
 
@@ -28,7 +30,8 @@ const LoginPage = ({ login, isAuthenticated, errors }) => {
   // };
 
   if (isAuthenticated) {
-    return <Navigate to="/"></Navigate>;
+    window.location.replace("/");
+    // return <Navigate to="/"></Navigate>;
   }
 
   return (
@@ -76,7 +79,7 @@ const LoginPage = ({ login, isAuthenticated, errors }) => {
                         <label>Hasło</label>
                       </div>
                       <p>
-                        <p>{errors !== null ? errors.message : ""}</p>
+                        {/* <p>{errors !== null ? errors.message : ""}</p> */}
                       </p>
                       <button
                         className="w-100 btn btn-lg button-blue-lp "
@@ -99,6 +102,11 @@ const LoginPage = ({ login, isAuthenticated, errors }) => {
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   errors: state.auth.errors,
+  user: state.auth.user,
 });
 
-export default connect(mapStateToProps, { login })(LoginPage);
+export default connect(mapStateToProps, {
+  login,
+  loadUser,
+  checkAuthenticated,
+})(LoginPage);
