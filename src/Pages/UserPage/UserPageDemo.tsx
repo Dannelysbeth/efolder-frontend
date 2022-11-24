@@ -1,22 +1,50 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "./UserPage.css";
 import a_documents from "../../Data/documentsA";
 import b_documents from "../../Data/documentsA";
 import List from "../MyDocumentsPage/DocumentList";
+import { uploadFile } from "../../Actions/auth";
 
 import { connect } from "react-redux";
 import documents from "../../Data/documentsA";
 import { saveAs } from "file-saver";
+import {
+  MDBInput,
+  MDBBtn,
+  MDBCheckbox,
+  MDBRow,
+  MDBCol,
+} from "mdb-react-ui-kit";
 
 const UserPageDemo = ({ user }) => {
-  const [files, setFiles] = useState(documents);
   const [aFiles, setAFiles] = useState(a_documents);
   const [bFiles, setBFiles] = useState(b_documents);
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
+
+  const [files, setFiles] = useState({
+    fileCategory: "",
+    documents: null,
+  });
+
+  const { fileCategory, documents } = files;
+  const onChange = (e) =>
+    setFiles({ ...files, [e.target.name]: e.target.value });
+
+  const onChangeHandler = (event) => {
+    console.log(event.target.files[0]);
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (fileCategory !== null) {
+      console.log(`File category: ${fileCategory} \nfile: ${documents}`);
+      uploadFile(fileCategory, documents);
+      return <Navigate to="/" />;
+    }
+  };
 
   const infoOfUser = () => (
     <div className="row">
@@ -217,6 +245,82 @@ const UserPageDemo = ({ user }) => {
               </form>
             </div>
           </div>
+          <div className="col-xl-5  mb-5 mb-xl-0">
+            <div className="row">
+              <div className=" ">
+                <div className="card-profile-image shadows ">
+                  <img
+                    src={
+                      user.imageUrl
+                        ? user.imageUrl
+                        : "https://i.imgur.com/teiJw8H.png"
+                    }
+                    className="rounded-circle user-pic shadow"
+                  />
+                </div>
+
+                <div className="row card-body pt-0 pt-md-4">
+                  <div className=" text">
+                    <h3>
+                      {user.firstName}
+                      {user.middleName ? " " + user.middleName + " " : " "}
+                      {user.lastName}
+                    </h3>
+                    <div className="h5 font-weight-300">
+                      <i className="ni location_pin mr-2"></i>Bucharest, Romania
+                    </div>
+                    <div className="h5 mt-4">
+                      <i className="ni business_briefcase-24 mr-2"></i>Solution
+                      Manager - Creative Tim Officer
+                    </div>
+                    <div>
+                      <i className="ni education_hat mr-2"></i>University of
+                      Computer Science
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="card-header ">
+                <div className="row align-items-center">
+                  <div className="col-7">
+                    <h3 className="mb-0">Moje dokumenty</h3>
+                  </div>
+                </div>
+              </div>
+              <div className="card-body">
+                <ul className="treeview-animated-list mb-3">
+                  <li className="list-unstyled treeview-animated-items">
+                    <a className="closed">
+                      <i className="fas fa-angle-right"></i>
+                      <span>
+                        <i className="far fa-folder-open ic-w mx-1"></i>A
+                      </span>
+                    </a>
+                    <ul className="nested">
+                      <li className="list-unstyled treeview-animated-items">
+                        <List documents={aFiles} />
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* <div className="row">
+        <div className="col-xl-7 order-xl-1"></div>
+      </div> */}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="backgd d-flex flex-column min-vh-100">
+      <div className="userPage-text mt-3">
+        {/* {user !== null ? infoOfUser() : "Osoba niezalogowana "} */}
+        <MDBRow className="g-3" tag="form" onSubmit={(e) => onSubmit(e)}>
           <div className="card-header ">
             <div className="row align-items-center">
               <div className="col-7">
@@ -225,188 +329,39 @@ const UserPageDemo = ({ user }) => {
             </div>
           </div>
           <div className="card-body">
-            <form className="was-validated">
-              <div className="form-group">
-                <select className="custom-select" required>
+            <form className="was-validated post" action="#" id="#">
+              <div className="form-group" onSubmit={(e) => onSubmit(e)}>
+                <select
+                  className="form-select"
+                  required
+                  value={fileCategory}
+                  name="fileCategory"
+                  onChange={(e) => onChange(e)}
+                >
                   <option value="">Wybierz kategorię dokumentu</option>
-                  <option value="1">A</option>
-                  <option value="2">B</option>
-                  <option value="3">C</option>
-                  <option value="4">D</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
                 </select>
-                <div className="invalid-feedback">
-                  Wymagane jest podanie kategorii
-                </div>
               </div>
-
-              <div className="custom-file">
-                <label className="custom-file-label validatedCustomFile">
-                  Wybierz dokument
-                </label>
-                <p></p>
+              <p></p>
+              <div className="form-group files">
                 <input
                   type="file"
-                  className="custom-file-input"
-                  id="validatedCustomFile"
+                  className="form-control "
+                  value={documents}
+                  onChange={(e) => onChange(e)}
                   required
                 />
-
-                <div className="invalid-feedback">
-                  Example invalid custom file feedback
-                </div>
               </div>
+              <MDBBtn className="w-100 btn btn-lg button-blue" type="submit">
+                Prześlij document
+              </MDBBtn>
             </form>
           </div>
-        </div>
-        <div className="col-xl-5  mb-5 mb-xl-0">
-          <div className="row">
-            <div className=" ">
-              <div className="card-profile-image shadows ">
-                <img
-                  src={
-                    user.imageUrl
-                      ? user.imageUrl
-                      : "https://i.imgur.com/teiJw8H.png"
-                  }
-                  className="rounded-circle user-pic shadow"
-                />
-              </div>
-
-              <div className="row card-body pt-0 pt-md-4">
-                <div className=" text">
-                  <h3>
-                    {user.firstName}
-                    {user.middleName ? " " + user.middleName + " " : " "}
-                    {user.lastName}
-                  </h3>
-                  <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2"></i>Bucharest, Romania
-                  </div>
-                  <div className="h5 mt-4">
-                    <i className="ni business_briefcase-24 mr-2"></i>Solution
-                    Manager - Creative Tim Officer
-                  </div>
-                  <div>
-                    <i className="ni education_hat mr-2"></i>University of
-                    Computer Science
-                  </div>
-                  {/* <hr className="my-4" />
-                <p>
-                  Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick
-                  Murphy — writes, performs and records all of his own music.
-                </p>
-                <a href="#">Show more</a> */}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="card-header ">
-              <div className="row align-items-center">
-                <div className="col-7">
-                  <h3 className="mb-0">Moje dokumenty</h3>
-                </div>
-              </div>
-            </div>
-            <div className="card-body">
-              <ul className="treeview-animated-list mb-3">
-                <li className="list-unstyled treeview-animated-items">
-                  <a className="closed">
-                    <i className="fas fa-angle-right"></i>
-                    <span>
-                      <i className="far fa-folder-open ic-w mx-1"></i>A
-                    </span>
-                  </a>
-                  <ul className="nested">
-                    <li className="list-unstyled treeview-animated-items">
-                      <List documents={aFiles} />
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        </MDBRow>
       </div>
-      <div className="row">
-        {/* Here */}
-        {/* <div className="col-xl-3 order-xl-1">
-          <div className="card-container ">
-            <div className="card-header ">
-              <div className="row align-items-center">
-                <div className="col-7">
-                  <h3 className="mb-0">Moje dokumenty</h3>
-                </div>
-              </div>
-            </div>
-            <div className="card-body">
-              <ul className="treeview-animated-list mb-3">
-                <li className="list-unstyled treeview-animated-items">
-                  <a className="closed">
-                    <i className="fas fa-angle-right"></i>
-                    <span>
-                      <i className="far fa-folder-open ic-w mx-1"></i>A
-                    </span>
-                  </a>
-                  <ul className="nested">
-                    <li className="list-unstyled treeview-animated-items">
-                      <List documents={aFiles} />
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div> */}
-        <div className="col-xl-7 order-xl-1">
-          {/* <div className="card-container ">
-            <div className="card-header ">
-              <div className="row align-items-center">
-                <div className="col-7">
-                  <h3 className="mb-0">Dodaj dokumenty</h3>
-                </div>
-              </div>
-            </div>
-            <div className="card-body">
-              <form className="was-validated">
-                <div className="form-group">
-                  <select className="custom-select" required>
-                    <option value="">Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <div className="invalid-feedback">
-                    Example invalid custom select feedback
-                  </div>
-                </div>
-
-                <div className="custom-file">
-                  <input
-                    type="file"
-                    className="custom-file-input"
-                    id="validatedCustomFile"
-                    required
-                  />
-                  <label className="custom-file-label validatedCustomFile">
-                    Choose file...
-                  </label>
-                  <div className="invalid-feedback">
-                    Example invalid custom file feedback
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div> */}
-        </div>
-      </div>
-    </div>
-  );
-  return (
-    <div className="backgd d-flex flex-column min-vh-100">
-      <h4 className="userPage-text mt-3">
-        {user !== null ? infoOfUser() : "Osoba niezalogowana "}
-      </h4>
     </div>
   );
 };
@@ -415,4 +370,4 @@ const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
 
-export default connect(mapStateToProps)(UserPageDemo);
+export default connect(mapStateToProps, { uploadFile })(UserPageDemo);

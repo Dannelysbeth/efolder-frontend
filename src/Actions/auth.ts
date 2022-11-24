@@ -13,6 +13,8 @@ import {
   SIGNUP_FAIL,
   ROLE_LOADED_SUCCESS,
   ROLE_LOADED_FAIL,
+  FILE_UPLOAD_FILE_SUCCESS,
+  FILE_UPLOAD_FILE_FAIL,
 } from "./types";
 
 export const loadUser = () => async (dispatch) => {
@@ -175,6 +177,37 @@ export const login =
       console.log(err.response.data);
       dispatch({
         type: LOGIN_FAIL,
+        payload: err.response.data,
+      });
+    }
+  };
+export const uploadFile =
+  (fileType: string, document: any) => async (dispatch) => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    const body = new URLSearchParams({
+      file: document,
+    });
+
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_REMOTE_URL}/api/document/upload/${fileType}`,
+        body,
+        config
+      );
+
+      dispatch({
+        type: FILE_UPLOAD_FILE_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err.response.data);
+      dispatch({
+        type: FILE_UPLOAD_FILE_FAIL,
         payload: err.response.data,
       });
     }

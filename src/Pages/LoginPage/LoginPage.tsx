@@ -24,11 +24,6 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
     // setFormData({ name, password });
   };
 
-  // const continueWithGoogle = () => {
-  //     const site = window.location.hostname === "localhost" ? "http://localhost:3000" : "https://projekt-pp-tab-2022-frontend.herokuapp.com"   ;
-  //     window.location.replace("https://projekt-pp-tab-2022.herokuapp.com/oauth2/authorize/google?redirect_uri=:site/google".replace(":site", site));
-  // };
-
   if (isAuthenticated) {
     window.location.replace("/");
     // return <Navigate to="/"></Navigate>;

@@ -12,6 +12,8 @@ import {
   SIGNUP_SUCCESS,
   ROLE_LOADED_SUCCESS,
   ROLE_LOADED_FAIL,
+  FILE_UPLOAD_FILE_SUCCESS,
+  FILE_UPLOAD_FILE_FAIL,
 } from "../Actions/types";
 
 const initialState = {
@@ -139,6 +141,18 @@ export default function (state = initialState, action) {
         // refresh: null,
         // isAuthenticated: false,
         // user: null,
+        errors: payload,
+        message: payload,
+      };
+    case FILE_UPLOAD_FILE_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        message: payload,
+      };
+    case FILE_UPLOAD_FILE_FAIL:
+      return {
+        ...state,
         errors: payload,
         message: payload,
       };

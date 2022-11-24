@@ -123,9 +123,9 @@ const RegisterPage = ({
         setError(true);
       });
   };
-  useEffect(() => {
-    getHRUsers();
-  }, []);
+  // useEffect(() => {
+  //   getHRUsers();
+  // }, []);
 
   const getTeams = () => {
     return fetch(`${process.env.REACT_APP_REMOTE_URL}/api/team/all`, {
