@@ -26,6 +26,7 @@ const initialState = {
   anotherUser: null,
   errors: null,
   message: null,
+  selectedFile: null,
 };
 
 export default function (state = initialState, action) {

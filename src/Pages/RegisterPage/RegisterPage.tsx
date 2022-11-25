@@ -227,7 +227,7 @@ const RegisterPage = ({
             />
           </MDBCol>
           <MDBCol md="4">
-            {hrAdmins.length === 0 ? (
+            {teams.length === 0 ? (
               <select
                 className="form-select"
                 id="teamName"
@@ -237,7 +237,7 @@ const RegisterPage = ({
                 placeholder="Zespół"
               >
                 <option value="" disabled selected>
-                  Brak managerów HR w systemie
+                  Brak zespołów HR w systemie
                 </option>
               </select>
             ) : (
@@ -263,7 +263,7 @@ const RegisterPage = ({
               </select>
             )}
           </MDBCol>
-          <MDBCol md="4" className="form-floating form-myBox">
+          <MDBCol md="4">
             {hrAdmins.length === 0 ? (
               <select
                 className="form-select"

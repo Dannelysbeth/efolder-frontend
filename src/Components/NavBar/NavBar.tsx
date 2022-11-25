@@ -75,9 +75,8 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
         {
           <li>
             {user != null &&
-            (user.roles[0] == "ROLE_HR_ADMIN" ||
-              user.roles[0] == "ROLE_MANAGER" ||
-              user.roles[0] == "ROLE_SUPER_ADMIN") ? (
+            (user.roles[0] == "ROLE_REGULAR_EMPLOYEE" ||
+              user.roles[1] !== null) ? (
               <Link
                 to="/createUser"
                 className="nav-link link-light dropdown-item "

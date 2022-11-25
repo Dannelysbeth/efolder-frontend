@@ -181,37 +181,45 @@ export const login =
       });
     }
   };
-export const uploadFile =
-  (fileType: string, document: any) => async (dispatch) => {
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
+export const uploadFile = (fileType: string, file: any) => async (dispatch) => {
+  console.log(file);
+  const formData = new FormData();
 
-    const body = new URLSearchParams({
-      file: document,
-    });
+  formData.append("file", file);
 
-    try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_REMOTE_URL}/api/document/upload/${fileType}`,
-        body,
-        config
-      );
-
-      dispatch({
-        type: FILE_UPLOAD_FILE_SUCCESS,
-        payload: res.data,
-      });
-    } catch (err) {
-      console.log(err.response.data);
-      dispatch({
-        type: FILE_UPLOAD_FILE_FAIL,
-        payload: err.response.data,
-      });
-    }
+  // formData.append("file", file.na);
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("access")}`,
+      Accept: "*/*",
+    },
   };
+
+  const body = new URLSearchParams({
+    // file: document,
+  });
+  // console.log(document);
+  try {
+    const res = await axios.post(
+      `${process.env.REACT_APP_REMOTE_URL}/api/document/upload/${fileType}`,
+
+      formData,
+      config
+    );
+
+    dispatch({
+      type: FILE_UPLOAD_FILE_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err.response.data);
+    dispatch({
+      type: FILE_UPLOAD_FILE_FAIL,
+      payload: err.response.data,
+    });
+  }
+};
 
 export const signup =
   (

@@ -5,7 +5,7 @@ import "./UserPage.css";
 import a_documents from "../../Data/documentsA";
 import b_documents from "../../Data/documentsA";
 import List from "../MyDocumentsPage/DocumentList";
-import { uploadFile } from "../../Actions/auth";
+import { uploadFile, extendedSignup } from "../../Actions/auth";
 
 import { connect } from "react-redux";
 import documents from "../../Data/documentsA";
@@ -18,21 +18,25 @@ import {
   MDBCol,
 } from "mdb-react-ui-kit";
 
-const UserPageDemo = ({ user }) => {
+const onChangeHandler = (event) => {
+  console.log(event.target.files[0]);
+};
+
+const UserPageDemo = ({ user, uploadFile, extendedSignup }) => {
   const [aFiles, setAFiles] = useState(a_documents);
   const [bFiles, setBFiles] = useState(b_documents);
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
 
-  const [files, setFiles] = useState({
+  const [formData, setFormData] = useState({
     fileCategory: "",
-    documents: null,
+    file: null,
   });
 
-  const { fileCategory, documents } = files;
+  const { fileCategory, file } = formData;
   const onChange = (e) =>
-    setFiles({ ...files, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onChangeHandler = (event) => {
     console.log(event.target.files[0]);
@@ -40,11 +44,29 @@ const UserPageDemo = ({ user }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (fileCategory !== null) {
-      console.log(`File category: ${fileCategory} \nfile: ${documents}`);
-      uploadFile(fileCategory, documents);
+      extendedSignup(
+        "username",
+        "password",
+        "email",
+        "firstName",
+        "lastName",
+        "middleName",
+        "teamName",
+        "hrManager",
+        "positionName",
+        "positionDescription",
+        "country",
+        "city",
+        "zipcode",
+        "street",
+        "flatNumber",
+        "county"
+      );
+      // uploadFile(fileCategory, file);
       return <Navigate to="/" />;
     }
   };
+  console.log(`File category: ${fileCategory} \nfile: ${file}`);
 
   const infoOfUser = () => (
     <div className="row">
@@ -330,7 +352,7 @@ const UserPageDemo = ({ user }) => {
           </div>
           <div className="card-body">
             <form className="was-validated post" action="#" id="#">
-              <div className="form-group" onSubmit={(e) => onSubmit(e)}>
+              <div className="form-group">
                 <select
                   className="form-select"
                   required
@@ -346,15 +368,16 @@ const UserPageDemo = ({ user }) => {
                 </select>
               </div>
               <p></p>
-              <div className="form-group files">
+              <MDBCol md="4" className="form-floating form-myBox">
                 <input
                   type="file"
+                  name="file"
                   className="form-control "
-                  value={documents}
+                  value={file}
                   onChange={(e) => onChange(e)}
                   required
                 />
-              </div>
+              </MDBCol>
               <MDBBtn className="w-100 btn btn-lg button-blue" type="submit">
                 Prześlij document
               </MDBBtn>
@@ -369,5 +392,6 @@ const UserPageDemo = ({ user }) => {
 const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
-
-export default connect(mapStateToProps, { uploadFile })(UserPageDemo);
+export default connect(mapStateToProps, { uploadFile, extendedSignup })(
+  UserPageDemo
+);
