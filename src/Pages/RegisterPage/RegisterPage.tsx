@@ -182,7 +182,7 @@ const RegisterPage = ({
               required
             />
           </MDBCol>
-          <MDBCol md="4" className="form-floating form-myBox">
+          <MDBCol md="4">
             <MDBInput
               type="text"
               className="form-control"
@@ -300,7 +300,7 @@ const RegisterPage = ({
               </select>
             )}
           </MDBCol>
-          <MDBCol md="4" className="form-floating form-myBox">
+          <MDBCol md="4">
             <MDBInput
               type="text"
               className="form-control"
@@ -312,7 +312,7 @@ const RegisterPage = ({
               label="Stanowisko"
             />
           </MDBCol>
-          <MDBCol md="4" className="form-floating form-myBox">
+          <MDBCol md="4">
             <MDBInput
               type="text"
               className="form-control"
@@ -324,7 +324,7 @@ const RegisterPage = ({
               label="Miasto"
             />
           </MDBCol>
-          <MDBCol md="4" className="form-floating form-myBox">
+          <MDBCol md="4">
             <MDBInput
               type="text"
               className="form-control"

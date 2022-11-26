@@ -181,11 +181,12 @@ export const login =
       });
     }
   };
-export const uploadFile = (fileType: string, file: any) => async (dispatch) => {
+export const uploadFile = (fileType: string, file) => async (dispatch) => {
   console.log(file);
-  const formData = new FormData();
-
-  formData.append("file", file);
+  //
+  let data = new FormData();
+  data.append("file", file, file.name);
+  // data.append("filename", file.ame);
 
   // formData.append("file", file.na);
   const config = {
@@ -204,7 +205,7 @@ export const uploadFile = (fileType: string, file: any) => async (dispatch) => {
     const res = await axios.post(
       `${process.env.REACT_APP_REMOTE_URL}/api/document/upload/${fileType}`,
 
-      formData,
+      data,
       config
     );
 

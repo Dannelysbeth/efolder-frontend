@@ -28,6 +28,7 @@ import EndpaymentPage from "./Pages/EndpaymentPage/EndpaymentPage";
 import CancelPaymentPage from "./Pages/CancelPaymentPage/CancelPaymentPage";
 import MyDocumentsPage from "./Pages/UserPage/UserPage"; //AnotherUserPage
 import AnotherUserPage from "./Pages/UserPage/AnotherUserPage";
+import UploadDocumentPage from "./Pages/FileUpload/UploadDocumentPage";
 
 const routing = (
   <div>
@@ -43,8 +44,9 @@ const routing = (
               <Route path="/konto" element={<UserPage />} />
               <Route path="/o-nas" element={<AboutUsPage />} />
               <Route path="/kartoteka" element={<MyDocumentsPage />} />
-              <Route path="/createUser" element={<RegisterPage />} />
+              <Route path="/createUser" element={<RegisterPage />} />{" "}
               <Route path="/user/*" element={<AnotherUserPage />} />
+              <Route path="/uploadFile" element={<UploadDocumentPage />} />
             </Route>
             {/* route that doesnt exist */}
             <Route path="*" element={<PageNotFound />}></Route>

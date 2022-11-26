@@ -18,51 +18,32 @@ import {
   MDBCol,
 } from "mdb-react-ui-kit";
 
-const onChangeHandler = (event) => {
-  console.log(event.target.files[0]);
-};
-
-const UserPageDemo = ({ user, uploadFile, extendedSignup }) => {
+const UserPageDemo = ({ user, uploadFile }) => {
   const [aFiles, setAFiles] = useState(a_documents);
+  const [fileData, setFileData] = useState({
+    file: null,
+  });
   const [bFiles, setBFiles] = useState(b_documents);
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
-
   const [formData, setFormData] = useState({
     fileCategory: "",
-    file: null,
   });
+  const { file } = fileData;
+  const onFileChange = (e) =>
+    setFileData({ ...fileData, [e.target.name]: e.target.files[0] });
 
-  const { fileCategory, file } = formData;
+  const { fileCategory } = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onChangeHandler = (event) => {
-    console.log(event.target.files[0]);
-  };
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log(file);
+
     if (fileCategory !== null) {
-      extendedSignup(
-        "username",
-        "password",
-        "email",
-        "firstName",
-        "lastName",
-        "middleName",
-        "teamName",
-        "hrManager",
-        "positionName",
-        "positionDescription",
-        "country",
-        "city",
-        "zipcode",
-        "street",
-        "flatNumber",
-        "county"
-      );
-      // uploadFile(fileCategory, file);
+      uploadFile(fileCategory, file);
       return <Navigate to="/" />;
     }
   };
@@ -331,9 +312,6 @@ const UserPageDemo = ({ user, uploadFile, extendedSignup }) => {
             </div>
           </div>
         </div>
-        {/* <div className="row">
-        <div className="col-xl-7 order-xl-1"></div>
-      </div> */}
       </div>
     </div>
   );
@@ -341,7 +319,7 @@ const UserPageDemo = ({ user, uploadFile, extendedSignup }) => {
   return (
     <div className="backgd d-flex flex-column min-vh-100">
       <div className="userPage-text mt-3">
-        {/* {user !== null ? infoOfUser() : "Osoba niezalogowana "} */}
+        {user !== null ? infoOfUser() : "Osoba niezalogowana "}
         <MDBRow className="g-3" tag="form" onSubmit={(e) => onSubmit(e)}>
           <div className="card-header ">
             <div className="row align-items-center">
@@ -373,8 +351,8 @@ const UserPageDemo = ({ user, uploadFile, extendedSignup }) => {
                   type="file"
                   name="file"
                   className="form-control "
-                  value={file}
-                  onChange={(e) => onChange(e)}
+                  // value={file}
+                  onChange={(e) => onFileChange(e)}
                   required
                 />
               </MDBCol>
@@ -392,6 +370,4 @@ const UserPageDemo = ({ user, uploadFile, extendedSignup }) => {
 const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
-export default connect(mapStateToProps, { uploadFile, extendedSignup })(
-  UserPageDemo
-);
+export default connect(mapStateToProps, { uploadFile })(UserPageDemo);

@@ -64,6 +64,11 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
           </Link>
         </li>
         <li>
+          <Link to="/uploadFile" className="nav-link link-light dropdown-item ">
+            Dodaj dokument
+          </Link>
+        </li>
+        <li>
           <Link
             to=""
             className="nav-link link-light dropdown-item"
