@@ -12,6 +12,7 @@ import MainPage from "./Pages/MainPage/MainPage";
 import NewsPage from "./Pages/NewsPage/NewsPage";
 import AboutUsPage from "./Pages/AboutUsPage/AboutUsPage";
 import UserPage from "./Pages/UserPage/UserPageDemo";
+import UserInfoPage from "./Pages/UserPage/UserPage";
 import RulesPage from "./Pages/RulesPage/RulesPage";
 import ContactPage from "./Pages/ContactPage/ContactPage";
 import OpenHoursPage from "./Pages/OpenHoursPage/OpenHoursPage";
@@ -28,6 +29,7 @@ import EndpaymentPage from "./Pages/EndpaymentPage/EndpaymentPage";
 import CancelPaymentPage from "./Pages/CancelPaymentPage/CancelPaymentPage";
 import MyDocumentsPage from "./Pages/UserPage/UserPage"; //AnotherUserPage
 import AnotherUserPage from "./Pages/UserPage/AnotherUserPage";
+import DocumentsPage from "./Pages/UserPage/MyDocumentsPage";
 import UploadDocumentPage from "./Pages/UploadDocumentPage/UploadDocumentPage";
 import ViewDocumentsPage from "./Pages/ViewDocumentsPage/ViewDocumentsPage";
 
@@ -46,9 +48,14 @@ const routing = (
               <Route path="/o-nas" element={<AboutUsPage />} />
               <Route path="/kartoteka" element={<MyDocumentsPage />} />
               <Route path="/createUser" element={<RegisterPage />} />{" "}
-              <Route path="/user/*" element={<AnotherUserPage />} />
+              <Route path="/user">
+                <Route path="/user/:username/" element={<AnotherUserPage />}>
+                  <Route path="kartoteka" element={<DocumentsPage />} />
+                  <Route path="daneOsobowe" element={<UserInfoPage />} />
+                </Route>
+              </Route>
               <Route path="/uploadFile" element={<UploadDocumentPage />} />
-              <Route path="/mojeDocumenty" element={<ViewDocumentsPage />} />
+              <Route path="/mojeDocumenty" element={<DocumentsPage />} />
             </Route>
             {/* route that doesnt exist */}
             <Route path="*" element={<PageNotFound />}></Route>
