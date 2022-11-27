@@ -28,7 +28,8 @@ import EndpaymentPage from "./Pages/EndpaymentPage/EndpaymentPage";
 import CancelPaymentPage from "./Pages/CancelPaymentPage/CancelPaymentPage";
 import MyDocumentsPage from "./Pages/UserPage/UserPage"; //AnotherUserPage
 import AnotherUserPage from "./Pages/UserPage/AnotherUserPage";
-import UploadDocumentPage from "./Pages/FileUpload/UploadDocumentPage";
+import UploadDocumentPage from "./Pages/UploadDocumentPage/UploadDocumentPage";
+import ViewDocumentsPage from "./Pages/ViewDocumentsPage/ViewDocumentsPage";
 
 const routing = (
   <div>
@@ -47,6 +48,7 @@ const routing = (
               <Route path="/createUser" element={<RegisterPage />} />{" "}
               <Route path="/user/*" element={<AnotherUserPage />} />
               <Route path="/uploadFile" element={<UploadDocumentPage />} />
+              <Route path="/mojeDocumenty" element={<ViewDocumentsPage />} />
             </Route>
             {/* route that doesnt exist */}
             <Route path="*" element={<PageNotFound />}></Route>
@@ -59,7 +61,9 @@ const routing = (
 
 ReactDOM.render(routing, document.getElementById("root"));
 
-// If you want to start measuring performance in your app, pass a function
+{
+  /* // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals */
+}
 reportWebVitals();

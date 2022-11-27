@@ -12,16 +12,7 @@ import {
   MDBCol,
 } from "mdb-react-ui-kit";
 
-const UploadDocumentPage = ({
-  extendedSignup,
-  isAuthenticated,
-  errors,
-  accountCreated,
-  anotherUser,
-  uploadFile,
-}) => {
-  let formFilData = new FormData();
-  accountCreated = false;
+const UploadDocumentPage = ({ errors, uploadFile }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [hrAdmins, setHrAdmins] = useState([]);
@@ -31,24 +22,46 @@ const UploadDocumentPage = ({
   const [formData, setFormData] = useState({
     file: null,
   });
+  const [category, setCategory] = useState({
+    fileCategory: "",
+  });
 
   console.log(window.location.hostname);
 
   const { file } = formData;
+  const { fileCategory } = category;
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+  const onCatChange = (e) =>
+    setCategory({ ...category, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(file);
-    uploadFile("A", file);
+    uploadFile(fileCategory, file);
   };
 
   return (
     <div className="d-flex flex-column min-vh-100">
       <div className="form-signin top-space">
         <MDBRow className="g-3" tag="form" onSubmit={(e) => onSubmit(e)}>
-          <h1 className="h3 mb-3 fw-normal text-center">Utwórz konto</h1>
+          <h1 className="h3 mb-3 fw-normal text-center">Dodaj dokument</h1>
+          <div className="form-group">
+            <select
+              className="form-select"
+              required
+              value={fileCategory}
+              name="fileCategory"
+              onChange={(e) => onCatChange(e)}
+            >
+              <option value="">Wybierz kategorię dokumentu</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+            </select>
+          </div>
 
           <div className="file-card">
             <div className="file-inputs">

@@ -14,6 +14,14 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
     navigate("/");
   };
 
+  function checkIfSuperAdmin(): boolean {
+    if (user != null && user.roles != null)
+      for (var i of user.roles) {
+        if (i == "ROLE_SUPER_ADMIN") return true;
+      }
+    return false;
+  }
+
   const userBar = () => (
     <Fragment>
       <li id="message bold" className="greetings">
@@ -42,14 +50,6 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
         aria-expanded="false"
       >
         {user !== null ? userPic() : " "}
-        {/* <img
-          src="http://localhost:8080/api/profilePicture/view/3"
-          className="rounded-circle no-padding "
-          height="50"
-          alt="Profile picture"
-          loading="lazy"
-        /> */}
-        {/* {userPic()} */}
       </button>
       <ul className="dropdown-menu navbar-dropdown dropdown-menu-end">
         {user !== null ? userBar() : " "}
@@ -63,9 +63,13 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
             Kartoteka pracownicza
           </Link>
         </li>
+
         <li>
-          <Link to="/uploadFile" className="nav-link link-light dropdown-item ">
-            Dodaj dokument
+          <Link
+            to="/mojeDocumenty"
+            className="nav-link link-light dropdown-item "
+          >
+            Moje documenty
           </Link>
         </li>
         <li>
@@ -79,9 +83,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
         </li>
         {
           <li>
-            {user != null &&
-            (user.roles[0] == "ROLE_REGULAR_EMPLOYEE" ||
-              user.roles[1] !== null) ? (
+            {checkIfSuperAdmin() == true ? (
               <Link
                 to="/createUser"
                 className="nav-link link-light dropdown-item "
@@ -164,7 +166,6 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user,
-  // role: state.auth.role,
 });
 
 export default connect(mapStateToProps, { logout })(NavBar);
