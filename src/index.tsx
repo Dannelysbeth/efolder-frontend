@@ -32,6 +32,8 @@ import AnotherUserPage from "./Pages/UserPage/AnotherUserPage";
 import DocumentsPage from "./Pages/UserPage/MyDocumentsPage";
 import UploadDocumentPage from "./Pages/UploadDocumentPage/UploadDocumentPage";
 import ViewDocumentsPage from "./Pages/ViewDocumentsPage/ViewDocumentsPage";
+import EmployeeListPage from "./Pages/EmployeeListPage/EmployeeListPage";
+import PasswordChangePage from "./Pages/PasswordChangePage/PasswordChangePage";
 
 const routing = (
   <div>
@@ -47,6 +49,8 @@ const routing = (
               <Route path="/konto" element={<UserPage />} />
               <Route path="/o-nas" element={<AboutUsPage />} />
               <Route path="/kartoteka" element={<MyDocumentsPage />} />
+              <Route path="/pracownicy" element={<EmployeeListPage />} />
+              <Route path="/zmienHaslo" element={<PasswordChangePage />} />
               <Route path="/createUser" element={<RegisterPage />} />{" "}
               <Route path="/user">
                 <Route path="/user/:username/" element={<AnotherUserPage />}>

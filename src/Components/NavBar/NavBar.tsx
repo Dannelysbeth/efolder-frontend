@@ -65,11 +65,8 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
         </li>
 
         <li>
-          <Link
-            to="/mojeDocumenty"
-            className="nav-link link-light dropdown-item "
-          >
-            Moje documenty
+          <Link to="/uploadFile" className="nav-link link-light dropdown-item ">
+            Dodaj dokument
           </Link>
         </li>
         <li>
@@ -89,6 +86,18 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                 className="nav-link link-light dropdown-item "
               >
                 Utwórz konto
+              </Link>
+            ) : null}
+          </li>
+        }
+        {
+          <li>
+            {checkIfSuperAdmin() == true ? (
+              <Link
+                to="/pracownicy"
+                className="nav-link link-light dropdown-item "
+              >
+                Pracownicy
               </Link>
             ) : null}
           </li>

@@ -1,13 +1,25 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, useNavigate, useParams, Outlet } from "react-router-dom";
-// import "./UserPage.css";
+import "./UserPage.css";
 import a_documents from "../../Data/documentsA";
 import b_documents from "../../Data/documentsA";
 import List from "../MyDocumentsPage/DocumentList";
 
 import { connect } from "react-redux";
 import documents from "../../Data/documentsA";
+import {
+  MDBAccordion,
+  MDBAccordionItem,
+  MDBBtn,
+  MDBContainer,
+  MDBDropdown,
+  MDBDropdownItem,
+  MDBDropdownMenu,
+  MDBDropdownToggle,
+  MDBListGroup,
+  MDBListGroupItem,
+} from "mdb-react-ui-kit";
 
 const AnotherUserPage = ({ user }) => {
   const { username } = useParams();
@@ -48,45 +60,91 @@ const AnotherUserPage = ({ user }) => {
   useEffect(() => {
     getDocuments();
   }, []);
-  const infoOfUser = () => (
-    <div className="row">
-      <div className="row user-container">
-        <div className="row">
-          <div className="card-header ">
-            <div className="row align-items-center">
-              <div className="col-7">
-                <h3 className="mb-0">Moje dokumenty</h3>
-              </div>
-            </div>
-          </div>
-          <div className="card-body">
-            <ul className="treeview-animated-list mb-3">
-              <li className="list-unstyled treeview-animated-items">
-                <a className="closed">
-                  <i className="fas fa-angle-right"></i>
-                  <span>
-                    <i className="far fa-folder-open ic-w mx-1"></i>A
-                  </span>
-                </a>
-                <ul className="nested">
-                  <li className="list-unstyled treeview-animated-items">
-                    <List documents={documents} />
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-xl-7 order-xl-1"></div>
-      </div>
-    </div>
-  );
+
   return (
-    <div className="backgd d-flex flex-column min-vh-100">
-      <div className="userPage-text mt-3">{infoOfUser()}</div>
-    </div>
+    <MDBContainer>
+      <MDBAccordion borderless alwaysOpen initialActive={0}>
+        <MDBAccordionItem collapseId={1} headerTitle="Moje dokumenty">
+          <MDBAccordion borderless alwaysOpen initialActive={1}>
+            <MDBAccordionItem collapseId={1} headerTitle="A">
+              {documents.length === 0 ? (
+                <h3>Brak dokumentów</h3>
+              ) : (
+                documents.map((document) => (
+                  <MDBListGroupItem className="d-flex justify-content-between align-items-center">
+                    <div className="d-flex align-items-center">
+                      <i className="fa-sharp fa-solid fa-file-pdf" />
+                      <div className="ms-3">
+                        <p className="fw-bold mb-1">{document.name}</p>
+                        <p className="text-muted mb-0">{document.size}</p>
+                      </div>
+                    </div>
+                    <MDBDropdown className="btn-group-1">
+                      <MDBDropdownToggle />
+                      <MDBDropdownMenu>
+                        <MDBDropdownItem link>
+                          <Link
+                            className="nav-link active"
+                            to={{
+                              pathname: `http://localhost:8080/api/document/view/${document.id}`,
+                            }}
+                          >
+                            Otwórz{" "}
+                          </Link>
+                        </MDBDropdownItem>
+                        <MDBDropdownItem link>Another action</MDBDropdownItem>
+                        <MDBDropdownItem link>
+                          Something else here
+                        </MDBDropdownItem>
+                      </MDBDropdownMenu>
+                    </MDBDropdown>
+                    {/* <MDBBtn size="sm">
+                      <Link
+                        className="nav-link active"
+                        to={{
+                          pathname: `http://localhost:8080/api/document/view/${document.id}`,
+                        }}
+                      >
+                        View
+                      </Link>
+                    </MDBBtn> */}
+                  </MDBListGroupItem>
+                ))
+              )}
+            </MDBAccordionItem>
+          </MDBAccordion>
+          <MDBAccordion borderless alwaysOpen initialActive={1}>
+            <MDBAccordionItem collapseId={1} headerTitle="B">
+              {documents.length === 0 ? (
+                <h3>Brak użytkowników w systemie</h3>
+              ) : (
+                documents.map((document) => (
+                  <MDBListGroupItem className="d-flex justify-content-between align-items-center">
+                    <div className="d-flex align-items-center">
+                      <i className="fa-sharp fa-solid fa-file-pdf" />
+                      <div className="ms-3">
+                        <p className="fw-bold mb-1">{document.name}</p>
+                        <p className="text-muted mb-0">{document.size}</p>
+                      </div>
+                    </div>
+                    <MDBBtn size="sm">
+                      <Link
+                        className="nav-link active"
+                        to={{
+                          pathname: `http://localhost:8080/api/document/view/${document.id}`,
+                        }}
+                      >
+                        View
+                      </Link>
+                    </MDBBtn>
+                  </MDBListGroupItem>
+                ))
+              )}
+            </MDBAccordionItem>
+          </MDBAccordion>
+        </MDBAccordionItem>
+      </MDBAccordion>
+    </MDBContainer>
   );
 };
 

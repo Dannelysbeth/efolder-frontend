@@ -1,6 +1,7 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, useNavigate, useParams, Outlet } from "react-router-dom";
+// import Avatar from 'react-avatar-edit';
 import "./UserPage.css";
 import a_documents from "../../Data/documentsA";
 import b_documents from "../../Data/documentsA";
