@@ -166,11 +166,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
             <i className="fa fa-navicon"></i>
           </span>
         </button>
-        <MDBCollapse
-          show={showShow}
-          tag="nav"
-          className="d-lg-block bg-white sidebar"
-        >
+        <MDBCollapse show={showShow} tag="nav" className="d-lg-block bg-white ">
           <div className="position-sticky">
             <MDBListGroup flush className="mx-3 mt-4">
               <MDBRipple rippleTag="span">

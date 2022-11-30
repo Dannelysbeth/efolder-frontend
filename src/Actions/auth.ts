@@ -15,6 +15,8 @@ import {
   ROLE_LOADED_FAIL,
   FILE_UPLOAD_FILE_SUCCESS,
   FILE_UPLOAD_FILE_FAIL,
+  PASSWORD_CHANGE_SUCCESS,
+  PASSWORD_CHANGE_FAIL,
 } from "./types";
 
 export const loadUser = () => async (dispatch) => {
@@ -343,6 +345,40 @@ export const extendedSignup =
       console.log(err.response); //TODO
       dispatch({
         type: SIGNUP_FAIL,
+        payload: err.response.data,
+      });
+    }
+  };
+export const changePassword =
+  (password: string, repeatPassword: string, username: string) =>
+  async (dispatch) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        Accept: "*/*",
+      },
+    };
+
+    const body = JSON.stringify({
+      password,
+      repeatPassword,
+    });
+
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_REMOTE_URL}/api/user/changePassword/${username}`,
+        body,
+        config
+      );
+      dispatch({
+        type: PASSWORD_CHANGE_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err.response); //TODO
+      dispatch({
+        type: PASSWORD_CHANGE_FAIL,
         payload: err.response.data,
       });
     }

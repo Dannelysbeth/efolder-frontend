@@ -50,8 +50,6 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
         aria-expanded="false"
       >
         {user !== null ? userPic() : " "}
-        {user.firstName} {}
-        {user.lastName}
       </button>
       <ul className="dropdown-menu navbar-dropdown dropdown-menu-end">
         {user !== null ? userBar() : " "}
@@ -65,6 +63,12 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
             Kartoteka pracownicza
           </Link>
         </li>
+        {/* <li>
+          <Link to="/zmienHaslo" className="nav-link link-light dropdown-item ">
+            Zmien haslo
+          </Link>
+        </li> */}
+
         <li>
           <Link to="/uploadFile" className="nav-link link-light dropdown-item ">
             Dodaj dokument

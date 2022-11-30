@@ -14,6 +14,8 @@ import {
   ROLE_LOADED_FAIL,
   FILE_UPLOAD_FILE_SUCCESS,
   FILE_UPLOAD_FILE_FAIL,
+  PASSWORD_CHANGE_SUCCESS,
+  PASSWORD_CHANGE_FAIL,
 } from "../Actions/types";
 
 const initialState = {
@@ -152,6 +154,18 @@ export default function (state = initialState, action) {
         message: payload,
       };
     case FILE_UPLOAD_FILE_FAIL:
+      return {
+        ...state,
+        errors: payload,
+        message: payload,
+      };
+    case PASSWORD_CHANGE_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        message: payload,
+      };
+    case PASSWORD_CHANGE_FAIL:
       return {
         ...state,
         errors: payload,
