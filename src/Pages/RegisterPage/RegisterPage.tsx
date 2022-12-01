@@ -13,6 +13,7 @@ import {
   MDBRow,
   MDBCol,
 } from "mdb-react-ui-kit";
+import { Alert } from "reactstrap";
 
 const RegisterPage = ({
   extendedSignup,
@@ -21,7 +22,8 @@ const RegisterPage = ({
   accountCreated,
   anotherUser,
 }) => {
-  accountCreated = false;
+  // errors = "error";
+  // accountCreated = false;
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [hrAdmins, setHrAdmins] = useState([]);
@@ -92,7 +94,13 @@ const RegisterPage = ({
         flatNumber,
         county
       );
+      if (errors == null) {
+        <Alert>{errors}</Alert>;
+      }
       return <Navigate to="/" />;
+    } else {
+      <Alert>Hasła nie są identyczne</Alert>;
+      // alert("Hasła nie są identyczne");
     }
   };
   console.log(isAuthenticated);
@@ -101,7 +109,13 @@ const RegisterPage = ({
   //     return <Navigate to='/' />
   // }
   if (accountCreated) {
-    return <Navigate to="/" />;
+    // return <Navigate to="/" />;
+    <div
+      className="alert alert-warning alert-dismissible fade show"
+      role="alert"
+    >
+      <strong>User created</strong>
+    </div>;
     // window.open("https://" + window.location.hostname + "/login", "_parent");
   }
   const getHRUsers = () => {

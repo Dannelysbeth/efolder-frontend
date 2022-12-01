@@ -46,6 +46,11 @@ const routing = (
                 <Route path="/user/:username/" element={<AnotherUserPage />}>
                   <Route path="kartoteka" element={<DocumentsPage />} />
                   <Route path="daneOsobowe" element={<UserInfoPage />} />
+                  <Route
+                    path="dodajDokumenty"
+                    element={<UploadDocumentPage />}
+                  />
+                  <Route path="zmienHaslo" element={<PasswordChangePage />} />
                 </Route>
               </Route>
               <Route path="/uploadFile" element={<UploadDocumentPage />} />

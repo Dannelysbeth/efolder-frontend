@@ -183,46 +183,47 @@ export const login =
       });
     }
   };
-export const uploadFile = (fileType: string, file) => async (dispatch) => {
-  console.log(file);
-  //
-  let data = new FormData();
-  data.append("file", file, file.name);
-  // data.append("filename", file.ame);
+export const uploadFile =
+  (fileType: string, file, username: string) => async (dispatch) => {
+    console.log(file);
+    //
+    let data = new FormData();
+    data.append("file", file, file.name);
+    // data.append("filename", file.ame);
 
-  // formData.append("file", file.na);
-  const config = {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${localStorage.getItem("access")}`,
-      Accept: "*/*",
-    },
+    // formData.append("file", file.na);
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        Accept: "*/*",
+      },
+    };
+
+    const body = new URLSearchParams({
+      // file: document,
+    });
+    // console.log(document);
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_REMOTE_URL}/api/document/upload/${fileType}/${username}`,
+
+        data,
+        config
+      );
+
+      dispatch({
+        type: FILE_UPLOAD_FILE_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err.response.data);
+      dispatch({
+        type: FILE_UPLOAD_FILE_FAIL,
+        payload: err.response.data,
+      });
+    }
   };
-
-  const body = new URLSearchParams({
-    // file: document,
-  });
-  // console.log(document);
-  try {
-    const res = await axios.post(
-      `${process.env.REACT_APP_REMOTE_URL}/api/document/upload/${fileType}`,
-
-      data,
-      config
-    );
-
-    dispatch({
-      type: FILE_UPLOAD_FILE_SUCCESS,
-      payload: res.data,
-    });
-  } catch (err) {
-    console.log(err.response.data);
-    dispatch({
-      type: FILE_UPLOAD_FILE_FAIL,
-      payload: err.response.data,
-    });
-  }
-};
 
 export const signup =
   (

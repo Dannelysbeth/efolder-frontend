@@ -1,6 +1,6 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { extendedSignup, uploadFile } from "../../Actions/auth";
 import { checkAuthenticated } from "../../Actions/auth";
@@ -13,6 +13,7 @@ import {
 } from "mdb-react-ui-kit";
 
 const UploadDocumentPage = ({ errors, uploadFile }) => {
+  const { username } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [hrAdmins, setHrAdmins] = useState([]);
@@ -39,7 +40,7 @@ const UploadDocumentPage = ({ errors, uploadFile }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(file);
-    uploadFile(fileCategory, file);
+    uploadFile(fileCategory, file, username);
   };
 
   return (

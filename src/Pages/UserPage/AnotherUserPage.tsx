@@ -108,14 +108,31 @@ const AnotherUserPage = ({ user }) => {
             </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <Link
+              className="nav-link active"
+              to={{ pathname: `/user/${username}/dodajDokumenty` }}
+            >
+              {" "}
+              Dodaj dokumenty{" "}
+            </Link>
+            {/* <a className="nav-link" href="#">
               Link
-            </a>
+            </a> */}
           </li>
           <li className="nav-item">
-            <a className="nav-link disabled" href="#" aria-disabled="true">
+            <Link
+              className="nav-link active"
+              to={{ pathname: `/user/${username}/zmienHaslo` }}
+            >
+              {" "}
+              {user != null && user.username !== username
+                ? "Zmień hasło"
+                : `Zresetuj hasło`}
+              {/* Zmień hasło{" "} */}
+            </Link>
+            {/* <a className="nav-link disabled" href="#" aria-disabled="true">
               Disabled
-            </a>
+            </a> */}
           </li>
         </ul>
       </div>
