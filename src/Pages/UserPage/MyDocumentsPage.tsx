@@ -35,6 +35,12 @@ const AnotherUserPage = ({ user }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
 
+  const onDocumentSubmit = (document: any, e) => {
+    e.preventDefault();
+    console.log("TEST");
+    downloadDocumentById(document);
+  };
+
   const getDocuments = () => {
     return fetch(
       `${process.env.REACT_APP_REMOTE_URL}/api/document/${username}`,
@@ -56,6 +62,48 @@ const AnotherUserPage = ({ user }) => {
         setLoading(false);
         setError(true);
       });
+  };
+  const downloadDocumentById = (doc: any) => {
+    return (
+      fetch(
+        `${process.env.REACT_APP_REMOTE_URL}/api/document/download/${doc.id}`,
+        {
+          method: "GET",
+          // mode: "cors",
+          // responseType: "blob",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+            "Content-Type": "application/pdf",
+            "Content-Disposition": "attachment;filename=report.pdf",
+          },
+        }
+      )
+        // .then((response) => {
+        //   FileDownload(response.blob, "report.pdf");
+        //   setLoading(false);
+        // })
+        // .catch((error) => {
+        //   setLoading(false);
+        //   setError(true);
+        // });
+        .then((response) => response.blob())
+        .then((responseType) => {
+          // Create blob link to download
+          const url = window.URL.createObjectURL(new Blob([responseType]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", doc.name);
+
+          // Append to html link element page
+          document.body.appendChild(link);
+
+          // Start download
+          link.click();
+
+          // Clean up and remove the link
+          link.parentNode.removeChild(link);
+        })
+    );
   };
   useEffect(() => {
     getDocuments();
@@ -127,15 +175,18 @@ const AnotherUserPage = ({ user }) => {
                         <p className="text-muted mb-0">{document.size}</p>
                       </div>
                     </div>
-                    <MDBBtn size="sm">
-                      <Link
-                        className="nav-link active"
+                    <MDBBtn
+                      size="sm"
+                      onClick={(e) => onDocumentSubmit(document, e)}
+                    >
+                      {/* <Link
+                        className="nav-link active"e
                         to={{
                           pathname: `http://localhost:8080/api/document/view/${document.id}`,
                         }}
-                      >
-                        View
-                      </Link>
+                      > */}
+                      View
+                      {/* </Link> */}
                     </MDBBtn>
                   </MDBListGroupItem>
                 ))
@@ -153,3 +204,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(AnotherUserPage);
+function FileDownload(data: any, arg1: string) {
+  throw new Error("Function not implemented.");
+}
