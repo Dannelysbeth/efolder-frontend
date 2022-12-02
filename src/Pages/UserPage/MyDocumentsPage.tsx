@@ -35,6 +35,24 @@ const AnotherUserPage = ({ user }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
 
+  //   function addDocument(e){
+  //     if(e){e.preventDefault();
+  //     //     if(documents === null){
+  //     //         alert('Brak ')
+  //     //      }else{
+  //     //      setTodos([...todos,task]);
+  //     //      setTask('')
+  //     //      }
+  //     //  }else{
+  //          setTodos([...todos])
+  //      }
+  //  }
+
+  function deleteItem(document) {
+    deleteDocument(document);
+    setDocuments((oldDocs) => oldDocs.filter((d) => d.id !== document.id));
+  }
+
   const onDocumentSubmit = (document: any, e) => {
     e.preventDefault();
     console.log("TEST");
@@ -143,56 +161,41 @@ const AnotherUserPage = ({ user }) => {
               {documents.length === 0 ? (
                 <h3>Brak dokumentów</h3>
               ) : (
-                documents.map((document) => (
-                  <MDBListGroupItem className="d-flex justify-content-between align-items-center">
-                    <div className="d-flex align-items-center">
-                      <i className="fa-sharp fa-solid fa-file-pdf" />
-                      <div className="ms-3">
-                        <p className="fw-bold mb-1">{document.name}</p>
-                        <p className="text-muted mb-0">{document.size}</p>
-                      </div>
+                documents.map((document, index) => {
+                  return (
+                    <div key={document.id}>
+                      <MDBListGroupItem className="d-flex justify-content-between align-items-center">
+                        <div className="d-flex align-items-center">
+                          <i className="fa-sharp fa-solid fa-file-pdf" />
+                          <div className="ms-3">
+                            <p className="fw-bold mb-1">{document.name}</p>
+                            <p className="text-muted mb-0">{document.size}</p>
+                          </div>
+                        </div>
+                        <MDBDropdown className="btn-group-1">
+                          <MDBDropdownToggle />
+                          <MDBDropdownMenu>
+                            <MDBDropdownItem
+                              link
+                              onClick={(e) => onDocumentSubmit(document, e)}
+                            >
+                              Pobierz
+                            </MDBDropdownItem>
+                            <MDBDropdownItem
+                              link
+                              onClick={(e) => deleteItem(document)}
+                            >
+                              Usuń
+                            </MDBDropdownItem>
+                            <MDBDropdownItem link>
+                              Something else here
+                            </MDBDropdownItem>
+                          </MDBDropdownMenu>
+                        </MDBDropdown>
+                      </MDBListGroupItem>
                     </div>
-                    <MDBDropdown className="btn-group-1">
-                      <MDBDropdownToggle />
-                      <MDBDropdownMenu>
-                        <MDBDropdownItem
-                          link
-                          // size="bg"
-                          onClick={(e) => onDocumentSubmit(document, e)}
-                        >
-                          {/* <Link
-                        className="nav-link active"e
-                        to={{
-                          pathname: `http://localhost:8080/api/document/view/${document.id}`,
-                        }}
-                      > */}
-                          Pobierz
-                          {/* </Link> */}
-                        </MDBDropdownItem>
-                        <MDBDropdownItem
-                          link
-                          // size="bg"
-                          onClick={(e) => onDocumentDeleteSubmit(document, e)}
-                        >
-                          Usuń
-                        </MDBDropdownItem>
-                        <MDBDropdownItem link>
-                          Something else here
-                        </MDBDropdownItem>
-                      </MDBDropdownMenu>
-                    </MDBDropdown>
-                    {/* <MDBBtn size="sm">
-                      <Link
-                        className="nav-link active"
-                        to={{
-                          pathname: `http://localhost:8080/api/document/view/${document.id}`,
-                        }}
-                      >
-                        View
-                      </Link>
-                    </MDBBtn> */}
-                  </MDBListGroupItem>
-                ))
+                  );
+                })
               )}
             </MDBAccordionItem>
           </MDBAccordion>
