@@ -9,12 +9,9 @@ import { MDBBtn, MDBCol, MDBInput, MDBRow } from "mdb-react-ui-kit";
 import { Console } from "console";
 
 const PasswordChangePage = ({ user, errors, changePassword, message }) => {
-  // message = null;
   const { username } = useParams();
-  const [error, setError] = useState({
-    password: "",
-    repeatPassword: "",
-  });
+  const [infoMessage, setInfoMessage] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const [formData, setFormData] = useState({
     password: "",
     repeatPassword: "",
@@ -22,94 +19,32 @@ const PasswordChangePage = ({ user, errors, changePassword, message }) => {
   const { password, repeatPassword } = formData;
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    validateInput(e);
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    validateInput(e);
-    if (password !== repeatPassword) {
-      alert("Hasła nie są identyczne");
-
-      //TODO
-      return <Navigate to="/" />;
+  function submitNewPasswd() {
+    setInfoMessage("");
+    setErrMsg("");
+    if (password != repeatPassword) {
+      setErrMsg("Wprowadzone hasła nie są identyczne");
     } else {
       changePassword(password, repeatPassword, username);
-      alert("Haslo zostało poprawnie zmienione");
-      // error = "Hasła nie są identyczne!";
-      // console.log("Pass dont match");
+      setInfoMessage("Hasło zostało poprawnie zmienione");
+      setFormData({ ...formData, password: "", repeatPassword: "" });
     }
-  };
+  }
 
-  // const changeUserPassword = async () => {
-  //   return fetch(
-  //     `${process.env.REACT_APP_REMOTE_URL}/api/user/changePassword/${user.username}`,
-  //     {
-  //       method: "POST",
-  //       // mode: "cors",
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("access")}`,
-  //         "Content-Type": "application/json",
-  //         Accept: "*/*",
-  //       },
-  //       body: JSON.stringify(formData),
-  //     }
-  //   )
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {
-  //       successMsg = "Password changed successfully";
-  //       error = null;
-  //       console.log(successMsg);
-  //     })
-  //     .catch((error) => {
-  //       console.log("Something is wrong");
-  //       successMsg = null;
-  //       error = error;
-  //     });
-  // };
-  const validateInput = (e) => {
-    let { name, value } = e.target;
-    // setError({ ...errors, [e.target.name]: "" });
-    setError((prev) => {
-      const stateObj = { ...prev, [name]: "" };
-
-      switch (name) {
-        case "password":
-          if (!value) {
-            stateObj[name] = "Proszę wypełnij pole z hasłem";
-          } else if (
-            formData.repeatPassword &&
-            value !== formData.repeatPassword
-          ) {
-            stateObj["repeatPassword"] = "Hasła nie są identyczne!";
-          } else {
-            stateObj["repeatPassword"] = formData.repeatPassword
-              ? ""
-              : error.repeatPassword;
-          }
-          break;
-
-        case "confirmPassword":
-          if (!value) {
-            stateObj[name] = "Please enter Confirm Password.";
-          } else if (formData.password && value !== formData.password) {
-            stateObj[name] = "Proszę wypełnij pole 'Powtórz hasło'";
-          }
-          break;
-
-        default:
-          break;
-      }
-
-      return stateObj;
-    });
-  };
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setInfoMessage;
+  }, []);
 
   return (
     <div className="d-flex flex-column min-vh-100">
       <div className="form-signin top-space">
-        <MDBRow className="g-3" tag="form" onSubmit={(e) => onSubmit(e)}>
+        <MDBRow
+          className="g-3"
+          tag="form"
+          // onSubmit={(e) => submitNewPasswd()}
+        >
           <h1 className="h3 mb-3 fw-normal text-center">Zmien haslo</h1>
 
           <MDBInput
@@ -120,40 +55,38 @@ const PasswordChangePage = ({ user, errors, changePassword, message }) => {
             value={formData.password}
             onChange={(e) => onChange(e)}
             placeholder="Hasło"
-            onBlur={validateInput}
           />
-          {error.password && <span className="err">{error.password}</span>}
 
           <MDBInput
             type="password"
             className="form-control"
-            id="floatingPassword"
+            id="floatingRepeatPassword"
             name="repeatPassword"
             value={formData.repeatPassword}
             onChange={(e) => onChange(e)}
             placeholder="Powtórz hasło"
-            onBlur={validateInput}
           />
-          {error.repeatPassword && (
-            <span className="err">{error.repeatPassword}</span>
-          )}
-          <MDBBtn className="w-100 btn btn-lg button-blue" type="submit">
+          <MDBBtn
+            className="w-100 btn btn-lg button-blue"
+            type="submit"
+            onClick={(e) => submitNewPasswd()}
+          >
             Zmień hasło
           </MDBBtn>
-          {errors !== null && message !== null ? (
+          {infoMessage != null && infoMessage != "" ? (
             <div
-              className="alert alert-warning alert-dismissible fade show"
+              className="alert alert-success alert-dismissible fade show"
               role="alert"
             >
-              <strong>{errors.message}</strong>
+              <strong>{infoMessage}</strong>
             </div>
           ) : null}
-          {message !== null && error == null ? (
+          {errMsg != null && errMsg != "" ? (
             <div
-              className="alert alert-warning alert-dismissible fade show"
+              className="alert alert-danger alert-dismissible fade show"
               role="alert"
             >
-              <strong>Password successfully saved </strong>
+              <strong>{errMsg}</strong>
             </div>
           ) : null}
         </MDBRow>

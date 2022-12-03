@@ -115,9 +115,6 @@ const AnotherUserPage = ({ user }) => {
               {" "}
               Dodaj dokumenty{" "}
             </Link>
-            {/* <a className="nav-link" href="#">
-              Link
-            </a> */}
           </li>
           <li className="nav-item">
             <Link
@@ -128,11 +125,7 @@ const AnotherUserPage = ({ user }) => {
               {user != null && user.username !== username
                 ? "Zmień hasło"
                 : `Zresetuj hasło`}
-              {/* Zmień hasło{" "} */}
             </Link>
-            {/* <a className="nav-link disabled" href="#" aria-disabled="true">
-              Disabled
-            </a> */}
           </li>
         </ul>
       </div>
