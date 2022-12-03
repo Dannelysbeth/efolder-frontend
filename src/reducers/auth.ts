@@ -28,6 +28,7 @@ const initialState = {
   anotherUser: null,
   errors: null,
   message: null,
+  fileSuccessMessage: null,
   selectedFile: null,
 };
 
@@ -43,6 +44,7 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
         access: payload.accessToken,
         refresh: payload.refreshToken,
+        fileSuccessMessage: null,
         message: "Successfully logged in",
       };
     case USER_LOADED_SUCCESS:
@@ -51,6 +53,7 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
         user: payload,
         erros: null,
+        fileSuccessMessage: null,
         message: "User successfully loaded",
       };
     case USER_LOADED_FAIL:
@@ -58,12 +61,16 @@ export default function (state = initialState, action) {
         ...state,
         user: null,
         errors: payload,
+        fileSuccessMessage: null,
+        message: null,
       };
     case ANOTHER_USER_LOADED_FAIL:
       return {
         ...state,
         anotherUser: null,
         errors: payload,
+        fileSuccessMessage: null,
+        message: null,
       };
     case ANOTHER_USER_LOADED_SUCCESS:
       return {
@@ -71,6 +78,7 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
         anotherUser: payload,
         errors: null,
+        fileSuccessMessage: null,
         message: "User successfully loaded",
       };
 
@@ -79,7 +87,8 @@ export default function (state = initialState, action) {
         ...state,
         role: null,
         errors: payload,
-        message: payload,
+        fileSuccessMessage: null,
+        message: null,
       };
     case ROLE_LOADED_SUCCESS:
       return {
@@ -87,6 +96,7 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
         role: payload,
         errors: null,
+        fileSuccessMessage: null,
         message: "Role successfully loaded",
       };
 
@@ -94,13 +104,15 @@ export default function (state = initialState, action) {
       return {
         ...state,
         errors: payload,
+        fileSuccessMessage: null,
         isAuthenticated: false,
-        message: payload,
+        message: null,
       };
     case AUTHENTICATED_SUCCESS:
       return {
         ...state,
         errors: null,
+        fileSuccessMessage: null,
         isAuthenticated: true,
         message: "User successfully authenticated",
       };
@@ -111,6 +123,7 @@ export default function (state = initialState, action) {
         accountCreated: true,
         anotherUser: payload,
         errors: null,
+        fileSuccessMessage: null,
         message: "User successfully created",
       };
     case LOGOUT:
@@ -123,6 +136,7 @@ export default function (state = initialState, action) {
         isAuthenticated: false,
         user: null,
         errors: null,
+        fileSuccessMessage: null,
         message: "User successfully logged out",
       };
     case LOGIN_FAIL:
@@ -133,7 +147,8 @@ export default function (state = initialState, action) {
         isAuthenticated: false,
         user: null,
         errors: payload,
-        message: payload,
+        fileSuccessMessage: null,
+        message: null,
       };
     case SIGNUP_FAIL:
       // localStorage.removeItem("access");
@@ -145,31 +160,36 @@ export default function (state = initialState, action) {
         // isAuthenticated: false,
         // user: null,
         errors: payload,
+        fileSuccessMessage: null,
         message: payload,
       };
     case FILE_UPLOAD_FILE_SUCCESS:
       return {
         ...state,
         errors: null,
-        message: payload,
+        fileSuccessMessage: "Dokument został poprawnie dodany",
+        message: "Dokument został poprawnie dodany",
       };
     case FILE_UPLOAD_FILE_FAIL:
       return {
         ...state,
         errors: payload,
-        message: payload,
+        fileSuccessMessage: null,
+        message: null,
       };
     case PASSWORD_CHANGE_SUCCESS:
       return {
         ...state,
         errors: null,
-        message: payload,
+        fileSuccessMessage: null,
+        message: "Haslo zostało zmienione",
       };
     case PASSWORD_CHANGE_FAIL:
       return {
         ...state,
         errors: payload,
-        message: payload,
+        fileSuccessMessage: null,
+        message: null,
       };
     default:
       // errors: payload;

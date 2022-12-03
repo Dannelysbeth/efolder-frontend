@@ -12,8 +12,10 @@ import {
   MDBCol,
 } from "mdb-react-ui-kit";
 
-const UploadDocumentPage = ({ errors, uploadFile }) => {
+const UploadDocumentPage = ({ errors, uploadFile, successMessage }) => {
   const { username } = useParams();
+  const [infoMessage, setInfoMessage] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [hrAdmins, setHrAdmins] = useState([]);
@@ -39,14 +41,32 @@ const UploadDocumentPage = ({ errors, uploadFile }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(file);
-    uploadFile(fileCategory, file, username);
   };
+  function submitDocument(e) {
+    // setInfoMessage("");
+    setErrMsg("");
+
+    if (fileCategory != "" && file != null) {
+      // setErrMsg("");
+      uploadFile(fileCategory, file, username);
+      // if (errors == null) {
+      //   setInfoMessage("Dokument został poprawnie dodany");
+      //   setFormData({ ...formData, file: null });
+      //   setCategory({ ...category, fileCategory: "" });
+      // } else {
+      //   setInfoMessage("");
+      // }
+    } else if (fileCategory != "") {
+      setErrMsg("Proszę wybierz plik");
+    } else {
+      setErrMsg("Proszę wybierz kategorię dokumentu");
+    }
+  }
 
   return (
     <div className="d-flex flex-column min-vh-100">
       <div className="form-signin top-space">
-        <MDBRow className="g-3" tag="form" onSubmit={(e) => onSubmit(e)}>
+        <MDBRow className="g-3">
           <h1 className="h3 mb-3 fw-normal text-center">Dodaj dokument</h1>
           <div className="form-group">
             <select
@@ -69,6 +89,7 @@ const UploadDocumentPage = ({ errors, uploadFile }) => {
               <input
                 type="file"
                 name="file"
+                required
                 accept="application/pdf"
                 onChange={(e) => onChange(e)}
               />
@@ -77,15 +98,35 @@ const UploadDocumentPage = ({ errors, uploadFile }) => {
             <p className="main">Wspierane pliki:</p>
             <p className="info">PDF</p>
           </div>
-          <MDBBtn className="w-100 btn btn-lg button-blue" type="submit">
+          <MDBBtn
+            className="w-100 btn btn-lg button-blue"
+            type="submit"
+            onClick={(e) => submitDocument(e)}
+          >
             Prześlij document{" "}
           </MDBBtn>
-          {errors !== null ? (
+          {errors != null && errors.message != null && errMsg == "" ? (
             <div
-              className="alert alert-warning alert-dismissible fade show"
+              className="alert alert-danger alert-dismissible fade show "
               role="alert"
             >
               <strong>{errors.message}</strong>
+            </div>
+          ) : null}
+          {successMessage != null && errMsg == "" ? (
+            <div
+              className="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              <strong>{successMessage}</strong>{" "}
+            </div>
+          ) : null}
+          {errMsg != null && errMsg != "" ? (
+            <div
+              className="alert alert-danger alert-dismissible fade show"
+              role="alert"
+            >
+              <strong>{errMsg}</strong>{" "}
             </div>
           ) : null}
         </MDBRow>
@@ -100,6 +141,7 @@ const mapStateToProps = (state) => ({
   errors: state.auth.errors,
   anotherUser: state.auth.anotherUser,
   user: state.auth.user,
+  successMessage: state.auth.fileSuccessMessage,
 });
 
 export default connect(mapStateToProps, { extendedSignup, uploadFile })(
