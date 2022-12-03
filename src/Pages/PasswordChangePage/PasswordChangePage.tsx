@@ -24,7 +24,9 @@ const PasswordChangePage = ({ user, errors, changePassword, message }) => {
   function submitNewPasswd() {
     setInfoMessage("");
     setErrMsg("");
-    if (password != repeatPassword) {
+    if (password == null || password == "") {
+      setErrMsg("Pole 'Hasło' nie może byc puste ");
+    } else if (password != repeatPassword) {
       setErrMsg("Wprowadzone hasła nie są identyczne");
     } else {
       changePassword(password, repeatPassword, username);
@@ -42,7 +44,7 @@ const PasswordChangePage = ({ user, errors, changePassword, message }) => {
       <div className="form-signin top-space">
         <MDBRow
           className="g-3"
-          tag="form"
+          // tag="form"
           // onSubmit={(e) => submitNewPasswd()}
         >
           <h1 className="h3 mb-3 fw-normal text-center">Zmien haslo</h1>
