@@ -28,7 +28,7 @@
   background-size: auto;
 }
 .form-signin {
-  width: 100%;
+  width: 67%;
   height: 100%;
   /* max-width: 500px; */
   padding: 100px;
@@ -64,15 +64,7 @@
   margin-top: 50px;
 }
 .button-blue-lp:hover {
-  background: linear-gradient(
-    to right,
-    #c4cacd,
-    #9ecfe4,
-    #8aa7b4,
-    #425158,
-    #233841,
-    #2b2e35
-  );
+  background-color: #8aa7b4;
   color: #1d2223;
   /* box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19); */

@@ -35,6 +35,14 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="d-flex flex-column min-vh-100">
             <div className="card">
+              {errors != null && errors.message != null ? (
+                <div
+                  className="alert alert-danger alert-dismissible fade show"
+                  role="alert"
+                >
+                  <strong>Nazwa użytkownika lub hasło są niepoprawne</strong>
+                </div>
+              ) : null}
               <div className="row g-0">
                 <div className="col-md-6 col-lg-6 d-none d-md-block">
                   <img
@@ -42,6 +50,7 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
                     className="img-fluid-1"
                   />
                 </div>
+
                 <div className="col-md-6 col-lg-6 d-flex align-items-center">
                   <div className="form-signin ">
                     <form onSubmit={(e) => onSubmit(e)}>
@@ -74,7 +83,11 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
                         <label>Hasło</label>
                       </div>
                       <p>
-                        {/* <p>{errors !== null ? errors.message : ""}</p> */}
+                        <p>
+                          {errors != null && errors.message != null
+                            ? "Nazwa użytkownika lub hasło są niepoprawne"
+                            : ""}
+                        </p>
                       </p>
                       <button
                         className="w-100 btn btn-lg button-blue-lp "

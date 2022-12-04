@@ -53,7 +53,7 @@ const AnotherUserPage = ({ user }) => {
   return (
     <div className="backgd d-flex flex-column min-vh-100">
       <div className="">
-        <div className="card-profile-image shadows ">
+        <div className="profile-pic rounded-circle no-padding d-flex justify-content-center  ">
           <img
             src={
               employee["user"] && employee["user"]["imageUrl"]
@@ -63,8 +63,8 @@ const AnotherUserPage = ({ user }) => {
             className="rounded-circle user-pic shadow"
           />
         </div>
-        <div className="row user-container text">
-          <h3>
+        <div className="row user-container justify-content-center">
+          <h3 className="justify-content-center">
             {employee["user"] && employee["user"]["firstname"]}{" "}
             {employee["user"] && employee["user"]["middleName"]
               ? employee["user"] && employee["user"]["middleName"] + " "

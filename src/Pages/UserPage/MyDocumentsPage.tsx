@@ -48,7 +48,7 @@ const AnotherUserPage = ({ user }) => {
 
   const getDocuments = () => {
     return fetch(
-      `${process.env.REACT_APP_REMOTE_URL}/api/document/${username}`,
+      `${process.env.REACT_APP_REMOTE_URL}/api/document/info/all/${username}`,
       {
         method: "GET",
         mode: "cors",
