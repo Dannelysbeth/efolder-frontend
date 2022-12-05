@@ -15,11 +15,24 @@ const UserPage = ({ user }) => {
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
+  const [addressData, setAddressData] = useState({
+    country: "",
+    city: "",
+    zipcode: "",
+    street: "",
+    buildingNumber: "",
+    flatNumber: "",
+    county: "",
+  });
 
-  // function onEdit() {
-  //   isEditable = true;
-  //   console.log(isEditable);
-  // }
+  function onSave() {
+    setIsEditable(false);
+    changeAddressInfo();
+    window.location.reload();
+  }
+  function onCancel() {
+    setIsEditable(false);
+  }
 
   const getEmployee = () => {
     return fetch(
@@ -43,6 +56,33 @@ const UserPage = ({ user }) => {
         setError(true);
       });
   };
+  const onChange = (e) =>
+    setAddressData({ ...addressData, [e.target.name]: e.target.value });
+
+  const changeAddressInfo = () => {
+    return fetch(
+      `${process.env.REACT_APP_REMOTE_URL}/api/address/${username}`,
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(addressData),
+      }
+    )
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setEmployee(responseJson);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(true);
+      });
+  };
+
   useEffect(() => {
     getEmployee();
   }, []);
@@ -73,7 +113,6 @@ const UserPage = ({ user }) => {
           <p>
             <p></p>
           </p>
-          {/* <h1 className="h3   text-left">Infomacje podstawowe</h1> */}
           <MDBCol md="4">
             <MDBInput
               type="text"
@@ -140,115 +179,8 @@ const UserPage = ({ user }) => {
   );
   const adressInfo = () => (
     <div className="user-container top-space bottom-space">
-      <h1 className="caption">Infomacje adresowe</h1>
-      <hr></hr>
-
-      <div className="row">
-        <MDBRow className="g-3">
-          <MDBCol md="4">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="country"
-              name="country"
-              value={employee["address"] && employee["address"]["country"]}
-              // onChange={(e) => onChange(e)}
-              placeholder="Kraj"
-              readOnly={!isEditable}
-            />
-          </MDBCol>
-          <MDBCol md="5">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="country"
-              name="county"
-              value={
-                employee["address"] && employee["address"]["county"] != null
-                  ? employee["address"]["county"]
-                  : "-"
-              }
-              // onChange={(e) => onChange(e)}
-              placeholder="Województwo/Prowincja"
-              readOnly={!isEditable}
-            />
-          </MDBCol>
-          <div className="row"></div>
-          <MDBCol md="5">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="street"
-              name="street"
-              value={employee["address"] && employee["address"]["street"]}
-              // onChange={(e) => onChange(e)}
-              placeholder="Ulica"
-              readOnly={!isEditable}
-            />
-          </MDBCol>
-          <MDBCol md="2">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="buildingNumber"
-              name="buildingNumber"
-              value={
-                employee["address"] && employee["address"]["buildingNumber"]
-              }
-              // onChange={(e) => onChange(e)}
-              placeholder="Nr domu"
-              readOnly={!isEditable}
-              // required
-            />
-          </MDBCol>
-          <MDBCol md="3">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="flatNumber"
-              name="flatNumber"
-              value={employee["address"] && employee["address"]["flatNumber"]}
-              // onChange={(e) => onChange(e)}
-              placeholder="Nr mieszkania"
-              readOnly={!isEditable}
-            />
-          </MDBCol>
-          <div className="row"></div>
-          <MDBCol md="3">
-            <MDBInput
-              type="text"
-              pattern="[0-9]{2}-[0-9]{3}"
-              className="form-control"
-              id="zipcode"
-              name="zipcode"
-              value={employee["address"] && employee["address"]["zipcode"]}
-              // onChange={(e) => onChange(e)}
-              placeholder="NN-NNN"
-              readOnly={!isEditable}
-            />
-          </MDBCol>
-          <MDBCol md="5">
-            {!isEditable ? (
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="city"
-                name="city"
-                value={employee["address"] && employee["address"]["city"]}
-                placeholder="Miasto"
-                readOnly={!isEditable}
-              />
-            ) : (
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="city"
-                name="city"
-                placeholder="Miasto"
-                readOnly={!isEditable}
-              />
-            )}
-          </MDBCol>
+      <div className="d-flex justify-content-end">
+        {!isEditable ? (
           <button
             className="btn btn-info btn-sm "
             id="emp-info-edit-btn"
@@ -256,7 +188,244 @@ const UserPage = ({ user }) => {
           >
             <span className="fa fa-pencil fa-little"></span>
           </button>
-        </MDBRow>
+        ) : (
+          <p>
+            <p></p>
+          </p>
+        )}
+      </div>
+      <h1 className="caption">Infomacje adresowe</h1>
+
+      <hr></hr>
+
+      <div className="row">
+        {isEditable ? (
+          <MDBRow className="g-3">
+            <MDBCol md="4">
+              <MDBInput
+                type="text"
+                className="form-control"
+                id="country"
+                name="country"
+                onChange={(e) => onChange(e)}
+                placeholder="Kraj"
+                required
+              />
+            </MDBCol>
+            <MDBCol md="5">
+              <MDBInput
+                type="text"
+                className="form-control"
+                id="country"
+                name="county"
+                onChange={(e) => onChange(e)}
+                placeholder="Województwo/Prowincja"
+              />
+            </MDBCol>
+            <div className="row"></div>
+            <MDBCol md="5">
+              <MDBInput
+                type="text"
+                className="form-control"
+                id="street"
+                name="street"
+                onChange={(e) => onChange(e)}
+                placeholder="Ulica"
+              />
+            </MDBCol>
+            <MDBCol md="2">
+              <MDBInput
+                type="text"
+                className="form-control"
+                id="buildingNumber"
+                name="buildingNumber"
+                onChange={(e) => onChange(e)}
+                placeholder="Nr domu"
+                required
+              />
+            </MDBCol>
+            <MDBCol md="3">
+              <MDBInput
+                type="text"
+                className="form-control"
+                id="flatNumber"
+                name="flatNumber"
+                // value={employee["address"] && employee["address"]["flatNumber"]}
+                onChange={(e) => onChange(e)}
+                placeholder="Nr mieszkania"
+                // readOnly={!isEditable}
+              />
+            </MDBCol>
+            <div className="row"></div>
+            <MDBCol md="3">
+              <MDBInput
+                type="text"
+                pattern="[0-9]{2}-[0-9]{3}"
+                className="form-control"
+                id="zipcode"
+                name="zipcode"
+                // value={employee["address"] && employee["address"]["zipcode"]}
+                onChange={(e) => onChange(e)}
+                placeholder="NN-NNN"
+                // readOnly={!isEditable}
+              />
+            </MDBCol>
+            <MDBCol md="5">
+              {!isEditable ? (
+                <MDBInput
+                  type="text"
+                  className="form-control"
+                  id="city"
+                  name="city"
+                  value={employee["address"] && employee["address"]["city"]}
+                  placeholder="Miasto"
+                  readOnly={!isEditable}
+                />
+              ) : (
+                <MDBInput
+                  type="text"
+                  className="form-control"
+                  id="city"
+                  name="city"
+                  placeholder="Miasto"
+                  readOnly={!isEditable}
+                />
+              )}
+            </MDBCol>
+            <div className="d-flex justify-content-end">
+              <div className="d-flex justify-content-end">
+                {" "}
+                <button
+                  className="btn btn-primary btn-sm "
+                  id="emp-primary-edit-btn"
+                  onClick={() => onSave()}
+                >
+                  Zapisz
+                </button>
+              </div>
+              <div className="d-flex justify-content-end">
+                {" "}
+                <button
+                  className="btn btn-danger btn-sm "
+                  id="emp-danger-edit-btn"
+                  onClick={() => onCancel()}
+                >
+                  Anuluj
+                </button>
+              </div>
+            </div>
+          </MDBRow>
+        ) : (
+          <MDBRow className="g-3">
+            <MDBCol md="4">
+              <MDBInput
+                type="text"
+                className="form-control"
+                id="country"
+                name="country"
+                value={employee["address"] && employee["address"]["country"]}
+                // onChange={(e) => onChange(e)}
+                placeholder="Kraj"
+                readOnly={!isEditable}
+              />
+            </MDBCol>
+            <MDBCol md="5">
+              <MDBInput
+                type="text"
+                className="form-control"
+                id="country"
+                name="county"
+                value={
+                  employee["address"] && employee["address"]["county"] != null
+                    ? employee["address"]["county"]
+                    : "-"
+                }
+                // onChange={(e) => onChange(e)}
+                placeholder="Województwo/Prowincja"
+                readOnly={!isEditable}
+              />
+            </MDBCol>
+            <div className="row"></div>
+            <MDBCol md="5">
+              <MDBInput
+                type="text"
+                className="form-control"
+                id="street"
+                name="street"
+                value={employee["address"] && employee["address"]["street"]}
+                // onChange={(e) => onChange(e)}
+                placeholder="Ulica"
+                readOnly={!isEditable}
+              />
+            </MDBCol>
+            <MDBCol md="2">
+              <MDBInput
+                type="text"
+                className="form-control"
+                id="buildingNumber"
+                name="buildingNumber"
+                value={
+                  employee["address"] && employee["address"]["buildingNumber"]
+                }
+                // onChange={(e) => onChange(e)}
+                placeholder="Nr domu"
+                readOnly={!isEditable}
+                // required
+              />
+            </MDBCol>
+            <MDBCol md="3">
+              <MDBInput
+                type="text"
+                className="form-control"
+                id="flatNumber"
+                name="flatNumber"
+                value={employee["address"] && employee["address"]["flatNumber"]}
+                // onChange={(e) => onChange(e)}
+                placeholder="Nr mieszkania"
+                readOnly={!isEditable}
+              />
+            </MDBCol>
+            <div className="row"></div>
+            <MDBCol md="3">
+              <MDBInput
+                type="text"
+                pattern="[0-9]{2}-[0-9]{3}"
+                className="form-control"
+                id="zipcode"
+                name="zipcode"
+                value={employee["address"] && employee["address"]["zipcode"]}
+                // onChange={(e) => onChange(e)}
+                placeholder="NN-NNN"
+                readOnly={!isEditable}
+              />
+            </MDBCol>
+            <MDBCol md="5">
+              {!isEditable ? (
+                <MDBInput
+                  type="text"
+                  className="form-control"
+                  id="city"
+                  name="city"
+                  value={employee["address"] && employee["address"]["city"]}
+                  placeholder="Miasto"
+                  readOnly={!isEditable}
+                />
+              ) : (
+                <MDBInput
+                  type="text"
+                  className="form-control"
+                  id="city"
+                  name="city"
+                  placeholder="Miasto"
+                  readOnly={!isEditable}
+                />
+              )}
+            </MDBCol>
+            <p>
+              <p></p>
+            </p>
+          </MDBRow>
+        )}
       </div>
     </div>
   );
@@ -269,13 +438,7 @@ const UserPage = ({ user }) => {
         <h4 className="userPage-text mt-3"> </h4>
         {user !== null ? infoOfUser() : "Osoba niezalogowana "}
       </div>
-      {/* <div className="user-container top-space bottom-space"> */}
-      {/* <h1 className="caption">Infomacje o zatrudnieniu</h1>
-        <hr></hr>
-        <h4 className="userPage-text mt-3"> */}
       {employee && employee["user"] ? adressInfo() : "Osoba niezalogowana "}
-      {/* </h4> */}
-      {/* </div> */}
       <div className="user-container top-space bottom-space">
         <h1 className="column col-lg-3 caption">Adres</h1>
         <hr></hr>
