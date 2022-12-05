@@ -25,7 +25,8 @@ const UserPage = ({ user }) => {
     county: "",
   });
 
-  function onSave() {
+  function onSave(e) {
+    e.preventDefault();
     setIsEditable(false);
     changeAddressInfo();
     window.location.reload();
@@ -113,7 +114,7 @@ const UserPage = ({ user }) => {
           <p>
             <p></p>
           </p>
-          <MDBCol md="4">
+          <MDBCol md="4" tag="form">
             <MDBInput
               type="text"
               className="form-control"
@@ -200,7 +201,7 @@ const UserPage = ({ user }) => {
 
       <div className="row">
         {isEditable ? (
-          <MDBRow className="g-3">
+          <MDBRow className="g-3" tag="form" onSubmit={(e) => onSave(e)}>
             <MDBCol md="4">
               <MDBInput
                 type="text"
@@ -296,9 +297,10 @@ const UserPage = ({ user }) => {
               <div className="d-flex justify-content-end">
                 {" "}
                 <button
+                  type="submit"
                   className="btn btn-primary btn-sm "
                   id="emp-primary-edit-btn"
-                  onClick={() => onSave()}
+                  // onClick={() => onSave()}
                 >
                   Zapisz
                 </button>
