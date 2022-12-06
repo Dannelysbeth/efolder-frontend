@@ -11,7 +11,7 @@ import {
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
 
-const EmployeeListPage = () => {
+const EmployeeListPage = ({ user, isAuthenticated }) => {
   const [users, setUsers] = useState([
     {
       id: 0,
@@ -52,53 +52,116 @@ const EmployeeListPage = () => {
         setError(true);
       });
   };
+  function checkIfSuperAdmin(): boolean {
+    if (user != null && user.roles != null) {
+      console.log(user.username);
+      for (var i of user.roles) {
+        if (i == "ROLE_SUPER_ADMIN") return true;
+      }
+    }
+
+    return false;
+  }
   useEffect(() => {
     getUsers();
   }, []);
 
   return (
-    <MDBListGroup style={{ minWidth: "22rem" }} light>
-      {users.length === 0 ? (
-        <h3>Brak użytkowników w systemie</h3>
+    <div>
+      {checkIfSuperAdmin() ? (
+        <MDBListGroup style={{ minWidth: "22rem" }} light>
+          {users.length === 0 ? (
+            <h3>Brak użytkowników w systemie</h3>
+          ) : (
+            users.map((user) => (
+              <MDBListGroupItem className="d-flex justify-content-between align-items-center">
+                <div className="d-flex align-items-center">
+                  <img
+                    src={
+                      user.imageUrl
+                        ? user.imageUrl
+                        : "https://i.imgur.com/teiJw8H.png"
+                    }
+                    alt=""
+                    style={{ width: "45px", height: "45px" }}
+                    className="rounded-circle"
+                  />
+                  <div className="ms-3">
+                    <p className="fw-bold mb-1">
+                      {user.firstName}
+                      {user.middleName != null
+                        ? " " + user.middleName
+                        : null}{" "}
+                      {user.lastName}
+                    </p>
+                    <p className="text-muted mb-0">{user.positionName}</p>
+                    <p className="text-muted mb-0">{user.teamName}</p>
+                  </div>
+                </div>
+                <MDBBtn size="sm" rounded color="link">
+                  <Link
+                    className="nav-link active"
+                    to={{ pathname: `/user/${user.username}/daneOsobowe` }}
+                  >
+                    View
+                  </Link>
+                </MDBBtn>
+              </MDBListGroupItem>
+            ))
+          )}
+        </MDBListGroup>
       ) : (
-        // !loading &&
-        // !error &&
-        users.map((user) => (
-          <MDBListGroupItem className="d-flex justify-content-between align-items-center">
-            <div className="d-flex align-items-center">
-              <img
-                src={
-                  user.imageUrl
-                    ? user.imageUrl
-                    : "https://i.imgur.com/teiJw8H.png"
-                }
-                alt=""
-                style={{ width: "45px", height: "45px" }}
-                className="rounded-circle"
-              />
-              <div className="ms-3">
-                <p className="fw-bold mb-1">
-                  {user.firstName}
-                  {user.middleName != null ? " " + user.middleName : null}{" "}
-                  {user.lastName}
-                </p>
-                <p className="text-muted mb-0">{user.positionDescription}</p>
-                <p className="text-muted mb-0">{user.teamName}</p>
-              </div>
-            </div>
-            <MDBBtn size="sm" rounded color="link">
-              <Link
-                className="nav-link active"
-                to={{ pathname: `/user/${user.username}/daneOsobowe` }}
-              >
-                View
-              </Link>
-            </MDBBtn>
-          </MDBListGroupItem>
-        ))
+        <div>
+          {isAuthenticated == true} ? (<Navigate to="/forbidden" />) : (
+          <Navigate to="/login" />)
+        </div>
       )}
-    </MDBListGroup>
+    </div>
+    // <MDBListGroup style={{ minWidth: "22rem" }} light>
+    //   {users.length === 0 ? (
+    //     <h3>Brak użytkowników w systemie</h3>
+    //   ) : (
+    //     users.map((user) => (
+    //       <MDBListGroupItem className="d-flex justify-content-between align-items-center">
+    //         <div className="d-flex align-items-center">
+    //           <img
+    //             src={
+    //               user.imageUrl
+    //                 ? user.imageUrl
+    //                 : "https://i.imgur.com/teiJw8H.png"
+    //             }
+    //             alt=""
+    //             style={{ width: "45px", height: "45px" }}
+    //             className="rounded-circle"
+    //           />
+    //           <div className="ms-3">
+    //             <p className="fw-bold mb-1">
+    //               {user.firstName}
+    //               {user.middleName != null ? " " + user.middleName : null}{" "}
+    //               {user.lastName}
+    //             </p>
+    //             <p className="text-muted mb-0">{user.positionName}</p>
+    //             <p className="text-muted mb-0">{user.teamName}</p>
+    //           </div>
+    //         </div>
+    //         <MDBBtn size="sm" rounded color="link">
+    //           <Link
+    //             className="nav-link active"
+    //             to={{ pathname: `/user/${user.username}/daneOsobowe` }}
+    //           >
+    //             View
+    //           </Link>
+    //         </MDBBtn>
+    //       </MDBListGroupItem>
+    //     ))
+    //   )}
+    // </MDBListGroup>
   );
 };
 
-export default EmployeeListPage;
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(EmployeeListPage);

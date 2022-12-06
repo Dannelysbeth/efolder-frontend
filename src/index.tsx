@@ -15,7 +15,6 @@ import UserInfoPage from "./Pages/UserPage/UserPage";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import ScrollToTop from "./Actions/ScrollToTop";
-import BlankPage from "./Pages/BlankPage/BlankPage";
 import OAuth2RedirectPage from "./Pages/OAuth2RedirectPage/OAuth2RedirectPage";
 import MyDocumentsPage from "./Pages/UserPage/UserPage"; //AnotherUserPage
 import AnotherUserPage from "./Pages/UserPage/AnotherUserPage";
@@ -24,6 +23,7 @@ import UploadDocumentPage from "./Pages/UploadDocumentPage/UploadDocumentPage";
 import ViewDocumentsPage from "./Pages/ViewDocumentsPage/ViewDocumentsPage";
 import EmployeeListPage from "./Pages/EmployeeListPage/EmployeeListPage";
 import PasswordChangePage from "./Pages/PasswordChangePage/PasswordChangePage";
+import ForbiddenPage from "./Pages/ForbiddenPage/ForbiddenPage";
 
 const routing = (
   <div>
@@ -37,6 +37,7 @@ const routing = (
             {/* Protected routes */}
             <Route>
               <Route path="/konto" element={<UserPage />} />
+              <Route path="/forbidden" element={<ForbiddenPage />} />
               <Route path="/o-nas" element={<AboutUsPage />} />
               <Route path="/kartoteka" element={<MyDocumentsPage />} />
               <Route path="/pracownicy" element={<EmployeeListPage />} />

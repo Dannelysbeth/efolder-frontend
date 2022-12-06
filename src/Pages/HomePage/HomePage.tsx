@@ -3,7 +3,6 @@ import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import "./HomePage.css";
 import MyNavbar from "../../Components/NavBar/MainNavbar";
-import MyHeader from "../../Components/Header/HomepageHeader";
 import MyFooter from "../../Components/Footer/Footer";
 
 import {
