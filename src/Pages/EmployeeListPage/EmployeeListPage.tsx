@@ -11,7 +11,7 @@ import {
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
 
-const EmployeeListPage = ({ user, isAuthenticated }) => {
+const EmployeeListPage = ({ user }) => {
   const [users, setUsers] = useState([
     {
       id: 0,
@@ -112,7 +112,7 @@ const EmployeeListPage = ({ user, isAuthenticated }) => {
         </MDBListGroup>
       ) : (
         <div>
-          {isAuthenticated == true} ? (<Navigate to="/forbidden" />) : (
+          {user == null} ? (<Navigate to="/forbidden" />) : (
           <Navigate to="/login" />)
         </div>
       )}
@@ -161,7 +161,6 @@ const EmployeeListPage = ({ user, isAuthenticated }) => {
 
 const mapStateToProps = (state) => ({
   user: state.auth.user,
-  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps)(EmployeeListPage);

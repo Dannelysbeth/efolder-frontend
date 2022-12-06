@@ -54,8 +54,8 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
       <ul className="dropdown-menu navbar-dropdown dropdown-menu-end">
         {user !== null ? userBar() : " "}
         <li>
-          <Link to="/konto" className="nav-link link-light dropdown-item ">
-            Moje dane
+          <Link to="/profil" className="nav-link link-light dropdown-item ">
+            Profil
           </Link>
         </li>
         <li>
@@ -67,11 +67,11 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
             Kartoteka pracownicza
           </Link>
         </li>
-        {/* <li>
+        <li>
           <Link to="/zmienHaslo" className="nav-link link-light dropdown-item ">
-            Zmien haslo
+            Zmień hasło
           </Link>
-        </li> */}
+        </li>
 
         <li>
           <Link to="/uploadFile" className="nav-link link-light dropdown-item ">
@@ -164,11 +164,11 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                 Kontakt
               </Link>
             </li>
-            <li className="nav-item shadow">
+            {/* <li className="nav-item shadow">
               <Link to="/regulamin" className="nav-link link-light active">
                 Regulamin
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item shadow">
               <Link to="/pomoc" className="nav-link link-light active">
                 Pomoc

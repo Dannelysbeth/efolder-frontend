@@ -24,6 +24,8 @@ import ViewDocumentsPage from "./Pages/ViewDocumentsPage/ViewDocumentsPage";
 import EmployeeListPage from "./Pages/EmployeeListPage/EmployeeListPage";
 import PasswordChangePage from "./Pages/PasswordChangePage/PasswordChangePage";
 import ForbiddenPage from "./Pages/ForbiddenPage/ForbiddenPage";
+import ProfilePage from "./Pages/ProfilePage/ProfilePage";
+import ChangeOwnPasswordPage from "./Pages/ChangeOwnPasswordPage/ChangeOwnPasswordPage";
 
 const routing = (
   <div>
@@ -36,12 +38,12 @@ const routing = (
             <Route path="/login" element={<LoginPage />}></Route>
             {/* Protected routes */}
             <Route>
-              <Route path="/konto" element={<UserPage />} />
+              <Route path="/profil" element={<ProfilePage />} />
               <Route path="/forbidden" element={<ForbiddenPage />} />
               <Route path="/o-nas" element={<AboutUsPage />} />
               <Route path="/kartoteka" element={<MyDocumentsPage />} />
               <Route path="/pracownicy" element={<EmployeeListPage />} />
-              <Route path="/zmienHaslo" element={<PasswordChangePage />} />
+              <Route path="/zmienHaslo" element={<ChangeOwnPasswordPage />} />
               <Route path="/createUser" element={<RegisterPage />} />{" "}
               <Route path="/user">
                 <Route path="/user/:username/" element={<AnotherUserPage />}>

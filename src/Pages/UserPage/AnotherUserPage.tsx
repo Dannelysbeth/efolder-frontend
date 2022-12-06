@@ -64,9 +64,16 @@ const AnotherUserPage = ({ user, isAuthenticated }) => {
     return false;
   }
 
+  const returnUserNotAdmin = () => (
+    <div>
+      {user == null} ? (<Navigate to="/login" />) : (
+      <Navigate to="/forbidden" />)
+    </div>
+  );
+
   const returnUserPage = () => (
     <div>
-      {checkIfSuperAdmin ? (
+      {checkIfSuperAdmin() ? (
         <div className="backgd d-flex flex-column min-vh-100">
           <div className="">
             <div className="profile-pic rounded-circle no-padding d-flex justify-content-center  ">
@@ -149,10 +156,7 @@ const AnotherUserPage = ({ user, isAuthenticated }) => {
           <Outlet />
         </div>
       ) : (
-        <div>
-          {isAuthenticated != null} ? (<Navigate to="/forbidden" />) : (
-          <Navigate to="/login" />)
-        </div>
+        returnUserNotAdmin()
       )}
     </div>
   );

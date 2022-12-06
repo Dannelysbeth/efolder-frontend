@@ -1,21 +1,32 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
-// import "./RegisterPage.css";
-import { connect } from "react-redux";
-import { extendedSignup } from "../../Actions/auth";
-import { changePassword } from "../../Actions/auth";
-import { MDBBtn, MDBCol, MDBInput, MDBRow } from "mdb-react-ui-kit";
-import { Console } from "console";
+import { Link, Navigate } from "react-router-dom";
+import { uploadFile, extendedSignup } from "../../Actions/auth";
+import { loadUser, changePassword } from "../../Actions/auth";
 
-const PasswordChangePage = ({ user, errors, changePassword, message }) => {
-  const { username } = useParams();
+import { connect } from "react-redux";
+import documents from "../../Data/documentsA";
+import { saveAs } from "file-saver";
+import {
+  MDBInput,
+  MDBBtn,
+  MDBCheckbox,
+  MDBRow,
+  MDBCol,
+} from "mdb-react-ui-kit";
+
+const ChangeOwnPassword = ({ user, changePassword }) => {
+  const [employee, setEmployee] = useState([]);
+  //   const [info, setInfo] = useState([]);
+  //   const [loading, setLoading] = useState(true);
+  //   const [error, setError] = useState(true);
   const [infoMessage, setInfoMessage] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [formData, setFormData] = useState({
     password: "",
     repeatPassword: "",
   });
+
   const { password, repeatPassword } = formData;
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,17 +40,17 @@ const PasswordChangePage = ({ user, errors, changePassword, message }) => {
     } else if (password != repeatPassword) {
       setErrMsg("Wprowadzone hasła nie są identyczne");
     } else {
-      changePassword(password, repeatPassword, username);
+      changePassword(
+        password,
+        repeatPassword,
+        employee["user"] && employee["user"]["username"]
+      );
       setInfoMessage("Hasło zostało poprawnie zmienione");
       setFormData({ ...formData, password: "", repeatPassword: "" });
     }
   }
 
-  useEffect(() => {
-    setInfoMessage;
-  }, []);
-
-  return (
+  const passwordChangeTab = () => (
     <div className="d-flex flex-column min-vh-100">
       <div className="form-signin top-space">
         <MDBRow className="g-3">
@@ -50,7 +61,7 @@ const PasswordChangePage = ({ user, errors, changePassword, message }) => {
             className="form-control"
             id="floatingPassword"
             name="password"
-            value={formData.password}
+            // value={formData.password}
             onChange={(e) => onChange(e)}
             placeholder="Hasło"
           />
@@ -60,7 +71,7 @@ const PasswordChangePage = ({ user, errors, changePassword, message }) => {
             className="form-control"
             id="floatingRepeatPassword"
             name="repeatPassword"
-            value={formData.repeatPassword}
+            // value={formData.repeatPassword}
             onChange={(e) => onChange(e)}
             placeholder="Powtórz hasło"
           />
@@ -91,14 +102,31 @@ const PasswordChangePage = ({ user, errors, changePassword, message }) => {
       </div>
     </div>
   );
-};
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  accountCreated: state.auth.accountCreated,
-  errors: state.auth.errors,
-  anotherUser: state.auth.anotherUser,
-  user: state.auth.user,
-  message: state.auth.message,
-});
 
-export default connect(mapStateToProps, { changePassword })(PasswordChangePage);
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+  function checkIfLogged(): boolean {
+    loadUser();
+    if (user !== null) return true;
+    return false;
+  }
+
+  return (
+    <div>
+      {checkIfLogged() ? (
+        <div className="backgd d-flex flex-column min-vh-100">
+          {passwordChangeTab()}
+        </div>
+      ) : (
+        <div />
+      )}
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+export default connect(mapStateToProps, { changePassword })(ChangeOwnPassword);

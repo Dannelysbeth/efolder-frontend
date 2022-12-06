@@ -19,36 +19,7 @@ const Footer = () => {
             </Link>
           </div>
 
-          <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h5 className="text-uppercase">Nawigacja</h5>
-            <ul className="list-unstyled mb-0">
-              <li>
-                <Link to="/aktualnosci" className="link-light active">
-                  Aktualności
-                </Link>
-              </li>
-              <li>
-                <Link to="/regulamin" className="link-light active">
-                  Regulamin
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <div className="footer-space" />
-            <ul className="list-unstyled mb-1">
-              <li>
-                <Link to="/kontakt" className="text-light active">
-                  Kontakt
-                </Link>
-              </li>
-              <li>
-                <Link to="/login" className="link-light active">
-                  Zaloguj się
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <div className="col-lg-3 col-md-6 mb-4 mb-md-0"></div>
         </div>
       </div>
       <div className="text-center p-3">

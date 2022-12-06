@@ -156,10 +156,7 @@ export default function (state = initialState, action) {
       // localStorage.removeItem("refresh");
       return {
         ...state,
-        // access: null,
-        // refresh: null,
-        // isAuthenticated: false,
-        // user: null,
+
         errors: payload,
         fileSuccessMessage: null,
         message: payload,
