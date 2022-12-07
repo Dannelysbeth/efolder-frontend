@@ -21,6 +21,13 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
       }
     return false;
   }
+  function checkIfRegularEmployee(): boolean {
+    if (user != null && user.roles != null)
+      for (var i of user.roles) {
+        if (i == "ROLE_REGULAR_EMPLOYEE") return true;
+      }
+    return false;
+  }
 
   const userBar = () => (
     <Fragment>
@@ -59,29 +66,18 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
           </Link>
         </li>
         <li>
-          {/* {user !== null && ? } */}
-          <Link to="/kartoteka" className="nav-link link-light dropdown-item ">
-            Kartoteka pracownicza
-          </Link>
+          {checkIfRegularEmployee() ? (
+            <Link
+              to="/kartoteka"
+              className="nav-link link-light dropdown-item "
+            >
+              Kartoteka pracownicza
+            </Link>
+          ) : null}
         </li>
         <li>
           <Link to="/zmienHaslo" className="nav-link link-light dropdown-item ">
             Zmień hasło
-          </Link>
-        </li>
-
-        <li>
-          <Link to="/uploadFile" className="nav-link link-light dropdown-item ">
-            Dodaj dokument
-          </Link>
-        </li>
-        <li>
-          <Link
-            to=""
-            className="nav-link link-light dropdown-item"
-            onClick={logout_user}
-          >
-            Wyloguj
           </Link>
         </li>
         {
@@ -107,7 +103,16 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
               </Link>
             ) : null}
           </li>
-        }
+        }{" "}
+        <li>
+          <Link
+            to=""
+            className="nav-link link-light dropdown-item"
+            onClick={logout_user}
+          >
+            Wyloguj
+          </Link>
+        </li>
       </ul>
     </li>
   );
