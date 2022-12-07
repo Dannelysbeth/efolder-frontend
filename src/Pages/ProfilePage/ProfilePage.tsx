@@ -5,7 +5,7 @@ import { loadUser, changePassword } from "../../Actions/auth";
 import { connect } from "react-redux";
 import { MDBInput, MDBRow, MDBCol } from "mdb-react-ui-kit";
 
-const ProfilePage = ({ user, changePassword }) => {
+const ProfilePage = ({ user }) => {
   const [employee, setEmployee] = useState([]);
   const [isAddrEditable, setIsAddrEditable] = useState(false);
 

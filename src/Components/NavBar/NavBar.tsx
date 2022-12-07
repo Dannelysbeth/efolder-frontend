@@ -60,10 +60,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
         </li>
         <li>
           {/* {user !== null && ? } */}
-          <Link
-            to={{ pathname: `/user/${user && user.username}/kartoteka` }}
-            className="nav-link link-light dropdown-item "
-          >
+          <Link to="/kartoteka" className="nav-link link-light dropdown-item ">
             Kartoteka pracownicza
           </Link>
         </li>

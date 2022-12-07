@@ -2,7 +2,7 @@ import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { uploadFile, extendedSignup } from "../../Actions/auth";
-import { loadUser, changePassword } from "../../Actions/auth";
+import { loadUser, changeOwnPassword } from "../../Actions/auth";
 
 import { connect } from "react-redux";
 import documents from "../../Data/documentsA";
@@ -15,7 +15,7 @@ import {
   MDBCol,
 } from "mdb-react-ui-kit";
 
-const ChangeOwnPassword = ({ user, changePassword }) => {
+const ChangeOwnPassword = ({ user, changeOwnPassword }) => {
   const [employee, setEmployee] = useState([]);
   //   const [info, setInfo] = useState([]);
   //   const [loading, setLoading] = useState(true);
@@ -40,11 +40,7 @@ const ChangeOwnPassword = ({ user, changePassword }) => {
     } else if (password != repeatPassword) {
       setErrMsg("Wprowadzone hasła nie są identyczne");
     } else {
-      changePassword(
-        password,
-        repeatPassword,
-        employee["user"] && employee["user"]["username"]
-      );
+      changeOwnPassword(password, repeatPassword);
       setInfoMessage("Hasło zostało poprawnie zmienione");
       setFormData({ ...formData, password: "", repeatPassword: "" });
     }
@@ -129,4 +125,6 @@ const ChangeOwnPassword = ({ user, changePassword }) => {
 const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
-export default connect(mapStateToProps, { changePassword })(ChangeOwnPassword);
+export default connect(mapStateToProps, { changeOwnPassword })(
+  ChangeOwnPassword
+);

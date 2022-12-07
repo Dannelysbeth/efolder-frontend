@@ -501,15 +501,6 @@ const UserPage = ({ user }) => {
         {isEmpEditable ? (
           <MDBRow className="g-3" tag="form" onSubmit={(e) => onEmpSave(e)}>
             <MDBCol md="4">
-              {/* <MDBInput
-                type="text"
-                className="form-control"
-                id="teamName"
-                name="teamName"
-                onChange={(e) => onEmpChange(e)}
-                placeholder="Nazwa zespołu"
-                required
-              /> */}
               {teams.length === 0 ? (
                 <select
                   className="form-select"

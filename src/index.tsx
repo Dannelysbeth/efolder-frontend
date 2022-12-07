@@ -15,10 +15,9 @@ import UserInfoPage from "./Pages/UserPage/UserPage";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import ScrollToTop from "./Actions/ScrollToTop";
-import OAuth2RedirectPage from "./Pages/OAuth2RedirectPage/OAuth2RedirectPage";
 import MyDocumentsPage from "./Pages/UserPage/UserPage"; //AnotherUserPage
 import AnotherUserPage from "./Pages/UserPage/AnotherUserPage";
-import DocumentsPage from "./Pages/UserPage/MyDocumentsPage";
+import UserDocumentsPage from "./Pages/UserPage/MyDocumentsPage";
 import UploadDocumentPage from "./Pages/UploadDocumentPage/UploadDocumentPage";
 import ViewDocumentsPage from "./Pages/ViewDocumentsPage/ViewDocumentsPage";
 import EmployeeListPage from "./Pages/EmployeeListPage/EmployeeListPage";
@@ -26,6 +25,13 @@ import PasswordChangePage from "./Pages/PasswordChangePage/PasswordChangePage";
 import ForbiddenPage from "./Pages/ForbiddenPage/ForbiddenPage";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import ChangeOwnPasswordPage from "./Pages/ChangeOwnPasswordPage/ChangeOwnPasswordPage";
+import DocumentsPage from "./Pages/DocumentsPage/DocumentsPage";
+import MyFilesPage from "./Pages/DocumentsPage/MyFilesPage/MyFilesPage";
+import AFilesPage from "./Pages/DocumentsPage/MyFilesPage/AFilesPage";
+import BFilePage from "./Pages/DocumentsPage/MyFilesPage/BFilesPage";
+import CFilesPage from "./Pages/DocumentsPage/MyFilesPage/CFilesPage";
+import DFilesPage from "./Pages/DocumentsPage/MyFilesPage/DFilesPage";
+import UploadMyFilesPage from "./Pages/DocumentsPage/UploadMyFilesPage/UploadMyFilesPage";
 
 const routing = (
   <div>
@@ -41,13 +47,27 @@ const routing = (
               <Route path="/profil" element={<ProfilePage />} />
               <Route path="/forbidden" element={<ForbiddenPage />} />
               <Route path="/o-nas" element={<AboutUsPage />} />
-              <Route path="/kartoteka" element={<MyDocumentsPage />} />
+              <Route path="/kartoteka" element={<DocumentsPage />}>
+                <Route path="/kartoteka/dokumenty/" element={<MyFilesPage />}>
+                  <Route
+                    path="/kartoteka/dokumenty/A"
+                    element={<AFilesPage />}
+                  />
+                  <Route path="B" element={<BFilePage />} />
+                  <Route path="C" element={<CFilesPage />} />
+                  <Route path="D" element={<DFilesPage />} />
+                </Route>
+                <Route
+                  path="/kartoteka/dodajDokumenty"
+                  element={<UploadMyFilesPage />}
+                />
+              </Route>
               <Route path="/pracownicy" element={<EmployeeListPage />} />
               <Route path="/zmienHaslo" element={<ChangeOwnPasswordPage />} />
               <Route path="/createUser" element={<RegisterPage />} />{" "}
               <Route path="/user">
                 <Route path="/user/:username/" element={<AnotherUserPage />}>
-                  <Route path="kartoteka" element={<DocumentsPage />} />
+                  <Route path="kartoteka" element={<UserDocumentsPage />} />
                   <Route path="daneOsobowe" element={<UserInfoPage />} />
                   <Route
                     path="dodajDokumenty"

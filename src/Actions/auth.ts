@@ -225,6 +225,47 @@ export const uploadFile =
     }
   };
 
+export const uploadOwnFile = (fileType: string, file) => async (dispatch) => {
+  console.log(file);
+  //
+  let data = new FormData();
+  data.append("file", file, file.name);
+  // data.append("filename", file.ame);
+
+  // formData.append("file", file.na);
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("access")}`,
+      Accept: "*/*",
+    },
+  };
+
+  const body = new URLSearchParams({
+    // file: document,
+  });
+  // console.log(document);
+  try {
+    const res = await axios.post(
+      `${process.env.REACT_APP_REMOTE_URL}/api/document/upload/${fileType}`,
+
+      data,
+      config
+    );
+
+    dispatch({
+      type: FILE_UPLOAD_FILE_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err.response.data);
+    dispatch({
+      type: FILE_UPLOAD_FILE_FAIL,
+      payload: err.response.data,
+    });
+  }
+};
+
 export const signup =
   (
     username: string,
@@ -369,6 +410,40 @@ export const changePassword =
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_REMOTE_URL}/api/user/changePassword/${username}`,
+        body,
+        config
+      );
+      dispatch({
+        type: PASSWORD_CHANGE_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err.response); //TODO
+      dispatch({
+        type: PASSWORD_CHANGE_FAIL,
+        payload: err.response.data,
+      });
+    }
+  };
+
+export const changeOwnPassword =
+  (password: string, repeatPassword: string) => async (dispatch) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        Accept: "*/*",
+      },
+    };
+
+    const body = JSON.stringify({
+      password,
+      repeatPassword,
+    });
+
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_REMOTE_URL}/api/user/changePassword`,
         body,
         config
       );
