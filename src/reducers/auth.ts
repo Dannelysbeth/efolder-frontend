@@ -27,6 +27,7 @@ const initialState = {
   role: null,
   anotherUser: null,
   errors: null,
+  RoleErrors: null,
   message: null,
   fileSuccessMessage: null,
   selectedFile: null,
@@ -86,7 +87,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         role: null,
-        errors: payload,
+        RoleErrors: payload,
         fileSuccessMessage: null,
         message: null,
       };
@@ -95,7 +96,7 @@ export default function (state = initialState, action) {
         ...state,
         isAuthenticated: true,
         role: payload,
-        errors: null,
+        RoleErrors: null,
         fileSuccessMessage: null,
         message: "Role successfully loaded",
       };

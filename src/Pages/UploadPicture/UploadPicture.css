@@ -1,0 +1,10 @@
+.user-container-picture-picker {
+  height: 100%;
+  min-height: 70vh;
+  padding: 20px;
+  margin: auto;
+  background-color: none;
+  /* border-radius: 20px; */
+  border-color: #1d2223;
+  box-shadow: 20px 20px 50px #1d2223;
+}

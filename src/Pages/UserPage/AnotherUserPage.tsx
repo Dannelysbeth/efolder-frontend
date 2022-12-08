@@ -12,6 +12,8 @@ import "./UserPage.css";
 import a_documents from "../../Data/documentsA";
 import b_documents from "../../Data/documentsA";
 import List from "../MyDocumentsPage/DocumentList";
+import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 import { connect } from "react-redux";
 import documents from "../../Data/documentsA";
@@ -23,7 +25,7 @@ import {
   MDBCol,
 } from "mdb-react-ui-kit";
 
-const AnotherUserPage = ({ user, isAuthenticated }) => {
+const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
   const { username } = useParams();
   const [employee, setEmployee] = useState([]);
   const [documents, setDocuments] = useState([]);
@@ -48,6 +50,7 @@ const AnotherUserPage = ({ user, isAuthenticated }) => {
         setLoading(false);
       })
       .catch((error) => {
+        setEmployee(null);
         setLoading(false);
         setError(true);
       });
@@ -64,6 +67,13 @@ const AnotherUserPage = ({ user, isAuthenticated }) => {
     return false;
   }
 
+  function checkIfUserExists(): boolean {
+    // getEmployee();
+    if (employee["user"] == null) return false;
+
+    return true;
+  }
+
   const returnUserNotAdmin = () => (
     <div>
       {user == null} ? (<Navigate to="/login" />) : (
@@ -73,90 +83,105 @@ const AnotherUserPage = ({ user, isAuthenticated }) => {
 
   const returnUserPage = () => (
     <div>
-      {checkIfSuperAdmin() ? (
-        <div className="backgd d-flex flex-column min-vh-100">
-          <div className="">
-            <div className="profile-pic rounded-circle no-padding d-flex justify-content-center  ">
-              <img
-                src={
-                  employee["user"] && employee["user"]["imageUrl"]
-                    ? employee["user"]["imageUrl"]
-                    : "https://i.imgur.com/teiJw8H.png"
-                }
-                className="rounded-circle user-pic shadow"
-              />
+      {checkIfUserExists() ? (
+        <div>
+          {checkIfSuperAdmin() ? (
+            <div className="backgd d-flex flex-column min-vh-100">
+              <div className="">
+                <div className="profile-pic rounded-circle no-padding d-flex justify-content-center  ">
+                  <img
+                    src={
+                      employee["user"] && employee["user"]["imageUrl"]
+                        ? employee["user"]["imageUrl"]
+                        : "https://i.imgur.com/teiJw8H.png"
+                    }
+                    className="rounded-circle user-pic shadow"
+                  />
+                </div>
+                <div className="row user-container justify-content-center">
+                  <h3 className="justify-content-center">
+                    {employee["user"] && employee["user"]["firstName"]}{" "}
+                    {employee["user"] && employee["user"]["middleName"] != ""
+                      ? employee["user"] && employee["user"]["middleName"] + " "
+                      : null}
+                    {employee["user"] && employee["user"]["lastName"]}
+                  </h3>
+                  <div className="h5 font-weight-300 ">
+                    <i className="ni location_pin mr-2"></i>
+                    {employee["address"] && employee["address"]["city"]} ,{" "}
+                    {employee["address"] && employee["address"]["country"]}
+                  </div>
+                  <div className="h5 mt-4">
+                    <i className="ni business_briefcase-24 mr-2"></i>
+                    {employee["employment"] &&
+                      employee["employment"]["positionName"]}
+                  </div>
+                  <div>
+                    <i className="ni education_hat mr-2"></i>
+                    {employee["employment"] &&
+                      employee["employment"]["teamName"]}
+                  </div>
+                </div>
+              </div>
+              <div className="productsNav">
+                <ul className="nav nav-tabs">
+                  {" "}
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link active"
+                      to={{ pathname: `/user/${username}/daneOsobowe` }}
+                    >
+                      {" "}
+                      Dane osobowe{" "}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link active"
+                      to={{ pathname: `/user/${username}/kartoteka` }}
+                    >
+                      {" "}
+                      Kartoteka{" "}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link active"
+                      to={{ pathname: `/user/${username}/dodajDokumenty` }}
+                    >
+                      {" "}
+                      Dodaj dokumenty{" "}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link active"
+                      to={{ pathname: `/user/${username}/zmienHaslo` }}
+                    >
+                      {" "}
+                      {user != null && user.username !== username
+                        ? "Zmień hasło"
+                        : `Zresetuj hasło`}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link active"
+                      to={{ pathname: `/user/${username}/adminRole` }}
+                    >
+                      Nadaj rolę Administratora
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <Outlet />
             </div>
-            <div className="row user-container justify-content-center">
-              <h3 className="justify-content-center">
-                {employee["user"] && employee["user"]["firstname"]}{" "}
-                {employee["user"] && employee["user"]["middleName"]
-                  ? employee["user"] && employee["user"]["middleName"] + " "
-                  : null}
-                {employee["user"] && employee["user"]["lastname"]}
-              </h3>
-              <div className="h5 font-weight-300 ">
-                <i className="ni location_pin mr-2"></i>
-                {employee["address"] && employee["address"]["city"]} ,{" "}
-                {employee["address"] && employee["address"]["country"]}
-              </div>
-              <div className="h5 mt-4">
-                <i className="ni business_briefcase-24 mr-2"></i>
-                {employee["employment"] &&
-                  employee["employment"]["positionName"]}
-              </div>
-              <div>
-                <i className="ni education_hat mr-2"></i>
-                {employee["employment"] && employee["employment"]["teamName"]}
-              </div>
-            </div>
-          </div>
-          <div className="productsNav">
-            <ul className="nav nav-tabs">
-              {" "}
-              <li className="nav-item">
-                <Link
-                  className="nav-link active"
-                  to={{ pathname: `/user/${username}/daneOsobowe` }}
-                >
-                  {" "}
-                  Dane osobowe{" "}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link active"
-                  to={{ pathname: `/user/${username}/kartoteka` }}
-                >
-                  {" "}
-                  Kartoteka{" "}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link active"
-                  to={{ pathname: `/user/${username}/dodajDokumenty` }}
-                >
-                  {" "}
-                  Dodaj dokumenty{" "}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link active"
-                  to={{ pathname: `/user/${username}/zmienHaslo` }}
-                >
-                  {" "}
-                  {user != null && user.username !== username
-                    ? "Zmień hasło"
-                    : `Zresetuj hasło`}
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <Outlet />
+          ) : (
+            <ForbiddenPage />
+          )}
         </div>
       ) : (
-        returnUserNotAdmin()
+        <NotFoundPage />
       )}
     </div>
   );
@@ -166,6 +191,7 @@ const AnotherUserPage = ({ user, isAuthenticated }) => {
 
 const mapStateToProps = (state) => ({
   user: state.auth.user,
+  errors: state.auth.errors,
   isAuthenticated: state.auth.isAuthenticated,
 });
 

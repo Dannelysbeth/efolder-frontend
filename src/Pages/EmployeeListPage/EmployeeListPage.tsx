@@ -31,14 +31,17 @@ const EmployeeListPage = ({ user }) => {
   const [error, setError] = useState(true);
 
   const getUsers = () => {
-    return fetch(`${process.env.REACT_APP_REMOTE_URL}/api/user/employee/all`, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-        "Content-Type": "application/json",
-      },
-    })
+    return fetch(
+      `${process.env.REACT_APP_REMOTE_URL}/api/employment/employees`,
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((responseJson) => {
         setUsers(responseJson);

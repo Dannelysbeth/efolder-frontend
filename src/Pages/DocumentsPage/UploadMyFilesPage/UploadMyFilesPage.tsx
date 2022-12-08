@@ -43,19 +43,9 @@ const UploadMyFilesPage = ({ errors, uploadOwnFile, successMessage }) => {
     e.preventDefault();
   };
   function submitDocument(e) {
-    // setInfoMessage("");
     setErrMsg("");
-
     if (fileCategory != "" && file != null) {
-      // setErrMsg("");
       uploadOwnFile(fileCategory, file);
-      // if (errors == null) {
-      //   setInfoMessage("Dokument został poprawnie dodany");
-      //   setFormData({ ...formData, file: null });
-      //   setCategory({ ...category, fileCategory: "" });
-      // } else {
-      //   setInfoMessage("");
-      // }
     } else if (fileCategory != "") {
       setErrMsg("Proszę wybierz plik");
     } else {

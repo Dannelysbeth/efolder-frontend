@@ -112,6 +112,63 @@ export const RolesLoad = () => async (dispatch) => {
   }
 };
 
+// export const giveAdminPermission = (username: string) => async (dispatch) => {
+//   if (localStorage.getItem("access")) {
+//     const config = {
+//       headers: {
+//         Authorization: `Bearer ${localStorage.getItem("access")}`,
+//         Accept: "*/*",
+//       },
+//     };
+
+//     try {
+//       const res = await axios.post(
+//         `${process.env.REACT_APP_REMOTE_URL}/api/role/superAdmin/${username}`,
+//         config
+//       );
+
+//       dispatch({
+//         type: ROLE_LOADED_SUCCESS,
+//         payload: res.data,
+//       });
+//     } catch (err) {
+//       dispatch({
+//         type: ROLE_LOADED_FAIL,
+//       });
+//     }
+//   } else {
+//     dispatch({
+//       type: ROLE_LOADED_FAIL,
+//     });
+//   }
+// };
+export const giveAdminPermission = (username: string) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("access")}`,
+      Accept: "*/*",
+    },
+  };
+  try {
+    const res = await axios.post(
+      `${process.env.REACT_APP_REMOTE_URL}/api/role/superAdmin/${username}`,
+      null,
+      config
+    );
+    dispatch({
+      type: ROLE_LOADED_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    // console.log(err.response.data);
+    dispatch({
+      type: ROLE_LOADED_FAIL,
+      payload: err.response.data,
+    });
+  }
+};
+
 export const checkAuthenticated = () => async (dispatch) => {
   if (localStorage.getItem("access")) {
     console.log(localStorage.getItem("access"));
@@ -186,12 +243,8 @@ export const login =
 export const uploadFile =
   (fileType: string, file, username: string) => async (dispatch) => {
     console.log(file);
-    //
     let data = new FormData();
     data.append("file", file, file.name);
-    // data.append("filename", file.ame);
-
-    // formData.append("file", file.na);
     const config = {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -199,19 +252,13 @@ export const uploadFile =
         Accept: "*/*",
       },
     };
-
-    const body = new URLSearchParams({
-      // file: document,
-    });
-    // console.log(document);
+    const body = new URLSearchParams({});
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_REMOTE_URL}/api/document/upload/${fileType}/${username}`,
-
         data,
         config
       );
-
       dispatch({
         type: FILE_UPLOAD_FILE_SUCCESS,
         payload: res.data,

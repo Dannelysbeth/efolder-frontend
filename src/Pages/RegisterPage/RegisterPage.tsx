@@ -136,6 +136,26 @@ const RegisterPage = ({
       });
   };
 
+  const getSystemRoles = () => {
+    return fetch(`${process.env.REACT_APP_REMOTE_URL}/api/role/all`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setHrAdmins(responseJson);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(true);
+      });
+  };
+
   const getTeams = () => {
     return fetch(`${process.env.REACT_APP_REMOTE_URL}/api/team/all`, {
       method: "GET",

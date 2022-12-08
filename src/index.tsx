@@ -33,6 +33,7 @@ import CFilesPage from "./Pages/DocumentsPage/MyFilesPage/CFilesPage";
 import DFilesPage from "./Pages/DocumentsPage/MyFilesPage/DFilesPage";
 import UploadMyFilesPage from "./Pages/DocumentsPage/UploadMyFilesPage/UploadMyFilesPage";
 import UploadPicture from "./Pages/UploadPicture/UploadPicture";
+import SuperAdminPermPage from "./Pages/SuperAdminPermPage/SuperAdminPermPage";
 
 const routing = (
   <div>
@@ -71,6 +72,7 @@ const routing = (
                 <Route path="/user/:username/" element={<AnotherUserPage />}>
                   <Route path="kartoteka" element={<UserDocumentsPage />} />
                   <Route path="daneOsobowe" element={<UserInfoPage />} />
+                  <Route path="adminRole" element={<SuperAdminPermPage />} />
                   <Route
                     path="dodajDokumenty"
                     element={<UploadDocumentPage />}

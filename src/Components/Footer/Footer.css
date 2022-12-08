@@ -2,6 +2,10 @@
   margin-bottom: 0;
   background-color: #1d2223;
   position: relative;
+  /* position: absolute; */
+  left: 0;
+  bottom: 0;
+  right: 0;
   clear: both;
 }
 

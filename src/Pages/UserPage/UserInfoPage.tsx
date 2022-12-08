@@ -105,7 +105,7 @@ const AnotherUserPage = ({ user }) => {
                           className="form-control form-control-alternative"
                           placeholder="First name"
                           value={
-                            employee["user"] && employee["user"]["firstname"]
+                            employee["user"] && employee["user"]["firstName"]
                           }
                         />
                       </div>
@@ -121,7 +121,7 @@ const AnotherUserPage = ({ user }) => {
                           className="form-control form-control-alternative"
                           placeholder="Last name"
                           value={
-                            employee["user"] && employee["user"]["lastname"]
+                            employee["user"] && employee["user"]["lastName"]
                           }
                         />
                       </div>
