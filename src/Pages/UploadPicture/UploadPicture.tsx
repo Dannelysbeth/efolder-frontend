@@ -89,6 +89,7 @@ const UploadPicture = ({ uploadOwnProfilePic }) => {
     var fil = blobToFile(file, "hello.png");
     console.log(fil);
     uploadOwnProfilePic(fil);
+    window.location.reload();
   };
 
   useEffect(() => {
