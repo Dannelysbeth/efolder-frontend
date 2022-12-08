@@ -66,6 +66,14 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
           </Link>
         </li>
         <li>
+          <Link
+            to="/uploadProfilePic"
+            className="nav-link link-light dropdown-item "
+          >
+            Avatar
+          </Link>
+        </li>
+        <li>
           {checkIfRegularEmployee() ? (
             <Link
               to="/kartoteka"

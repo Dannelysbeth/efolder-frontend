@@ -32,6 +32,7 @@ import BFilePage from "./Pages/DocumentsPage/MyFilesPage/BFilesPage";
 import CFilesPage from "./Pages/DocumentsPage/MyFilesPage/CFilesPage";
 import DFilesPage from "./Pages/DocumentsPage/MyFilesPage/DFilesPage";
 import UploadMyFilesPage from "./Pages/DocumentsPage/UploadMyFilesPage/UploadMyFilesPage";
+import UploadPicture from "./Pages/UploadPicture/UploadPicture";
 
 const routing = (
   <div>
@@ -64,6 +65,7 @@ const routing = (
               </Route>
               <Route path="/pracownicy" element={<EmployeeListPage />} />
               <Route path="/zmienHaslo" element={<ChangeOwnPasswordPage />} />
+              <Route path="/uploadProfilePic" element={<UploadPicture />} />
               <Route path="/createUser" element={<RegisterPage />} />{" "}
               <Route path="/user">
                 <Route path="/user/:username/" element={<AnotherUserPage />}>

@@ -266,6 +266,40 @@ export const uploadOwnFile = (fileType: string, file) => async (dispatch) => {
   }
 };
 
+export const uploadOwnProfilePic = (file) => async (dispatch) => {
+  // console.log(file);
+  let data = new FormData();
+  data.append("file", file, file.name);
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("access")}`,
+      Accept: "*/*",
+    },
+  };
+
+  const body = new URLSearchParams({});
+  try {
+    const res = await axios.post(
+      `${process.env.REACT_APP_REMOTE_URL}/api/profilePicture/upload`,
+
+      data,
+      config
+    );
+
+    dispatch({
+      type: FILE_UPLOAD_FILE_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err.response.data);
+    dispatch({
+      type: FILE_UPLOAD_FILE_FAIL,
+      payload: err.response.data,
+    });
+  }
+};
+
 export const signup =
   (
     username: string,
