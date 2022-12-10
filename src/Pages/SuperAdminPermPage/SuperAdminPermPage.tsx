@@ -33,35 +33,47 @@ const SuperAdminPermPage = ({
   const [roles, setRoles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
-  const [basicModal, setBasicModal] = useState(false);
-  const toggleShow = () => setBasicModal(!basicModal);
+  const [givePermModal, setGivePermModal] = useState(false);
+  const [takePermModal, setTakePermModal] = useState(false);
+  const [deleteUserModal, setDeleteUserModal] = useState(false);
+  const givePermToggleShow = () => setGivePermModal(!givePermModal);
+  const takePermToggleShow = () => setTakePermModal(!takePermModal);
+  const deleteUserToggleShow = () => setDeleteUserModal(!deleteUserModal);
 
   function giveAdminPermissions() {
-    toggleShow();
+    givePermToggleShow();
     setInfoMessage("");
     giveAdminPermission(username);
     setInfoMessage("Rola Administratora została poprawnie nadana");
   }
   function takeAdminPermissions() {
-    toggleShow();
+    takePermToggleShow();
     setInfoMessage("");
     takeAdminPermission(username);
     setInfoMessage("Rola Administratora została odebrana");
   }
+  function onDeleteUserAccount() {
+    deleteUserToggleShow();
+    deleteUserAccount();
+    window.location.replace("/pracownicy");
+  }
 
   function checkIfUserIsAdmin(): boolean {
-    // getEmployeeRoles();
     console.log(employee);
     if (employee != null) {
       for (var r of employee["roles"]) {
-        if (
-          r["roleName"] == "ROLE_HR_ADMIN" ||
-          r["roleName"] == "ROLE_SUPER_ADMIN"
-        )
-          return true;
+        if (r["roleName"] == "ROLE_HR_ADMIN") return true;
       }
     }
     return false;
+  }
+
+  function checkIfUserIsSuperAdmin(): boolean {
+    if (employee != null) {
+      for (var r of employee["roles"]) {
+        if (r["roleName"] == "ROLE_SUPER_ADMIN") return true;
+      }
+    }
   }
 
   const getEmployeeRoles = () => {
@@ -84,6 +96,29 @@ const SuperAdminPermPage = ({
       });
   };
 
+  const deleteUserAccount = () => {
+    return fetch(
+      `${process.env.REACT_APP_REMOTE_URL}/api/user/delete/${username}`,
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((responseJson) => {
+        // setEmployee(responseJson);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(true);
+      });
+  };
+
   useEffect(() => {
     getEmployeeRoles();
   }, []);
@@ -91,120 +126,173 @@ const SuperAdminPermPage = ({
   return (
     <div className="d-flex flex-column min-vh-100">
       <div className="form-signin top-space">
-        {checkIfUserIsAdmin() ? (
-          <MDBRow className="g-3">
-            {/* <h1 className="h3 mb-3 fw-normal text-center">Jest adminem</h1> */}
+        {!checkIfUserIsSuperAdmin() ? (
+          <div>
+            {checkIfUserIsAdmin() ? (
+              <MDBRow className="g-3">
+                <MDBBtn
+                  className="w-100 btn-danger btn-lg "
+                  onClick={takePermToggleShow}
+                >
+                  Odbierz uprawnienia administratora
+                </MDBBtn>
+                <MDBModal
+                  show={takePermModal}
+                  setShow={setTakePermModal}
+                  tabIndex="-1"
+                >
+                  <MDBModalDialog>
+                    <MDBModalContent>
+                      <MDBModalHeader>
+                        <MDBBtn
+                          className="btn-close"
+                          color="none"
+                          onClick={takePermToggleShow}
+                        ></MDBBtn>
+                      </MDBModalHeader>
+                      <MDBModalBody>
+                        Czy na pewno odebrać prawa administratora?
+                      </MDBModalBody>
 
-            <MDBBtn className="w-100 btn-danger btn-lg " onClick={toggleShow}>
-              Odbierz uprawnienia administratora
-            </MDBBtn>
-            <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
-              <MDBModalDialog>
-                <MDBModalContent>
-                  <MDBModalHeader>
-                    {/* <MDBModalTitle>Modal title</MDBModalTitle> */}
-                    <MDBBtn
-                      className="btn-close"
-                      color="none"
-                      onClick={toggleShow}
-                    ></MDBBtn>
-                  </MDBModalHeader>
-                  <MDBModalBody>
-                    Czy na pewno odebrać prawa administratora?
-                  </MDBModalBody>
+                      <MDBModalFooter>
+                        <MDBBtn color="secondary" onClick={takePermToggleShow}>
+                          Anuluj
+                        </MDBBtn>
+                        <MDBBtn
+                          color="danger"
+                          onClick={(e) => takeAdminPermissions()}
+                        >
+                          Tak
+                        </MDBBtn>
+                      </MDBModalFooter>
+                    </MDBModalContent>
+                  </MDBModalDialog>
+                </MDBModal>
+                {infoMessage != null && infoMessage != "" && errors == null ? (
+                  <div
+                    className="alert alert-success alert-dismissible fade show"
+                    role="alert"
+                  >
+                    <strong>{infoMessage}</strong>
+                  </div>
+                ) : null}
+                {errors != null && errors.message != null ? (
+                  <div
+                    className="alert alert-danger alert-dismissible fade show"
+                    role="alert"
+                  >
+                    <strong>{errors.message}</strong>
+                  </div>
+                ) : null}
+              </MDBRow>
+            ) : (
+              <MDBRow className="g-3">
+                <MDBBtn
+                  className="w-100 btn btn-lg button-blue"
+                  onClick={givePermToggleShow}
+                >
+                  Nadaj rolę administratora
+                </MDBBtn>
+                <MDBModal
+                  show={givePermModal}
+                  setShow={setGivePermModal}
+                  tabIndex="-2"
+                >
+                  <MDBModalDialog>
+                    <MDBModalContent>
+                      <MDBModalHeader>
+                        <MDBBtn
+                          className="btn-close"
+                          color="none"
+                          onClick={givePermToggleShow}
+                        ></MDBBtn>
+                      </MDBModalHeader>
+                      <MDBModalBody>
+                        Czy na pewno nadać prawa administratora?
+                      </MDBModalBody>
 
-                  <MDBModalFooter>
-                    <MDBBtn color="secondary" onClick={toggleShow}>
-                      Anuluj
-                    </MDBBtn>
-                    <MDBBtn
-                      color="danger"
-                      onClick={(e) => takeAdminPermissions()}
-                    >
-                      Tak
-                    </MDBBtn>
-                  </MDBModalFooter>
-                </MDBModalContent>
-              </MDBModalDialog>
-            </MDBModal>
-            {infoMessage != null && infoMessage != "" && errors == null ? (
-              <div
-                className="alert alert-success alert-dismissible fade show"
-                role="alert"
+                      <MDBModalFooter>
+                        <MDBBtn color="secondary" onClick={givePermToggleShow}>
+                          Anuluj
+                        </MDBBtn>
+                        <MDBBtn
+                          color="primary"
+                          onClick={(e) => giveAdminPermissions()}
+                        >
+                          Tak
+                        </MDBBtn>
+                      </MDBModalFooter>
+                    </MDBModalContent>
+                  </MDBModalDialog>
+                </MDBModal>
+                {infoMessage != null && infoMessage != "" && errors == null ? (
+                  <div
+                    className="alert alert-success alert-dismissible fade show"
+                    role="alert"
+                  >
+                    <strong>{infoMessage}</strong>
+                  </div>
+                ) : null}
+                {errors != null && errors.message != null ? (
+                  <div
+                    className="alert alert-danger alert-dismissible fade show"
+                    role="alert"
+                  >
+                    <strong>{errors.message}</strong>
+                  </div>
+                ) : null}
+              </MDBRow>
+            )}
+            <p>
+              <p></p>
+            </p>
+            <MDBRow className="g-3">
+              <MDBBtn
+                className="w-100 btn-danger btn-lg "
+                onClick={deleteUserToggleShow}
               >
-                <strong>{infoMessage}</strong>
-              </div>
-            ) : null}
-            {errors != null && errors.message != null ? (
-              <div
-                className="alert alert-danger alert-dismissible fade show"
-                role="alert"
+                Usuń użytkownika
+              </MDBBtn>
+              <MDBModal
+                show={deleteUserModal}
+                setShow={setDeleteUserModal}
+                tabIndex="-3"
               >
-                <strong>{errors.message}</strong>
-              </div>
-            ) : null}
-          </MDBRow>
+                <MDBModalDialog>
+                  <MDBModalContent>
+                    <MDBModalHeader>
+                      <MDBBtn
+                        className="btn-close"
+                        color="none"
+                        onClick={deleteUserToggleShow}
+                      ></MDBBtn>
+                    </MDBModalHeader>
+                    <MDBModalBody>
+                      Zamierzasz usunąć użytkownika. Tej czynności nie można
+                      cofnąć. Czy na pewno chcesz kontynuować?
+                    </MDBModalBody>
+
+                    <MDBModalFooter>
+                      <MDBBtn color="secondary" onClick={deleteUserToggleShow}>
+                        Anuluj
+                      </MDBBtn>
+                      <MDBBtn
+                        color="danger"
+                        onClick={(e) => onDeleteUserAccount()}
+                      >
+                        Tak
+                      </MDBBtn>
+                    </MDBModalFooter>
+                  </MDBModalContent>
+                </MDBModalDialog>
+              </MDBModal>
+            </MDBRow>
+          </div>
         ) : (
-          <MDBRow className="g-3">
-            {/* <h1 className="h3 mb-3 fw-normal text-center">Nie jest adminem</h1> */}
-
-            <MDBBtn
-              className="w-100 btn btn-lg button-blue"
-              // type="button"
-              // data-mdb-toggle="modal"
-              // data-mdb-target="#exampleModal"
-              onClick={toggleShow}
-            >
-              Nadaj rolę administratora
-            </MDBBtn>
-            <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
-              <MDBModalDialog>
-                <MDBModalContent>
-                  <MDBModalHeader>
-                    {/* <MDBModalTitle>Modal title</MDBModalTitle> */}
-                    <MDBBtn
-                      className="btn-close"
-                      color="none"
-                      onClick={toggleShow}
-                    ></MDBBtn>
-                  </MDBModalHeader>
-                  <MDBModalBody>
-                    Czy na pewno nadać prawa administratora?
-                  </MDBModalBody>
-
-                  <MDBModalFooter>
-                    <MDBBtn color="secondary" onClick={toggleShow}>
-                      Anuluj
-                    </MDBBtn>
-                    <MDBBtn
-                      color="primary"
-                      onClick={(e) => giveAdminPermissions()}
-                    >
-                      Tak
-                    </MDBBtn>
-                  </MDBModalFooter>
-                </MDBModalContent>
-              </MDBModalDialog>
-            </MDBModal>
-            {infoMessage != null && infoMessage != "" && errors == null ? (
-              <div
-                className="alert alert-success alert-dismissible fade show"
-                role="alert"
-              >
-                <strong>{infoMessage}</strong>
-              </div>
-            ) : null}
-            {errors != null && errors.message != null ? (
-              <div
-                className="alert alert-danger alert-dismissible fade show"
-                role="alert"
-              >
-                <strong>{errors.message}</strong>
-              </div>
-            ) : null}
-          </MDBRow>
+          <h2 color="danger" className="flex-center">
+            Użytkownik jest Super Administratorem
+          </h2>
         )}
-        {/* <div>{popUpMessage()}</div> */}
       </div>
     </div>
   );
