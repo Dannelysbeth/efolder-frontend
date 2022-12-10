@@ -16,6 +16,8 @@ import {
   FILE_UPLOAD_FILE_FAIL,
   PASSWORD_CHANGE_SUCCESS,
   PASSWORD_CHANGE_FAIL,
+  TEAM_CREATE_SUCCESS,
+  TEAM_CREATE_FAIL,
 } from "../Actions/types";
 
 const initialState = {
@@ -24,6 +26,7 @@ const initialState = {
   isAuthenticated: null,
   accountCreated: null,
   user: null,
+  team: null,
   role: null,
   anotherUser: null,
   errors: null,
@@ -126,6 +129,18 @@ export default function (state = initialState, action) {
         errors: null,
         fileSuccessMessage: null,
         message: "User successfully created",
+      };
+    case TEAM_CREATE_SUCCESS:
+      return {
+        ...state,
+        team: payload,
+        errors: null,
+      };
+    case TEAM_CREATE_FAIL:
+      return {
+        ...state,
+        team: null,
+        errors: payload,
       };
     case LOGOUT:
       localStorage.removeItem("access");

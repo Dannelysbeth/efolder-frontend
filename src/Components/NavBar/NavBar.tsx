@@ -14,10 +14,10 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
     navigate("/");
   };
 
-  function checkIfSuperAdmin(): boolean {
+  function checkIfAdmin(): boolean {
     if (user != null && user.roles != null)
       for (var i of user.roles) {
-        if (i == "ROLE_SUPER_ADMIN") return true;
+        if (i == "ROLE_SUPER_ADMIN" || i == "ROLE_HR_ADMIN") return true;
       }
     return false;
   }
@@ -90,7 +90,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
         </li>
         {
           <li>
-            {checkIfSuperAdmin() == true ? (
+            {checkIfAdmin() == true ? (
               <Link
                 to="/createUser"
                 className="nav-link link-light dropdown-item "
@@ -102,7 +102,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
         }
         {
           <li>
-            {checkIfSuperAdmin() == true ? (
+            {checkIfAdmin() == true ? (
               <Link
                 to="/pracownicy"
                 className="nav-link link-light dropdown-item "
@@ -112,9 +112,9 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
             ) : null}
           </li>
         }{" "}
-        {/* {
+        {
           <li>
-            {checkIfSuperAdmin() == true ? (
+            {checkIfAdmin() == true ? (
               <Link
                 to="/createTeam"
                 className="nav-link link-light dropdown-item "
@@ -123,7 +123,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
               </Link>
             ) : null}
           </li>
-        }{" "} */}
+        }{" "}
         <li>
           <Link
             to=""

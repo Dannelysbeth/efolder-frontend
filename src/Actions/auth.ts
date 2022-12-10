@@ -17,6 +17,8 @@ import {
   FILE_UPLOAD_FILE_FAIL,
   PASSWORD_CHANGE_SUCCESS,
   PASSWORD_CHANGE_FAIL,
+  TEAM_CREATE_SUCCESS,
+  TEAM_CREATE_FAIL,
 } from "./types";
 
 export const loadUser = () => async (dispatch) => {
@@ -413,6 +415,7 @@ export const createTeam =
       teamLeader,
     });
 
+    console.log(body);
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_REMOTE_URL}/api/team`,
@@ -420,13 +423,13 @@ export const createTeam =
         config
       );
       dispatch({
-        type: SIGNUP_SUCCESS,
+        type: TEAM_CREATE_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
       console.log(err.response); //TODO
       dispatch({
-        type: SIGNUP_FAIL,
+        type: TEAM_CREATE_FAIL,
         payload: err.response.data,
       });
     }

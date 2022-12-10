@@ -43,7 +43,7 @@ const RegisterPage = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createTeam(formData);
+    createTeam(name, description, teamLeader);
     // if (password === re_password) {
     //   extendedSignup(
     //     username,
