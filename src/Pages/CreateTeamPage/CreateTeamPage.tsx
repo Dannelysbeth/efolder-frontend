@@ -166,7 +166,7 @@ const RegisterPage = ({
                       !error &&
                       hrAdmins.map((hrAdmin) => (
                         <option value={hrAdmin["username"]}>
-                          {hrAdmin["firstname"]} {hrAdmin["lastname"]} (
+                          {hrAdmin["firstName"]} {hrAdmin["lastName"]} (
                           {hrAdmin["username"]})
                         </option>
                       ))}
@@ -182,8 +182,8 @@ const RegisterPage = ({
         </div>
       ) : (
         <div>
-          {isAuthenticated == true} ? (<ForbiddenPage />) : (
-          <LoginPage />)
+          {isAuthenticated != true} ? (<LoginPage />) : (
+          <ForbiddenPage />)
         </div>
       )}
     </div>

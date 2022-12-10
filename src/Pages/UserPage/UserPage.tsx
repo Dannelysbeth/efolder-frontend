@@ -579,7 +579,7 @@ const UserPage = ({ user }) => {
                   </option>
                   {hrAdmins.map((hrAdmin) => (
                     <option value={hrAdmin["username"]}>
-                      {hrAdmin["firstname"]} {hrAdmin["lastname"]} (
+                      {hrAdmin["firstName"]} {hrAdmin["lastName"]} (
                       {hrAdmin["username"]})
                     </option>
                   ))}
