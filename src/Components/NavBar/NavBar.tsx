@@ -112,6 +112,18 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
             ) : null}
           </li>
         }{" "}
+        {/* {
+          <li>
+            {checkIfSuperAdmin() == true ? (
+              <Link
+                to="/createTeam"
+                className="nav-link link-light dropdown-item "
+              >
+                Stwórz zespół
+              </Link>
+            ) : null}
+          </li>
+        }{" "} */}
         <li>
           <Link
             to=""

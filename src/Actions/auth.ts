@@ -112,36 +112,6 @@ export const RolesLoad = () => async (dispatch) => {
   }
 };
 
-// export const giveAdminPermission = (username: string) => async (dispatch) => {
-//   if (localStorage.getItem("access")) {
-//     const config = {
-//       headers: {
-//         Authorization: `Bearer ${localStorage.getItem("access")}`,
-//         Accept: "*/*",
-//       },
-//     };
-
-//     try {
-//       const res = await axios.post(
-//         `${process.env.REACT_APP_REMOTE_URL}/api/role/superAdmin/${username}`,
-//         config
-//       );
-
-//       dispatch({
-//         type: ROLE_LOADED_SUCCESS,
-//         payload: res.data,
-//       });
-//     } catch (err) {
-//       dispatch({
-//         type: ROLE_LOADED_FAIL,
-//       });
-//     }
-//   } else {
-//     dispatch({
-//       type: ROLE_LOADED_FAIL,
-//     });
-//   }
-// };
 export const giveAdminPermission = (username: string) => async (dispatch) => {
   const config = {
     headers: {
@@ -152,7 +122,34 @@ export const giveAdminPermission = (username: string) => async (dispatch) => {
   };
   try {
     const res = await axios.post(
-      `${process.env.REACT_APP_REMOTE_URL}/api/role/superAdmin/${username}`,
+      `${process.env.REACT_APP_REMOTE_URL}/api/role/addHRAdminRole/${username}`,
+      null,
+      config
+    );
+    dispatch({
+      type: ROLE_LOADED_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    // console.log(err.response.data);
+    dispatch({
+      type: ROLE_LOADED_FAIL,
+      payload: err.response.data,
+    });
+  }
+};
+
+export const takeAdminPermission = (username: string) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("access")}`,
+      Accept: "*/*",
+    },
+  };
+  try {
+    const res = await axios.post(
+      `${process.env.REACT_APP_REMOTE_URL}/api/role/deleteHRAdminRole/${username}`,
       null,
       config
     );
@@ -383,6 +380,42 @@ export const signup =
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_REMOTE_URL}/api/user`,
+        body,
+        config
+      );
+      dispatch({
+        type: SIGNUP_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err.response); //TODO
+      dispatch({
+        type: SIGNUP_FAIL,
+        payload: err.response.data,
+      });
+    }
+  };
+
+export const createTeam =
+  (name: string, description: string, teamLeader: string) =>
+  async (dispatch) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        Accept: "*/*",
+      },
+    };
+
+    const body = JSON.stringify({
+      name,
+      description,
+      teamLeader,
+    });
+
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_REMOTE_URL}/api/team`,
         body,
         config
       );

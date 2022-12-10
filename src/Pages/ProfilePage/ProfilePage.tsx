@@ -102,7 +102,7 @@ const ProfilePage = ({ user }) => {
               className="form-control"
               id=""
               name="firstName"
-              value={employee["user"] && employee["user"]["firstname"]}
+              value={employee["user"] && employee["user"]["firstName"]}
               placeholder="Imię"
               readonly
             />
@@ -125,7 +125,7 @@ const ProfilePage = ({ user }) => {
               className="form-control"
               id="floatingInput"
               name="lastName"
-              value={employee["user"] && employee["user"]["lastname"]}
+              value={employee["user"] && employee["user"]["lastName"]}
               placeholder="Nazwisko"
               readonly
               required

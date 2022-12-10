@@ -307,7 +307,7 @@ const AnotherUserPage = ({ user }) => {
               <div className="row card-body pt-0 pt-md-4">
                 <div className=" text">
                   <h3>
-                    {employee["user.firstname"]}
+                    {employee["user.firstName"]}
                     {employee["user.middleName"]
                       ? " " + employee["user.middleName"] + " "
                       : null}

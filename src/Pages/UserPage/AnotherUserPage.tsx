@@ -68,7 +68,6 @@ const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
   }
 
   function checkIfUserExists(): boolean {
-    // getEmployee();
     if (employee["user"] == null) return false;
 
     return true;
@@ -101,14 +100,14 @@ const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
                 <div className="row user-container justify-content-center">
                   <h3 className="justify-content-center">
                     {employee["user"] && employee["user"]["firstName"]}{" "}
-                    {employee["user"] && employee["user"]["middleName"] != ""
+                    {employee["user"] && employee["user"]["middleName"]
                       ? employee["user"] && employee["user"]["middleName"] + " "
                       : null}
                     {employee["user"] && employee["user"]["lastName"]}
                   </h3>
                   <div className="h5 font-weight-300 ">
                     <i className="ni location_pin mr-2"></i>
-                    {employee["address"] && employee["address"]["city"]} ,{" "}
+                    {employee["address"] && employee["address"]["city"]},{" "}
                     {employee["address"] && employee["address"]["country"]}
                   </div>
                   <div className="h5 mt-4">
