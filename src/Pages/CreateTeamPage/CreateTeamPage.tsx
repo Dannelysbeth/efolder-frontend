@@ -1,7 +1,6 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-// import "./RegisterPage.css";
 import { connect } from "react-redux";
 import { createTeam } from "../../Actions/auth";
 import { checkAuthenticated } from "../../Actions/auth";
@@ -22,14 +21,11 @@ const RegisterPage = ({
   isAuthenticated,
   errors,
   accountCreated,
-  anotherUser,
 }) => {
   const [loading, setLoading] = useState(true);
   const [errMsg, setErrMsg] = useState("");
   const [error, setError] = useState(false);
   const [hrAdmins, setHrAdmins] = useState([]);
-  //   const [teams, setTeams] = useState([]);
-
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -44,33 +40,6 @@ const RegisterPage = ({
   const onSubmit = (e) => {
     e.preventDefault();
     createTeam(name, description, teamLeader);
-    // if (password === re_password) {
-    //   extendedSignup(
-    //     username,
-    //     password,
-    //     email,
-    //     firstName,
-    //     lastName,
-    //     middleName,
-    //     teamName,
-    //     hrManager,
-    //     positionName,
-    //     positionDescription,
-    //     country,
-    //     city,
-    //     zipcode,
-    //     street,
-    //     buildingNumber,
-    //     flatNumber,
-    //     county
-    //   );
-    //   if (errors == null) {
-    //     <Alert>{errors}</Alert>;
-    //   }
-    //   return <Navigate to="/" />;
-    // } else {
-    //   setErrMsg("Hasła są różne");
-    // }
   };
   console.log(isAuthenticated);
   console.log(`User created: ${accountCreated}`);
@@ -141,43 +110,6 @@ const RegisterPage = ({
               <h1 className="h3  fw-normal text-left">
                 Infomacje o zatrudnieniu
               </h1>
-              {/* <MDBCol md="6">
-                {teams.length === 0 ? (
-                  <select
-                    className="form-select"
-                    id="name"
-                    name="name"
-                    value={name}
-                    onChange={(e) => onChange(e)}
-                    placeholder="Zespół"
-                  >
-                    <option value="" disabled selected>
-                      Brak zespołów HR w systemie
-                    </option>
-                  </select>
-                ) : (
-                  <select
-                    className="form-select"
-                    id="teamName"
-                    name="teamName"
-                    value={teamName}
-                    onChange={(e) => onChange(e)}
-                    placeholder="Zespół"
-                    required
-                  >
-                    <option selected disabled value="">
-                      Wybierz dział
-                    </option>
-                    {!loading &&
-                      !error &&
-                      teams.map((team) => (
-                        <option value={team["name"]}>
-                          {team["description"]} ({team["name"]})
-                        </option>
-                      ))}
-                  </select>
-                )}
-              </MDBCol> */}
               <div className="row"></div>
               <MDBCol md="5">
                 <MDBInput
