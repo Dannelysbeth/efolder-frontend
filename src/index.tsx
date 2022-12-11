@@ -35,6 +35,9 @@ import UploadMyFilesPage from "./Pages/DocumentsPage/UploadMyFilesPage/UploadMyF
 import UploadPicture from "./Pages/UploadPicture/UploadPicture";
 import SuperAdminPermPage from "./Pages/SuperAdminPermPage/SuperAdminPermPage";
 import CreateTeamPage from "./Pages/CreateTeamPage/CreateTeamPage";
+import TeamViewPage from "./Pages/TeamsViewPage/TeamsViewPage";
+import ViewMyTeamspage from "./Pages/TeamsViewPage/ViewMyTeamspage";
+import TeamPage from "./Pages/TeamPage/TeamPage";
 
 const routing = (
   <div>
@@ -51,6 +54,11 @@ const routing = (
               <Route path="/forbidden" element={<ForbiddenPage />} />
               <Route path="/o-nas" element={<AboutUsPage />} />{" "}
               <Route path="/createTeam" element={<CreateTeamPage />} />
+              <Route path="/viewTeams" element={<TeamViewPage />} />
+              <Route path="/viewMyTeams" element={<ViewMyTeamspage />} />
+              <Route path="/team">
+                <Route path="/team/:teamName" element={<TeamPage />} />
+              </Route>
               <Route path="/kartoteka" element={<DocumentsPage />}>
                 <Route path="/kartoteka/dokumenty/" element={<MyFilesPage />}>
                   <Route

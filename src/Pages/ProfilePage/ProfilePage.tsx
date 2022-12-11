@@ -26,7 +26,7 @@ const ProfilePage = ({ user }) => {
     e.preventDefault();
     setIsAddrEditable(false);
     changeAddressInfo();
-    window.location.replace("/");
+    window.location.reload();
   }
   function onAddrCancel() {
     setIsAddrEditable(false);

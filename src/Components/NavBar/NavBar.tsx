@@ -21,6 +21,15 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
       }
     return false;
   }
+  function checkIfTeamLeader(): boolean {
+    if (user != null && user.roles != null) {
+      console.log(user.username);
+      for (var i of user.roles) {
+        if (i == "ROLE_MANAGER") return true;
+      }
+    }
+    return false;
+  }
   function checkIfRegularEmployee(): boolean {
     if (user != null && user.roles != null)
       for (var i of user.roles) {
@@ -108,6 +117,30 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                 className="nav-link link-light dropdown-item "
               >
                 Pracownicy
+              </Link>
+            ) : null}
+          </li>
+        }{" "}
+        {
+          <li>
+            {checkIfAdmin() == true ? (
+              <Link
+                to="/viewTeams"
+                className="nav-link link-light dropdown-item "
+              >
+                Zespoły
+              </Link>
+            ) : null}
+          </li>
+        }{" "}
+        {
+          <li>
+            {checkIfTeamLeader() == true ? (
+              <Link
+                to="/viewMyTeams"
+                className="nav-link link-light dropdown-item "
+              >
+                Moje zespoły
               </Link>
             ) : null}
           </li>
