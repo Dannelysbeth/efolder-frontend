@@ -33,12 +33,16 @@ const SuperAdminPermPage = ({
   const [roles, setRoles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
+  const [canDeleteUser, setCanDeleteUser] = useState(false);
   const [givePermModal, setGivePermModal] = useState(false);
   const [takePermModal, setTakePermModal] = useState(false);
   const [deleteUserModal, setDeleteUserModal] = useState(false);
+  const [deleteFailInfoModal, setDeleteFailInfoModal] = useState(false);
   const givePermToggleShow = () => setGivePermModal(!givePermModal);
   const takePermToggleShow = () => setTakePermModal(!takePermModal);
   const deleteUserToggleShow = () => setDeleteUserModal(!deleteUserModal);
+  const deleteFailInfoToggleShow = () =>
+    setDeleteFailInfoModal(!deleteFailInfoModal);
 
   function giveAdminPermissions() {
     givePermToggleShow();
@@ -55,7 +59,11 @@ const SuperAdminPermPage = ({
   function onDeleteUserAccount() {
     deleteUserToggleShow();
     deleteUserAccount();
-    window.location.replace("/pracownicy");
+    if (!checkIfUserIsManager()) {
+      window.location.replace("/pracownicy");
+    } else {
+      setDeleteFailInfoModal(true);
+    }
   }
 
   function checkIfUserIsAdmin(): boolean {
@@ -72,6 +80,14 @@ const SuperAdminPermPage = ({
     if (employee != null) {
       for (var r of employee["roles"]) {
         if (r["roleName"] == "ROLE_SUPER_ADMIN") return true;
+      }
+    }
+  }
+
+  function checkIfUserIsManager(): boolean {
+    if (employee != null) {
+      for (var r of employee["roles"]) {
+        if (r["roleName"] == "ROLE_MANAGER") return true;
       }
     }
   }
@@ -293,6 +309,40 @@ const SuperAdminPermPage = ({
             Użytkownik jest Super Administratorem
           </h2>
         )}
+        <MDBModal
+          show={deleteFailInfoModal}
+          setShow={setDeleteFailInfoModal}
+          tabIndex="-2"
+        >
+          <MDBModalDialog>
+            <MDBModalContent>
+              <MDBModalHeader>
+                <MDBBtn
+                  className="btn-close"
+                  color="none"
+                  onClick={deleteFailInfoToggleShow}
+                ></MDBBtn>
+              </MDBModalHeader>
+              <MDBModalBody>
+                Podany pracownik nie może zostać usunięty, ponieważ jest liderem
+                przynajmniej jednego zespołu! Aby usunąć użytkonika, ustaw
+                nowych kieroników zespołów.
+              </MDBModalBody>
+
+              <MDBModalFooter>
+                <MDBBtn color="secondary" onClick={deleteFailInfoToggleShow}>
+                  Rozumiem
+                </MDBBtn>
+                {/* <MDBBtn
+                          color="primary"
+                          onClick={(e) => giveAdminPermissions()}
+                        >
+                          Tak
+                        </MDBBtn> */}
+              </MDBModalFooter>
+            </MDBModalContent>
+          </MDBModalDialog>
+        </MDBModal>
       </div>
     </div>
   );

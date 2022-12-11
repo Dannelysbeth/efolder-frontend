@@ -24,6 +24,7 @@ const initialState = {
   access: localStorage.getItem("access"),
   refresh: localStorage.getItem("refresh"),
   isAuthenticated: null,
+  teamCreated: null,
   accountCreated: null,
   user: null,
   team: null,
@@ -134,12 +135,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         team: payload,
+        teamCreated: true,
         errors: null,
       };
     case TEAM_CREATE_FAIL:
       return {
         ...state,
         team: null,
+        teamCreated: false,
         errors: payload,
       };
     case LOGOUT:

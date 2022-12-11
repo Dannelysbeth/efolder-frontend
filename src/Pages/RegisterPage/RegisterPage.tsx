@@ -255,6 +255,7 @@ const RegisterPage = ({
                   value={email}
                   onChange={(e) => onChange(e)}
                   placeholder="nazwa@przyklad.com"
+                  required
                 />
               </MDBCol>
               <div className="row"></div>
@@ -267,6 +268,7 @@ const RegisterPage = ({
                   value={username}
                   onChange={(e) => onChange(e)}
                   placeholder="Nazwa użytkownika"
+                  required
                 />
               </MDBCol>
               <MDBCol md="4">
@@ -278,6 +280,7 @@ const RegisterPage = ({
                   value={password}
                   onChange={(e) => onChange(e)}
                   placeholder="Hasło"
+                  required
                 />
               </MDBCol>
               <MDBCol md="4">
@@ -289,6 +292,7 @@ const RegisterPage = ({
                   value={re_password}
                   onChange={(e) => onChange(e)}
                   placeholder="Powtórz hasło"
+                  required
                 />
               </MDBCol>
               <div className="row"></div>
@@ -302,6 +306,7 @@ const RegisterPage = ({
                   value={country}
                   onChange={(e) => onChange(e)}
                   placeholder="Kraj"
+                  required
                 />
               </MDBCol>
               <MDBCol md="5">

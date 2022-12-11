@@ -28,40 +28,6 @@ import {
 const TeamPage = ({ user, isAuthenticated, errors }) => {
   const { teamName } = useParams();
   const [team, setTeam] = useState([]);
-  //   const [team, setTeam] = useState({
-  //     id:"",
-  //     name: "",
-  //     description: "",
-  //     teamSize: 0,
-  //     employees: [
-  //       {
-  //         id: 0,
-  //         username,
-  //         firstName: "",
-  //         middleName: null,
-  //         lastName: "",
-  //         imageUrl: null,
-  //         teamName: "",
-  //         supervisor: "",
-  //         hrManager: "",
-  //         positionName: "",
-  //         positionDescription: "",
-  //       },
-  //     ],
-  //     teamLeader: {
-  //       id: 0,
-  //       username: "",
-  //       firstName: "",
-  //       middleName: null,
-  //       lastName: "",
-  //       imageUrl: null,
-  //       teamName: "",
-  //       supervisor: "",
-  //       hrManager: "",
-  //       positionName: "",
-  //       positionDescription: "",
-  //     },
-  //   });
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
@@ -85,7 +51,6 @@ const TeamPage = ({ user, isAuthenticated, errors }) => {
         setLoading(false);
       })
       .catch((error) => {
-        // setEmployee(null);
         setLoading(false);
         setError(true);
       });
@@ -111,7 +76,6 @@ const TeamPage = ({ user, isAuthenticated, errors }) => {
   }
 
   function checkIfCanViewPage(): boolean {
-    // getTeam();
     if (checkIfAdmin()) return true;
     else if (
       checkIfTeamLeader() &&
