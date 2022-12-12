@@ -72,10 +72,10 @@ const RegisterPage = ({
       });
   };
 
-  function checkIfSuperAdmin(): boolean {
+  function checkIfAdmin(): boolean {
     if (user != null && user.roles != null)
       for (var i of user.roles) {
-        if (i == "ROLE_SUPER_ADMIN") return true;
+        if (i == "ROLE_HR_ADMIN" || i == "ROLE_SUPER_ADMIN") return true;
       }
     return false;
   }
@@ -90,7 +90,7 @@ const RegisterPage = ({
         <div>{checkIfTeamCreated()}</div>
       ) : (
         <div>
-          {checkIfSuperAdmin() ? (
+          {checkIfAdmin() ? (
             <div className="d-flex flex-column min-vh-100">
               {errors !== null ? (
                 <div
