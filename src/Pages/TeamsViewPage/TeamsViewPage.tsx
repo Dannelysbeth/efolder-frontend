@@ -162,9 +162,6 @@ const TeamViewPage = ({ user }) => {
                   <h4 className="d-flex justify-content-between align-items-center">
                     {team.name}
                   </h4>
-                  {/* <h5 className="d-flex justify-content-between align-items-center text-muted">
-                    {team.description}
-                  </h5> */}
                   <div className="d-flex align-items-center">
                     <img
                       src={
@@ -222,7 +219,7 @@ const TeamViewPage = ({ user }) => {
                 <MDBModal
                   show={deleteUserModal}
                   setShow={setDeleteUserModal}
-                  tabIndex="-3"
+                  tabIndex={"-3"}
                 >
                   <MDBModalDialog>
                     <MDBModalContent>
@@ -240,7 +237,7 @@ const TeamViewPage = ({ user }) => {
                             className="form-control"
                             id="name"
                             name="name"
-                            value={name}
+                            value={team.name}
                             onChange={(e) => onChange(e)}
                             placeholder="Nazwa zespołu"
                             required
@@ -285,16 +282,12 @@ const TeamViewPage = ({ user }) => {
                               <option selected disabled value="">
                                 Wybierz lidera zespołu
                               </option>
-                              {
-                                // !loading &&
-                                //   !error &&
-                                hrAdmins.map((hrAdmin) => (
-                                  <option value={hrAdmin["username"]}>
-                                    {hrAdmin["firstName"]} {hrAdmin["lastName"]}{" "}
-                                    ({hrAdmin["username"]})
-                                  </option>
-                                ))
-                              }
+                              {hrAdmins.map((hrAdmin) => (
+                                <option value={hrAdmin["username"]}>
+                                  {hrAdmin["firstName"]} {hrAdmin["lastName"]} (
+                                  {hrAdmin["username"]})
+                                </option>
+                              ))}
                             </select>
                           )}
                         </MDBCol>

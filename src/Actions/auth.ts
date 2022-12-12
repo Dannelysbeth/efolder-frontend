@@ -19,6 +19,8 @@ import {
   PASSWORD_CHANGE_FAIL,
   TEAM_CREATE_SUCCESS,
   TEAM_CREATE_FAIL,
+  TEAM_UPDATE_SUCCESS,
+  TEAM_UPDATE_FAIL,
 } from "./types";
 
 export const loadUser = () => async (dispatch) => {
@@ -430,6 +432,42 @@ export const createTeam =
       console.log(err.response); //TODO
       dispatch({
         type: TEAM_CREATE_FAIL,
+        payload: err.response.data,
+      });
+    }
+  };
+export const updateTeam =
+  (name: string, description: string, teamLeader: string) =>
+  async (dispatch) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        Accept: "*/*",
+      },
+    };
+
+    const body = JSON.stringify({
+      name,
+      description,
+      teamLeader,
+    });
+
+    console.log(body);
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_REMOTE_URL}/api/team/${name}`,
+        body,
+        config
+      );
+      dispatch({
+        type: TEAM_UPDATE_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err.response); //TODO
+      dispatch({
+        type: TEAM_UPDATE_FAIL,
         payload: err.response.data,
       });
     }

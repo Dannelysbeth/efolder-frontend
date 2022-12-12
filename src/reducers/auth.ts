@@ -18,6 +18,8 @@ import {
   PASSWORD_CHANGE_FAIL,
   TEAM_CREATE_SUCCESS,
   TEAM_CREATE_FAIL,
+  TEAM_UPDATE_SUCCESS,
+  TEAM_UPDATE_FAIL,
 } from "../Actions/types";
 
 const initialState = {
@@ -25,6 +27,7 @@ const initialState = {
   refresh: localStorage.getItem("refresh"),
   isAuthenticated: null,
   teamCreated: null,
+  teamUpdated: null,
   accountCreated: null,
   user: null,
   team: null,
@@ -143,6 +146,20 @@ export default function (state = initialState, action) {
         ...state,
         team: null,
         teamCreated: false,
+        errors: payload,
+      };
+    case TEAM_UPDATE_SUCCESS:
+      return {
+        ...state,
+        team: payload,
+        teamUpdated: true,
+        errors: null,
+      };
+    case TEAM_UPDATE_FAIL:
+      return {
+        ...state,
+        team: null,
+        teamUpdated: false,
         errors: payload,
       };
     case LOGOUT:

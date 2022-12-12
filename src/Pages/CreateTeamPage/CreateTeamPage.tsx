@@ -50,7 +50,6 @@ const RegisterPage = ({
     <div>
       <Navigate to={`/team/${name}`} />
     </div>
-    // return window.location.replace();
   );
 
   const getHRUsers = () => {
