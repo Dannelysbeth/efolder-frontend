@@ -52,11 +52,11 @@ const EmployeeListPage = ({ user }) => {
         setError(true);
       });
   };
-  function checkIfSuperAdmin(): boolean {
+  function checkIfAdmin(): boolean {
     if (user != null && user.roles != null) {
       console.log(user.username);
       for (var i of user.roles) {
-        if (i == "ROLE_SUPER_ADMIN") return true;
+        if (i == "ROLE_SUPER_ADMIN" || i == "ROLE_HR_ADMIN") return true;
       }
     }
 
@@ -68,7 +68,7 @@ const EmployeeListPage = ({ user }) => {
 
   return (
     <div>
-      {checkIfSuperAdmin() ? (
+      {checkIfAdmin() ? (
         <MDBListGroup style={{ minWidth: "22rem" }} light>
           {users.length === 0 ? (
             <h3>Brak użytkowników w systemie</h3>

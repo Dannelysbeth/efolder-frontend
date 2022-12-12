@@ -101,7 +101,7 @@ const ViewMyTeamspage = ({ user }) => {
   }, []);
 
   return (
-    <div>
+    <div className="team-container">
       <MDBCardHeader>
         <h1 className="text-center">Moje zespoły</h1>
       </MDBCardHeader>

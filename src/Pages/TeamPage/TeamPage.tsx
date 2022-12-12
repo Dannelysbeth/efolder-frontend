@@ -165,7 +165,10 @@ const TeamPage = ({
   function checkIfAdmin(): boolean {
     if (user != null && user.roles != null)
       for (var i of user.roles) {
-        if (i == "ROLE_SUPER_ADMIN" || i == "ROLE_HR_ADMIN") return true;
+        if (i == "ROLE_SUPER_ADMIN" || i == "ROLE_HR_ADMIN") {
+          //   getHRUsers();
+          return true;
+        }
       }
     return false;
   }
@@ -207,10 +210,11 @@ const TeamPage = ({
     </div>
   );
   useEffect(() => {
+    getHRUsers();
     getTeam();
-    if (checkIfTeamLeader()) {
-      getHRUsers();
-    }
+    // if (checkIfAdmin()) {
+    //   getHRUsers();
+    // }
   }, []);
 
   const returnUserPage = () => (
@@ -222,6 +226,9 @@ const TeamPage = ({
             {checkIfCanViewPage() ? (
               <div className="backgd d-flex flex-column min-vh-100">
                 <div className="">
+                  <p>
+                    <p></p>
+                  </p>
                   <div className="row user-container justify-content-center">
                     <h3 className="justify-content-center">{team["name"]} </h3>
                     <h5>
@@ -229,20 +236,34 @@ const TeamPage = ({
                         ? team["description"]
                         : null}
                     </h5>
-                    <div className="h5 font-weight-300 ">
-                      <i className="ni location_pin mr-2"></i>
-                      Lider zespołu:{" "}
-                      {team["teamLeader"] &&
-                        team["teamLeader"]["firstName"]}{" "}
-                      {team["teamLeader"] &&
-                      team["teamLeader"]["middleName"] != null
-                        ? team["teamLeader"]["middleName"] + " "
-                        : null}
-                      {team["teamLeader"] && team["teamLeader"]["lastName"]}
-                    </div>
-                    <div className="h5 mt-4">
-                      <i className="ni business_briefcase-24 mr-2"></i>
-                      Ilość pracowników w zespole: {team["teamSize"]}
+
+                    <div className="d-flex align-items-center">
+                      <img
+                        src={
+                          team["teamLeader"] && team["teamLeader"]["imageUrl"]
+                            ? team["teamLeader"] &&
+                              team["teamLeader"]["imageUrl"]
+                            : "https://i.imgur.com/teiJw8H.png"
+                        }
+                        alt=""
+                        style={{ width: "100px", height: "100px" }}
+                        className="rounded-circle"
+                      />
+                      <div className="ms-3">
+                        <p className="fw-bold mb-2">
+                          Lider zespołu:{" "}
+                          {team["teamLeader"] &&
+                            team["teamLeader"]["firstName"]}{" "}
+                          {team["teamLeader"] &&
+                          team["teamLeader"]["middleName"] != null
+                            ? team["teamLeader"]["middleName"] + " "
+                            : null}
+                          {team["teamLeader"] && team["teamLeader"]["lastName"]}
+                        </p>
+                        <p className="text-muted mb-0">
+                          Ilość pracowników w zespole: {team["teamSize"]}
+                        </p>
+                      </div>
                     </div>
                   </div>{" "}
                   <p>
@@ -312,7 +333,7 @@ const TeamPage = ({
                                     aria-label="Administartor HR"
                                   >
                                     <option value="" disabled selected>
-                                      Brak managerów HR w systemie
+                                      Brak użytkowników w systemie
                                     </option>
                                   </select>
                                 ) : (
@@ -359,7 +380,11 @@ const TeamPage = ({
                       </MDBModal>
                     </div>
                   ) : null}
-                  <MDBListGroup style={{ minWidth: "22rem" }} light>
+                  <MDBListGroup
+                    className="team-members-container"
+                    style={{ minWidth: "22rem" }}
+                    light
+                  >
                     {team["employees"] && team["employees"].length === 0 ? (
                       <h3>Ten zepół nie posiada pracowników</h3>
                     ) : (
@@ -392,14 +417,18 @@ const TeamPage = ({
                             </div>
                           </div>
                           {checkIfAdmin() ? (
-                            <MDBBtn size="sm" rounded color="link">
+                            <MDBBtn
+                              size="sm"
+                              rounded
+                              className="btn btn-info btn-sm"
+                            >
                               <Link
                                 className="nav-link active"
                                 to={{
                                   pathname: `/user/${user.username}/daneOsobowe`,
                                 }}
                               >
-                                View
+                                <i className="fas fa-eye"></i>
                               </Link>
                             </MDBBtn>
                           ) : null}
@@ -409,14 +438,16 @@ const TeamPage = ({
                   </MDBListGroup>
                 </div>{" "}
                 {checkIfAdmin() ? (
-                  <div>
+                  <div className="d-flex justify-content-center">
                     {" "}
+                    <p>
+                      <p></p>
+                    </p>{" "}
                     <MDBBtn
                       size="sm"
                       className="btn btn-danger btn-sm "
                       rounded
                       onClick={deleteTeamToggleShow}
-                      // onClick={() => setIsAddrEditable(true)}
                     >
                       <span className="fa fa-trash fa-little"></span>
                     </MDBBtn>

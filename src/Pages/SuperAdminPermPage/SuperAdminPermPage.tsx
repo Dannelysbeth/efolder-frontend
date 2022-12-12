@@ -92,6 +92,14 @@ const SuperAdminPermPage = ({
     }
   }
 
+  function checkIfLoggedUserSuperAdmin(): boolean {
+    if (user != null && user.roles != null)
+      for (var i of user.roles) {
+        if (i == "ROLE_SUPER_ADMIN") return true;
+      }
+    return false;
+  }
+
   const getEmployeeRoles = () => {
     return fetch(`${process.env.REACT_APP_REMOTE_URL}/api/role/${username}`, {
       method: "GET",
@@ -202,62 +210,71 @@ const SuperAdminPermPage = ({
                 ) : null}
               </MDBRow>
             ) : (
-              <MDBRow className="g-3">
-                <MDBBtn
-                  className="w-100 btn btn-lg button-blue"
-                  onClick={givePermToggleShow}
-                >
-                  Nadaj rolę administratora
-                </MDBBtn>
-                <MDBModal
-                  show={givePermModal}
-                  setShow={setGivePermModal}
-                  tabIndex="-2"
-                >
-                  <MDBModalDialog>
-                    <MDBModalContent>
-                      <MDBModalHeader>
-                        <MDBBtn
-                          className="btn-close"
-                          color="none"
-                          onClick={givePermToggleShow}
-                        ></MDBBtn>
-                      </MDBModalHeader>
-                      <MDBModalBody>
-                        Czy na pewno nadać prawa administratora?
-                      </MDBModalBody>
+              <div>
+                {checkIfLoggedUserSuperAdmin() ? (
+                  <MDBRow className="g-3">
+                    <MDBBtn
+                      className="w-100 btn btn-lg button-blue"
+                      onClick={givePermToggleShow}
+                    >
+                      Nadaj rolę administratora
+                    </MDBBtn>
+                    <MDBModal
+                      show={givePermModal}
+                      setShow={setGivePermModal}
+                      tabIndex="-2"
+                    >
+                      <MDBModalDialog>
+                        <MDBModalContent>
+                          <MDBModalHeader>
+                            <MDBBtn
+                              className="btn-close"
+                              color="none"
+                              onClick={givePermToggleShow}
+                            ></MDBBtn>
+                          </MDBModalHeader>
+                          <MDBModalBody>
+                            Czy na pewno nadać prawa administratora?
+                          </MDBModalBody>
 
-                      <MDBModalFooter>
-                        <MDBBtn color="secondary" onClick={givePermToggleShow}>
-                          Anuluj
-                        </MDBBtn>
-                        <MDBBtn
-                          color="primary"
-                          onClick={(e) => giveAdminPermissions()}
-                        >
-                          Tak
-                        </MDBBtn>
-                      </MDBModalFooter>
-                    </MDBModalContent>
-                  </MDBModalDialog>
-                </MDBModal>
-                {infoMessage != null && infoMessage != "" && errors == null ? (
-                  <div
-                    className="alert alert-success alert-dismissible fade show"
-                    role="alert"
-                  >
-                    <strong>{infoMessage}</strong>
-                  </div>
+                          <MDBModalFooter>
+                            <MDBBtn
+                              color="secondary"
+                              onClick={givePermToggleShow}
+                            >
+                              Anuluj
+                            </MDBBtn>
+                            <MDBBtn
+                              color="primary"
+                              onClick={(e) => giveAdminPermissions()}
+                            >
+                              Tak
+                            </MDBBtn>
+                          </MDBModalFooter>
+                        </MDBModalContent>
+                      </MDBModalDialog>
+                    </MDBModal>
+                    {infoMessage != null &&
+                    infoMessage != "" &&
+                    errors == null ? (
+                      <div
+                        className="alert alert-success alert-dismissible fade show"
+                        role="alert"
+                      >
+                        <strong>{infoMessage}</strong>
+                      </div>
+                    ) : null}
+                    {errors != null && errors.message != null ? (
+                      <div
+                        className="alert alert-danger alert-dismissible fade show"
+                        role="alert"
+                      >
+                        <strong>{errors.message}</strong>
+                      </div>
+                    ) : null}
+                  </MDBRow>
                 ) : null}
-                {errors != null && errors.message != null ? (
-                  <div
-                    className="alert alert-danger alert-dismissible fade show"
-                    role="alert"
-                  >
-                    <strong>{errors.message}</strong>
-                  </div>
-                ) : null}
-              </MDBRow>
+              </div>
             )}
             <p>
               <p></p>
@@ -333,12 +350,6 @@ const SuperAdminPermPage = ({
                 <MDBBtn color="secondary" onClick={deleteFailInfoToggleShow}>
                   Rozumiem
                 </MDBBtn>
-                {/* <MDBBtn
-                          color="primary"
-                          onClick={(e) => giveAdminPermissions()}
-                        >
-                          Tak
-                        </MDBBtn> */}
               </MDBModalFooter>
             </MDBModalContent>
           </MDBModalDialog>

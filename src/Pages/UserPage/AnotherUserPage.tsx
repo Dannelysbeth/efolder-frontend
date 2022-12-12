@@ -59,10 +59,10 @@ const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
     getEmployee();
   }, []);
 
-  function checkIfSuperAdmin(): boolean {
+  function checkIfAdmin(): boolean {
     if (user != null && user.roles != null)
       for (var i of user.roles) {
-        if (i == "ROLE_SUPER_ADMIN") return true;
+        if (i == "ROLE_SUPER_ADMIN" || i == "ROLE_HR_ADMIN") return true;
       }
     return false;
   }
@@ -84,7 +84,7 @@ const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
     <div>
       {checkIfUserExists() ? (
         <div>
-          {checkIfSuperAdmin() ? (
+          {checkIfAdmin() ? (
             <div className="backgd d-flex flex-column min-vh-100">
               <div className="">
                 <div className="profile-pic rounded-circle no-padding d-flex justify-content-center  ">
@@ -168,7 +168,7 @@ const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
                       className="nav-link active"
                       to={{ pathname: `/user/${username}/adminRole` }}
                     >
-                      Nadaj rolę Administratora
+                      Narzędzia Administratora
                     </Link>
                   </li>
                 </ul>
