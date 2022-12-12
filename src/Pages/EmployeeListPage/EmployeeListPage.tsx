@@ -10,6 +10,8 @@ import {
   MDBListGroup,
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
+import LoginPage from "../LoginPage/LoginPage";
+import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 
 const EmployeeListPage = ({ user }) => {
   const [users, setUsers] = useState([
@@ -68,8 +70,15 @@ const EmployeeListPage = ({ user }) => {
 
   return (
     <div>
+      <p>
+        <p></p>
+      </p>
       {checkIfAdmin() ? (
-        <MDBListGroup style={{ minWidth: "22rem" }} light>
+        <MDBListGroup
+          style={{ minWidth: "22rem" }}
+          light
+          className="team-members-container"
+        >
           {users.length === 0 ? (
             <h3>Brak użytkowników w systemie</h3>
           ) : (
@@ -98,12 +107,12 @@ const EmployeeListPage = ({ user }) => {
                     <p className="text-muted mb-0">{user.teamName}</p>
                   </div>
                 </div>
-                <MDBBtn size="sm" rounded color="link">
+                <MDBBtn size="sm" rounded className="btn btn-info btn-sm ">
                   <Link
                     className="nav-link active"
                     to={{ pathname: `/user/${user.username}/daneOsobowe` }}
                   >
-                    View
+                    <i className="fas fa-eye"></i>
                   </Link>
                 </MDBBtn>
               </MDBListGroupItem>
@@ -112,50 +121,14 @@ const EmployeeListPage = ({ user }) => {
         </MDBListGroup>
       ) : (
         <div>
-          {user == null} ? (<Navigate to="/forbidden" />) : (
-          <Navigate to="/login" />)
+          {user == null} ? (<ForbiddenPage />) : (
+          <ForbiddenPage />)
         </div>
       )}
+      <p>
+        <p></p>
+      </p>
     </div>
-    // <MDBListGroup style={{ minWidth: "22rem" }} light>
-    //   {users.length === 0 ? (
-    //     <h3>Brak użytkowników w systemie</h3>
-    //   ) : (
-    //     users.map((user) => (
-    //       <MDBListGroupItem className="d-flex justify-content-between align-items-center">
-    //         <div className="d-flex align-items-center">
-    //           <img
-    //             src={
-    //               user.imageUrl
-    //                 ? user.imageUrl
-    //                 : "https://i.imgur.com/teiJw8H.png"
-    //             }
-    //             alt=""
-    //             style={{ width: "45px", height: "45px" }}
-    //             className="rounded-circle"
-    //           />
-    //           <div className="ms-3">
-    //             <p className="fw-bold mb-1">
-    //               {user.firstName}
-    //               {user.middleName != null ? " " + user.middleName : null}{" "}
-    //               {user.lastName}
-    //             </p>
-    //             <p className="text-muted mb-0">{user.positionName}</p>
-    //             <p className="text-muted mb-0">{user.teamName}</p>
-    //           </div>
-    //         </div>
-    //         <MDBBtn size="sm" rounded color="link">
-    //           <Link
-    //             className="nav-link active"
-    //             to={{ pathname: `/user/${user.username}/daneOsobowe` }}
-    //           >
-    //             View
-    //           </Link>
-    //         </MDBBtn>
-    //       </MDBListGroupItem>
-    //     ))
-    //   )}
-    // </MDBListGroup>
   );
 };
 

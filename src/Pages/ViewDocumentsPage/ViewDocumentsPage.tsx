@@ -23,12 +23,7 @@ import {
 } from "mdb-react-ui-kit";
 
 const ViewDocumentsPage = () => {
-  // const [documents, setDocuments] = useState([]);
   const [info, setInfo] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(true);
-
-  // const getDocuments = () => {
   const { username } = useParams();
   const [documents, setDocuments] = useState([
     {
@@ -81,6 +76,10 @@ const ViewDocumentsPage = () => {
   function deleteItem(document) {
     deleteDocument(document);
     setDocuments((oldDocs) => oldDocs.filter((d) => d.id !== document.id));
+    setDocumentsA((oldDocs) => oldDocs.filter((d) => d.id !== document.id));
+    setDocumentsB((oldDocs) => oldDocs.filter((d) => d.id !== document.id));
+    setDocumentsC((oldDocs) => oldDocs.filter((d) => d.id !== document.id));
+    setDocumentsD((oldDocs) => oldDocs.filter((d) => d.id !== document.id));
   }
 
   const onDocumentSubmit = (document: any, e) => {
@@ -288,7 +287,7 @@ const ViewDocumentsPage = () => {
               </MDBTabs>
             </MDBCol>
             <MDBCol size="9">
-              <MDBTabsContent>
+              <MDBTabsContent className="documents-container">
                 <MDBTabsPane show={verticalActive === "tab1"}>
                   {documentsA.length === 0 ? (
                     <h3>Brak dokumentów</h3>

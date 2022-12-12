@@ -20,3 +20,15 @@
   border-color: #1d2223;
   box-shadow: 20px 20px 50px #1d2223;
 }
+
+.documents-container {
+  height: 100%;
+  /* min-height: 75vh; */
+  max-width: 90%;
+  /* padding: 20px; */
+  margin: auto;
+  /* background-color: none; */
+  /* border-radius: 20px; */
+  border-color: #1d2223;
+  box-shadow: 20px 20px 50px #1d2223;
+}

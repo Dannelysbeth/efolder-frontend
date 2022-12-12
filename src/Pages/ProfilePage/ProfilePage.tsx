@@ -116,6 +116,7 @@ const ProfilePage = ({ user }) => {
                 name="middleName"
                 value={employee["user"] && employee["user"]["middleName"]}
                 placeholder="Drugie imię"
+                readonly
               />
             </MDBCol>
           ) : null}{" "}

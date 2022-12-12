@@ -55,17 +55,14 @@ const ViewMyTeamspage = ({ user }) => {
   const [error, setError] = useState(true);
 
   const getTeams = () => {
-    return fetch(
-      `${process.env.REACT_APP_REMOTE_URL}/api/team/teamLeader/${user.username}`,
-      {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    return fetch(`${process.env.REACT_APP_REMOTE_URL}/api/team/myTeams`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((responseJson) => {
         setTeams(responseJson);
@@ -76,16 +73,6 @@ const ViewMyTeamspage = ({ user }) => {
         setError(true);
       });
   };
-  //   function checkIfAdmin(): boolean {
-  //     if (user != null && user.roles != null) {
-  //       console.log(user.username);
-  //       for (var i of user.roles) {
-  //         if (i == "ROLE_SUPER_ADMIN" || i == "ROLE_HR_ADMIN") return true;
-  //       }
-  //     }
-
-  //     return false;
-  //   }
   function checkIfTeamLeader(): boolean {
     if (user != null && user.roles != null) {
       console.log(user.username);
@@ -101,7 +88,7 @@ const ViewMyTeamspage = ({ user }) => {
   }, []);
 
   return (
-    <div className="team-container">
+    <div className="backgd team-container">
       <MDBCardHeader>
         <h1 className="text-center">Moje zespoły</h1>
       </MDBCardHeader>
@@ -121,7 +108,7 @@ const ViewMyTeamspage = ({ user }) => {
                     {team.description}
                   </h5> */}
                   <div className="d-flex align-items-center">
-                    <img
+                    {/* <img
                       src={
                         team.teamLeader.imageUrl
                           ? team.teamLeader.imageUrl
@@ -130,7 +117,7 @@ const ViewMyTeamspage = ({ user }) => {
                       alt=""
                       style={{ width: "45px", height: "45px" }}
                       className="rounded-circle"
-                    />
+                    /> */}
                     <div className="ms-3">
                       <p className="fw-bold mb-1">
                         Lider zespołu: {team.teamLeader.firstName}
@@ -146,12 +133,12 @@ const ViewMyTeamspage = ({ user }) => {
                     </div>
                   </div>
                 </div>
-                <MDBBtn size="sm" rounded color="link">
+                <MDBBtn size="sm" rounded className="btn btn-info btn-sm ">
                   <Link
                     className="nav-link active"
                     to={{ pathname: `/team/${team.name}` }}
                   >
-                    View
+                    <i className="fas fa-eye"></i>
                   </Link>
                 </MDBBtn>
               </MDBListGroupItem>
