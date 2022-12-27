@@ -33,8 +33,8 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
     <section className="vh-100 gradient-form">
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="d-flex flex-column min-vh-100">
-            <div className="card">
+          <div className="d-flex flex-column min-vh-100 flex-row">
+            <div className="row g-0">
               {errors != null && errors.message != null ? (
                 <div
                   className="alert alert-danger alert-dismissible fade show"
@@ -43,6 +43,8 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
                   <strong>Nazwa użytkownika lub hasło są niepoprawne</strong>
                 </div>
               ) : null}
+            </div>
+            <div className="card">
               <div className="row g-0">
                 <div className="col-md-6 col-lg-6 d-none d-md-block">
                   <img
