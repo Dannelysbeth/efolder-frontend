@@ -79,7 +79,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
             to="/uploadProfilePic"
             className="nav-link link-light dropdown-item "
           >
-            Avatar
+            Zdjęcie profilowe
           </Link>
         </li>
         <li>
@@ -88,7 +88,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
               to="/kartoteka"
               className="nav-link link-light dropdown-item "
             >
-              Kartoteka pracownicza
+              Moja kartoteka
             </Link>
           ) : null}
         </li>
@@ -204,7 +204,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="navbar-nav ms-auto mx-5 pe-3 gap-3">
-            <li className="nav-item shadow">
+            {/* <li className="nav-item shadow">
               <Link to="/o-nas" className="nav-link link-light active">
                 O nas
               </Link>
@@ -219,16 +219,12 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                 Kontakt
               </Link>
             </li>
-            {/* <li className="nav-item shadow">
-              <Link to="/regulamin" className="nav-link link-light active">
-                Regulamin
-              </Link>
-            </li> */}
+           
             <li className="nav-item shadow">
               <Link to="/pomoc" className="nav-link link-light active">
                 Pomoc
               </Link>
-            </li>
+            </li> */}
             {isAuthenticated ? authLink() : guestLink()}
           </ul>
         </div>

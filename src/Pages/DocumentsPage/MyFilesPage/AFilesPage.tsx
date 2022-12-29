@@ -152,13 +152,13 @@ const AFilesPage = ({ user }) => {
                   >
                     <i className="fas fa-download"></i>
                   </button>
-                  <button
+                  {/* <button
                     type="button"
                     className="btn btn-danger"
                     onClick={(e) => deleteItem(document)}
                   >
                     <i className="fas fa-trash-alt"></i>
-                  </button>
+                  </button> */}
                 </div>
               </MDBListGroupItem>
             </div>
