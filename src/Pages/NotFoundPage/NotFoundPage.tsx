@@ -4,7 +4,7 @@ import { useRive, Layout, Fit, Alignment } from "@rive-app/react-canvas";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { addPropertyControls } from "framer";
-import "./NotFoundPage.css";
+import "../css/app.css";
 import MyFooter from "../../Components/Footer/Footer";
 
 const NotFoundPage = () => {

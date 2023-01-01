@@ -6,7 +6,7 @@ import documents from "../../Data/documentsA";
 import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 import LoginPage from "../LoginPage/LoginPage";
 import { saveAs } from "file-saver";
-import "./ViewTeams.css";
+import "../css/app.css";
 import {
   MDBBadge,
   MDBBtn,
@@ -186,14 +186,14 @@ const TeamViewPage = ({ user }) => {
                   </div>
                 </div>
 
-                <MDBBtn size="sm" rounded className="btn btn-info btn-sm ">
+                <button className="btn btn-info btn-sm ">
                   <Link
                     className="nav-link active"
                     to={{ pathname: `/team/${team.name}` }}
                   >
                     <i className="fas fa-eye"></i>
                   </Link>
-                </MDBBtn>
+                </button>
               </MDBListGroupItem>
             ))
           )}

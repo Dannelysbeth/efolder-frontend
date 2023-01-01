@@ -1,7 +1,7 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import "./LoginPage.css";
+import "../css/app.css";
 import { login, checkAuthenticated, loadUser } from "../../Actions/auth";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -92,7 +92,7 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
                         </p>
                       </p>
                       <button
-                        className="w-100 btn btn-lg button-blue-lp "
+                        className="w-100 button-blue-lp btn btn-lg  "
                         type="submit"
                       >
                         Zaloguj się

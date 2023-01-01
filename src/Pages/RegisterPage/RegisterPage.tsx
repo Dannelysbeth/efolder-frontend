@@ -1,7 +1,7 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import "./RegisterPage.css";
+import "../css/app.css";
 import { connect } from "react-redux";
 import { extendedSignup } from "../../Actions/auth";
 import { checkAuthenticated } from "../../Actions/auth";

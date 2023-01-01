@@ -1,7 +1,6 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-// import "./RegisterPage.css";
 import { connect } from "react-redux";
 import { giveAdminPermission, takeAdminPermission } from "../../Actions/auth";
 import { changePassword } from "../../Actions/auth";

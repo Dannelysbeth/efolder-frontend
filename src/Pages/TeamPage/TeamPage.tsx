@@ -34,7 +34,6 @@ import {
 } from "mdb-react-ui-kit";
 import { get } from "https";
 import UserNotFoundPage from "../UserNotFoundPage/UserNotFoundPage";
-// import { updateTeam } from "../../Actions/auth";
 
 const TeamPage = ({
   user,

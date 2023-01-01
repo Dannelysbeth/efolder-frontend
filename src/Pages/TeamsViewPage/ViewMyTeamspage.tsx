@@ -104,20 +104,7 @@ const ViewMyTeamspage = ({ user }) => {
                   <h4 className="d-flex justify-content-between align-items-center">
                     {team.name}
                   </h4>
-                  {/* <h5 className="d-flex justify-content-between align-items-center text-muted">
-                    {team.description}
-                  </h5> */}
                   <div className="d-flex align-items-center">
-                    {/* <img
-                      src={
-                        team.teamLeader.imageUrl
-                          ? team.teamLeader.imageUrl
-                          : "https://i.imgur.com/teiJw8H.png"
-                      }
-                      alt=""
-                      style={{ width: "45px", height: "45px" }}
-                      className="rounded-circle"
-                    /> */}
                     <div className="ms-3">
                       <p className="fw-bold mb-1">
                         Lider zespołu: {team.teamLeader.firstName}
@@ -129,18 +116,17 @@ const ViewMyTeamspage = ({ user }) => {
                       <p className="text-muted mb-0">
                         Ilość pracowników w zespole: {team.teamSize}
                       </p>
-                      {/* <p className="text-muted mb-0">{user.teamName}</p> */}
                     </div>
                   </div>
                 </div>
-                <MDBBtn size="sm" rounded className="btn btn-info btn-sm ">
+                <button className="btn btn-info btn-sm ">
                   <Link
                     className="nav-link active"
                     to={{ pathname: `/team/${team.name}` }}
                   >
                     <i className="fas fa-eye"></i>
                   </Link>
-                </MDBBtn>
+                </button>
               </MDBListGroupItem>
             ))
           )}

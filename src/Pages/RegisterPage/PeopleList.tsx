@@ -2,7 +2,6 @@ import React from "react";
 
 const PeopleList = (props) => {
   const { people } = props;
-  // Map over prop "people" and code the right structure
 
   return people.map((person) => {
     const { id, username, firstname, middleName, lastname, size, uploadTime } =

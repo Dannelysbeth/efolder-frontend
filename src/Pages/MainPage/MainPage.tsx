@@ -1,7 +1,7 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./MainPage.css";
+import "../css/app.css";
 
 const MainPage = () => {
   return (
@@ -119,10 +119,7 @@ const MainPage = () => {
         <div className="row justify-content-center">
           <div className="col-md-5 order-md-2">
             <h2 className="featurette-heading">Zdobądź szczyt! </h2>
-            <p className="lead">
-              Wjedź jednym z naszych wyciągów na szczyt i podziwiaj w czasie
-              jazdy przepiękną malowniczą scenerię górską.
-            </p>
+            <p className="lead">WLorem ipsum.</p>
             <p>
               <Link to="/wyciagi" className="btn button-blue-2 active">
                 Czytaj więcej &raquo;
