@@ -33,7 +33,6 @@ import {
   MDBModalHeader,
 } from "mdb-react-ui-kit";
 import { get } from "https";
-import UserNotFoundPage from "../UserNotFoundPage/UserNotFoundPage";
 
 const TeamPage = ({
   user,
