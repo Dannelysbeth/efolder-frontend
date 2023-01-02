@@ -43,19 +43,10 @@ const UploadDocumentPage = ({ errors, uploadFile, successMessage }) => {
     e.preventDefault();
   };
   function submitDocument(e) {
-    // setInfoMessage("");
     setErrMsg("");
 
     if (fileCategory != "" && file != null) {
-      // setErrMsg("");
       uploadFile(fileCategory, file, username);
-      // if (errors == null) {
-      //   setInfoMessage("Dokument został poprawnie dodany");
-      //   setFormData({ ...formData, file: null });
-      //   setCategory({ ...category, fileCategory: "" });
-      // } else {
-      //   setInfoMessage("");
-      // }
     } else if (fileCategory != "") {
       setErrMsg("Proszę wybierz plik");
     } else {
@@ -65,7 +56,31 @@ const UploadDocumentPage = ({ errors, uploadFile, successMessage }) => {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <div className="form-signin top-space">
+      {errors != null && errors.message != null && errMsg == "" ? (
+        <div
+          className="alert alert-danger alert-dismissible fade show "
+          role="alert"
+        >
+          <strong>{errors.message}</strong>
+        </div>
+      ) : null}
+      {successMessage != null && errMsg == "" ? (
+        <div
+          className="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>{successMessage}</strong>{" "}
+        </div>
+      ) : null}
+      {errMsg != null && errMsg != "" ? (
+        <div
+          className="alert alert-danger alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>{errMsg}</strong>{" "}
+        </div>
+      ) : null}
+      <div className="form-signin  top-space">
         <MDBRow className="g-3">
           <h1 className="h3 mb-3 fw-normal text-center">Dodaj dokument</h1>
           <div className="form-group">
@@ -84,8 +99,8 @@ const UploadDocumentPage = ({ errors, uploadFile, successMessage }) => {
             </select>
           </div>
 
-          <div className="file-card">
-            <div className="file-inputs">
+          <div className="file-card ">
+            <div className=" files input">
               <input
                 type="file"
                 name="file"
@@ -94,41 +109,14 @@ const UploadDocumentPage = ({ errors, uploadFile, successMessage }) => {
                 onChange={(e) => onChange(e)}
               />
             </div>
-
-            <p className="main">Wspierane pliki:</p>
-            <p className="info">PDF</p>
           </div>
-          <MDBBtn
-            className="w-100 btn btn-lg button-blue"
+          <button
+            className="w-100 btn btn-lg button-blue-2"
             type="submit"
             onClick={(e) => submitDocument(e)}
           >
             Prześlij document{" "}
-          </MDBBtn>
-          {errors != null && errors.message != null && errMsg == "" ? (
-            <div
-              className="alert alert-danger alert-dismissible fade show "
-              role="alert"
-            >
-              <strong>{errors.message}</strong>
-            </div>
-          ) : null}
-          {successMessage != null && errMsg == "" ? (
-            <div
-              className="alert alert-success alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>{successMessage}</strong>{" "}
-            </div>
-          ) : null}
-          {errMsg != null && errMsg != "" ? (
-            <div
-              className="alert alert-danger alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>{errMsg}</strong>{" "}
-            </div>
-          ) : null}
+          </button>
         </MDBRow>
       </div>
     </div>

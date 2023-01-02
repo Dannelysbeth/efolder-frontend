@@ -11,10 +11,7 @@ import documents from "../../Data/documentsA";
 
 const AnotherUserPage = ({ user }) => {
   const { username } = useParams();
-  const [files, setFiles] = useState(documents);
   const [aFiles, setAFiles] = useState(a_documents);
-  const [bFiles, setBFiles] = useState(b_documents);
-  const [info, setInfo] = useState([]);
   const [employee, setEmployee] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
@@ -363,11 +360,7 @@ const AnotherUserPage = ({ user }) => {
   );
   return (
     <div className="backgd d-flex flex-column min-vh-100">
-      <h4 className="userPage-text mt-3">
-        {/* {user !== null ? infoOfUser() : "Osoba niezalogowana "} */}
-        {infoOfUser()}
-        {/* Hello */}
-      </h4>
+      <h4 className="userPage-text mt-3">{infoOfUser()}</h4>
     </div>
   );
 };

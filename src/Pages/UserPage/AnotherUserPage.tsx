@@ -1,34 +1,15 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import {
-  Link,
-  useNavigate,
-  useParams,
-  Outlet,
-  Navigate,
-} from "react-router-dom";
-// import Avatar from 'react-avatar-edit';
+import { useEffect, useState } from "react";
+import { Link, useParams, Outlet, Navigate } from "react-router-dom";
 import "./UserPage.css";
-import a_documents from "../../Data/documentsA";
-import b_documents from "../../Data/documentsA";
-import List from "../MyDocumentsPage/DocumentList";
 import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 import { connect } from "react-redux";
-import documents from "../../Data/documentsA";
-import {
-  MDBInput,
-  MDBBtn,
-  MDBCheckbox,
-  MDBRow,
-  MDBCol,
-} from "mdb-react-ui-kit";
 
 const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
   const { username } = useParams();
   const [employee, setEmployee] = useState([]);
-  const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
 

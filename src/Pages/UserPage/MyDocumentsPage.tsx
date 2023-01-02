@@ -1,23 +1,13 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, useNavigate, useParams, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./UserPage.css";
-import a_documents from "../../Data/documentsA";
-import b_documents from "../../Data/documentsA";
-import List from "../MyDocumentsPage/DocumentList";
 
 import { connect } from "react-redux";
-import documents from "../../Data/documentsA";
 import {
   MDBAccordion,
   MDBAccordionItem,
-  MDBBtn,
   MDBContainer,
-  MDBDropdown,
-  MDBDropdownItem,
-  MDBDropdownMenu,
-  MDBDropdownToggle,
-  MDBListGroup,
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
 
@@ -194,12 +184,12 @@ const AnotherUserPage = ({ user }) => {
                         <p className="text-muted mb-0">{document.size}</p>
                       </div>
                     </div>
-                    <MDBBtn
-                      size="sm"
+                    <button
+                      // size="sm"
                       onClick={(e) => onDocumentSubmit(document, e)}
                     >
                       View
-                    </MDBBtn>
+                    </button>
                   </MDBListGroupItem>
                 ))
               )}
