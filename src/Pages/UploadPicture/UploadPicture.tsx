@@ -50,17 +50,26 @@ const UploadPicture = ({ uploadOwnProfilePic }) => {
     console.log(file);
   }, [file]);
 
+  const containerStyles = {
+    backgroundColor: "#ffff", // zielony kolor tła
+    width: "500px",
+    height: "500px",
+    margin: "auto", // wyśrodkowanie w obu płaszczyznach
+    borderRadius: "10px", // zaokrąglenie krawędzi o promieniu 10px
+  };
+
   return (
     <div className="user-container-picture-picker ">
       <p>
         <p></p>
       </p>
-      <div className="d-flex justify-content-center">
+      <div style={containerStyles} className="d-flex justify-content-center">
         <Avatar
           width={500}
-          height={400}
+          height={500}
           onCrop={onCrop}
           onClose={onClose}
+          // backgroundColor="#00ff00"
           label="Wybierz zdjęcie"
           onBeforeFileLoad={onBeforeFileLoad}
           src={src}
