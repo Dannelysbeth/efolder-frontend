@@ -2,9 +2,7 @@ import { MDBBtn } from "mdb-react-ui-kit";
 import React, { useEffect, useState, Component } from "react";
 import Avatar from "react-avatar-edit";
 import { connect } from "react-redux";
-import "./UploadPicture.css";
 import { uploadOwnProfilePic } from "../../Actions/auth";
-import { createObjectURL, base64StringToBlob } from "blob-util";
 
 const UploadPicture = ({ uploadOwnProfilePic }) => {
   const [src, setSrc] = useState(null);
@@ -32,8 +30,6 @@ const UploadPicture = ({ uploadOwnProfilePic }) => {
   }
 
   const onSubmit = () => {
-    // const buffer = Buffer.from(file, "base64");
-
     var fil = blobToFile(file, "hello.png");
     console.log(fil);
     uploadOwnProfilePic(fil);
@@ -69,7 +65,6 @@ const UploadPicture = ({ uploadOwnProfilePic }) => {
           height={500}
           onCrop={onCrop}
           onClose={onClose}
-          // backgroundColor="#00ff00"
           label="Wybierz zdjęcie"
           onBeforeFileLoad={onBeforeFileLoad}
           src={src}

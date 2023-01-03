@@ -147,7 +147,7 @@ const TeamViewPage = ({ user }) => {
     <div className="team-container ">
       <div className="team-inner-container ">
         <MDBCardHeader>
-          <h1 className="text-center">Zespoły</h1>
+          <h1 className="center">Zespoły</h1>
         </MDBCardHeader>
         {checkIfAdmin() ? (
           <MDBListGroup
@@ -191,12 +191,12 @@ const TeamViewPage = ({ user }) => {
                     </div>
                   </div>
 
-                  <button className="btn btn-info btn-sm ">
+                  <button className="btn button-blue-2 btn-sm ">
                     <Link
                       className="nav-link active"
                       to={{ pathname: `/team/${team.name}` }}
                     >
-                      <i className="fas fa-eye"></i>
+                      <i className="fas fas-white fa-eye"></i>
                     </Link>
                   </button>
                 </MDBListGroupItem>

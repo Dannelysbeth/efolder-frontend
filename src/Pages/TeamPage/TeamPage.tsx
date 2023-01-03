@@ -1,21 +1,11 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import {
-  Link,
-  useNavigate,
-  useParams,
-  Outlet,
-  Navigate,
-} from "react-router-dom";
-import a_documents from "../../Data/documentsA";
-import b_documents from "../../Data/documentsA";
-import List from "../MyDocumentsPage/DocumentList";
+import { useEffect, useState } from "react";
+import { Link, useParams, Navigate } from "react-router-dom";
 import { updateTeam } from "../../Actions/auth";
 import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 import { connect } from "react-redux";
-import documents from "../../Data/documentsA";
 import {
   MDBInput,
   MDBBtn,
@@ -32,15 +22,8 @@ import {
   MDBBtnGroup,
   MDBModalHeader,
 } from "mdb-react-ui-kit";
-import { get } from "https";
 
-const TeamPage = ({
-  user,
-  isAuthenticated,
-  errors,
-  teamUpdated,
-  updateTeam,
-}) => {
+const TeamPage = ({ user, updateTeam }) => {
   const { teamName } = useParams();
   const [team, setTeam] = useState([]);
   const [formData, setFormData] = useState({
@@ -50,7 +33,6 @@ const TeamPage = ({
   });
 
   const [hrAdmins, setHrAdmins] = useState([]);
-  const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
   const [editTeamModal, setEditTeamModal] = useState(false);
@@ -210,9 +192,6 @@ const TeamPage = ({
   useEffect(() => {
     getHRUsers();
     getTeam();
-    // if (checkIfAdmin()) {
-    //   getHRUsers();
-    // }
   }, []);
 
   const returnUserPage = () => (
@@ -270,16 +249,15 @@ const TeamPage = ({
                   {checkIfAdmin() ? (
                     <div>
                       {" "}
-                      <div>
-                        <MDBBtn
-                          size="sm"
-                          className="btn btn-info btn-sm "
-                          rounded
-                          // color="link"
+                      <div className="center">
+                        <button
+                          // size="sm"
+                          className="btn button-blue-2 "
+                          // rounded
                           onClick={editTeamToggleShow}
                         >
                           <span className="fa fa-pencil fa-little"></span>
-                        </MDBBtn>
+                        </button>
                       </div>
                       <MDBModal
                         show={editTeamModal}
@@ -415,20 +393,16 @@ const TeamPage = ({
                             </div>
                           </div>
                           {checkIfAdmin() ? (
-                            <MDBBtn
-                              size="sm"
-                              rounded
-                              className="btn btn-info btn-sm"
-                            >
+                            <button className="btn btn-info btn-sm button-blue-2">
                               <Link
                                 className="nav-link active"
                                 to={{
                                   pathname: `/user/${user.username}/daneOsobowe`,
                                 }}
                               >
-                                <i className="fas fa-eye"></i>
+                                <i className="fas  fas-white fa-eye"></i>
                               </Link>
-                            </MDBBtn>
+                            </button>
                           ) : null}
                         </MDBListGroupItem>
                       ))

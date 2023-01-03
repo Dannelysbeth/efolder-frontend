@@ -1,25 +1,11 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import { uploadFile, extendedSignup } from "../../Actions/auth";
+import { useEffect, useState } from "react";
 import { loadUser, changeOwnPassword } from "../../Actions/auth";
 
 import { connect } from "react-redux";
-import documents from "../../Data/documentsA";
-import { saveAs } from "file-saver";
-import {
-  MDBInput,
-  MDBBtn,
-  MDBCheckbox,
-  MDBRow,
-  MDBCol,
-} from "mdb-react-ui-kit";
+import { MDBInput, MDBRow } from "mdb-react-ui-kit";
 
 const ChangeOwnPassword = ({ user, changeOwnPassword }) => {
-  const [employee, setEmployee] = useState([]);
-  //   const [info, setInfo] = useState([]);
-  //   const [loading, setLoading] = useState(true);
-  //   const [error, setError] = useState(true);
   const [infoMessage, setInfoMessage] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [formData, setFormData] = useState({
@@ -48,7 +34,24 @@ const ChangeOwnPassword = ({ user, changeOwnPassword }) => {
 
   const passwordChangeTab = () => (
     <div className="d-flex flex-column min-vh-100">
-      <div className="form-signin top-space">
+      {" "}
+      {infoMessage != null && infoMessage != "" ? (
+        <div
+          className="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>{infoMessage}</strong>
+        </div>
+      ) : null}
+      {errMsg != null && errMsg != "" ? (
+        <div
+          className="alert alert-danger alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>{errMsg}</strong>
+        </div>
+      ) : null}
+      <div className="form-password-change top-space">
         <MDBRow className="g-3">
           <h1 className="h3 mb-3 fw-normal text-center">Zmien haslo</h1>
 
@@ -57,7 +60,6 @@ const ChangeOwnPassword = ({ user, changeOwnPassword }) => {
             className="form-control"
             id="floatingPassword"
             name="password"
-            // value={formData.password}
             onChange={(e) => onChange(e)}
             placeholder="Hasło"
           />
@@ -67,33 +69,16 @@ const ChangeOwnPassword = ({ user, changeOwnPassword }) => {
             className="form-control"
             id="floatingRepeatPassword"
             name="repeatPassword"
-            // value={formData.repeatPassword}
             onChange={(e) => onChange(e)}
             placeholder="Powtórz hasło"
           />
-          <MDBBtn
-            className="w-100 btn btn-lg button-blue"
+          <button
+            className="w-100 btn btn-lg button-blue-2"
             type="submit"
             onClick={(e) => submitNewPasswd()}
           >
             Zmień hasło
-          </MDBBtn>
-          {infoMessage != null && infoMessage != "" ? (
-            <div
-              className="alert alert-success alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>{infoMessage}</strong>
-            </div>
-          ) : null}
-          {errMsg != null && errMsg != "" ? (
-            <div
-              className="alert alert-danger alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>{errMsg}</strong>
-            </div>
-          ) : null}
+          </button>
         </MDBRow>
       </div>
     </div>
@@ -112,7 +97,7 @@ const ChangeOwnPassword = ({ user, changeOwnPassword }) => {
   return (
     <div>
       {checkIfLogged() ? (
-        <div className="backgd d-flex flex-column min-vh-100">
+        <div className="backgd-2 d-flex flex-column min-vh-100">
           {passwordChangeTab()}
         </div>
       ) : (

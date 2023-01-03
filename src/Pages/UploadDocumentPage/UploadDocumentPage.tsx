@@ -1,9 +1,8 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { extendedSignup, uploadFile } from "../../Actions/auth";
-import { checkAuthenticated } from "../../Actions/auth";
 import {
   MDBInput,
   MDBBtn,
@@ -14,14 +13,7 @@ import {
 
 const UploadDocumentPage = ({ errors, uploadFile, successMessage }) => {
   const { username } = useParams();
-  const [infoMessage, setInfoMessage] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [hrAdmins, setHrAdmins] = useState([]);
-  const [teams, setTeams] = useState([]);
-  const [files, setFiles] = useState([]);
-
   const [formData, setFormData] = useState({
     file: null,
   });
@@ -39,9 +31,6 @@ const UploadDocumentPage = ({ errors, uploadFile, successMessage }) => {
   const onCatChange = (e) =>
     setCategory({ ...category, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-  };
   function submitDocument(e) {
     setErrMsg("");
 
@@ -80,9 +69,12 @@ const UploadDocumentPage = ({ errors, uploadFile, successMessage }) => {
           <strong>{errMsg}</strong>{" "}
         </div>
       ) : null}
-      <div className="form-signin  top-space">
-        <MDBRow className="g-3">
-          <h1 className="h3 mb-3 fw-normal text-center">Dodaj dokument</h1>
+      <div className="form-document-upload">
+        <MDBRow className="">
+          <h1 className="h3  text-center-dark">Dodaj dokument</h1>
+          <p>
+            <p></p>
+          </p>
           <div className="form-group">
             <select
               className="form-select"
@@ -98,7 +90,9 @@ const UploadDocumentPage = ({ errors, uploadFile, successMessage }) => {
               <option value="D">D</option>
             </select>
           </div>
-
+          <p>
+            <p></p>
+          </p>
           <div className="file-card ">
             <div className=" files input">
               <input
@@ -110,6 +104,10 @@ const UploadDocumentPage = ({ errors, uploadFile, successMessage }) => {
               />
             </div>
           </div>
+          <p>
+            <p></p>
+          </p>
+
           <button
             className="w-100 btn btn-lg button-blue-2"
             type="submit"

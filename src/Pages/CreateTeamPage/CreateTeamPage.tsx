@@ -1,18 +1,9 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { createTeam } from "../../Actions/auth";
-import { checkAuthenticated } from "../../Actions/auth";
-import {
-  MDBInput,
-  MDBBtn,
-  MDBCheckbox,
-  MDBRow,
-  MDBCol,
-} from "mdb-react-ui-kit";
-import { Alert } from "reactstrap";
-import LoginPage from "../LoginPage/LoginPage";
+import { MDBInput, MDBBtn, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 
 const RegisterPage = ({
@@ -108,16 +99,14 @@ const RegisterPage = ({
                   <strong>{errMsg}</strong>{" "}
                 </div>
               ) : null}
-              <div className="form-register top-space">
+              <div className="form-create-team top-space">
                 <MDBRow
                   className="g-3"
                   tag="form"
                   onSubmit={(e) => onSubmit(e)}
                 >
                   <div className="row"></div>
-                  <h1 className="h3  fw-normal text-left">
-                    Infomacje o zatrudnieniu
-                  </h1>
+                  <h1 className="h3  fw-normal text-left">Utwórz zespół</h1>
                   <div className="row"></div>
                   <MDBCol md="7">
                     <MDBInput
@@ -182,12 +171,12 @@ const RegisterPage = ({
                     )}
                   </MDBCol>
                   <div className="row"></div>
-                  <MDBBtn
-                    className="w-100 btn btn-lg button-blue"
+                  <button
+                    className="w-100 btn btn-lg button-blue-2"
                     type="submit"
                   >
                     Utwórz zespół
-                  </MDBBtn>
+                  </button>
                 </MDBRow>
               </div>
             </div>

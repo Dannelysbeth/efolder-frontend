@@ -1,13 +1,11 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, useNavigate, useParams, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 // import "./UserPage.css";
 import a_documents from "../../Data/documentsA";
-import b_documents from "../../Data/documentsA";
 import List from "../MyDocumentsPage/DocumentList";
 
 import { connect } from "react-redux";
-import documents from "../../Data/documentsA";
 
 const AnotherUserPage = ({ user }) => {
   const { username } = useParams();
