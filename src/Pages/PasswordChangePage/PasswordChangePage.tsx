@@ -40,54 +40,54 @@ const PasswordChangePage = ({ user, errors, changePassword, message }) => {
   }, []);
 
   return (
-    <div className="d-flex flex-column min-vh-100">
-      <div className="form-signin top-space">
-        <MDBRow className="g-3">
-          <h1 className="h3 mb-3 fw-normal text-center">Zmien haslo</h1>
-
-          <MDBInput
-            type="password"
-            className="form-control"
-            id="floatingPassword"
-            name="password"
-            value={formData.password}
-            onChange={(e) => onChange(e)}
-            placeholder="Hasło"
-          />
-
-          <MDBInput
-            type="password"
-            className="form-control"
-            id="floatingRepeatPassword"
-            name="repeatPassword"
-            value={formData.repeatPassword}
-            onChange={(e) => onChange(e)}
-            placeholder="Powtórz hasło"
-          />
-          <MDBBtn
-            className="w-100 btn btn-lg button-blue"
-            type="submit"
-            onClick={(e) => submitNewPasswd()}
+    <div className="d-flex flex-column min-vh-100 parent">
+      <div className="d-flex flex-column  ">
+        {infoMessage != null && infoMessage != "" ? (
+          <div
+            className="alert alert-success alert-dismissible fade show"
+            role="alert"
           >
-            Zmień hasło
-          </MDBBtn>
-          {infoMessage != null && infoMessage != "" ? (
-            <div
-              className="alert alert-success alert-dismissible fade show"
-              role="alert"
+            <strong>{infoMessage}</strong>
+          </div>
+        ) : null}
+        {errMsg != null && errMsg != "" ? (
+          <div
+            className="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>{errMsg}</strong>
+          </div>
+        ) : null}
+        <div className="form-password-change ">
+          <MDBRow className="g-3">
+            <h4 className="center">Zmien haslo</h4>
+
+            <MDBInput
+              type="password"
+              className="form-control"
+              id="floatingPassword"
+              name="password"
+              onChange={(e) => onChange(e)}
+              placeholder="Hasło"
+            />
+
+            <MDBInput
+              type="password"
+              className="form-control"
+              id="floatingRepeatPassword"
+              name="repeatPassword"
+              onChange={(e) => onChange(e)}
+              placeholder="Powtórz hasło"
+            />
+            <button
+              className="w-100 btn btn-lg button-blue-2 top-space"
+              type="submit"
+              onClick={(e) => submitNewPasswd()}
             >
-              <strong>{infoMessage}</strong>
-            </div>
-          ) : null}
-          {errMsg != null && errMsg != "" ? (
-            <div
-              className="alert alert-danger alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>{errMsg}</strong>
-            </div>
-          ) : null}
-        </MDBRow>
+              Zmień hasło
+            </button>
+          </MDBRow>
+        </div>
       </div>
     </div>
   );

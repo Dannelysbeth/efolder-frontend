@@ -33,8 +33,7 @@ const ChangeOwnPassword = ({ user, changeOwnPassword }) => {
   }
 
   const passwordChangeTab = () => (
-    <div className="d-flex flex-column min-vh-100">
-      {" "}
+    <div className="d-flex flex-column  ">
       {infoMessage != null && infoMessage != "" ? (
         <div
           className="alert alert-success alert-dismissible fade show"
@@ -51,9 +50,9 @@ const ChangeOwnPassword = ({ user, changeOwnPassword }) => {
           <strong>{errMsg}</strong>
         </div>
       ) : null}
-      <div className="form-password-change top-space">
+      <div className="form-password-change ">
         <MDBRow className="g-3">
-          <h1 className="h3 mb-3 fw-normal text-center">Zmien haslo</h1>
+          <h4 className="center">Zmien haslo</h4>
 
           <MDBInput
             type="password"
@@ -73,7 +72,7 @@ const ChangeOwnPassword = ({ user, changeOwnPassword }) => {
             placeholder="Powtórz hasło"
           />
           <button
-            className="w-100 btn btn-lg button-blue-2"
+            className="w-100 btn btn-lg button-blue-2 top-space"
             type="submit"
             onClick={(e) => submitNewPasswd()}
           >
@@ -97,7 +96,7 @@ const ChangeOwnPassword = ({ user, changeOwnPassword }) => {
   return (
     <div>
       {checkIfLogged() ? (
-        <div className="backgd-2 d-flex flex-column min-vh-100">
+        <div className="backgd-2 d-flex flex-column min-vh-100 parent">
           {passwordChangeTab()}
         </div>
       ) : (

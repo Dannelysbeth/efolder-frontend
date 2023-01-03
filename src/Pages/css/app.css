@@ -57,19 +57,16 @@
   background-color: #ffffff;
   color: #1d2223;
   border-radius: 10px;
-  /* border-top-right-radius: 20px; */
 }
 .form-password-change {
-  width: 50%;
+  width: 100%;
   height: 100%;
-  /* max-width: 500px; */
   padding: 40px;
-  height: 300px;
+  height: 350px;
   margin: auto;
   background-color: #ffffff;
   color: #1d2223;
   border-radius: 10px;
-  /* border-top-right-radius: 20px; */
 }
 
 .form-floating {
@@ -548,4 +545,9 @@ body {
   background-color: #1d2223;
   color: white;
   font-weight: bold;
+}
+.parent {
+  /* display: flex; */
+  align-items: center; /* wyśrodkowanie elementu w płaszczyźnie pionowej */
+  justify-content: center; /* wyśrodkowanie elementu w płaszczyźnie poziomej */
 }
