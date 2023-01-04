@@ -76,13 +76,13 @@ const RegisterPage = ({
   }, []);
 
   return (
-    <div>
+    <div className="backgd-3 d-flex flex-column min-vh-100 parent">
       {teamCreated ? (
         <div>{checkIfTeamCreated()}</div>
       ) : (
         <div>
           {checkIfAdmin() ? (
-            <div className="d-flex flex-column min-vh-100">
+            <div className="">
               {errors !== null ? (
                 <div
                   className="alert alert-danger alert-dismissible fade show"
@@ -99,14 +99,14 @@ const RegisterPage = ({
                   <strong>{errMsg}</strong>{" "}
                 </div>
               ) : null}
-              <div className="form-create-team top-space">
+              <div className="form-create-team">
                 <MDBRow
                   className="g-3"
                   tag="form"
                   onSubmit={(e) => onSubmit(e)}
                 >
                   <div className="row"></div>
-                  <h1 className="h3  fw-normal text-left">Utwórz zespół</h1>
+                  <h4 className="center">Utwórz zespół</h4>
                   <div className="row"></div>
                   <MDBCol md="7">
                     <MDBInput

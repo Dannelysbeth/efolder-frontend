@@ -246,7 +246,7 @@ body {
 }
 .form-create-team {
   width: 50%;
-  height: 300px;
+  height: 350px;
   padding: 20px;
   margin: auto;
   background-color: #f1f1f1;
@@ -433,6 +433,11 @@ body {
 }
 .backgd-2 {
   background-image: url("https://i.imgur.com/SD8uPo6.jpg");
+  background-size: cover;
+  /* background-color: #002e3f; */
+}
+.backgd-3 {
+  background-image: url("https://i.imgur.com/2bHhodZ.jpg");
   background-size: cover;
   /* background-color: #002e3f; */
 }
