@@ -3,11 +3,27 @@ import { useEffect, useState } from "react";
 import { loadUser, changePassword } from "../../Actions/auth";
 
 import { connect } from "react-redux";
-import { MDBInput, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import {
+  MDBInput,
+  MDBRow,
+  MDBCol,
+  MDBBtn,
+  MDBModal,
+  MDBModalBody,
+  MDBModalContent,
+  MDBModalDialog,
+  MDBModalFooter,
+  MDBModalHeader,
+} from "mdb-react-ui-kit";
+import Avatar from "react-avatar-edit";
+import { uploadOwnProfilePic } from "../../Actions/auth";
 
-const ProfilePage = ({ user }) => {
+const ProfilePage = ({ user, uploadOwnProfilePic }) => {
   const [employee, setEmployee] = useState([]);
   const [isAddrEditable, setIsAddrEditable] = useState(false);
+  const [profilePictureModal, setProfilePictureModal] = useState(false);
+  const profilePictureToggleShow = () =>
+    setProfilePictureModal(!profilePictureModal);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
@@ -73,6 +89,56 @@ const ProfilePage = ({ user }) => {
         setError(true);
       });
   };
+  const [src, setSrc] = useState(null);
+  const [file, setFile] = useState(null);
+
+  const onClose = () => {
+    setFile(null);
+  };
+  const onCrop = (view) => {
+    setFile(view);
+  };
+
+  function blobToFile(theBlob, fileName) {
+    var arr = theBlob.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], fileName, { type: mime });
+  }
+
+  const submitPic = () => {
+    var fil = blobToFile(file, "hello.png");
+    console.log(fil);
+    uploadOwnProfilePic(fil);
+    window.location.reload();
+  };
+  const onBeforeFileLoad = (view) => {
+    if (view.target.files[0].size > 10000000) {
+      alert("Plik jest za duży!");
+      view.target.value = "";
+    }
+  };
+
+  useEffect(() => {
+    console.log(file);
+  }, [file]);
+
+  const containerStyles = {
+    // objectFit="scale-down",
+    backgroundSize: "cover",
+    backgroundColor: "#ffff", // zielony kolor tła
+    width: "500px",
+    height: "500px",
+    margin: "auto", // wyśrodkowanie w obu płaszczyznach
+    borderRadius: "10px", // zaokrąglenie krawędzi o promieniu 10px
+  };
 
   const infoOfUser = () => (
     <div className="row">
@@ -88,7 +154,58 @@ const ProfilePage = ({ user }) => {
           width="200"
           alt="Avatar"
           loading="lazy"
+          onClick={profilePictureToggleShow}
         />
+        <MDBModal
+          show={profilePictureModal}
+          setShow={setProfilePictureModal}
+          tabIndex="-1"
+        >
+          <MDBModalDialog className="modal-dialog modal-dialog-centered">
+            <MDBModalContent>
+              {/* <MDBModalHeader>
+                <MDBBtn
+                  className="btn-close"
+                  color="none"
+                  onClick={profilePictureToggleShow}
+                ></MDBBtn>
+              </MDBModalHeader> */}
+              <MDBModalBody className="user-container-picture-picker ">
+                <div>
+                  <p>
+                    <p></p>
+                  </p>
+                  <div
+                    style={containerStyles}
+                    className="d-flex justify-content-center"
+                  >
+                    <Avatar
+                      // object-fit="scale-down"
+                      background-size="cover"
+                      width={500}
+                      height={500}
+                      onCrop={onCrop}
+                      onClose={onClose}
+                      label="Wybierz zdjęcie"
+                      onBeforeFileLoad={onBeforeFileLoad}
+                      src={src}
+                    />
+                  </div>
+                  <div className="d-flex justify-content-center">
+                    {file != null ? (
+                      <div>
+                        <p>
+                          <p></p>
+                        </p>
+                        <MDBBtn onClick={(e) => submitPic()}>Wybierz</MDBBtn>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </MDBModalBody>
+            </MDBModalContent>
+          </MDBModalDialog>
+        </MDBModal>
       </div>
 
       <div className="column col-lg-9">
@@ -164,7 +281,7 @@ const ProfilePage = ({ user }) => {
       <div className="d-flex justify-content-end">
         {!isAddrEditable ? (
           <button
-            className="btn btn-info btn-sm "
+            className="btn btn-info btn-sm button-blue-2"
             id="emp-info-edit-btn"
             onClick={() => setIsAddrEditable(true)}
           >
@@ -505,4 +622,7 @@ const ProfilePage = ({ user }) => {
 const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
-export default connect(mapStateToProps, { changePassword })(ProfilePage);
+export default connect(mapStateToProps, {
+  changePassword,
+  uploadOwnProfilePic,
+})(ProfilePage);

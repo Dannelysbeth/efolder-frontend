@@ -556,3 +556,10 @@ body {
   align-items: center; /* wyśrodkowanie elementu w płaszczyźnie pionowej */
   justify-content: center; /* wyśrodkowanie elementu w płaszczyźnie poziomej */
 }
+
+.modal-dialog {
+  min-width: 600px; /* maksymalna szerokość modala wynosi 600px */
+}
+.avatar {
+  object-fit: scale-down; /* zdjęcie jest dopasowywane do elementu i przykrywa całą jego powierzchnię */
+}
