@@ -179,7 +179,26 @@ hr {
 }
 
 .rounded-circle:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
+  /* content: "Zmień"; */
+}
+
+.profile-picture-2:hover {
+  transform: scale(1.1);
+  filter: brightness(30%);
+}
+.profile-picture-2:hover:after {
+  content: "Edytuj";
+  position: absolute; /* pozycja pseudo-elementu */
+  top: 50%; /* pozycja od góry */
+  left: 50%; /* pozycja od lewej */
+  transform: translate(-50%, -50%); /* wyśrodkowanie tekstu */
+  color: white; /* kolor tekstu */
+  font-size: 24px; /* rozmiar tekstu */
+  font-weight: bold; /* pogrubienie tekstu */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* cień tekstu */
+  visibility: visible; /* widoczność tekstu */
+  opacity: 1; /*przezroczystość tekstu*/
 }
 
 .img-featurette:hover {
@@ -241,11 +260,12 @@ body {
   height: 700px;
   padding: 20px;
   margin: auto;
-  background-color: #425158;
+  background-color: #f1f1f1;
+  color: #1d2223;
   border-radius: 10px;
 }
 .form-create-team {
-  width: 50%;
+  width: 80%;
   height: 350px;
   padding: 20px;
   margin: auto;
@@ -413,6 +433,11 @@ team-inner-container {
   justify-content: center; /* wyśrodkowanie elementu w płaszczyźnie poziomej */
   padding: 20px;
 }
+.center-text-2 {
+  display: flex;
+  align-items: center; /* wyśrodkowanie elementu w płaszczyźnie pionowej */
+  justify-content: center; /* wyśrodkowanie elementu w płaszczyźnie poziomej */
+}
 
 .fas-dark {
   color: #1d2223;
@@ -442,11 +467,21 @@ body {
   /* background-color: #002e3f; */
 }
 .user-container {
-  width: 100%;
-  max-width: 1500px;
+  width: 80%;
+  max-width: 100vmax;
   padding: 20px;
   margin: auto;
-  background-color: white;
+  background-color: #ffffff;
+  border-radius: 20px;
+  border-color: #1d2223;
+  box-shadow: 20px 20px 50px #1d2223;
+}
+.user-container-2 {
+  width: 80%;
+  max-width: 100vmax;
+  padding: 20px;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.4);
   border-radius: 20px;
   border-color: #1d2223;
   box-shadow: 20px 20px 50px #1d2223;

@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useParams, Outlet, Navigate } from "react-router-dom";
-import "./UserPage.css";
+// import "./UserPage.css";
 import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
@@ -84,14 +84,14 @@ const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
                     {employee["user"] && employee["user"]["middleName"]
                       ? employee["user"] && employee["user"]["middleName"] + " "
                       : null}
-                    {employee["user"] && employee["user"]["lastName"]}
+                    {employee["user"] && employee["user"]["lastName"]} (
+                    {employee["user"] && employee["user"]["username"]})
                   </h3>
-                  <div className="h5 font-weight-300 ">
+                  <div className="h6 font-weight-500 ">
                     <i className="ni location_pin mr-2"></i>
-                    {employee["address"] && employee["address"]["city"]},{" "}
-                    {employee["address"] && employee["address"]["country"]}
+                    {employee["address"] && employee["user"]["email"]}
                   </div>
-                  <div className="h5 mt-4">
+                  <div className="h5 ">
                     <i className="ni business_briefcase-24 mr-2"></i>
                     {employee["employment"] &&
                       employee["employment"]["positionName"]}
@@ -100,6 +100,11 @@ const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
                     <i className="ni education_hat mr-2"></i>
                     {employee["employment"] &&
                       employee["employment"]["teamName"]}
+                  </div>{" "}
+                  <div className="h5 font-weight-500 ">
+                    <i className="ni location_pin mr-2"></i>
+                    {employee["address"] && employee["address"]["city"]},{" "}
+                    {employee["address"] && employee["address"]["country"]}
                   </div>
                 </div>
               </div>

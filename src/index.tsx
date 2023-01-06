@@ -8,16 +8,11 @@ import Layout from "./hocs/Layout/Layout";
 import store from "./store";
 import HomePage from "./Pages/MainPage/MainPage";
 import PageNotFound from "./Pages/NotFoundPage/NotFoundPage";
-import MainPage from "./Pages/MainPage/MainPage";
 import AboutUsPage from "./Pages/AboutUsPage/AboutUsPage";
-import UserPage from "./Pages/UserPage/UserPageDemo";
 import UserInfoPage from "./Pages/UserPage/UserPage";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
-import ScrollToTop from "./Actions/ScrollToTop";
-import MyDocumentsPage from "./Pages/UserPage/UserPage"; //AnotherUserPage
 import AnotherUserPage from "./Pages/UserPage/AnotherUserPage";
-import UserDocumentsPage from "./Pages/UserPage/MyDocumentsPage";
 import UploadDocumentPage from "./Pages/UploadDocumentPage/UploadDocumentPage";
 import ViewDocumentsPage from "./Pages/ViewDocumentsPage/ViewDocumentsPage";
 import EmployeeListPage from "./Pages/EmployeeListPage/EmployeeListPage";
@@ -104,9 +99,4 @@ const routing = (
 
 ReactDOM.render(routing, document.getElementById("root"));
 
-{
-  /* // If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals */
-}
 reportWebVitals();

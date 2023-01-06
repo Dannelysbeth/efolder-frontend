@@ -1571,8 +1571,20 @@ a.text-white:focus {
   border-radius: 0.375rem;
 }
 
-.card-profile-image img:hover {
+/* .card-profile-image img:hover {
   transform: translate(-50%, -33%);
+  content: "Tekst na obrazku";
+} */
+.card-profile-image img:hover {
+  content: "Tekst na obrazku"; /* tekst, który ma zostać wyświetlony */
+  position: absolute; /* pozycja pseudo-elementu */
+  top: 50%; /* pozycja od góry */
+  left: 50%; /* pozycja od lewej */
+  transform: translate(-50%, -50%); /* wyśrodkowanie tekstu */
+  color: white; /* kolor tekstu */
+  font-size: 24px; /* rozmiar tekstu */
+  font-weight: bold; /* pogrubienie tekstu */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* cień tekstu */
 }
 
 .card-profile-stats {

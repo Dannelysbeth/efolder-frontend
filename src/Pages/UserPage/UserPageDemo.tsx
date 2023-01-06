@@ -1,7 +1,7 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import "./UserPage.css";
+// import "./UserPage.css";
 import a_documents from "../../Data/documentsA";
 import b_documents from "../../Data/documentsA";
 import List from "../MyDocumentsPage/DocumentList";

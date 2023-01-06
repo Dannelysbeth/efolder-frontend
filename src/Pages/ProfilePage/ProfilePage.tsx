@@ -140,22 +140,23 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
     borderRadius: "10px", // zaokrąglenie krawędzi o promieniu 10px
   };
 
-  const infoOfUser = () => (
-    <div className="row">
-      <div className="column col-lg-3">
-        <img
-          src={
-            employee["user"] && employee["user"]["imageUrl"]
-              ? employee["user"]["imageUrl"]
-              : "https://i.imgur.com/teiJw8H.png"
-          }
-          className="profile-pic rounded-circle no-padding "
-          height="200"
-          width="200"
-          alt="Avatar"
-          loading="lazy"
-          onClick={profilePictureToggleShow}
-        />
+  const userBasicInfoPanel = () => (
+    <div className="">
+      <div className="center">
+        <div className="profile-picture-2 " onClick={profilePictureToggleShow}>
+          <img
+            src={
+              employee["user"] && employee["user"]["imageUrl"]
+                ? employee["user"]["imageUrl"]
+                : "https://i.imgur.com/teiJw8H.png"
+            }
+            // className="profile-picture-2 "
+            height="200"
+            width="200"
+            alt=""
+            loading="lazy"
+          />
+        </div>
         <MDBModal
           show={profilePictureModal}
           setShow={setProfilePictureModal}
@@ -163,13 +164,6 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
         >
           <MDBModalDialog className="modal-dialog modal-dialog-centered">
             <MDBModalContent>
-              {/* <MDBModalHeader>
-                <MDBBtn
-                  className="btn-close"
-                  color="none"
-                  onClick={profilePictureToggleShow}
-                ></MDBBtn>
-              </MDBModalHeader> */}
               <MDBModalBody className="user-container-picture-picker ">
                 <div>
                   <p>
@@ -197,7 +191,12 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
                         <p>
                           <p></p>
                         </p>
-                        <MDBBtn onClick={(e) => submitPic()}>Wybierz</MDBBtn>
+                        <button
+                          className="btn btn-lg button-blue-2"
+                          onClick={(e) => submitPic()}
+                        >
+                          Wybierz
+                        </button>
                       </div>
                     ) : null}
                   </div>
@@ -207,75 +206,36 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
           </MDBModalDialog>
         </MDBModal>
       </div>
-
-      <div className="column col-lg-9">
-        <MDBRow className="g-3">
-          <p>
-            <p></p>
-          </p>
-          <MDBCol md="4" tag="form">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id=""
-              name="firstName"
-              value={employee["user"] && employee["user"]["firstName"]}
-              placeholder="Imię"
-              readonly
-            />
-          </MDBCol>
-          {employee["user"] && employee["user"]["middleName"] ? (
-            <MDBCol md="4">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="floatingInput"
-                name="middleName"
-                value={employee["user"] && employee["user"]["middleName"]}
-                placeholder="Drugie imię"
-                readonly
-              />
-            </MDBCol>
-          ) : null}{" "}
-          <MDBCol md="5">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="floatingInput"
-              name="lastName"
-              value={employee["user"] && employee["user"]["lastName"]}
-              placeholder="Nazwisko"
-              readonly
-              required
-            />
-          </MDBCol>{" "}
-          <div className="row"></div>
-          <MDBCol md="3">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="floatingInput"
-              name="username"
-              value={employee["user"] && employee["user"]["username"]}
-              readonly
-              placeholder="Nazwa użytkownika"
-            />
-          </MDBCol>
-          <MDBCol md="5">
-            <MDBInput
-              type="email"
-              className="form-control"
-              id="floatingInput"
-              name="email"
-              value={employee["user"] && employee["user"]["email"]}
-              readonly
-              placeholder="nazwa@przyklad.com"
-            />
-          </MDBCol>
-        </MDBRow>
+      <div className="row user-container-2 justify-content-center center">
+        <h3 className="justify-content-center center-text-2">
+          {employee["user"] && employee["user"]["firstName"]}{" "}
+          {employee["user"] && employee["user"]["middleName"]
+            ? employee["user"] && employee["user"]["middleName"] + " "
+            : null}
+          {employee["user"] && employee["user"]["lastName"]} (
+          {employee["user"] && employee["user"]["username"]})
+        </h3>
+        <div className="h6 font-weight-500 center-text-2">
+          <i className="ni location_pin mr-2"></i>
+          {employee["address"] && employee["user"]["email"]}
+        </div>
+        <div className="h5 center">
+          <i className="ni location_pin mr-2"></i>
+          {employee["address"] && employee["address"]["city"]},{" "}
+          {employee["address"] && employee["address"]["country"]}
+        </div>{" "}
+        <div className="h4 font-weight-500 center-text-2">
+          <i className="ni business_briefcase-24 mr-2"></i>
+          {employee["employment"] && employee["employment"]["positionName"]}
+        </div>
+        <div className="center-text-2">
+          <i className="ni education_hat mr-2 "></i>
+          {employee["employment"] && employee["employment"]["teamName"]}
+        </div>
       </div>
     </div>
   );
+
   const adressInfo = () => (
     <div className="user-container top-space bottom-space">
       <div className="d-flex justify-content-end">
@@ -379,7 +339,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
                 {" "}
                 <button
                   type="submit"
-                  className="btn btn-primary btn-sm "
+                  className="btn btn-primary btn-sm button-blue-2"
                   id="emp-primary-edit-btn"
                 >
                   Zapisz
@@ -388,7 +348,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
               <div className="d-flex justify-content-end">
                 {" "}
                 <button
-                  className="btn btn-danger btn-sm "
+                  className="btn btn-secondary btn-sm "
                   id="emp-danger-edit-btn"
                   onClick={() => onAddrCancel()}
                 >
@@ -603,12 +563,12 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
     <div>
       {checkIfLogged() ? (
         <div className="backgd d-flex flex-column min-vh-100">
-          <div className="user-container top-space bottom-space">
+          {/* <div className="user-container top-space bottom-space">
             <h1 className="caption">Dane osobowe</h1>
             <hr></hr>
             <h4 className="userPage-text mt-3"> </h4>
-            {infoOfUser()}
-          </div>
+          </div> */}
+          {userBasicInfoPanel()}
           {checkIfRegularEmployee() ? adressInfo() : null}
           {checkIfRegularEmployee() ? employmentInfo() : null}
         </div>

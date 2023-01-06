@@ -1,7 +1,7 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import "./UserPage.css";
+// import "./UserPage.css";
 import { connect } from "react-redux";
 import documents from "../../Data/documentsA";
 import { saveAs } from "file-saver";
