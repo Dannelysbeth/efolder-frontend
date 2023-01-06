@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from "react";
 import "./NavBar.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../Actions/auth";
+import { MDBIcon } from "mdb-react-ui-kit";
 
 const NavBar = ({ logout, isAuthenticated, user }) => {
-  const [info, setInfo] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const navigate = useNavigate();
   const logout_user = () => {
@@ -58,116 +58,122 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
   );
 
   const authLink = () => (
-    <li className="navbar-dropdown-icon shadow dropdown text-center">
-      <button
-        className="btn fa-solid fa-lg text-light no-padding "
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        {user !== null ? userPic() : " "}
-      </button>
-      <ul className="dropdown-menu navbar-dropdown dropdown-menu-end">
-        {user !== null ? userBar() : " "}
-        <li>
-          <Link to="/profil" className="nav-link link-light dropdown-item ">
-            Profil
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/uploadProfilePic"
-            className="nav-link link-light dropdown-item "
-          >
-            Zdjęcie profilowe
-          </Link>
-        </li>
-        <li>
-          {checkIfRegularEmployee() ? (
-            <Link
-              to="/kartoteka"
-              className="nav-link link-light dropdown-item "
-            >
-              Moja kartoteka
-            </Link>
-          ) : null}
-        </li>
-        <li>
-          <Link to="/zmienHaslo" className="nav-link link-light dropdown-item ">
-            Zmień hasło
-          </Link>
-        </li>
-        {
-          <li>
-            {checkIfAdmin() == true ? (
+    <div className="row">
+      <div className="col-8 center">{user !== null ? userPic() : " "}</div>
+
+      <div className="col-4 no-padding">
+        <li className="navbar-dropdown-icon  dropdown text-center no-padding">
+          <MDBIcon
+            fas
+            icon="caret-down"
+            className="btn fa-solid fa-lg text-light no-padding "
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          />
+          <ul className="dropdown-menu navbar-dropdown dropdown-menu-end">
+            <li>
+              <h5 className="center text-center border-bottom">
+                {user !== null ? userBar() : " "}
+              </h5>
+            </li>
+            <li>
+              <Link to="/profil" className="nav-link link-light dropdown-item ">
+                <MDBIcon far icon="user-circle" /> Profil
+              </Link>
+            </li>
+            <li>
+              {checkIfRegularEmployee() ? (
+                <Link
+                  to="/kartoteka"
+                  className="nav-link link-light dropdown-item "
+                >
+                  <MDBIcon fas icon="id-card" /> Moja kartoteka
+                </Link>
+              ) : null}
+            </li>
+            <li>
               <Link
-                to="/createUser"
+                to="/zmienHaslo"
                 className="nav-link link-light dropdown-item "
               >
-                Utwórz konto
+                <MDBIcon fas icon="key" /> Zmień hasło
               </Link>
-            ) : null}
-          </li>
-        }
-        {
-          <li>
-            {checkIfAdmin() == true ? (
+            </li>
+            {
+              <li>
+                {checkIfAdmin() == true ? (
+                  <Link
+                    to="/createUser"
+                    className="nav-link link-light dropdown-item "
+                  >
+                    <MDBIcon fas icon="user-plus" /> Utwórz konto
+                  </Link>
+                ) : null}
+              </li>
+            }
+            {
+              <li>
+                {checkIfAdmin() == true ? (
+                  <Link
+                    to="/pracownicy"
+                    className="nav-link link-light dropdown-item "
+                  >
+                    <MDBIcon fas icon="user-tag" /> Pracownicy
+                  </Link>
+                ) : null}
+              </li>
+            }{" "}
+            {
+              <li>
+                {checkIfAdmin() == true ? (
+                  <Link
+                    to="/viewTeams"
+                    className="nav-link link-light dropdown-item "
+                  >
+                    <MDBIcon fas icon="users" /> Zespoły
+                  </Link>
+                ) : null}
+              </li>
+            }{" "}
+            {
+              <li>
+                {checkIfTeamLeader() == true ? (
+                  <Link
+                    to="/viewMyTeams"
+                    className="nav-link link-light dropdown-item "
+                  >
+                    <MDBIcon fas icon="user-friends" /> Moje zespoły
+                  </Link>
+                ) : null}
+              </li>
+            }{" "}
+            {
+              <li>
+                {checkIfAdmin() == true ? (
+                  <Link
+                    to="/createTeam"
+                    className="nav-link link-light dropdown-item "
+                  >
+                    <MDBIcon fas icon="users-cog" /> Stwórz zespół
+                  </Link>
+                ) : null}
+              </li>
+            }{" "}
+            <li>
               <Link
-                to="/pracownicy"
-                className="nav-link link-light dropdown-item "
+                to=""
+                className="nav-link link-light dropdown-item"
+                onClick={logout_user}
               >
-                Pracownicy
+                <MDBIcon fas icon="sign-out-alt" /> {}
+                Wyloguj
               </Link>
-            ) : null}
-          </li>
-        }{" "}
-        {
-          <li>
-            {checkIfAdmin() == true ? (
-              <Link
-                to="/viewTeams"
-                className="nav-link link-light dropdown-item "
-              >
-                Zespoły
-              </Link>
-            ) : null}
-          </li>
-        }{" "}
-        {
-          <li>
-            {checkIfTeamLeader() == true ? (
-              <Link
-                to="/viewMyTeams"
-                className="nav-link link-light dropdown-item "
-              >
-                Moje zespoły
-              </Link>
-            ) : null}
-          </li>
-        }{" "}
-        {
-          <li>
-            {checkIfAdmin() == true ? (
-              <Link
-                to="/createTeam"
-                className="nav-link link-light dropdown-item "
-              >
-                Stwórz zespół
-              </Link>
-            ) : null}
-          </li>
-        }{" "}
-        <li>
-          <Link
-            to=""
-            className="nav-link link-light dropdown-item"
-            onClick={logout_user}
-          >
-            Wyloguj
-          </Link>
+            </li>
+          </ul>
         </li>
-      </ul>
-    </li>
+      </div>
+    </div>
   );
 
   const guestLink = () => (
@@ -179,8 +185,8 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
   );
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-custom" id="main">
-      <div className="container-fluid justify-content-between">
+    <nav className="navbar navbar-expand-lg navbar-custom no-padding" id="main">
+      <div className="container-fluid justify-content-between center-text-2">
         <Link to="/" className="navbar-brand">
           <img
             src="https://i.imgur.com/s3tSg4v.png"
@@ -208,19 +214,19 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
               <Link to="/o-nas" className="nav-link link-light active">
                 O nas
               </Link>
-            </li>
-            <li className="nav-item shadow">
+            </li> */}
+            <li className="nav-item shadow center-text-2 ">
               <Link to="/aktualnosci" className="nav-link link-light active">
                 Aktualności
               </Link>
             </li>
-            <li className="nav-item shadow">
-              <Link to="/kontakt" className="nav-link link-light active">
-                Kontakt
+            <li className="nav-item center-text-2">
+              <Link to="/" className="nav-link link-light active">
+                <MDBIcon fas icon="home" /> O nas
               </Link>
             </li>
-           
-            <li className="nav-item shadow">
+
+            {/* <li className="nav-item shadow">
               <Link to="/pomoc" className="nav-link link-light active">
                 Pomoc
               </Link>

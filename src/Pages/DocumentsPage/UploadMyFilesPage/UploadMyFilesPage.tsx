@@ -54,72 +54,81 @@ const UploadMyFilesPage = ({ errors, uploadOwnFile, successMessage }) => {
   }
 
   return (
-    <div className="d-flex flex-column min-vh-100">
-      <div className="form-signin top-space">
-        <MDBRow className="g-3">
-          <h1 className="h3 mb-3 fw-normal text-center">Dodaj dokument</h1>
-          <div className="form-group">
-            <select
-              className="form-select"
-              required
-              value={fileCategory}
-              name="fileCategory"
-              onChange={(e) => onCatChange(e)}
-            >
-              <option value="">Wybierz kategorię dokumentu</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
-            </select>
-          </div>
-
-          <div className="file-card">
-            <div className="file-inputs">
-              <input
-                type="file"
-                name="file"
-                required
-                accept="application/pdf"
-                onChange={(e) => onChange(e)}
-              />
-            </div>
-
-            <p className="main">Wspierane pliki:</p>
-            <p className="info">PDF</p>
-          </div>
-          <MDBBtn
-            className="w-100 btn btn-lg button-blue"
-            type="submit"
-            onClick={(e) => submitDocument(e)}
+    <div className="d-flex flex-column min-vh-100 parent-top">
+      <div className="d-flex flex-column  ">
+        {errors != null && errors.message != null && errMsg == "" ? (
+          <div
+            className="alert alert-danger alert-dismissible fade show "
+            role="alert"
           >
-            Prześlij document{" "}
-          </MDBBtn>
-          {errors != null && errors.message != null && errMsg == "" ? (
-            <div
-              className="alert alert-danger alert-dismissible fade show "
-              role="alert"
-            >
-              <strong>{errors.message}</strong>
+            <strong>{errors.message}</strong>
+          </div>
+        ) : null}
+        {successMessage != null && errMsg == "" ? (
+          <div
+            className="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>{successMessage}</strong>{" "}
+          </div>
+        ) : null}
+        {errMsg != null && errMsg != "" ? (
+          <div
+            className="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>{errMsg}</strong>{" "}
+          </div>
+        ) : null}
+
+        <div className="form-document-upload ">
+          <MDBRow className="">
+            <h1 className="h3  text-center-dark">Dodaj dokument</h1>
+            <p>
+              <p></p>
+            </p>
+            <div className="form-group">
+              <select
+                className="form-select"
+                required
+                value={fileCategory}
+                name="fileCategory"
+                onChange={(e) => onCatChange(e)}
+              >
+                <option value="">Wybierz kategorię dokumentu</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
             </div>
-          ) : null}
-          {successMessage != null && errMsg == "" ? (
-            <div
-              className="alert alert-success alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>{successMessage}</strong>{" "}
+            <p>
+              <p></p>
+            </p>
+            <div className="file-card ">
+              <div className=" files input">
+                <input
+                  type="file"
+                  name="file"
+                  required
+                  accept="application/pdf"
+                  onChange={(e) => onChange(e)}
+                />
+              </div>
             </div>
-          ) : null}
-          {errMsg != null && errMsg != "" ? (
-            <div
-              className="alert alert-danger alert-dismissible fade show"
-              role="alert"
+            <p>
+              <p></p>
+            </p>
+
+            <button
+              className="w-100 btn btn-lg button-blue-2"
+              type="submit"
+              onClick={(e) => submitDocument(e)}
             >
-              <strong>{errMsg}</strong>{" "}
-            </div>
-          ) : null}
-        </MDBRow>
+              Prześlij document{" "}
+            </button>
+          </MDBRow>
+        </div>
       </div>
     </div>
   );
