@@ -56,7 +56,7 @@
   margin: auto;
   background-color: #ffffff;
   color: #1d2223;
-  border-radius: 10px;
+  border-radius: 20px;
 }
 .form-password-change {
   width: 100%;
@@ -66,7 +66,7 @@
   margin: auto;
   background-color: #ffffff;
   color: #1d2223;
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 .form-floating {
@@ -100,6 +100,9 @@
 .button-blue-lp:hover {
   background-color: #8aa7b4;
   color: #1d2223;
+}
+btn-primary-blue {
+  background-color: #8aa7b4;
 }
 /* GLOBAL STYLES
 -------------------------------------------------- */
@@ -211,6 +214,18 @@ hr {
   border: none;
 }
 .button-blue-2:hover {
+  background-color: #607d8b;
+  color: #ffffff;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.button-blue-3 {
+  background-color: #ffffff;
+  color: #1d2223;
+  border: none;
+}
+
+.button-blue-3:hover {
   background-color: #607d8b;
   color: #ffffff;
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
@@ -438,6 +453,13 @@ team-inner-container {
   align-items: center; /* wyśrodkowanie elementu w płaszczyźnie pionowej */
   justify-content: center; /* wyśrodkowanie elementu w płaszczyźnie poziomej */
 }
+.center-text-3 {
+  display: flex;
+  align-items: center; /* wyśrodkowanie elementu w płaszczyźnie pionowej */
+  justify-content: center; /* wyśrodkowanie elementu w płaszczyźnie poziomej */
+  padding-right: 10px;
+  padding-left: 10px;
+}
 
 .fas-dark {
   color: #1d2223;
@@ -581,11 +603,17 @@ body {
   margin-bottom: 1rem; */
 }
 
-.btn {
+.btn-bold {
+  /* background-color: #1d2223;
+  color: white; */
+  font-weight: bold;
+}
+.btn-dark {
   background-color: #1d2223;
   color: white;
   font-weight: bold;
 }
+
 .parent {
   /* display: flex; */
   align-items: center; /* wyśrodkowanie elementu w płaszczyźnie pionowej */

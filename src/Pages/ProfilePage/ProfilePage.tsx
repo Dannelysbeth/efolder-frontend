@@ -4,19 +4,14 @@ import { loadUser, changePassword } from "../../Actions/auth";
 
 import { connect } from "react-redux";
 import {
-  MDBInput,
-  MDBRow,
-  MDBCol,
-  MDBBtn,
   MDBModal,
   MDBModalBody,
   MDBModalContent,
   MDBModalDialog,
-  MDBModalFooter,
-  MDBModalHeader,
 } from "mdb-react-ui-kit";
 import Avatar from "react-avatar-edit";
 import { uploadOwnProfilePic } from "../../Actions/auth";
+import { Link, Outlet } from "react-router-dom";
 
 const ProfilePage = ({ user, uploadOwnProfilePic }) => {
   const [employee, setEmployee] = useState([]);
@@ -27,28 +22,6 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
-
-  const [addressData, setAddressData] = useState({
-    country: "",
-    city: "",
-    zipcode: "",
-    street: "",
-    buildingNumber: "",
-    flatNumber: "",
-    county: "",
-  });
-
-  function onAddrSave(e) {
-    e.preventDefault();
-    setIsAddrEditable(false);
-    changeAddressInfo();
-    window.location.reload();
-  }
-  function onAddrCancel() {
-    setIsAddrEditable(false);
-  }
-  const onAddrChange = (e) =>
-    setAddressData({ ...addressData, [e.target.name]: e.target.value });
 
   const getEmployee = () => {
     return fetch(`${process.env.REACT_APP_REMOTE_URL}/api/employment/info`, {
@@ -69,26 +42,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
         setError(true);
       });
   };
-  const changeAddressInfo = () => {
-    return fetch(`${process.env.REACT_APP_REMOTE_URL}/api/address`, {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(addressData),
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setEmployee(responseJson);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(true);
-      });
-  };
+
   const [src, setSrc] = useState(null);
   const [file, setFile] = useState(null);
 
@@ -141,405 +95,149 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
   };
 
   const userBasicInfoPanel = () => (
-    <div className="">
-      <div className="center">
-        <div className="profile-picture-2 " onClick={profilePictureToggleShow}>
-          <img
-            src={
-              employee["user"] && employee["user"]["imageUrl"]
-                ? employee["user"]["imageUrl"]
-                : "https://i.imgur.com/teiJw8H.png"
-            }
-            // className="profile-picture-2 "
-            height="200"
-            width="200"
-            alt=""
-            loading="lazy"
-          />
-        </div>
-        <MDBModal
-          show={profilePictureModal}
-          setShow={setProfilePictureModal}
-          tabIndex="-1"
-        >
-          <MDBModalDialog className="modal-dialog modal-dialog-centered">
-            <MDBModalContent>
-              <MDBModalBody className="user-container-picture-picker ">
-                <div>
-                  <p>
-                    <p></p>
-                  </p>
-                  <div
-                    style={containerStyles}
-                    className="d-flex justify-content-center"
-                  >
-                    <Avatar
-                      // object-fit="scale-down"
-                      background-size="cover"
-                      width={500}
-                      height={500}
-                      onCrop={onCrop}
-                      onClose={onClose}
-                      label="Wybierz zdjęcie"
-                      onBeforeFileLoad={onBeforeFileLoad}
-                      src={src}
-                    />
-                  </div>
-                  <div className="d-flex justify-content-center">
-                    {file != null ? (
-                      <div>
-                        <p>
-                          <p></p>
-                        </p>
-                        <button
-                          className="btn btn-lg button-blue-2"
-                          onClick={(e) => submitPic()}
-                        >
-                          Wybierz
-                        </button>
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              </MDBModalBody>
-            </MDBModalContent>
-          </MDBModalDialog>
-        </MDBModal>
-      </div>
-      <div className="row user-container-2 justify-content-center center">
-        <h3 className="justify-content-center center-text-2">
-          {employee["user"] && employee["user"]["firstName"]}{" "}
-          {employee["user"] && employee["user"]["middleName"]
-            ? employee["user"] && employee["user"]["middleName"] + " "
-            : null}
-          {employee["user"] && employee["user"]["lastName"]} (
-          {employee["user"] && employee["user"]["username"]})
-        </h3>
-        <div className="h6 font-weight-500 center-text-2">
-          <i className="ni location_pin mr-2"></i>
-          {employee["address"] && employee["user"]["email"]}
-        </div>
-        <div className="h5 center">
-          <i className="ni location_pin mr-2"></i>
-          {employee["address"] && employee["address"]["city"]},{" "}
-          {employee["address"] && employee["address"]["country"]}
-        </div>{" "}
-        <div className="h4 font-weight-500 center-text-2">
-          <i className="ni business_briefcase-24 mr-2"></i>
-          {employee["employment"] && employee["employment"]["positionName"]}
-        </div>
-        <div className="center-text-2">
-          <i className="ni education_hat mr-2 "></i>
-          {employee["employment"] && employee["employment"]["teamName"]}
-        </div>
-      </div>
-    </div>
-  );
-
-  const adressInfo = () => (
-    <div className="user-container top-space bottom-space">
-      <div className="d-flex justify-content-end">
-        {!isAddrEditable ? (
-          <button
-            className="btn btn-info btn-sm button-blue-2"
-            id="emp-info-edit-btn"
-            onClick={() => setIsAddrEditable(true)}
+    <div>
+      <div className="">
+        <div className="center">
+          <div
+            className="profile-picture-2 "
+            onClick={profilePictureToggleShow}
           >
-            <span className="fa fa-pencil fa-little"></span>
-          </button>
-        ) : (
-          <p>
-            <p></p>
-          </p>
-        )}
+            <img
+              src={
+                employee["user"] && employee["user"]["imageUrl"]
+                  ? employee["user"]["imageUrl"]
+                  : "https://i.imgur.com/teiJw8H.png"
+              }
+              // className="profile-picture-2 "
+              height="200"
+              width="200"
+              alt=""
+              loading="lazy"
+            />
+          </div>
+          <MDBModal
+            show={profilePictureModal}
+            setShow={setProfilePictureModal}
+            tabIndex="-1"
+          >
+            <MDBModalDialog className="modal-dialog modal-dialog-centered">
+              <MDBModalContent>
+                <MDBModalBody className="user-container-picture-picker ">
+                  <div>
+                    <p>
+                      <p></p>
+                    </p>
+                    <div
+                      style={containerStyles}
+                      className="d-flex justify-content-center"
+                    >
+                      <Avatar
+                        // object-fit="scale-down"
+                        background-size="cover"
+                        width={500}
+                        height={500}
+                        onCrop={onCrop}
+                        onClose={onClose}
+                        label="Wybierz zdjęcie"
+                        onBeforeFileLoad={onBeforeFileLoad}
+                        src={src}
+                      />
+                    </div>
+                    <div className="d-flex justify-content-center">
+                      {file != null ? (
+                        <div>
+                          <p>
+                            <p></p>
+                          </p>
+                          <button
+                            className="btn btn-lg button-blue-2"
+                            onClick={(e) => submitPic()}
+                          >
+                            Wybierz
+                          </button>
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </MDBModalBody>
+              </MDBModalContent>
+            </MDBModalDialog>
+          </MDBModal>
+        </div>
+        <div className="row user-container-2 justify-content-center center">
+          <h3 className="justify-content-center center-text-2">
+            {employee["user"] && employee["user"]["firstName"]}{" "}
+            {employee["user"] && employee["user"]["middleName"]
+              ? employee["user"] && employee["user"]["middleName"] + " "
+              : null}
+            {employee["user"] && employee["user"]["lastName"]} (
+            {employee["user"] && employee["user"]["username"]})
+          </h3>
+          <div className="h6 font-weight-500 center-text-2">
+            <i className="ni location_pin mr-2"></i>
+            {employee["address"] && employee["user"]["email"]}
+          </div>
+          <div className="h5 center">
+            <i className="ni location_pin mr-2"></i>
+            {employee["address"] && employee["address"]["city"]},{" "}
+            {employee["address"] && employee["address"]["country"]}
+          </div>{" "}
+          <div className="h4 font-weight-500 center-text-2">
+            <i className="ni business_briefcase-24 mr-2"></i>
+            {employee["employment"] && employee["employment"]["positionName"]}
+          </div>
+          <div className="center-text-2">
+            <i className="ni education_hat mr-2 "></i>
+            {employee["employment"] && employee["employment"]["teamName"]}
+          </div>
+        </div>
       </div>
-      <h1 className="caption">Infomacje adresowe</h1>
-      <hr></hr>
-      <div className="row">
-        {isAddrEditable ? (
-          <MDBRow className="g-3" tag="form" onSubmit={(e) => onAddrSave(e)}>
-            <MDBCol md="4">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="country"
-                name="country"
-                onChange={(e) => onAddrChange(e)}
-                placeholder="Kraj"
-                required
-              />
-            </MDBCol>
-            <MDBCol md="5">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="country"
-                name="county"
-                onChange={(e) => onAddrChange(e)}
-                placeholder="Województwo/Prowincja"
-              />
-            </MDBCol>
-            <div className="row"></div>
-            <MDBCol md="5">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="street"
-                name="street"
-                onChange={(e) => onAddrChange(e)}
-                placeholder="Ulica"
-              />
-            </MDBCol>
-            <MDBCol md="2">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="buildingNumber"
-                name="buildingNumber"
-                onChange={(e) => onAddrChange(e)}
-                placeholder="Nr domu"
-                required
-              />
-            </MDBCol>
-            <MDBCol md="3">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="flatNumber"
-                name="flatNumber"
-                onChange={(e) => onAddrChange(e)}
-                placeholder="Nr mieszkania"
-              />
-            </MDBCol>
-            <div className="row"></div>
-            <MDBCol md="3">
-              <MDBInput
-                type="text"
-                pattern="[0-9]{2}-[0-9]{3}"
-                className="form-control"
-                id="zipcode"
-                name="zipcode"
-                onChange={(e) => onAddrChange(e)}
-                placeholder="NN-NNN"
-              />
-            </MDBCol>
-            <MDBCol md="5">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="city"
-                name="city"
-                onChange={(e) => onAddrChange(e)}
-                placeholder="Miasto"
-                required
-              />
-            </MDBCol>
-            <div className="d-flex justify-content-end">
-              <div className="d-flex justify-content-end">
+      <div>
+        <div className="productsNav">
+          <ul className="nav center">
+            {" "}
+            <li className="center">
+              <Link
+                className="btn btn-lg button-blue-3"
+                to={{ pathname: `/profil/info` }}
+              >
                 {" "}
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-sm button-blue-2"
-                  id="emp-primary-edit-btn"
-                >
-                  Zapisz
-                </button>
-              </div>
-              <div className="d-flex justify-content-end">
+                Dane osobowe{" "}
+              </Link>
+            </li>
+            <li className="center">
+              <Link
+                className="btn btn-lg button-blue-3"
+                to={{ pathname: `profil/kartoteka/dokumenty` }}
+              >
                 {" "}
-                <button
-                  className="btn btn-secondary btn-sm "
-                  id="emp-danger-edit-btn"
-                  onClick={() => onAddrCancel()}
-                >
-                  Anuluj
-                </button>
-              </div>
-            </div>
-          </MDBRow>
-        ) : (
-          <MDBRow className="g-3">
-            <MDBCol md="4">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="country"
-                name="country"
-                value={employee["address"] && employee["address"]["country"]}
-                placeholder="Kraj"
-                readOnly
-              />
-            </MDBCol>
-            <MDBCol md="5">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="country"
-                name="county"
-                value={
-                  employee["address"] && employee["address"]["county"] != null
-                    ? employee["address"]["county"]
-                    : "-"
-                }
-                placeholder="Województwo/Prowincja"
-                readOnly
-              />
-            </MDBCol>
-            <div className="row"></div>
-            <MDBCol md="5">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="street"
-                name="street"
-                value={employee["address"] && employee["address"]["street"]}
-                placeholder="Ulica"
-                readOnly
-              />
-            </MDBCol>
-            <MDBCol md="2">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="buildingNumber"
-                name="buildingNumber"
-                value={
-                  employee["address"] && employee["address"]["buildingNumber"]
-                }
-                placeholder="Nr domu"
-                readOnly
-              />
-            </MDBCol>
-            <MDBCol md="3">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="flatNumber"
-                name="flatNumber"
-                value={employee["address"] && employee["address"]["flatNumber"]}
-                placeholder="Nr mieszkania"
-                readOnly
-              />
-            </MDBCol>
-            <div className="row"></div>
-            <MDBCol md="3">
-              <MDBInput
-                type="text"
-                pattern="[0-9]{2}-[0-9]{3}"
-                className="form-control"
-                id="zipcode"
-                name="zipcode"
-                value={employee["address"] && employee["address"]["zipcode"]}
-                placeholder="NN-NNN"
-                readOnly
-              />
-            </MDBCol>
-            <MDBCol md="5">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="city"
-                name="city"
-                value={employee["address"] && employee["address"]["city"]}
-                placeholder="Miasto"
-                readOnly
-              />
-            </MDBCol>
-            <p>
-              <p></p>
-            </p>
-          </MDBRow>
-        )}
+                Kartoteka{" "}
+              </Link>
+            </li>
+            <li className="center">
+              <Link
+                className="btn btn-lg button-blue-3"
+                to={{ pathname: `/profil/dodajDokumenty` }}
+              >
+                {" "}
+                <text className="center-text-2">Dodaj dokumenty </text>
+              </Link>
+            </li>
+            <li className="center">
+              <Link
+                className="btn btn-lg button-blue-3"
+                to={{ pathname: `/profil/zmienHaslo` }}
+              >
+                Zmień hasło
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
+      <Outlet />
     </div>
   );
 
-  const employmentInfo = () => (
-    <div className="user-container top-space bottom-space">
-      <div className="d-flex justify-content-end">
-        <p>
-          <p></p>
-        </p>
-      </div>
-      <h1 className="caption">Infomacje o zatrudnieniu</h1>
-      <hr></hr>
-      <div className="row">
-        <MDBRow className="g-3">
-          <MDBCol md="4">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="teamName"
-              name="teamName"
-              value={
-                employee["employment"] && employee["employment"]["teamName"]
-              }
-              placeholder="Nazwa działu"
-              readOnly
-            />
-          </MDBCol>
-          <MDBCol md="5">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="supervisor"
-              name="supervisor"
-              value={
-                employee["employment"] && employee["employment"]["supervisor"]
-              }
-              placeholder="Województwo/Prowincja"
-              readOnly
-            />
-          </MDBCol>
-          <div className="row"></div>
-          <MDBCol md="5">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="hrManager"
-              name="hrManager"
-              value={
-                employee["employment"] && employee["employment"]["hrManager"]
-              }
-              placeholder="Administrator kadr"
-              readOnly
-            />
-          </MDBCol>
-          <div className="row"></div>
-          <MDBCol md="2">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="positionName"
-              name="positionName"
-              value={
-                employee["employment"] && employee["employment"]["positionName"]
-              }
-              placeholder="Stanowisko"
-              readOnly
-            />
-          </MDBCol>
-          <MDBCol md="3">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="positionDescription"
-              name="positionDescription"
-              value={
-                employee["employment"] &&
-                employee["employment"]["positionDescription"]
-              }
-              placeholder="Opis stanowiska"
-              readOnly
-            />
-          </MDBCol>
-          <p>
-            <p></p>
-          </p>
-        </MDBRow>
-      </div>
-    </div>
-  );
   useEffect(() => {
     loadUser();
     getEmployee();
@@ -563,14 +261,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
     <div>
       {checkIfLogged() ? (
         <div className="backgd d-flex flex-column min-vh-100">
-          {/* <div className="user-container top-space bottom-space">
-            <h1 className="caption">Dane osobowe</h1>
-            <hr></hr>
-            <h4 className="userPage-text mt-3"> </h4>
-          </div> */}
           {userBasicInfoPanel()}
-          {checkIfRegularEmployee() ? adressInfo() : null}
-          {checkIfRegularEmployee() ? employmentInfo() : null}
         </div>
       ) : (
         <div />

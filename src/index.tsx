@@ -33,6 +33,7 @@ import CreateTeamPage from "./Pages/CreateTeamPage/CreateTeamPage";
 import TeamViewPage from "./Pages/TeamsViewPage/TeamsViewPage";
 import ViewMyTeamspage from "./Pages/TeamsViewPage/ViewMyTeamspage";
 import TeamPage from "./Pages/TeamPage/TeamPage";
+import PersonalInfoPage from "./Pages/ProfilePage/PersonalInfoPage";
 
 const routing = (
   <div>
@@ -45,7 +46,6 @@ const routing = (
             <Route path="/login" element={<LoginPage />}></Route>
             {/* Protected routes */}
             <Route>
-              <Route path="/profil" element={<ProfilePage />} />
               <Route path="/forbidden" element={<ForbiddenPage />} />
               <Route path="/o-nas" element={<AboutUsPage />} />{" "}
               <Route path="/createTeam" element={<CreateTeamPage />} />
@@ -54,23 +54,20 @@ const routing = (
               <Route path="/team">
                 <Route path="/team/:teamName" element={<TeamPage />} />
               </Route>
-              <Route path="/kartoteka" element={<DocumentsPage />}>
-                <Route path="/kartoteka/dokumenty/" element={<MyFilesPage />}>
-                  <Route
-                    path="/kartoteka/dokumenty/A"
-                    element={<AFilesPage />}
-                  />
-                  <Route path="B" element={<BFilePage />} />
-                  <Route path="C" element={<CFilesPage />} />
-                  <Route path="D" element={<DFilesPage />} />
+              <Route path="/:profil" element={<ProfilePage />}>
+                <Route path="info" element={<PersonalInfoPage />} />
+                <Route path="profil/:kartoteka/" element={<DocumentsPage />}>
+                  <Route path="dokumenty" element={<MyFilesPage />}>
+                    <Route path="A" element={<AFilesPage />} />
+                    <Route path="B" element={<BFilePage />} />
+                    <Route path="C" element={<CFilesPage />} />
+                    <Route path="D" element={<DFilesPage />} />
+                  </Route>
                 </Route>
-                <Route
-                  path="/kartoteka/dodajDokumenty"
-                  element={<UploadMyFilesPage />}
-                />
+                <Route path="dodajDokumenty" element={<UploadMyFilesPage />} />
+                <Route path="zmienHaslo" element={<ChangeOwnPasswordPage />} />
               </Route>
               <Route path="/pracownicy" element={<EmployeeListPage />} />
-              <Route path="/zmienHaslo" element={<ChangeOwnPasswordPage />} />
               <Route path="/uploadProfilePic" element={<UploadPicture />} />
               <Route path="/createUser" element={<RegisterPage />} />{" "}
               <Route path="/user">

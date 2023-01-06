@@ -96,7 +96,7 @@ const ChangeOwnPassword = ({ user, changeOwnPassword }) => {
   return (
     <div>
       {checkIfLogged() ? (
-        <div className="backgd-2 d-flex flex-column min-vh-100 parent">
+        <div className=" d-flex flex-column min-vh-100 parent-top">
           {passwordChangeTab()}
         </div>
       ) : (

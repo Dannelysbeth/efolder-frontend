@@ -1,26 +1,12 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { extendedSignup, uploadOwnFile } from "../../../Actions/auth";
-import { checkAuthenticated } from "../../../Actions/auth";
-import {
-  MDBInput,
-  MDBBtn,
-  MDBCheckbox,
-  MDBRow,
-  MDBCol,
-} from "mdb-react-ui-kit";
+import { MDBRow } from "mdb-react-ui-kit";
 
 const UploadMyFilesPage = ({ errors, uploadOwnFile, successMessage }) => {
-  const { username } = useParams();
-  const [infoMessage, setInfoMessage] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [hrAdmins, setHrAdmins] = useState([]);
-  const [teams, setTeams] = useState([]);
-  const [files, setFiles] = useState([]);
 
   const [formData, setFormData] = useState({
     file: null,
@@ -83,7 +69,7 @@ const UploadMyFilesPage = ({ errors, uploadOwnFile, successMessage }) => {
 
         <div className="form-document-upload ">
           <MDBRow className="">
-            <h1 className="h3  text-center-dark">Dodaj dokument</h1>
+            <h4 className="  center">Dodaj dokument</h4>
             <p>
               <p></p>
             </p>

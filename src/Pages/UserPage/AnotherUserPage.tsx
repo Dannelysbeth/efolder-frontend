@@ -1,13 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link, useParams, Outlet, Navigate } from "react-router-dom";
-// import "./UserPage.css";
+import { Link, useParams, Outlet } from "react-router-dom";
 import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 import { connect } from "react-redux";
 
-const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
+const AnotherUserPage = ({ user }) => {
   const { username } = useParams();
   const [employee, setEmployee] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -30,7 +29,7 @@ const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
         setEmployee(responseJson);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setEmployee(null);
         setLoading(false);
         setError(true);
@@ -54,32 +53,30 @@ const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
     return true;
   }
 
-  const returnUserNotAdmin = () => (
-    <div>
-      {user == null} ? (<Navigate to="/login" />) : (
-      <Navigate to="/forbidden" />)
-    </div>
-  );
-
   const returnUserPage = () => (
     <div>
       {checkIfUserExists() ? (
         <div>
           {checkIfAdmin() ? (
-            <div className="backgd d-flex flex-column min-vh-100">
+            <div className="backgd ">
               <div className="">
-                <div className="profile-pic rounded-circle no-padding d-flex justify-content-center  ">
-                  <img
-                    src={
-                      employee["user"] && employee["user"]["imageUrl"]
-                        ? employee["user"]["imageUrl"]
-                        : "https://i.imgur.com/teiJw8H.png"
-                    }
-                    className="rounded-circle user-pic shadow"
-                  />
+                <div className="center">
+                  <div className="profile-picture-1 ">
+                    <img
+                      src={
+                        employee["user"] && employee["user"]["imageUrl"]
+                          ? employee["user"]["imageUrl"]
+                          : "https://i.imgur.com/teiJw8H.png"
+                      }
+                      height="200"
+                      width="200"
+                      alt=""
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
-                <div className="row user-container justify-content-center">
-                  <h3 className="justify-content-center">
+                <div className="row user-container-2 justify-content-center center">
+                  <h3 className="justify-content-center center-text-2">
                     {employee["user"] && employee["user"]["firstName"]}{" "}
                     {employee["user"] && employee["user"]["middleName"]
                       ? employee["user"] && employee["user"]["middleName"] + " "
@@ -87,77 +84,79 @@ const AnotherUserPage = ({ user, isAuthenticated, errors }) => {
                     {employee["user"] && employee["user"]["lastName"]} (
                     {employee["user"] && employee["user"]["username"]})
                   </h3>
-                  <div className="h6 font-weight-500 ">
+                  <div className="h6 font-weight-500 center-text-2">
                     <i className="ni location_pin mr-2"></i>
                     {employee["address"] && employee["user"]["email"]}
                   </div>
-                  <div className="h5 ">
+                  <div className="h5 center">
+                    <i className="ni location_pin mr-2"></i>
+                    {employee["address"] && employee["address"]["city"]},{" "}
+                    {employee["address"] && employee["address"]["country"]}
+                  </div>{" "}
+                  <div className="h4 font-weight-500 center-text-2">
                     <i className="ni business_briefcase-24 mr-2"></i>
                     {employee["employment"] &&
                       employee["employment"]["positionName"]}
                   </div>
-                  <div>
-                    <i className="ni education_hat mr-2"></i>
+                  <div className="center-text-2">
+                    <i className="ni education_hat mr-2 "></i>
                     {employee["employment"] &&
                       employee["employment"]["teamName"]}
-                  </div>{" "}
-                  <div className="h5 font-weight-500 ">
-                    <i className="ni location_pin mr-2"></i>
-                    {employee["address"] && employee["address"]["city"]},{" "}
-                    {employee["address"] && employee["address"]["country"]}
                   </div>
                 </div>
               </div>
-              <div className="productsNav">
-                <ul className="nav nav-tabs">
-                  {" "}
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active"
-                      to={{ pathname: `/user/${username}/daneOsobowe` }}
-                    >
-                      {" "}
-                      Dane osobowe{" "}
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active"
-                      to={{ pathname: `/user/${username}/kartoteka` }}
-                    >
-                      {" "}
-                      Kartoteka{" "}
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active"
-                      to={{ pathname: `/user/${username}/dodajDokumenty` }}
-                    >
-                      {" "}
-                      Dodaj dokumenty{" "}
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active"
-                      to={{ pathname: `/user/${username}/zmienHaslo` }}
-                    >
-                      {" "}
-                      {user != null && user.username !== username
-                        ? "Zmień hasło"
-                        : `Zresetuj hasło`}
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active"
-                      to={{ pathname: `/user/${username}/adminRole` }}
-                    >
-                      Narzędzia Administratora
-                    </Link>
-                  </li>
-                </ul>
+              <div>
+                <div className="productsNav">
+                  <ul className="nav center">
+                    {" "}
+                    <li className="center">
+                      <Link
+                        className="btn btn-lg button-blue-3"
+                        to={{ pathname: `/user/${username}/daneOsobowe` }}
+                      >
+                        {" "}
+                        Dane osobowe{" "}
+                      </Link>
+                    </li>
+                    <li className="center">
+                      <Link
+                        className="btn btn-lg button-blue-3"
+                        to={{ pathname: `/user/${username}/kartoteka` }}
+                      >
+                        {" "}
+                        Kartoteka{" "}
+                      </Link>
+                    </li>
+                    <li className="center">
+                      <Link
+                        className="btn btn-lg button-blue-3"
+                        to={{ pathname: `/user/${username}/dodajDokumenty` }}
+                      >
+                        {" "}
+                        Dodaj dokumenty{" "}
+                      </Link>
+                    </li>
+                    <li className="center">
+                      <Link
+                        className="btn btn-lg button-blue-3"
+                        to={{ pathname: `/user/${username}/zmienHaslo` }}
+                      >
+                        {" "}
+                        {user != null && user.username !== username
+                          ? "Zmień hasło"
+                          : `Zresetuj hasło`}
+                      </Link>
+                    </li>
+                    <li className="center">
+                      <Link
+                        className="btn btn-lg button-blue-3"
+                        to={{ pathname: `/user/${username}/adminRole` }}
+                      >
+                        Narzędzia Administratora
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </div>
               <Outlet />
             </div>

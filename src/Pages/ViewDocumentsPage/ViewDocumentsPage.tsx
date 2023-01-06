@@ -246,8 +246,8 @@ const ViewDocumentsPage = () => {
   };
 
   return (
-    <div className=" d-flex flex-column min-vh-100">
-      <div className="userPage-text mt-3">
+    <div className=" d-flex flex-column min-vh-100 ">
+      <div className="d-flex flex-column min-vh-100 userPage-text mt-3">
         <>
           <MDBRow>
             <MDBCol size="3">
