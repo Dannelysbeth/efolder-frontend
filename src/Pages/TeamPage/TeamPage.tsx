@@ -359,66 +359,66 @@ const TeamPage = ({ user, updateTeam }) => {
                       </MDBModal>
                     </div>
                   ) : null}
-                  <MDBListGroup
-                    className="team-members-container"
-                    style={{ minWidth: "22rem" }}
-                    light
-                  >
-                    {team["employees"] && team["employees"].length === 0 ? (
-                      <div className="team-empty-container">
-                        <h3 className="team-empty-container center">
-                          Ten zepół nie posiada pracowników
-                        </h3>
-                      </div>
-                    ) : (
-                      team["employees"] &&
-                      team["employees"].map((user) => (
-                        <div>
-                          <MDBListGroupItem className="d-flex justify-content-between align-items-center">
-                            <div className="d-flex align-items-center">
-                              <img
-                                src={
-                                  user["imageUrl"]
-                                    ? user["imageUrl"]
-                                    : "https://i.imgur.com/teiJw8H.png"
-                                }
-                                alt=""
-                                style={{ width: "45px", height: "45px" }}
-                                className="rounded-circle"
-                              />
-                              <div className="ms-3">
-                                <p className="fw-bold mb-1">
-                                  {user.firstName}
-                                  {user.middleName != null
-                                    ? " " + user.middleName
-                                    : null}{" "}
-                                  {user.lastName}
-                                </p>
-                                <p className="text-muted mb-0">
-                                  {user.positionName}
-                                </p>
-                                <p className="text-muted mb-0">
-                                  {user.teamName}
-                                </p>
+                  {team["employees"] && team["employees"].length === 0 ? (
+                    <div className="team-empty-container center">
+                      <h3 className=" center">
+                        Ten zepół nie posiada pracowników
+                      </h3>
+                    </div>
+                  ) : (
+                    <MDBListGroup
+                      className="team-members-container"
+                      style={{ minWidth: "22rem" }}
+                      light
+                    >
+                      {team["employees"] &&
+                        team["employees"].map((user) => (
+                          <div>
+                            <MDBListGroupItem className="d-flex justify-content-between align-items-center">
+                              <div className="d-flex align-items-center">
+                                <img
+                                  src={
+                                    user["imageUrl"]
+                                      ? user["imageUrl"]
+                                      : "https://i.imgur.com/teiJw8H.png"
+                                  }
+                                  alt=""
+                                  style={{ width: "45px", height: "45px" }}
+                                  className="rounded-circle"
+                                />
+                                <div className="ms-3">
+                                  <p className="fw-bold mb-1">
+                                    {user.firstName}
+                                    {user.middleName != null
+                                      ? " " + user.middleName
+                                      : null}{" "}
+                                    {user.lastName}
+                                  </p>
+                                  <p className="text-muted mb-0">
+                                    {user.positionName}
+                                  </p>
+                                  <p className="text-muted mb-0">
+                                    {user.teamName}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
-                            {checkIfAdmin() ? (
-                              <button className="btn btn-info btn-sm button-blue-2">
-                                <Link
-                                  className="nav-link active"
-                                  to={{
-                                    pathname: `/user/${user.username}/daneOsobowe`,
-                                  }}
-                                >
-                                  <i className="fas  fas-white fa-eye"></i>
-                                </Link>
-                              </button>
-                            ) : null}
-                          </MDBListGroupItem>
-                        </div>
-                      ))
-                    )}
-                  </MDBListGroup>
+                              {checkIfAdmin() ? (
+                                <button className="btn btn-info btn-sm button-blue-2">
+                                  <Link
+                                    className="nav-link active"
+                                    to={{
+                                      pathname: `/user/${user.username}/daneOsobowe`,
+                                    }}
+                                  >
+                                    <i className="fas  fas-white fa-eye"></i>
+                                  </Link>
+                                </button>
+                              ) : null}
+                            </MDBListGroupItem>
+                          </div>
+                        ))}
+                    </MDBListGroup>
+                  )}
                 </div>{" "}
                 {checkIfAdmin() ? (
                   <div className="d-flex justify-content-center ">
