@@ -265,11 +265,11 @@ const UserPage = ({ user }) => {
       <div className="d-flex justify-content-end">
         {!isAddrEditable ? (
           <button
-            className="btn btn-info btn-sm "
+            className="btn btn-info btn-sm button-blue-2"
             id="emp-info-edit-btn"
             onClick={() => setIsAddrEditable(true)}
           >
-            <span className="fa fa-pencil fa-little"></span>
+            <span className="fa fa-pencil fa-little "></span>
           </button>
         ) : (
           <p>
@@ -359,21 +359,22 @@ const UserPage = ({ user }) => {
               />
             </MDBCol>
             <div className="d-flex justify-content-end">
-              <div className="d-flex justify-content-end">
+              <div className="d-flex justify-content-end center-text-3">
                 {" "}
                 <button
                   type="submit"
-                  className="btn btn-primary btn-sm "
+                  className="btn btn-primary "
                   id="emp-primary-edit-btn"
+
                   // onClick={() => onSave()}
                 >
                   Zapisz
                 </button>
               </div>
-              <div className="d-flex justify-content-end">
+              <div className="d-flex justify-content-end center-text-3">
                 {" "}
                 <button
-                  className="btn btn-danger btn-sm "
+                  className="btn btn-secondary  "
                   id="emp-danger-edit-btn"
                   onClick={() => onAddrCancel()}
                 >
@@ -484,7 +485,7 @@ const UserPage = ({ user }) => {
       <div className="d-flex justify-content-end">
         {!isEmpEditable ? (
           <button
-            className="btn btn-info btn-sm "
+            className="btn btn-info btn-sm button-blue-2"
             id="emp-info-edit-btn"
             onClick={() => setIsEmpEditable(true)}
           >
@@ -610,20 +611,20 @@ const UserPage = ({ user }) => {
             </MDBCol>
 
             <div className="d-flex justify-content-end">
-              <div className="d-flex justify-content-end">
+              <div className="d-flex justify-content-end center-text-3">
                 {" "}
                 <button
                   type="submit"
-                  className="btn btn-primary btn-sm "
+                  className="btn btn-primary "
                   id="emp-primary-edit-btn"
                 >
                   Zapisz
                 </button>
               </div>
-              <div className="d-flex justify-content-end">
+              <div className="d-flex justify-content-end center-text-3">
                 {" "}
                 <button
-                  className="btn btn-danger btn-sm "
+                  className="btn btn-secondary  "
                   id="emp-danger-edit-btn"
                   onClick={() => onEmpCancel()}
                 >
@@ -714,13 +715,7 @@ const UserPage = ({ user }) => {
   );
 
   return (
-    <div className="backgd d-flex flex-column min-vh-100">
-      <div className="user-container top-space bottom-space">
-        <h1 className="caption">Dane osobowe</h1>
-        <hr></hr>
-        <h4 className="userPage-text mt-3"> </h4>
-        {user !== null ? infoOfUser() : "Osoba niezalogowana "}
-      </div>
+    <div className=" d-flex flex-column min-vh-100">
       {employee && employee["user"] ? adressInfo() : "Osoba niezalogowana "}
       {employee && employee["user"] ? employmentInfo() : "Osoba niezalogowana "}
     </div>
