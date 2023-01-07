@@ -30,11 +30,11 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
   }
 
   return (
-    <section className="vh-100 gradient-form">
-      <div className="container py-5 h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
+    <section className=" gradient-form ">
+      <div className="d-flex flex-column min-vh-100 flex-row  py-5 h-100 center">
+        <div className="row d-flex justify-content-center align-items-center h-100 ">
           <div className="d-flex flex-column min-vh-100 flex-row">
-            <div className="row g-0">
+            <div className="row g-0 ">
               {errors != null && errors.message != null ? (
                 <div
                   className="alert alert-danger alert-dismissible fade show"
@@ -44,8 +44,8 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
                 </div>
               ) : null}
             </div>
-            <div className="card">
-              <div className="row g-0">
+            <div className="card ">
+              <div className="row g-0 ">
                 <div className="col-md-6 col-lg-6 d-none d-md-block">
                   <img
                     src="https://i.imgur.com/nauR3Dl.png"
@@ -56,7 +56,7 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
                 <div className="col-md-6 col-lg-6 d-flex align-items-center">
                   <div className="form-signin ">
                     <form onSubmit={(e) => onSubmit(e)}>
-                      <h1 className="h3 mb-3 fw-normal text-center ">
+                      <h1 className="h3 mb-3 fw-normal center-text-2">
                         Zaloguj się
                       </h1>
 
@@ -92,7 +92,7 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
                         </p>
                       </p>
                       <button
-                        className="w-100 button-blue-lp btn btn-lg  "
+                        className="w-100 button-blue-lp btn btn-lg btn-white  btn-bold"
                         type="submit"
                       >
                         Zaloguj się

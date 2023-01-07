@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { extendedSignup, uploadOwnFile } from "../../../Actions/auth";
 import { MDBRow } from "mdb-react-ui-kit";
+import ForbiddenPage from "../../ForbiddenPage/ForbiddenPage";
 
-const UploadMyFilesPage = ({ errors, uploadOwnFile, successMessage }) => {
+const UploadMyFilesPage = ({ user, errors, uploadOwnFile, successMessage }) => {
   const [errMsg, setErrMsg] = useState("");
 
   const [formData, setFormData] = useState({
@@ -39,83 +40,97 @@ const UploadMyFilesPage = ({ errors, uploadOwnFile, successMessage }) => {
     }
   }
 
+  function checkIfRegularEmployee(): boolean {
+    if (user != null && user.roles != null)
+      for (var i of user.roles) {
+        if (i == "ROLE_REGULAR_EMPLOYEE") return true;
+      }
+    return false;
+  }
+
   return (
-    <div className="d-flex flex-column min-vh-100 parent-top">
-      <div className="d-flex flex-column  ">
-        {errors != null && errors.message != null && errMsg == "" ? (
-          <div
-            className="alert alert-danger alert-dismissible fade show "
-            role="alert"
-          >
-            <strong>{errors.message}</strong>
-          </div>
-        ) : null}
-        {successMessage != null && errMsg == "" ? (
-          <div
-            className="alert alert-success alert-dismissible fade show"
-            role="alert"
-          >
-            <strong>{successMessage}</strong>{" "}
-          </div>
-        ) : null}
-        {errMsg != null && errMsg != "" ? (
-          <div
-            className="alert alert-danger alert-dismissible fade show"
-            role="alert"
-          >
-            <strong>{errMsg}</strong>{" "}
-          </div>
-        ) : null}
-
-        <div className="form-document-upload ">
-          <MDBRow className="">
-            <h4 className="  center">Dodaj dokument</h4>
-            <p>
-              <p></p>
-            </p>
-            <div className="form-group">
-              <select
-                className="form-select"
-                required
-                value={fileCategory}
-                name="fileCategory"
-                onChange={(e) => onCatChange(e)}
+    <div>
+      {checkIfRegularEmployee() == true ? (
+        <div className="d-flex flex-column min-vh-100 parent-top">
+          <div className="d-flex flex-column  ">
+            {errors != null && errors.message != null && errMsg == "" ? (
+              <div
+                className="alert alert-danger alert-dismissible fade show "
+                role="alert"
               >
-                <option value="">Wybierz kategorię dokumentu</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-              </select>
-            </div>
-            <p>
-              <p></p>
-            </p>
-            <div className="file-card ">
-              <div className=" files input">
-                <input
-                  type="file"
-                  name="file"
-                  required
-                  accept="application/pdf"
-                  onChange={(e) => onChange(e)}
-                />
+                <strong>{errors.message}</strong>
               </div>
-            </div>
-            <p>
-              <p></p>
-            </p>
+            ) : null}
+            {successMessage != null && errMsg == "" ? (
+              <div
+                className="alert alert-success alert-dismissible fade show"
+                role="alert"
+              >
+                <strong>{successMessage}</strong>{" "}
+              </div>
+            ) : null}
+            {errMsg != null && errMsg != "" ? (
+              <div
+                className="alert alert-danger alert-dismissible fade show"
+                role="alert"
+              >
+                <strong>{errMsg}</strong>{" "}
+              </div>
+            ) : null}
 
-            <button
-              className="w-100 btn btn-lg button-blue-2"
-              type="submit"
-              onClick={(e) => submitDocument(e)}
-            >
-              Prześlij document{" "}
-            </button>
-          </MDBRow>
+            <div className="form-document-upload ">
+              <MDBRow className="">
+                <h4 className="  center">Dodaj dokument</h4>
+                <p>
+                  <p></p>
+                </p>
+                <div className="form-group">
+                  <select
+                    className="form-select"
+                    required
+                    value={fileCategory}
+                    name="fileCategory"
+                    onChange={(e) => onCatChange(e)}
+                  >
+                    <option value="">Wybierz kategorię dokumentu</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                  </select>
+                </div>
+                <p>
+                  <p></p>
+                </p>
+                <div className="file-card ">
+                  <div className=" files input">
+                    <input
+                      type="file"
+                      name="file"
+                      required
+                      accept="application/pdf"
+                      onChange={(e) => onChange(e)}
+                    />
+                  </div>
+                </div>
+                <p>
+                  <p></p>
+                </p>
+
+                <button
+                  className="w-100 btn btn-lg button-blue-2"
+                  type="submit"
+                  onClick={(e) => submitDocument(e)}
+                >
+                  Prześlij document{" "}
+                </button>
+              </MDBRow>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <Navigate to="/forbidden" />
+      )}
     </div>
   );
 };

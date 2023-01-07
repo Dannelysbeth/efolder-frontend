@@ -1,23 +1,18 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { giveAdminPermission, takeAdminPermission } from "../../Actions/auth";
-import { changePassword } from "../../Actions/auth";
 import {
-  MDBBtn,
-  MDBCol,
-  MDBInput,
+  MDBIcon,
   MDBModal,
   MDBModalBody,
   MDBModalContent,
   MDBModalDialog,
   MDBModalFooter,
   MDBModalHeader,
-  MDBModalTitle,
   MDBRow,
 } from "mdb-react-ui-kit";
-import { Console } from "console";
 
 const SuperAdminPermPage = ({
   user,
@@ -48,12 +43,14 @@ const SuperAdminPermPage = ({
     setInfoMessage("");
     giveAdminPermission(username);
     setInfoMessage("Rola Administratora została poprawnie nadana");
+    window.location.reload();
   }
   function takeAdminPermissions() {
     takePermToggleShow();
     setInfoMessage("");
     takeAdminPermission(username);
     setInfoMessage("Rola Administratora została odebrana");
+    window.location.reload();
   }
   function onDeleteUserAccount() {
     deleteUserToggleShow();
@@ -148,17 +145,17 @@ const SuperAdminPermPage = ({
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <div className="form-signin top-space">
+      <div className="center top-space">
         {!checkIfUserIsSuperAdmin() ? (
           <div>
             {checkIfUserIsAdmin() ? (
               <MDBRow className="g-3">
-                <MDBBtn
-                  className="w-100 btn-danger btn-lg "
+                <button
+                  className="w-100 btn btn-bold text-center-dark btn-danger btn-lg "
                   onClick={takePermToggleShow}
                 >
                   Odbierz uprawnienia administratora
-                </MDBBtn>
+                </button>
                 <MDBModal
                   show={takePermModal}
                   setShow={setTakePermModal}
@@ -167,26 +164,26 @@ const SuperAdminPermPage = ({
                   <MDBModalDialog>
                     <MDBModalContent>
                       <MDBModalHeader>
-                        <MDBBtn
+                        <button
                           className="btn-close"
                           color="none"
                           onClick={takePermToggleShow}
-                        ></MDBBtn>
+                        ></button>
                       </MDBModalHeader>
                       <MDBModalBody>
                         Czy na pewno odebrać prawa administratora?
                       </MDBModalBody>
 
                       <MDBModalFooter>
-                        <MDBBtn color="secondary" onClick={takePermToggleShow}>
+                        <button color="secondary" onClick={takePermToggleShow}>
                           Anuluj
-                        </MDBBtn>
-                        <MDBBtn
+                        </button>
+                        <button
                           color="danger"
                           onClick={(e) => takeAdminPermissions()}
                         >
                           Tak
-                        </MDBBtn>
+                        </button>
                       </MDBModalFooter>
                     </MDBModalContent>
                   </MDBModalDialog>
@@ -212,12 +209,12 @@ const SuperAdminPermPage = ({
               <div>
                 {checkIfLoggedUserSuperAdmin() ? (
                   <MDBRow className="g-3">
-                    <MDBBtn
-                      className="w-100 btn btn-lg button-blue"
+                    <button
+                      className="w-100 btn-bold btn-lg button-blue-3"
                       onClick={givePermToggleShow}
                     >
                       Nadaj rolę administratora
-                    </MDBBtn>
+                    </button>
                     <MDBModal
                       show={givePermModal}
                       setShow={setGivePermModal}
@@ -226,29 +223,29 @@ const SuperAdminPermPage = ({
                       <MDBModalDialog>
                         <MDBModalContent>
                           <MDBModalHeader>
-                            <MDBBtn
+                            <button
                               className="btn-close"
                               color="none"
                               onClick={givePermToggleShow}
-                            ></MDBBtn>
+                            ></button>
                           </MDBModalHeader>
                           <MDBModalBody>
                             Czy na pewno nadać prawa administratora?
                           </MDBModalBody>
 
                           <MDBModalFooter>
-                            <MDBBtn
+                            <button
                               color="secondary"
                               onClick={givePermToggleShow}
                             >
                               Anuluj
-                            </MDBBtn>
-                            <MDBBtn
+                            </button>
+                            <button
                               color="primary"
                               onClick={(e) => giveAdminPermissions()}
                             >
                               Tak
-                            </MDBBtn>
+                            </button>
                           </MDBModalFooter>
                         </MDBModalContent>
                       </MDBModalDialog>
@@ -279,12 +276,12 @@ const SuperAdminPermPage = ({
               <p></p>
             </p>
             <MDBRow className="g-3">
-              <MDBBtn
-                className="w-100 btn-danger btn-lg "
+              <button
+                className="btn shadow w-100 btn-danger text-center-dark  btn-lg "
                 onClick={deleteUserToggleShow}
               >
-                Usuń użytkownika
-              </MDBBtn>
+                <MDBIcon fas icon="trash-alt" /> Usuń użytkownika
+              </button>
               <MDBModal
                 show={deleteUserModal}
                 setShow={setDeleteUserModal}
@@ -293,11 +290,11 @@ const SuperAdminPermPage = ({
                 <MDBModalDialog>
                   <MDBModalContent>
                     <MDBModalHeader>
-                      <MDBBtn
+                      <button
                         className="btn-close"
                         color="none"
                         onClick={deleteUserToggleShow}
-                      ></MDBBtn>
+                      ></button>
                     </MDBModalHeader>
                     <MDBModalBody>
                       Zamierzasz usunąć użytkownika. Tej czynności nie można
@@ -305,15 +302,15 @@ const SuperAdminPermPage = ({
                     </MDBModalBody>
 
                     <MDBModalFooter>
-                      <MDBBtn color="secondary" onClick={deleteUserToggleShow}>
+                      <button color="secondary" onClick={deleteUserToggleShow}>
                         Anuluj
-                      </MDBBtn>
-                      <MDBBtn
+                      </button>
+                      <button
                         color="danger"
                         onClick={(e) => onDeleteUserAccount()}
                       >
                         Tak
-                      </MDBBtn>
+                      </button>
                     </MDBModalFooter>
                   </MDBModalContent>
                 </MDBModalDialog>
@@ -321,9 +318,14 @@ const SuperAdminPermPage = ({
             </MDBRow>
           </div>
         ) : (
-          <h2 color="danger" className="flex-center">
-            Użytkownik jest Super Administratorem
-          </h2>
+          <div className="empty-container center">
+            <h2
+              color="danger"
+              className=" text-danger fw-bold text-center-light flex-center"
+            >
+              Użytkownik jest Super Administratorem
+            </h2>
+          </div>
         )}
         <MDBModal
           show={deleteFailInfoModal}
@@ -333,11 +335,11 @@ const SuperAdminPermPage = ({
           <MDBModalDialog>
             <MDBModalContent>
               <MDBModalHeader>
-                <MDBBtn
+                <button
                   className="btn-close"
                   color="none"
                   onClick={deleteFailInfoToggleShow}
-                ></MDBBtn>
+                ></button>
               </MDBModalHeader>
               <MDBModalBody>
                 Podany pracownik nie może zostać usunięty, ponieważ jest liderem
@@ -346,9 +348,9 @@ const SuperAdminPermPage = ({
               </MDBModalBody>
 
               <MDBModalFooter>
-                <MDBBtn color="secondary" onClick={deleteFailInfoToggleShow}>
+                <button color="secondary" onClick={deleteFailInfoToggleShow}>
                   Rozumiem
-                </MDBBtn>
+                </button>
               </MDBModalFooter>
             </MDBModalContent>
           </MDBModalDialog>

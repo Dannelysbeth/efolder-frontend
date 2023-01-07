@@ -275,12 +275,16 @@ body {
 
 .form-register {
   width: 50%;
-  height: 700px;
+  height: 750px;
   padding: 20px;
   margin: auto;
   background-color: #f1f1f1;
   color: #1d2223;
   border-radius: 10px;
+}
+form-register-alert {
+  width: 50%;
+  max-width: 50vh;
 }
 .form-create-team {
   width: 80%;
@@ -367,6 +371,18 @@ team-inner-container {
   margin: auto;
   background-color: none;
   border-radius: 10px;
+  border-color: #1d2223;
+  box-shadow: 20px 20px 50px #1d2223;
+}
+
+.empty-container {
+  min-height: 50px;
+  max-height: 80vh;
+  background-color: #1d2223;
+  width: 80%;
+  margin: auto;
+  background-color: none;
+  border-radius: 20px;
   border-color: #1d2223;
   box-shadow: 20px 20px 50px #1d2223;
 }

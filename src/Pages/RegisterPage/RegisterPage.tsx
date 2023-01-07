@@ -1,19 +1,13 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import "../css/app.css";
 import { connect } from "react-redux";
 import { extendedSignup } from "../../Actions/auth";
-import { checkAuthenticated } from "../../Actions/auth";
-import PeopleList from "./PeopleList";
-import {
-  MDBInput,
-  MDBBtn,
-  MDBCheckbox,
-  MDBRow,
-  MDBCol,
-} from "mdb-react-ui-kit";
+import { MDBInput, MDBBtn, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { Alert } from "reactstrap";
+import LoginPage from "../LoginPage/LoginPage";
+import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 
 const RegisterPage = ({
   extendedSignup,
@@ -21,7 +15,6 @@ const RegisterPage = ({
   isAuthenticated,
   errors,
   accountCreated,
-  anotherUser,
 }) => {
   const [loading, setLoading] = useState(true);
   const [errMsg, setErrMsg] = useState("");
@@ -130,27 +123,7 @@ const RegisterPage = ({
         setHrAdmins(responseJson);
         setLoading(false);
       })
-      .catch((error) => {
-        setLoading(false);
-        setError(true);
-      });
-  };
-
-  const getSystemRoles = () => {
-    return fetch(`${process.env.REACT_APP_REMOTE_URL}/api/role/all`, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setHrAdmins(responseJson);
-        setLoading(false);
-      })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
         setError(true);
       });
@@ -170,7 +143,7 @@ const RegisterPage = ({
         setTeams(responseJson);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
         setError(true);
       });
@@ -189,305 +162,324 @@ const RegisterPage = ({
 
   return (
     <div>
-      {checkIfAdmin() ? (
-        <div className="d-flex flex-column min-vh-100">
-          {errors !== null ? (
-            <div
-              className="alert alert-danger alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>{errors.message}</strong>
+      <div className="backgd-3 d-flex flex-column min-vh-100">
+        <div>
+          <div>
+            <div className="d-flex flex-column min-vh-100 parent-top ">
+              {checkIfAdmin() ? (
+                <div className="d-flex flex-column ">
+                  {errors !== null ? (
+                    <div
+                      className="alert alert-danger alert-dismissible fade show"
+                      role="alert"
+                    >
+                      <strong>{errors.message}</strong>
+                    </div>
+                  ) : null}
+                  {errMsg != null && errMsg != "" ? (
+                    <div
+                      className="alert alert-danger alert-dismissible fade show"
+                      role="alert"
+                    >
+                      <strong>{errMsg}</strong>{" "}
+                    </div>
+                  ) : null}
+                  <div className="form-register top-space ">
+                    <MDBRow
+                      className="g-3 "
+                      tag="form"
+                      onSubmit={(e) => onSubmit(e)}
+                    >
+                      <h1 className="h3  fw-normal  text-center-dark">
+                        Infomacje podstawowe
+                      </h1>
+                      <MDBCol md="4">
+                        <MDBInput
+                          type="text"
+                          className="form-control"
+                          id="floatingInput"
+                          name="firstName"
+                          value={firstName}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Imię"
+                          required
+                        />
+                      </MDBCol>
+                      <MDBCol md="4">
+                        <MDBInput
+                          type="text"
+                          className="form-control"
+                          id="floatingInput"
+                          name="middleName"
+                          value={middleName}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Drugie imię"
+                        />
+                      </MDBCol>
+                      <div className="row"></div>
+                      <MDBCol md="5">
+                        <MDBInput
+                          type="text"
+                          className="form-control"
+                          id="floatingInput"
+                          name="lastName"
+                          value={lastName}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Nazwisko"
+                          required
+                        />
+                      </MDBCol>{" "}
+                      <MDBCol md="5">
+                        <MDBInput
+                          type="email"
+                          className="form-control"
+                          id="floatingInput"
+                          name="email"
+                          value={email}
+                          onChange={(e) => onChange(e)}
+                          placeholder="nazwa@przyklad.com"
+                          required
+                        />
+                      </MDBCol>
+                      <div className="row"></div>
+                      <MDBCol md="3">
+                        <MDBInput
+                          type="text"
+                          className="form-control"
+                          id="floatingInput"
+                          name="username"
+                          value={username}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Nazwa użytkownika"
+                          required
+                        />
+                      </MDBCol>
+                      <MDBCol md="4">
+                        <MDBInput
+                          type="password"
+                          className="form-control"
+                          id="floatingPassword"
+                          name="password"
+                          value={password}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Hasło"
+                          required
+                        />
+                      </MDBCol>
+                      <MDBCol md="4">
+                        <MDBInput
+                          type="password"
+                          className="form-control"
+                          id="floatingPassword"
+                          name="re_password"
+                          value={re_password}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Powtórz hasło"
+                          required
+                        />
+                      </MDBCol>
+                      <div className="row"></div>
+                      <h3 className="h3  fw-normal text-center-dark">
+                        Infomacje adresowe
+                      </h3>
+                      <MDBCol md="4">
+                        <MDBInput
+                          type="text"
+                          className="form-control"
+                          id="country"
+                          name="country"
+                          value={country}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Kraj"
+                          required
+                        />
+                      </MDBCol>
+                      <MDBCol md="5">
+                        <MDBInput
+                          type="text"
+                          className="form-control"
+                          id="country"
+                          name="county"
+                          value={county}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Województwo/Prowincja"
+                        />
+                      </MDBCol>
+                      <div className="row"></div>
+                      <MDBCol md="5">
+                        <MDBInput
+                          type="text"
+                          className="form-control"
+                          id="street"
+                          name="street"
+                          value={street}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Ulica"
+                        />
+                      </MDBCol>
+                      <MDBCol md="2">
+                        <MDBInput
+                          type="text"
+                          className="form-control"
+                          id="buildingNumber"
+                          name="buildingNumber"
+                          value={buildingNumber}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Nr domu"
+                          required
+                        />
+                      </MDBCol>
+                      <MDBCol md="3">
+                        <MDBInput
+                          type="text"
+                          className="form-control"
+                          id="flatNumber"
+                          name="flatNumber"
+                          value={flatNumber}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Nr mieszkania"
+                        />
+                      </MDBCol>
+                      <div className="row"></div>
+                      <MDBCol md="3">
+                        <MDBInput
+                          type="text"
+                          pattern="[0-9]{2}-[0-9]{3}"
+                          className="form-control"
+                          id="zipcode"
+                          name="zipcode"
+                          value={zipcode}
+                          onChange={(e) => onChange(e)}
+                          placeholder="NN-NNN"
+                          // required
+                          // label="Kod pocztowy"
+                        />
+                      </MDBCol>
+                      <MDBCol md="5">
+                        <MDBInput
+                          type="text"
+                          className="form-control"
+                          id="city"
+                          name="city"
+                          value={city}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Miasto"
+                          required
+                          // label="Miasto"
+                        />
+                      </MDBCol>
+                      <div className="row"></div>
+                      <h1 className="h3  fw-normal text-center-dark">
+                        Infomacje o zatrudnieniu
+                      </h1>
+                      <MDBCol md="6">
+                        {teams.length === 0 ? (
+                          <select
+                            className="form-select"
+                            id="teamName"
+                            name="teamName"
+                            value={teamName}
+                            onChange={(e) => onChange(e)}
+                            placeholder="Zespół"
+                          >
+                            <option value="" disabled selected>
+                              Brak zespołów HR w systemie
+                            </option>
+                          </select>
+                        ) : (
+                          <select
+                            className="form-select"
+                            id="teamName"
+                            name="teamName"
+                            value={teamName}
+                            onChange={(e) => onChange(e)}
+                            placeholder="Zespół"
+                            required
+                          >
+                            <option selected disabled value="">
+                              Wybierz dział
+                            </option>
+                            {!loading &&
+                              !error &&
+                              teams.map((team) => (
+                                <option value={team["name"]}>
+                                  {team["description"]} ({team["name"]})
+                                </option>
+                              ))}
+                          </select>
+                        )}
+                      </MDBCol>
+                      <div className="row"></div>
+                      <MDBCol md="5">
+                        <MDBInput
+                          type="text"
+                          className="form-control"
+                          id="positionName"
+                          name="positionName"
+                          value={positionName}
+                          onChange={(e) => onChange(e)}
+                          placeholder="Stanowisko"
+                          required
+                        />
+                      </MDBCol>
+                      <MDBCol md="5">
+                        {hrAdmins.length === 0 ? (
+                          <select
+                            className="form-select"
+                            id="hrManager"
+                            name="hrManager"
+                            value={hrManager}
+                            onChange={(e) => onChange(e)}
+                            aria-label="Administartor HR"
+                          >
+                            <option value="" disabled selected>
+                              Brak managerów HR w systemie
+                            </option>
+                          </select>
+                        ) : (
+                          <select
+                            className="form-select"
+                            id="hrManager"
+                            name="hrManager"
+                            value={hrManager}
+                            onChange={(e) => onChange(e)}
+                            placeholder="Administartor HR"
+                            required
+                          >
+                            <option selected disabled value="">
+                              Wybierz administratora HR
+                            </option>
+                            {!loading &&
+                              !error &&
+                              hrAdmins.map((hrAdmin) => (
+                                <option value={hrAdmin["username"]}>
+                                  {hrAdmin["firstName"]} {hrAdmin["lastName"]} (
+                                  {hrAdmin["username"]})
+                                </option>
+                              ))}
+                          </select>
+                        )}
+                      </MDBCol>
+                      <div className="row"></div>
+                      <button
+                        className="w-100 btn btn-lg button-blue-2 top-space"
+                        type="submit"
+                      >
+                        Stwórz konto
+                      </button>
+                    </MDBRow>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  {isAuthenticated == true} ? (<ForbiddenPage />) : (
+                  <ForbiddenPage />)
+                </div>
+              )}
             </div>
-          ) : null}
-          {errMsg != null && errMsg != "" ? (
-            <div
-              className="alert alert-danger alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>{errMsg}</strong>{" "}
-            </div>
-          ) : null}
-          <div className="form-register top-space">
-            <MDBRow className="g-3" tag="form" onSubmit={(e) => onSubmit(e)}>
-              <h1 className="h3  fw-normal text-left">Infomacje podstawowe</h1>
-              <MDBCol md="4">
-                <MDBInput
-                  type="text"
-                  className="form-control"
-                  id="floatingInput"
-                  name="firstName"
-                  value={firstName}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Imię"
-                  required
-                />
-              </MDBCol>
-              <MDBCol md="4">
-                <MDBInput
-                  type="text"
-                  className="form-control"
-                  id="floatingInput"
-                  name="middleName"
-                  value={middleName}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Drugie imię"
-                />
-              </MDBCol>
-              <div className="row"></div>
-              <MDBCol md="5">
-                <MDBInput
-                  type="text"
-                  className="form-control"
-                  id="floatingInput"
-                  name="lastName"
-                  value={lastName}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Nazwisko"
-                  required
-                />
-              </MDBCol>{" "}
-              <MDBCol md="5">
-                <MDBInput
-                  type="email"
-                  className="form-control"
-                  id="floatingInput"
-                  name="email"
-                  value={email}
-                  onChange={(e) => onChange(e)}
-                  placeholder="nazwa@przyklad.com"
-                  required
-                />
-              </MDBCol>
-              <div className="row"></div>
-              <MDBCol md="3">
-                <MDBInput
-                  type="text"
-                  className="form-control"
-                  id="floatingInput"
-                  name="username"
-                  value={username}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Nazwa użytkownika"
-                  required
-                />
-              </MDBCol>
-              <MDBCol md="4">
-                <MDBInput
-                  type="password"
-                  className="form-control"
-                  id="floatingPassword"
-                  name="password"
-                  value={password}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Hasło"
-                  required
-                />
-              </MDBCol>
-              <MDBCol md="4">
-                <MDBInput
-                  type="password"
-                  className="form-control"
-                  id="floatingPassword"
-                  name="re_password"
-                  value={re_password}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Powtórz hasło"
-                  required
-                />
-              </MDBCol>
-              <div className="row"></div>
-              <h3 className="h3  fw-normal text-left">Infomacje adresowe</h3>
-              <MDBCol md="4">
-                <MDBInput
-                  type="text"
-                  className="form-control"
-                  id="country"
-                  name="country"
-                  value={country}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Kraj"
-                  required
-                />
-              </MDBCol>
-              <MDBCol md="5">
-                <MDBInput
-                  type="text"
-                  className="form-control"
-                  id="country"
-                  name="county"
-                  value={county}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Województwo/Prowincja"
-                />
-              </MDBCol>
-              <div className="row"></div>
-              <MDBCol md="5">
-                <MDBInput
-                  type="text"
-                  className="form-control"
-                  id="street"
-                  name="street"
-                  value={street}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Ulica"
-                />
-              </MDBCol>
-              <MDBCol md="2">
-                <MDBInput
-                  type="text"
-                  className="form-control"
-                  id="buildingNumber"
-                  name="buildingNumber"
-                  value={buildingNumber}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Nr domu"
-                  required
-                />
-              </MDBCol>
-              <MDBCol md="3">
-                <MDBInput
-                  type="text"
-                  className="form-control"
-                  id="flatNumber"
-                  name="flatNumber"
-                  value={flatNumber}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Nr mieszkania"
-                />
-              </MDBCol>
-              <div className="row"></div>
-              <MDBCol md="3">
-                <MDBInput
-                  type="text"
-                  pattern="[0-9]{2}-[0-9]{3}"
-                  className="form-control"
-                  id="zipcode"
-                  name="zipcode"
-                  value={zipcode}
-                  onChange={(e) => onChange(e)}
-                  placeholder="NN-NNN"
-                  // required
-                  // label="Kod pocztowy"
-                />
-              </MDBCol>
-              <MDBCol md="5">
-                <MDBInput
-                  type="text"
-                  className="form-control"
-                  id="city"
-                  name="city"
-                  value={city}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Miasto"
-                  required
-                  // label="Miasto"
-                />
-              </MDBCol>
-              <div className="row"></div>
-              <h1 className="h3  fw-normal text-left">
-                Infomacje o zatrudnieniu
-              </h1>
-              <MDBCol md="6">
-                {teams.length === 0 ? (
-                  <select
-                    className="form-select"
-                    id="teamName"
-                    name="teamName"
-                    value={teamName}
-                    onChange={(e) => onChange(e)}
-                    placeholder="Zespół"
-                  >
-                    <option value="" disabled selected>
-                      Brak zespołów HR w systemie
-                    </option>
-                  </select>
-                ) : (
-                  <select
-                    className="form-select"
-                    id="teamName"
-                    name="teamName"
-                    value={teamName}
-                    onChange={(e) => onChange(e)}
-                    placeholder="Zespół"
-                    required
-                  >
-                    <option selected disabled value="">
-                      Wybierz dział
-                    </option>
-                    {!loading &&
-                      !error &&
-                      teams.map((team) => (
-                        <option value={team["name"]}>
-                          {team["description"]} ({team["name"]})
-                        </option>
-                      ))}
-                  </select>
-                )}
-              </MDBCol>
-              <div className="row"></div>
-              <MDBCol md="5">
-                <MDBInput
-                  type="text"
-                  className="form-control"
-                  id="positionName"
-                  name="positionName"
-                  value={positionName}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Stanowisko"
-                  required
-                />
-              </MDBCol>
-              <MDBCol md="5">
-                {hrAdmins.length === 0 ? (
-                  <select
-                    className="form-select"
-                    id="hrManager"
-                    name="hrManager"
-                    value={hrManager}
-                    onChange={(e) => onChange(e)}
-                    aria-label="Administartor HR"
-                  >
-                    <option value="" disabled selected>
-                      Brak managerów HR w systemie
-                    </option>
-                  </select>
-                ) : (
-                  <select
-                    className="form-select"
-                    id="hrManager"
-                    name="hrManager"
-                    value={hrManager}
-                    onChange={(e) => onChange(e)}
-                    placeholder="Administartor HR"
-                    required
-                  >
-                    <option selected disabled value="">
-                      Wybierz administratora HR
-                    </option>
-                    {!loading &&
-                      !error &&
-                      hrAdmins.map((hrAdmin) => (
-                        <option value={hrAdmin["username"]}>
-                          {hrAdmin["firstName"]} {hrAdmin["lastName"]} (
-                          {hrAdmin["username"]})
-                        </option>
-                      ))}
-                  </select>
-                )}
-              </MDBCol>
-              <div className="row"></div>
-              <MDBBtn className="w-100 btn btn-lg button-blue" type="submit">
-                Stwórz konto
-              </MDBBtn>
-            </MDBRow>
           </div>
         </div>
-      ) : (
-        <div>
-          {isAuthenticated == true} ? (<Navigate to="/forbidden" />) : (
-          <Navigate to="/login" />)
-        </div>
-      )}
+      </div>
     </div>
   );
 };

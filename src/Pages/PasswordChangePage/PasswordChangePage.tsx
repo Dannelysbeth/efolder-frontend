@@ -1,14 +1,11 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
-// import "./RegisterPage.css";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { extendedSignup } from "../../Actions/auth";
 import { changePassword } from "../../Actions/auth";
-import { MDBBtn, MDBCol, MDBInput, MDBRow } from "mdb-react-ui-kit";
-import { Console } from "console";
+import { MDBInput, MDBRow } from "mdb-react-ui-kit";
 
-const PasswordChangePage = ({ user, errors, changePassword, message }) => {
+const PasswordChangePage = ({ changePassword }) => {
   const { username } = useParams();
   const [infoMessage, setInfoMessage] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -82,7 +79,7 @@ const PasswordChangePage = ({ user, errors, changePassword, message }) => {
             <button
               className="w-100 btn btn-lg button-blue-2 top-space"
               type="submit"
-              onClick={(e) => submitNewPasswd()}
+              onClick={() => submitNewPasswd()}
             >
               Zmień hasło
             </button>

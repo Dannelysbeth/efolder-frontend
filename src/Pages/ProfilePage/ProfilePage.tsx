@@ -195,34 +195,40 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
       <div>
         <div className="productsNav">
           <ul className="nav center">
-            {" "}
-            <li className="center">
-              <Link
-                className="btn btn-lg button-blue-3"
-                to={{ pathname: `/profil/info` }}
-              >
-                {" "}
-                Dane osobowe{" "}
-              </Link>
-            </li>
-            <li className="center">
-              <Link
-                className="btn btn-lg button-blue-3"
-                to={{ pathname: `/profil/dokumenty` }}
-              >
-                {" "}
-                Kartoteka{" "}
-              </Link>
-            </li>
-            <li className="center">
-              <Link
-                className="btn btn-lg button-blue-3"
-                to={{ pathname: `/profil/dodajDokumenty` }}
-              >
-                {" "}
-                <text className="center-text-2">Dodaj dokumenty </text>
-              </Link>
-            </li>
+            {checkIfRegularEmployee() == true ? (
+              <li className="center">
+                <Link
+                  className="btn btn-lg button-blue-3"
+                  to={{ pathname: `/profil/info` }}
+                >
+                  {" "}
+                  Dane osobowe{" "}
+                </Link>
+              </li>
+            ) : null}
+            {checkIfRegularEmployee() == true ? (
+              <li className="center">
+                <Link
+                  className="btn btn-lg button-blue-3"
+                  to={{ pathname: `/profil/dokumenty` }}
+                >
+                  {" "}
+                  Kartoteka{" "}
+                </Link>
+              </li>
+            ) : null}
+            {checkIfRegularEmployee() == true ? (
+              <li className="center">
+                <Link
+                  className="btn btn-lg button-blue-3"
+                  to={{ pathname: `/profil/dodajDokumenty` }}
+                >
+                  {" "}
+                  <text className="center-text-2">Dodaj dokumenty </text>
+                </Link>
+              </li>
+            ) : null}
+
             <li className="center">
               <Link
                 className="btn btn-lg button-blue-3"
