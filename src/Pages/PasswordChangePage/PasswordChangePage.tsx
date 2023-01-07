@@ -40,7 +40,7 @@ const PasswordChangePage = ({ user, errors, changePassword, message }) => {
   }, []);
 
   return (
-    <div className="d-flex flex-column min-vh-100 parent">
+    <div className="d-flex flex-column min-vh-100 parent-top ">
       <div className="d-flex flex-column  ">
         {infoMessage != null && infoMessage != "" ? (
           <div

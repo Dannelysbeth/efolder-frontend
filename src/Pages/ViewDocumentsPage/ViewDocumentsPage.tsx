@@ -2,10 +2,6 @@ import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 // import "./UserPage.css";
-import a_documents from "../../Data/documentsA";
-import b_documents from "../../Data/documentsA";
-import List from "../MyDocumentsPage/DocumentList";
-import { uploadFile, extendedSignup } from "../../Actions/auth";
 
 import { connect } from "react-redux";
 import {
