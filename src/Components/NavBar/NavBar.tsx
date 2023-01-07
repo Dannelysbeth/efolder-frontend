@@ -78,14 +78,17 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
               </h5>
             </li>
             <li>
-              <Link to="/profil" className="nav-link link-light dropdown-item ">
+              <Link
+                to="/profil/info"
+                className="nav-link link-light dropdown-item "
+              >
                 <MDBIcon far icon="user-circle" /> Profil
               </Link>
             </li>
             <li>
               {checkIfRegularEmployee() ? (
                 <Link
-                  to="/kartoteka"
+                  to="/profil/dokumenty/A"
                   className="nav-link link-light dropdown-item "
                 >
                   <MDBIcon fas icon="id-card" /> Moja kartoteka
@@ -94,7 +97,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
             </li>
             <li>
               <Link
-                to="/zmienHaslo"
+                to="/profil/zmienHaslo"
                 className="nav-link link-light dropdown-item "
               >
                 <MDBIcon fas icon="key" /> Zmień hasło
@@ -222,7 +225,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
             </li>
             <li className="nav-item center-text-2">
               <Link to="/" className="nav-link link-light active">
-                <MDBIcon fas icon="home" /> O nas
+                O nas
               </Link>
             </li>
 

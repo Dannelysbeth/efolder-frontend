@@ -69,7 +69,7 @@ const EmployeeListPage = ({ user }) => {
   }, []);
 
   return (
-    <div>
+    <div className="backgd-2 padding-employee">
       <p>
         <p></p>
       </p>
@@ -107,12 +107,12 @@ const EmployeeListPage = ({ user }) => {
                     <p className="text-muted mb-0">{user.teamName}</p>
                   </div>
                 </div>
-                <button className="btn btn-info btn-sm ">
+                <button className=" btn-sm button-blue-2 ">
                   <Link
                     className="nav-link active"
                     to={{ pathname: `/user/${user.username}/daneOsobowe` }}
                   >
-                    <i className="fas fa-eye"></i>
+                    <i className="fas fas-white fa-eye"></i>
                   </Link>
                 </button>
               </MDBListGroupItem>

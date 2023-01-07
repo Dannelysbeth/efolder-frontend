@@ -56,14 +56,14 @@ const routing = (
               </Route>
               <Route path="/:profil" element={<ProfilePage />}>
                 <Route path="info" element={<PersonalInfoPage />} />
-                <Route path="profil/:kartoteka/" element={<DocumentsPage />}>
-                  <Route path="dokumenty" element={<MyFilesPage />}>
-                    <Route path="A" element={<AFilesPage />} />
-                    <Route path="B" element={<BFilePage />} />
-                    <Route path="C" element={<CFilesPage />} />
-                    <Route path="D" element={<DFilesPage />} />
-                  </Route>
+                {/* <Route path="kartoteka/" element={<DocumentsPage />}> */}
+                <Route path="dokumenty" element={<MyFilesPage />}>
+                  <Route path="A" element={<AFilesPage />} />
+                  <Route path="B" element={<BFilePage />} />
+                  <Route path="C" element={<CFilesPage />} />
+                  <Route path="D" element={<DFilesPage />} />
                 </Route>
+                {/* </Route> */}
                 <Route path="dodajDokumenty" element={<UploadMyFilesPage />} />
                 <Route path="zmienHaslo" element={<ChangeOwnPasswordPage />} />
               </Route>

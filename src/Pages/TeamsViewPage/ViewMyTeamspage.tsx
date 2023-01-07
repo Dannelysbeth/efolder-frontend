@@ -88,55 +88,61 @@ const ViewMyTeamspage = ({ user }) => {
   }, []);
 
   return (
-    <div className="backgd team-container">
-      <MDBCardHeader>
-        <h1 className="text-center">Moje zespoły</h1>
-      </MDBCardHeader>
-      {checkIfTeamLeader() ? (
-        <MDBListGroup style={{ minWidth: "22rem" }} light>
-          {teams.length === 0 ? (
-            <h3>Brak zespołów w systemie</h3>
-          ) : (
-            teams != null &&
-            teams.map((team) => (
-              <MDBListGroupItem className="d-flex justify-content-between align-items-center">
-                <div className="row">
-                  <h4 className="d-flex justify-content-between align-items-center">
-                    {team.name}
-                  </h4>
-                  <div className="d-flex align-items-center">
-                    <div className="ms-3">
-                      <p className="fw-bold mb-1">
-                        Lider zespołu: {team.teamLeader.firstName}
-                        {team.teamLeader.middleName != null
-                          ? " " + team.teamLeader.middleName
-                          : null}{" "}
-                        {team.teamLeader.lastName}
-                      </p>
-                      <p className="text-muted mb-0">
-                        Ilość pracowników w zespole: {team.teamSize}
-                      </p>
+    <div className="backgd-2 padding-employee">
+      <div className=" team-container">
+        <MDBCardHeader>
+          <h1 className="text-center">Moje zespoły</h1>
+        </MDBCardHeader>
+        {checkIfTeamLeader() ? (
+          <MDBListGroup style={{ minWidth: "22rem" }} light>
+            {teams.length === 0 ? (
+              <h3>Brak zespołów w systemie</h3>
+            ) : (
+              teams != null &&
+              teams.map((team) => (
+                <MDBListGroupItem
+                  className="d-flex justify-content-between align-items-center "
+                  type="button"
+                  to={{ pathname: `/team/${team.name}` }}
+                >
+                  <div className="row">
+                    <h4 className="d-flex justify-content-between align-items-center">
+                      {team.name}
+                    </h4>
+                    <div className="d-flex align-items-center">
+                      <div className="ms-3">
+                        <p className="fw-bold mb-1">
+                          Lider zespołu: {team.teamLeader.firstName}
+                          {team.teamLeader.middleName != null
+                            ? " " + team.teamLeader.middleName
+                            : null}{" "}
+                          {team.teamLeader.lastName}
+                        </p>
+                        <p className="text-muted mb-0">
+                          Ilość pracowników w zespole: {team.teamSize}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <button className="btn btn-info btn-sm ">
-                  <Link
-                    className="nav-link active"
-                    to={{ pathname: `/team/${team.name}` }}
-                  >
-                    <i className="fas fa-eye"></i>
-                  </Link>
-                </button>
-              </MDBListGroupItem>
-            ))
-          )}
-        </MDBListGroup>
-      ) : (
-        <div>
-          {user == null} ? (<ForbiddenPage />) : (
-          <ForbiddenPage />)
-        </div>
-      )}
+                  <button className="btn btn-info btn-sm button-blue-2">
+                    <Link
+                      className="nav-link active"
+                      to={{ pathname: `/team/${team.name}` }}
+                    >
+                      <i className="fas fas-white fa-eye"></i>
+                    </Link>
+                  </button>
+                </MDBListGroupItem>
+              ))
+            )}
+          </MDBListGroup>
+        ) : (
+          <div>
+            {user == null} ? (<ForbiddenPage />) : (
+            <ForbiddenPage />)
+          </div>
+        )}
+      </div>
     </div>
   );
 };

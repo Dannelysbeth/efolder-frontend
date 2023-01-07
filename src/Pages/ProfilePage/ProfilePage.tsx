@@ -208,7 +208,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
             <li className="center">
               <Link
                 className="btn btn-lg button-blue-3"
-                to={{ pathname: `profil/kartoteka/dokumenty` }}
+                to={{ pathname: `/profil/dokumenty` }}
               >
                 {" "}
                 Kartoteka{" "}

@@ -201,20 +201,22 @@ const TeamPage = ({ user, updateTeam }) => {
         <div>
           <div>
             {checkIfCanViewPage() ? (
-              <div className="backgd d-flex flex-column min-vh-100">
+              <div className="backgd d-flex flex-column min-vh-100 ">
                 <div className="">
                   <p>
                     <p></p>
                   </p>
-                  <div className="row user-container justify-content-center">
-                    <h3 className="justify-content-center">{team["name"]} </h3>
-                    <h5>
+                  <div className="row user-container-2 justify-content-center center">
+                    <h3 className="center-text-2 justify-content-center">
+                      {team["name"]}{" "}
+                    </h3>
+                    <h5 className="center-text-3">
                       {team["description"] != null && team["description"] != ""
                         ? team["description"]
                         : null}
                     </h5>
 
-                    <div className="d-flex align-items-center">
+                    <div className="center d-flex align-items-center">
                       <img
                         src={
                           team["teamLeader"] && team["teamLeader"]["imageUrl"]
@@ -224,23 +226,22 @@ const TeamPage = ({ user, updateTeam }) => {
                         }
                         alt=""
                         style={{ width: "100px", height: "100px" }}
-                        className="rounded-circle"
+                        className="rounded-circle-2"
                       />
-                      <div className="ms-3">
-                        <p className="fw-bold mb-2">
-                          Lider zespołu:{" "}
-                          {team["teamLeader"] &&
-                            team["teamLeader"]["firstName"]}{" "}
-                          {team["teamLeader"] &&
-                          team["teamLeader"]["middleName"] != null
-                            ? team["teamLeader"]["middleName"] + " "
-                            : null}
-                          {team["teamLeader"] && team["teamLeader"]["lastName"]}
-                        </p>
-                        <p className="text-muted mb-0">
-                          Ilość pracowników w zespole: {team["teamSize"]}
-                        </p>
-                      </div>
+                    </div>
+                    <div className=" ms-3">
+                      <p className="fw-bold mb-2 center-text-2">
+                        Lider zespołu:{" "}
+                        {team["teamLeader"] && team["teamLeader"]["firstName"]}{" "}
+                        {team["teamLeader"] &&
+                        team["teamLeader"]["middleName"] != null
+                          ? team["teamLeader"]["middleName"] + " "
+                          : null}
+                        {team["teamLeader"] && team["teamLeader"]["lastName"]}
+                      </p>
+                      <p className="text-muted mb-0 center-text-2">
+                        Ilość pracowników w zespole: {team["teamSize"]}
+                      </p>
                     </div>
                   </div>{" "}
                   <p>
@@ -249,10 +250,10 @@ const TeamPage = ({ user, updateTeam }) => {
                   {checkIfAdmin() ? (
                     <div>
                       {" "}
-                      <div className="center">
+                      <div className="center  d-flex flex-col  ">
                         <button
                           // size="sm"
-                          className="btn button-blue-2 "
+                          className="btn button-blue-2 d-flex flex-col team-button-container center"
                           // rounded
                           onClick={editTeamToggleShow}
                         >
@@ -267,11 +268,11 @@ const TeamPage = ({ user, updateTeam }) => {
                         <MDBModalDialog>
                           <MDBModalContent>
                             <MDBModalHeader>
-                              <MDBBtn
+                              <button
                                 className="btn-close"
                                 color="none"
                                 onClick={editTeamToggleShow}
-                              ></MDBBtn>
+                              ></button>
                             </MDBModalHeader>
                             <MDBModalBody>
                               <MDBCol md="7">
@@ -338,18 +339,20 @@ const TeamPage = ({ user, updateTeam }) => {
                             </MDBModalBody>
 
                             <MDBModalFooter>
-                              <MDBBtn
+                              <button
+                                className="btn btn-secondary"
                                 color="secondary"
                                 onClick={editTeamToggleShow}
                               >
                                 Anuluj
-                              </MDBBtn>
-                              <MDBBtn
+                              </button>
+                              <button
+                                className="btn btn-primary"
                                 color="primary"
                                 onClick={(e) => onUpdateTeam(e)}
                               >
                                 Zapisz
-                              </MDBBtn>
+                              </button>
                             </MDBModalFooter>
                           </MDBModalContent>
                         </MDBModalDialog>
@@ -362,67 +365,75 @@ const TeamPage = ({ user, updateTeam }) => {
                     light
                   >
                     {team["employees"] && team["employees"].length === 0 ? (
-                      <h3>Ten zepół nie posiada pracowników</h3>
+                      <div className="team-empty-container">
+                        <h3 className="team-empty-container center">
+                          Ten zepół nie posiada pracowników
+                        </h3>
+                      </div>
                     ) : (
                       team["employees"] &&
                       team["employees"].map((user) => (
-                        <MDBListGroupItem className="d-flex justify-content-between align-items-center">
-                          <div className="d-flex align-items-center">
-                            <img
-                              src={
-                                user["imageUrl"]
-                                  ? user["imageUrl"]
-                                  : "https://i.imgur.com/teiJw8H.png"
-                              }
-                              alt=""
-                              style={{ width: "45px", height: "45px" }}
-                              className="rounded-circle"
-                            />
-                            <div className="ms-3">
-                              <p className="fw-bold mb-1">
-                                {user.firstName}
-                                {user.middleName != null
-                                  ? " " + user.middleName
-                                  : null}{" "}
-                                {user.lastName}
-                              </p>
-                              <p className="text-muted mb-0">
-                                {user.positionName}
-                              </p>
-                              <p className="text-muted mb-0">{user.teamName}</p>
+                        <div>
+                          <MDBListGroupItem className="d-flex justify-content-between align-items-center">
+                            <div className="d-flex align-items-center">
+                              <img
+                                src={
+                                  user["imageUrl"]
+                                    ? user["imageUrl"]
+                                    : "https://i.imgur.com/teiJw8H.png"
+                                }
+                                alt=""
+                                style={{ width: "45px", height: "45px" }}
+                                className="rounded-circle"
+                              />
+                              <div className="ms-3">
+                                <p className="fw-bold mb-1">
+                                  {user.firstName}
+                                  {user.middleName != null
+                                    ? " " + user.middleName
+                                    : null}{" "}
+                                  {user.lastName}
+                                </p>
+                                <p className="text-muted mb-0">
+                                  {user.positionName}
+                                </p>
+                                <p className="text-muted mb-0">
+                                  {user.teamName}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                          {checkIfAdmin() ? (
-                            <button className="btn btn-info btn-sm button-blue-2">
-                              <Link
-                                className="nav-link active"
-                                to={{
-                                  pathname: `/user/${user.username}/daneOsobowe`,
-                                }}
-                              >
-                                <i className="fas  fas-white fa-eye"></i>
-                              </Link>
-                            </button>
-                          ) : null}
-                        </MDBListGroupItem>
+                            {checkIfAdmin() ? (
+                              <button className="btn btn-info btn-sm button-blue-2">
+                                <Link
+                                  className="nav-link active"
+                                  to={{
+                                    pathname: `/user/${user.username}/daneOsobowe`,
+                                  }}
+                                >
+                                  <i className="fas  fas-white fa-eye"></i>
+                                </Link>
+                              </button>
+                            ) : null}
+                          </MDBListGroupItem>
+                        </div>
                       ))
                     )}
                   </MDBListGroup>
                 </div>{" "}
                 {checkIfAdmin() ? (
-                  <div className="d-flex justify-content-center">
+                  <div className="d-flex justify-content-center ">
                     {" "}
                     <p>
                       <p></p>
                     </p>{" "}
-                    <MDBBtn
-                      size="sm"
-                      className="btn btn-danger btn-sm "
-                      rounded
-                      onClick={deleteTeamToggleShow}
-                    >
-                      <span className="fa fa-trash fa-little"></span>
-                    </MDBBtn>
+                    <div className="center  d-flex flex-col min-vw-100">
+                      <button
+                        className="btn btn-danger d-flex flex-col team-button-container center"
+                        onClick={deleteTeamToggleShow}
+                      >
+                        <span className="fa fa-trash fa-little"></span>
+                      </button>
+                    </div>
                     <p>
                       <p></p>
                     </p>
@@ -488,6 +499,7 @@ const TeamPage = ({ user, updateTeam }) => {
 
                       <MDBModalFooter>
                         <MDBBtn
+                          className=""
                           color="secondary"
                           onClick={deleteTeamFailToggleShow}
                         >

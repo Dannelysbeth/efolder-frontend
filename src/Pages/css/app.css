@@ -46,6 +46,9 @@
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
 }
+.padding-employee {
+  padding: 50px;
+}
 
 .form-document-upload {
   width: 100%;
@@ -342,7 +345,28 @@ team-inner-container {
   /* padding: 20px; */
   margin: auto;
   background-color: none;
-  /* border-radius: 20px; */
+  border-radius: 20px;
+  border-color: #1d2223;
+  box-shadow: 20px 20px 50px #1d2223;
+}
+.team-button-container {
+  width: 80%;
+  max-height: 100vh;
+
+  margin: auto;
+  background-color: none;
+  border-radius: 10px;
+  border-color: #1d2223;
+  box-shadow: 20px 20px 50px #1d2223;
+}
+.team-empty-container {
+  min-height: 300px;
+  max-height: 100vh;
+  background-color: #ffffff;
+  width: 80%;
+  margin: auto;
+  background-color: none;
+  border-radius: 10px;
   border-color: #1d2223;
   box-shadow: 20px 20px 50px #1d2223;
 }

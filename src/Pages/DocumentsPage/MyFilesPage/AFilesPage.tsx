@@ -122,7 +122,7 @@ const AFilesPage = ({ user }) => {
   }, []);
 
   return (
-    <div>
+    <div className="team-members-container parent">
       {documents == null || documents.length === 0 ? (
         <h3>Brak dokumentów</h3>
       ) : (

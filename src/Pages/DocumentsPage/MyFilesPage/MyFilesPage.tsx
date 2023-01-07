@@ -26,6 +26,42 @@ const DocumentsPage = ({ user, isAuthenticated }) => {
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
+  const [documentsA, setDocumentsA] = useState([
+    {
+      id: 0,
+      name: "",
+      category: "",
+      size: 0,
+      uploadFile: "",
+    },
+  ]);
+  const [documentsB, setDocumentsB] = useState([
+    {
+      id: 0,
+      name: "",
+      category: "",
+      size: 0,
+      uploadFile: "",
+    },
+  ]);
+  const [documentsC, setDocumentsC] = useState([
+    {
+      id: 0,
+      name: "",
+      category: "",
+      size: 0,
+      uploadFile: "",
+    },
+  ]);
+  const [documentsD, setDocumentsD] = useState([
+    {
+      id: 0,
+      name: "",
+      category: "",
+      size: 0,
+      uploadFile: "",
+    },
+  ]);
 
   function checkIfRegularEmployee(): boolean {
     loadUser();
@@ -46,41 +82,41 @@ const DocumentsPage = ({ user, isAuthenticated }) => {
   const returnUserPage = () => (
     <div>
       {checkIfRegularEmployee() ? (
-        <div>
+        <div className="flex-column text-center">
           <div className="productsNav">
-            <ul className="nav nav-tabs">
+            <ul className="nav center">
               {" "}
-              <li className="nav-item">
+              <li className="center">
                 <Link
-                  className="nav-link active"
-                  to={{ pathname: `/kartoteka/dokumenty/A` }}
+                  className="btn btn-bold btn-lg button-blue-3"
+                  to={{ pathname: `/profil/dokumenty/A` }}
                 >
                   {" "}
                   A{" "}
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="center">
                 <Link
-                  className="nav-link active"
-                  to={{ pathname: `/kartoteka/dokumenty/B` }}
+                  className="btn btn-bold btn-lg button-blue-3"
+                  to={{ pathname: `/profil/dokumenty/B` }}
                 >
                   {" "}
                   B{" "}
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="center">
                 <Link
-                  className="nav-link active"
-                  to={{ pathname: `/kartoteka/dokumenty/C` }}
+                  className="btn btn-bold btn-lg button-blue-3"
+                  to={{ pathname: `/profil/dokumenty/C` }}
                 >
                   {" "}
                   C{" "}
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="center">
                 <Link
-                  className="nav-link active"
-                  to={{ pathname: `/kartoteka/dokumenty/D` }}
+                  className="btn btn-bold btn-lg button-blue-3"
+                  to={{ pathname: `/profil/dokumenty/D` }}
                 >
                   {" "}
                   D{" "}
