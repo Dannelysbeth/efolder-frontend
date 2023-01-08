@@ -1,6 +1,6 @@
 import React from "react";
 import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, Outlet, useParams } from "react-router-dom";
 // import "./UserPage.css";
 
 import { connect } from "react-redux";
@@ -242,236 +242,284 @@ const ViewDocumentsPage = () => {
   };
 
   return (
-    <div className=" d-flex flex-column min-vh-100 ">
-      <div className="d-flex flex-column min-vh-100 userPage-text mt-3">
-        <>
-          <MDBRow>
-            <MDBCol size="3">
-              <MDBTabs pills className="flex-column text-center ">
-                <MDBTabsItem className="">
-                  <MDBTabsLink
-                    onClick={() => handleVerticalClick("tab1")}
-                    active={verticalActive === "tab1"}
-                  >
-                    A
-                  </MDBTabsLink>
-                </MDBTabsItem>
-                <MDBTabsItem>
-                  <MDBTabsLink
-                    onClick={() => handleVerticalClick("tab2")}
-                    active={verticalActive === "tab2"}
-                  >
-                    B
-                  </MDBTabsLink>
-                </MDBTabsItem>
-                <MDBTabsItem>
-                  <MDBTabsLink
-                    onClick={() => handleVerticalClick("tab3")}
-                    active={verticalActive === "tab3"}
-                  >
-                    C
-                  </MDBTabsLink>
-                </MDBTabsItem>
-                <MDBTabsItem>
-                  <MDBTabsLink
-                    onClick={() => handleVerticalClick("tab4")}
-                    active={verticalActive === "tab4"}
-                  >
-                    D
-                  </MDBTabsLink>
-                </MDBTabsItem>
-              </MDBTabs>
-            </MDBCol>
-            <MDBCol size="9">
-              <MDBTabsContent className="documents-container">
-                <MDBTabsPane show={verticalActive === "tab1"}>
-                  {documentsA.length === 0 ? (
-                    <h3>Brak dokumentów</h3>
-                  ) : (
-                    documentsA.map((document, index) => {
-                      return (
-                        <div key={document.id}>
-                          <MDBListGroupItem className="d-flex justify-content-between align-items-center">
-                            <div className="row d-flex align-items-center">
-                              <div className="col-2">
-                                <i className="fas fa-file-pdf"></i>
-                              </div>
+    // <div className=" d-flex flex-column min-vh-100 ">
+    //   <div className="d-flex flex-column min-vh-100 userPage-text mt-3">
+    //     <>
+    //       <MDBRow>
+    //         <MDBCol size="3">
+    //           <MDBTabs pills className="flex-column text-center ">
+    //             <MDBTabsItem className="">
+    //               <MDBTabsLink
+    //                 onClick={() => handleVerticalClick("tab1")}
+    //                 active={verticalActive === "tab1"}
+    //               >
+    //                 A
+    //               </MDBTabsLink>
+    //             </MDBTabsItem>
+    //             <MDBTabsItem>
+    //               <MDBTabsLink
+    //                 onClick={() => handleVerticalClick("tab2")}
+    //                 active={verticalActive === "tab2"}
+    //               >
+    //                 B
+    //               </MDBTabsLink>
+    //             </MDBTabsItem>
+    //             <MDBTabsItem>
+    //               <MDBTabsLink
+    //                 onClick={() => handleVerticalClick("tab3")}
+    //                 active={verticalActive === "tab3"}
+    //               >
+    //                 C
+    //               </MDBTabsLink>
+    //             </MDBTabsItem>
+    //             <MDBTabsItem>
+    //               <MDBTabsLink
+    //                 onClick={() => handleVerticalClick("tab4")}
+    //                 active={verticalActive === "tab4"}
+    //               >
+    //                 D
+    //               </MDBTabsLink>
+    //             </MDBTabsItem>
+    //           </MDBTabs>
+    //         </MDBCol>
+    //         <MDBCol size="9">
+    //           <MDBTabsContent className="documents-container">
+    //             <MDBTabsPane show={verticalActive === "tab1"}>
+    //               {documentsA.length === 0 ? (
+    //                 <h3>Brak dokumentów</h3>
+    //               ) : (
+    //                 documentsA.map((document, index) => {
+    //                   return (
+    //                     <div key={document.id}>
+    //                       <MDBListGroupItem className="d-flex justify-content-between align-items-center">
+    //                         <div className="row d-flex align-items-center">
+    //                           <div className="col-2">
+    //                             <i className="fas fa-file-pdf"></i>
+    //                           </div>
 
-                              <div className="col-12 ms-3">
-                                <p className="fw-bold mb-1">{document.name}</p>
-                                <p className="text-muted mb-0">
-                                  {document.size}
-                                </p>
-                              </div>
-                            </div>
-                            <div
-                              className="btn-group"
-                              role="group"
-                              aria-label="Basic example"
-                            >
-                              <button
-                                type="button"
-                                className="btn btn-primary "
-                                onClick={(e) => onDocumentSubmit(document, e)}
-                              >
-                                <i className="fas fa-download"></i>
-                              </button>
-                              <button
-                                type="button"
-                                className="btn btn-danger"
-                                onClick={(e) => deleteItem(document)}
-                              >
-                                <i className="fas fa-trash-alt"></i>
-                              </button>
-                            </div>
-                          </MDBListGroupItem>
-                        </div>
-                      );
-                    })
-                  )}
-                </MDBTabsPane>
-                <MDBTabsPane show={verticalActive === "tab2"}>
-                  {documentsB.length === 0 ? (
-                    <h3>Brak dokumentów</h3>
-                  ) : (
-                    documentsB.map((document, index) => {
-                      return (
-                        <div key={document.id}>
-                          <MDBListGroupItem className="d-flex justify-content-between align-items-center">
-                            <div className="row d-flex align-items-center">
-                              <div className="col-2">
-                                <i className="fas fa-file-pdf"></i>
-                              </div>
+    //                           <div className="col-12 ms-3">
+    //                             <p className="fw-bold mb-1">{document.name}</p>
+    //                             <p className="text-muted mb-0">
+    //                               {document.size}
+    //                             </p>
+    //                           </div>
+    //                         </div>
+    //                         <div
+    //                           className="btn-group"
+    //                           role="group"
+    //                           aria-label="Basic example"
+    //                         >
+    //                           <button
+    //                             type="button"
+    //                             className="btn btn-primary "
+    //                             onClick={(e) => onDocumentSubmit(document, e)}
+    //                           >
+    //                             <i className="fas fa-download"></i>
+    //                           </button>
+    //                           <button
+    //                             type="button"
+    //                             className="btn btn-danger"
+    //                             onClick={(e) => deleteItem(document)}
+    //                           >
+    //                             <i className="fas fa-trash-alt"></i>
+    //                           </button>
+    //                         </div>
+    //                       </MDBListGroupItem>
+    //                     </div>
+    //                   );
+    //                 })
+    //               )}
+    //             </MDBTabsPane>
+    //             <MDBTabsPane show={verticalActive === "tab2"}>
+    //               {documentsB.length === 0 ? (
+    //                 <h3>Brak dokumentów</h3>
+    //               ) : (
+    //                 documentsB.map((document, index) => {
+    //                   return (
+    //                     <div key={document.id}>
+    //                       <MDBListGroupItem className="d-flex justify-content-between align-items-center">
+    //                         <div className="row d-flex align-items-center">
+    //                           <div className="col-2">
+    //                             <i className="fas fa-file-pdf"></i>
+    //                           </div>
 
-                              <div className="col-12 ms-3">
-                                <p className="fw-bold mb-1">{document.name}</p>
-                                <p className="text-muted mb-0">
-                                  {document.size}
-                                </p>
-                              </div>
-                            </div>
-                            <div
-                              className="btn-group"
-                              role="group"
-                              aria-label="Basic example"
-                            >
-                              <button
-                                type="button"
-                                className="btn btn-primary "
-                                onClick={(e) => onDocumentSubmit(document, e)}
-                              >
-                                <i className="fas fa-download"></i>
-                              </button>
-                              <button
-                                type="button"
-                                className="btn btn-danger"
-                                onClick={(e) => deleteItem(document)}
-                              >
-                                <i className="fas fa-trash-alt"></i>
-                              </button>
-                            </div>
-                          </MDBListGroupItem>
-                        </div>
-                      );
-                    })
-                  )}
-                </MDBTabsPane>
-                <MDBTabsPane show={verticalActive === "tab3"}>
-                  {documentsC.length === 0 ? (
-                    <h3>Brak dokumentów</h3>
-                  ) : (
-                    documentsC.map((document, index) => {
-                      return (
-                        <div key={document.id}>
-                          <MDBListGroupItem className="d-flex justify-content-between align-items-center">
-                            <div className="row d-flex align-items-center">
-                              <div className="col-2">
-                                <i className="fas fa-file-pdf"></i>
-                              </div>
+    //                           <div className="col-12 ms-3">
+    //                             <p className="fw-bold mb-1">{document.name}</p>
+    //                             <p className="text-muted mb-0">
+    //                               {document.size}
+    //                             </p>
+    //                           </div>
+    //                         </div>
+    //                         <div
+    //                           className="btn-group"
+    //                           role="group"
+    //                           aria-label="Basic example"
+    //                         >
+    //                           <button
+    //                             type="button"
+    //                             className="btn btn-primary "
+    //                             onClick={(e) => onDocumentSubmit(document, e)}
+    //                           >
+    //                             <i className="fas fa-download"></i>
+    //                           </button>
+    //                           <button
+    //                             type="button"
+    //                             className="btn btn-danger"
+    //                             onClick={(e) => deleteItem(document)}
+    //                           >
+    //                             <i className="fas fa-trash-alt"></i>
+    //                           </button>
+    //                         </div>
+    //                       </MDBListGroupItem>
+    //                     </div>
+    //                   );
+    //                 })
+    //               )}
+    //             </MDBTabsPane>
+    //             <MDBTabsPane show={verticalActive === "tab3"}>
+    //               {documentsC.length === 0 ? (
+    //                 <h3>Brak dokumentów</h3>
+    //               ) : (
+    //                 documentsC.map((document, index) => {
+    //                   return (
+    //                     <div key={document.id}>
+    //                       <MDBListGroupItem className="d-flex justify-content-between align-items-center">
+    //                         <div className="row d-flex align-items-center">
+    //                           <div className="col-2">
+    //                             <i className="fas fa-file-pdf"></i>
+    //                           </div>
 
-                              <div className="col-12 ms-3">
-                                <p className="fw-bold mb-1">{document.name}</p>
-                                <p className="text-muted mb-0">
-                                  {document.size}
-                                </p>
-                              </div>
-                            </div>
-                            <div
-                              className="btn-group"
-                              role="group"
-                              aria-label="Basic example"
-                            >
-                              <button
-                                type="button"
-                                className="btn btn-primary "
-                                onClick={(e) => onDocumentSubmit(document, e)}
-                              >
-                                <i className="fas fa-download"></i>
-                              </button>
-                              <button
-                                type="button"
-                                className="btn btn-danger"
-                                onClick={(e) => deleteItem(document)}
-                              >
-                                <i className="fas fa-trash-alt"></i>
-                              </button>
-                            </div>
-                          </MDBListGroupItem>
-                        </div>
-                      );
-                    })
-                  )}
-                </MDBTabsPane>
-                <MDBTabsPane show={verticalActive === "tab4"}>
-                  {documentsD.length === 0 ? (
-                    <h3>Brak dokumentów</h3>
-                  ) : (
-                    documentsD.map((document, index) => {
-                      return (
-                        <div key={document.id}>
-                          <MDBListGroupItem className="d-flex justify-content-between align-items-center">
-                            <div className="row d-flex align-items-center">
-                              <div className="col-2">
-                                <i className="fas fa-file-pdf"></i>
-                              </div>
+    //                           <div className="col-12 ms-3">
+    //                             <p className="fw-bold mb-1">{document.name}</p>
+    //                             <p className="text-muted mb-0">
+    //                               {document.size}
+    //                             </p>
+    //                           </div>
+    //                         </div>
+    //                         <div
+    //                           className="btn-group"
+    //                           role="group"
+    //                           aria-label="Basic example"
+    //                         >
+    //                           <button
+    //                             type="button"
+    //                             className="btn btn-primary "
+    //                             onClick={(e) => onDocumentSubmit(document, e)}
+    //                           >
+    //                             <i className="fas fa-download"></i>
+    //                           </button>
+    //                           <button
+    //                             type="button"
+    //                             className="btn btn-danger"
+    //                             onClick={(e) => deleteItem(document)}
+    //                           >
+    //                             <i className="fas fa-trash-alt"></i>
+    //                           </button>
+    //                         </div>
+    //                       </MDBListGroupItem>
+    //                     </div>
+    //                   );
+    //                 })
+    //               )}
+    //             </MDBTabsPane>
+    //             <MDBTabsPane show={verticalActive === "tab4"}>
+    //               {documentsD.length === 0 ? (
+    //                 <h3>Brak dokumentów</h3>
+    //               ) : (
+    //                 documentsD.map((document, index) => {
+    //                   return (
+    //                     <div key={document.id}>
+    //                       <MDBListGroupItem className="d-flex justify-content-between align-items-center">
+    //                         <div className="row d-flex align-items-center">
+    //                           <div className="col-2">
+    //                             <i className="fas fa-file-pdf"></i>
+    //                           </div>
 
-                              <div className="col-12 ms-3">
-                                <p className="fw-bold mb-1">{document.name}</p>
-                                <p className="text-muted mb-0">
-                                  {document.size}
-                                </p>
-                              </div>
-                            </div>
-                            <div
-                              className="btn-group"
-                              role="group"
-                              aria-label="Basic example"
-                            >
-                              <button
-                                type="button"
-                                className="btn btn-primary "
-                                onClick={(e) => onDocumentSubmit(document, e)}
-                              >
-                                <i className="fas fa-download"></i>
-                              </button>
-                              <button
-                                type="button"
-                                className="btn btn-danger"
-                                onClick={(e) => deleteItem(document)}
-                              >
-                                <i className="fas fa-trash-alt"></i>
-                              </button>
-                            </div>
-                          </MDBListGroupItem>
-                        </div>
-                      );
-                    })
-                  )}
-                </MDBTabsPane>
-              </MDBTabsContent>
-            </MDBCol>
-          </MDBRow>
-        </>
+    //                           <div className="col-12 ms-3">
+    //                             <p className="fw-bold mb-1">{document.name}</p>
+    //                             <p className="text-muted mb-0">
+    //                               {document.size}
+    //                             </p>
+    //                           </div>
+    //                         </div>
+    //                         <div
+    //                           className="btn-group"
+    //                           role="group"
+    //                           aria-label="Basic example"
+    //                         >
+    //                           <button
+    //                             type="button"
+    //                             className="btn btn-primary "
+    //                             onClick={(e) => onDocumentSubmit(document, e)}
+    //                           >
+    //                             <i className="fas fa-download"></i>
+    //                           </button>
+    //                           <button
+    //                             type="button"
+    //                             className="btn btn-danger"
+    //                             onClick={(e) => deleteItem(document)}
+    //                           >
+    //                             <i className="fas fa-trash-alt"></i>
+    //                           </button>
+    //                         </div>
+    //                       </MDBListGroupItem>
+    //                     </div>
+    //                   );
+    //                 })
+    //               )}
+    //             </MDBTabsPane>
+    //           </MDBTabsContent>
+    //         </MDBCol>
+    //       </MDBRow>
+    //     </>
+    //   </div>
+    // </div>
+    <div>
+      <div className=" text-center row ">
+        <div className="productsNav col-2 center">
+          <ul className="nav center flex-column text-center ">
+            {" "}
+            <li className="center">
+              <Link
+                className="btn btn-bold btn-lg button-blue-3"
+                to={{ pathname: `/user/${username}/kartoteka/A` }}
+              >
+                {" "}
+                A{" "}
+              </Link>
+            </li>
+            <li className="center">
+              <Link
+                className="btn btn-bold btn-lg button-blue-3"
+                to={{ pathname: `/user/${username}/kartoteka/B` }}
+              >
+                {" "}
+                B{" "}
+              </Link>
+            </li>
+            <li className="center">
+              <Link
+                className="btn btn-bold btn-lg button-blue-3"
+                to={{ pathname: `/user/${username}/kartoteka/C` }}
+              >
+                {" "}
+                C{" "}
+              </Link>
+            </li>
+            <li className="center">
+              <Link
+                className="btn btn-bold btn-lg button-blue-3"
+                to={{ pathname: `/user/${username}/kartoteka/D` }}
+              >
+                {" "}
+                D{" "}
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className="col-9 top-space bottom-space">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

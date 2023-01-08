@@ -163,6 +163,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(DFilesPage);
-function FileDownload(data: any, arg1: string) {
-  throw new Error("Function not implemented.");
-}

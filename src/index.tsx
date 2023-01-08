@@ -34,6 +34,10 @@ import TeamViewPage from "./Pages/TeamsViewPage/TeamsViewPage";
 import ViewMyTeamspage from "./Pages/TeamsViewPage/ViewMyTeamspage";
 import TeamPage from "./Pages/TeamPage/TeamPage";
 import PersonalInfoPage from "./Pages/ProfilePage/PersonalInfoPage";
+import ADocPage from "./Pages/ViewDocumentsPage/DocumentsTypesPages/ADocPage";
+import BDocPage from "./Pages/ViewDocumentsPage/DocumentsTypesPages/BDocPage";
+import CDocPage from "./Pages/ViewDocumentsPage/DocumentsTypesPages/CDocPage";
+import DDocPage from "./Pages/ViewDocumentsPage/DocumentsTypesPages/DDocPage";
 
 const routing = (
   <div>
@@ -72,7 +76,12 @@ const routing = (
               <Route path="/createUser" element={<RegisterPage />} />{" "}
               <Route path="/user">
                 <Route path="/user/:username/" element={<AnotherUserPage />}>
-                  <Route path="kartoteka" element={<ViewDocumentsPage />} />
+                  <Route path=":kartoteka" element={<ViewDocumentsPage />}>
+                    <Route path="A" element={<ADocPage />} />
+                    <Route path="B" element={<BDocPage />} />
+                    <Route path="C" element={<CDocPage />} />
+                    <Route path="D" element={<DDocPage />} />
+                  </Route>
                   <Route path="daneOsobowe" element={<UserInfoPage />} />
                   <Route path="adminRole" element={<SuperAdminPermPage />} />
                   <Route

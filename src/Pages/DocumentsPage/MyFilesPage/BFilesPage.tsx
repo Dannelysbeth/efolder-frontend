@@ -1,24 +1,9 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, useNavigate, useParams, Outlet } from "react-router-dom";
-// import "./UserPage.css";
-// import a_documents from "../../Data/documentsA";
-// import b_documents from "../../Data/documentsA";
-// import List from "../MyDocumentsPage/DocumentList";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { connect } from "react-redux";
-import {
-  MDBAccordion,
-  MDBAccordionItem,
-  MDBBtn,
-  MDBContainer,
-  MDBDropdown,
-  MDBDropdownItem,
-  MDBDropdownMenu,
-  MDBDropdownToggle,
-  MDBListGroup,
-  MDBListGroupItem,
-} from "mdb-react-ui-kit";
+import { MDBListGroupItem } from "mdb-react-ui-kit";
 
 const BFilesPage = ({ user }) => {
   const { username } = useParams();
@@ -178,6 +163,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(BFilesPage);
-function FileDownload(data: any, arg1: string) {
-  throw new Error("Function not implemented.");
-}

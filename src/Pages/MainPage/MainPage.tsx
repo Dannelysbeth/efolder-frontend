@@ -95,22 +95,15 @@ const MainPage = () => {
               Nasze osobiste wyzwanie i misja: przenosimy konkurencyjność
               naszych klientów w świecie cyfrowym na wyższy poziom.
             </p>
-            <p>
-              <Link to="/wyciagi" className="btn button-blue-2 active">
-                Czytaj więcej &raquo;
-              </Link>
-            </p>
           </div>
           <div className="col-md-5">
-            <Link to="/wyciagi">
-              <img
-                className="img-featurette image-main-border img-fluid mx-auto"
-                src="https://i.imgur.com/4Oj1aoh.jpg"
-                alt="Generic placeholder image"
-                width="500"
-                height="600"
-              />
-            </Link>
+            <img
+              className="img-featurette image-main-border img-fluid mx-auto"
+              src="https://i.imgur.com/4Oj1aoh.jpg"
+              alt="Generic placeholder image"
+              width="500"
+              height="600"
+            />
           </div>
         </div>
 
@@ -118,129 +111,28 @@ const MainPage = () => {
 
         <div className="row justify-content-center">
           <div className="col-md-5 order-md-2">
-            <h2 className="featurette-heading">Zdobądź szczyt! </h2>
-            <p className="lead">WLorem ipsum.</p>
-            <p>
-              <Link to="/wyciagi" className="btn button-blue-2 active">
-                Czytaj więcej &raquo;
-              </Link>
+            <p className="lead">
+              Dzięki naszemu zaawansowanemu systemowi zarządzania dokumentami,
+              pracodawcy mogą łatwo przechowywać i udostępniać dokumenty
+              pracownicze, takie jak umowy o pracę, świadectwa pracy,
+              zaświadczenia o zatrudnieniu i inne ważne dokumenty. Nasz system
+              umożliwia również łatwe wyszukiwanie i filtrowanie dokumentów, co
+              pozwala na szybkie znalezienie potrzebnych informacji.
             </p>
           </div>
           <div className="col-md-5 order-md-1">
-            <Link to="/wyciagi">
-              <img
-                className="img-featurette image-main-border img-fluid mx-auto"
-                src="https://i.imgur.com/Ux4KQ5n.jpg"
-                alt="Generic placeholder image"
-                width="800"
-                height="500"
-              />
-            </Link>
+            <img
+              className="img-featurette image-main-border img-fluid mx-auto"
+              src="https://i.imgur.com/Ux4KQ5n.jpg"
+              alt="Generic placeholder image"
+              width="800"
+              height="500"
+            />
           </div>
         </div>
 
         <hr className="featurette-divider"></hr>
-
-        <div className="row justify-content-center">
-          <div className="col-md-5">
-            <h2 className="featurette-heading">
-              Poznaj wartości naszej firmy!
-            </h2>
-            <p className="lead">
-              Nasze osobiste wyzwanie i misja: przenosimy konkurencyjność
-              naszych klientów w świecie cyfrowym na wyższy poziom.
-            </p>
-            <p>
-              <Link to="/wyciagi" className="btn button-blue-2 active">
-                Czytaj więcej &raquo;
-              </Link>
-            </p>
-          </div>
-          <div className="col-md-5">
-            <Link to="/wyciagi">
-              <img
-                className="img-featurette image-main-border img-fluid mx-auto"
-                src="https://i.imgur.com/vv73HTm.jpg"
-                alt="Generic placeholder image"
-                width="250"
-                height="300"
-              />
-            </Link>
-          </div>
-        </div>
       </div>
-      {/* <div className="divider"></div>
-      <div className="featurette-divider"></div>
-      <div className="container row">
-        <div className="col-lg-4">
-          <Link to="/godziny-otwarcia">
-            <img
-              className="img-featurette image-main-border img-fluid "
-              src="https://i.imgur.com/4Oj1aoh.jpg"
-              alt="Generic placeholder image"
-              // width="140"
-              // height="140"
-            />
-          </Link>
-          <h2>Czym jest eFolder?</h2>
-          <p>
-            Przyszedł czas na zmianę sezonu, a co za tym idzie zmianę godzin
-            otwarcia naszych stoków!{" "}
-          </p>
-          <p>
-            <Link to="/godziny-otwarcia" className="btn button-blue-2 active">
-              Czytaj więcej &raquo;
-            </Link>
-          </p>
-        </div>
-        <div className="col-lg-4">
-          <Link to="/o-nas">
-            <img
-              className="rounded-circle"
-              src="https://i.imgur.com/ypAgbSo.jpg"
-              alt="Generic placeholder image"
-              width="140"
-              height="140"
-            />
-          </Link>
-          <h2>
-            <p>Wypożyczalnia sprzętu </p>
-            <p>"Przy stoku"</p>
-          </h2>
-          <p>
-            Chcesz aktywnie spędzić swój wypoczynek , ale nie masz sprzętu?
-            Żaden problem nasza wyporzyczalnie ma wszystko czego potrzebujesz!
-          </p>
-          <p>
-            <Link to="/o-nas" className="btn button-blue-2 active">
-              Czytaj więcej &raquo;
-            </Link>
-          </p>
-        </div>
-        <div className="col-lg-4">
-          <Link to="/aktualnosci">
-            <img
-              className="rounded-circle"
-              src="https://i.imgur.com/N7qMLZk.jpg"
-              alt="Generic placeholder image"
-              width="140"
-              height="140"
-            />
-          </Link>
-          <h2>Koniec sezonu zimowego</h2>
-          <p>
-            Dziękujemy wszystkim narciarzom i snowboardzistom za wspaniały
-            wspólny sezon! Koniec zimy nie znaczy jednak, że zamykamy naszą
-            stację - w żadnym wypadku.
-          </p>
-          <p>
-            <Link to="/aktualnosci" className="btn button-blue-2 active">
-              Czytaj więcej &raquo;
-            </Link>
-          </p>
-        </div>
-      </div>
-      <div className="divider"></div> */}
     </div>
   );
 };

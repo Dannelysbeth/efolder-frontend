@@ -218,7 +218,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                 O nas
               </Link>
             </li> */}
-            <li className="nav-item shadow center-text-2 ">
+            {/* <li className="nav-item shadow center-text-2 ">
               <Link to="/aktualnosci" className="nav-link link-light active">
                 Aktualności
               </Link>
@@ -227,7 +227,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
               <Link to="/" className="nav-link link-light active">
                 O nas
               </Link>
-            </li>
+            </li> */}
 
             {/* <li className="nav-item shadow">
               <Link to="/pomoc" className="nav-link link-light active">
