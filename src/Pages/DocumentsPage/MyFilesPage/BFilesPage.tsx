@@ -122,48 +122,52 @@ const BFilesPage = ({ user }) => {
   }, []);
 
   return (
-    <div>
+    <div className=" ">
       {documents == null || documents.length === 0 ? (
-        <h3>Brak dokumentów</h3>
+        <div className="documents-container-noScroll center">
+          <h2 className=" text-white text-bold">Brak dokumentów</h2>
+        </div>
       ) : (
-        documents.map((document, index) => {
-          return (
-            <div key={document.id}>
-              <MDBListGroupItem className="d-flex justify-content-between align-items-center">
-                <div className="row d-flex align-items-center">
-                  <div className="col-2">
-                    <i className="fas fa-file-pdf"></i>
-                  </div>
+        <div className="documents-container ">
+          {documents.map((document, index) => {
+            return (
+              <div key={document.id}>
+                <MDBListGroupItem className="d-flex justify-content-between align-items-center">
+                  <div className=" d-flex align-items-center">
+                    <div className="col-2">
+                      <i className="fas  fa-file-pdf"></i>
+                    </div>
 
-                  <div className="col-12 ms-3">
-                    <p className="fw-bold mb-1">{document.name}</p>
-                    <p className="text-muted mb-0">{document.size}</p>
+                    <div className="col-12 ms-3">
+                      <p className="fw-bold mb-1">{document.name}</p>
+                      <p className="text-muted mb-0">{document.size}</p>
+                    </div>
                   </div>
-                </div>
-                <div
-                  className="btn-group"
-                  role="group"
-                  aria-label="Basic example"
-                >
-                  <button
-                    type="button"
-                    className="btn btn-primary "
-                    onClick={(e) => onDocumentSubmit(document, e)}
+                  <div
+                    className="btn-group"
+                    role="group"
+                    aria-label="Basic example"
                   >
-                    <i className="fas fa-download"></i>
-                  </button>
-                  <button
+                    <button
+                      type="button"
+                      className="btn btn-sm button-blue-2 "
+                      onClick={(e) => onDocumentSubmit(document, e)}
+                    >
+                      <i className="fas fa-download"></i>
+                    </button>
+                    {/* <button
                     type="button"
                     className="btn btn-danger"
                     onClick={(e) => deleteItem(document)}
                   >
                     <i className="fas fa-trash-alt"></i>
-                  </button>
-                </div>
-              </MDBListGroupItem>
-            </div>
-          );
-        })
+                  </button> */}
+                  </div>
+                </MDBListGroupItem>
+              </div>
+            );
+          })}
+        </div>
       )}
     </div>
   );

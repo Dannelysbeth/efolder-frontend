@@ -82,9 +82,9 @@ const DocumentsPage = ({ user, isAuthenticated }) => {
   const returnUserPage = () => (
     <div>
       {checkIfRegularEmployee() ? (
-        <div className="flex-column text-center">
-          <div className="productsNav">
-            <ul className="nav center">
+        <div className=" text-center row ">
+          <div className="productsNav col-2 center">
+            <ul className="nav center flex-column text-center ">
               {" "}
               <li className="center">
                 <Link
@@ -124,7 +124,9 @@ const DocumentsPage = ({ user, isAuthenticated }) => {
               </li>
             </ul>
           </div>
-          <Outlet />
+          <div className="col-9 top-space bottom-space">
+            <Outlet />
+          </div>
         </div>
       ) : (
         returnUserNotAdmin()

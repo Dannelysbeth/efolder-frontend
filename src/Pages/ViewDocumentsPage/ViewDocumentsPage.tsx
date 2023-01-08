@@ -247,8 +247,8 @@ const ViewDocumentsPage = () => {
         <>
           <MDBRow>
             <MDBCol size="3">
-              <MDBTabs pills className="flex-column text-center">
-                <MDBTabsItem>
+              <MDBTabs pills className="flex-column text-center ">
+                <MDBTabsItem className="">
                   <MDBTabsLink
                     onClick={() => handleVerticalClick("tab1")}
                     active={verticalActive === "tab1"}
