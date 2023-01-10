@@ -143,7 +143,7 @@ const RegisterPage = ({
                         aria-label="Administartor HR"
                       >
                         <option value="" disabled selected>
-                          Brak managerów HR w systemie
+                          Brak użytkonwników w systemie
                         </option>
                       </select>
                     ) : (

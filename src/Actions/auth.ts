@@ -482,7 +482,7 @@ export const extendedSignup =
     lastName: string,
     middleName: string,
     teamName: string,
-    hrManager: string,
+    // hrManager: string,
     positionName: string,
     positionDescription: string,
     country: string,
@@ -513,7 +513,7 @@ export const extendedSignup =
       },
       employment: {
         teamName,
-        hrManager,
+        // hrManager,
         positionName,
         positionDescription,
       },

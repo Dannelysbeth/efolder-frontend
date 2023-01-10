@@ -122,7 +122,7 @@ const UploadMyFilesPage = ({ user, errors, uploadOwnFile, successMessage }) => {
                   type="submit"
                   onClick={(e) => submitDocument(e)}
                 >
-                  Prześlij document{" "}
+                  Prześlij dokument{" "}
                 </button>
               </MDBRow>
             </div>

@@ -397,7 +397,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
             />
           </MDBCol>
           <div className="row"></div>
-          <MDBCol md="5">
+          {/* <MDBCol md="5">
             <MDBInput
               type="text"
               className="form-control"
@@ -409,7 +409,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
               placeholder="Administrator kadr"
               readOnly
             />
-          </MDBCol>
+          </MDBCol> */}
           <div className="row"></div>
           <MDBCol md="2">
             <MDBInput

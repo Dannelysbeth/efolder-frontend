@@ -31,7 +31,7 @@ const RegisterPage = ({
     lastName: "",
     middleName: "",
     teamName: "",
-    hrManager: "",
+    // hrManager: "",
     positionName: "",
     positionDescription: "",
     country: "",
@@ -53,7 +53,7 @@ const RegisterPage = ({
     lastName,
     middleName,
     teamName,
-    hrManager,
+    // hrManager,
     positionName,
     positionDescription,
     country,
@@ -78,7 +78,7 @@ const RegisterPage = ({
         lastName,
         middleName,
         teamName,
-        hrManager,
+        // hrManager,
         positionName,
         positionDescription,
         country,
@@ -120,7 +120,7 @@ const RegisterPage = ({
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        setHrAdmins(responseJson);
+        // setHrAdmins(responseJson);
         setLoading(false);
       })
       .catch(() => {
@@ -383,7 +383,7 @@ const RegisterPage = ({
                             placeholder="Zespół"
                           >
                             <option value="" disabled selected>
-                              Brak zespołów HR w systemie
+                              Brak zespołów w systemie
                             </option>
                           </select>
                         ) : (
@@ -422,7 +422,7 @@ const RegisterPage = ({
                           required
                         />
                       </MDBCol>
-                      <MDBCol md="5">
+                      {/* <MDBCol md="5">
                         {hrAdmins.length === 0 ? (
                           <select
                             className="form-select"
@@ -459,7 +459,7 @@ const RegisterPage = ({
                               ))}
                           </select>
                         )}
-                      </MDBCol>
+                      </MDBCol> */}
                       <div className="row"></div>
                       <button
                         className="w-100 btn btn-lg button-blue-2 top-space"

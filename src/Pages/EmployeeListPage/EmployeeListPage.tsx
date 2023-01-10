@@ -24,7 +24,7 @@ const EmployeeListPage = ({ user }) => {
       imageUrl: null,
       teamName: "",
       supervisor: "",
-      hrManager: "",
+      // hrManager: "",
       positionName: "",
       positionDescription: "",
     },

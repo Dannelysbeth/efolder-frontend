@@ -551,7 +551,7 @@ const UserPage = ({ user }) => {
               />
             </MDBCol>
             <div className="row"></div>
-            <MDBCol md="5">
+            {/* <MDBCol md="5">
               {hrAdmins.length === 0 ? (
                 <select
                   className="form-select"
@@ -586,7 +586,7 @@ const UserPage = ({ user }) => {
                   ))}
                 </select>
               )}
-            </MDBCol>
+            </MDBCol> */}
             <div className="row"></div>
             <MDBCol md="2">
               <MDBInput
@@ -662,7 +662,7 @@ const UserPage = ({ user }) => {
               />
             </MDBCol>
             <div className="row"></div>
-            <MDBCol md="5">
+            {/* <MDBCol md="5">
               <MDBInput
                 type="text"
                 className="form-control"
@@ -674,7 +674,7 @@ const UserPage = ({ user }) => {
                 placeholder="Administrator kadr"
                 readOnly
               />
-            </MDBCol>
+            </MDBCol> */}
             <div className="row"></div>
             <MDBCol md="2">
               <MDBInput
