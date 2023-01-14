@@ -3,21 +3,8 @@ import { useEffect, useState } from "react";
 import { loadUser, changePassword } from "../../Actions/auth";
 
 import { connect } from "react-redux";
-import {
-  MDBInput,
-  MDBRow,
-  MDBCol,
-  MDBBtn,
-  MDBModal,
-  MDBModalBody,
-  MDBModalContent,
-  MDBModalDialog,
-  MDBModalFooter,
-  MDBModalHeader,
-} from "mdb-react-ui-kit";
-import Avatar from "react-avatar-edit";
+import { MDBInput, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { uploadOwnProfilePic } from "../../Actions/auth";
-import { Link, Outlet } from "react-router-dom";
 
 const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
   const [employee, setEmployee] = useState([]);
@@ -397,19 +384,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
             />
           </MDBCol>
           <div className="row"></div>
-          {/* <MDBCol md="5">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="hrManager"
-              name="hrManager"
-              value={
-                employee["employment"] && employee["employment"]["hrManager"]
-              }
-              placeholder="Administrator kadr"
-              readOnly
-            />
-          </MDBCol> */}
+
           <div className="row"></div>
           <MDBCol md="2">
             <MDBInput

@@ -1,20 +1,18 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 // import "./UserPage.css";
 import { connect } from "react-redux";
-import documents from "../../Data/documentsA";
-import { saveAs } from "file-saver";
 import { MDBCol, MDBInput, MDBRow } from "mdb-react-ui-kit";
 
-const UserPage = ({ user }) => {
+const UserPage = () => {
   const { username } = useParams();
   const [employee, setEmployee] = useState([]);
   const [isAddrEditable, setIsAddrEditable] = useState(false);
   const [isEmpEditable, setIsEmpEditable] = useState(false);
   const [hrAdmins, setHrAdmins] = useState([]);
   const [teams, setTeams] = useState([]);
-  const [files, setFiles] = useState(documents);
+  // const [files, setFiles] = useState(documents);
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
@@ -71,7 +69,7 @@ const UserPage = ({ user }) => {
         setEmployee(responseJson);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
         setError(true);
       });
@@ -100,7 +98,7 @@ const UserPage = ({ user }) => {
         setEmployee(responseJson);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
         setError(true);
       });
@@ -124,7 +122,7 @@ const UserPage = ({ user }) => {
         setEmployee(responseJson);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
         setError(true);
       });
@@ -143,7 +141,7 @@ const UserPage = ({ user }) => {
         setHrAdmins(responseJson);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
         setError(true);
       });
@@ -163,7 +161,7 @@ const UserPage = ({ user }) => {
         setTeams(responseJson);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
         setError(true);
       });
@@ -175,91 +173,6 @@ const UserPage = ({ user }) => {
     getTeams();
   }, []);
 
-  const infoOfUser = () => (
-    <div className="row">
-      <div className="column col-lg-3">
-        <img
-          src={
-            employee["user"] && employee["user"]["imageUrl"]
-              ? employee["user"]["imageUrl"]
-              : "https://i.imgur.com/teiJw8H.png"
-          }
-          className="profile-pic rounded-circle no-padding "
-          height="200"
-          width="200"
-          alt="Avatar"
-          loading="lazy"
-        />
-      </div>
-
-      <div className="column col-lg-9">
-        <MDBRow className="g-3">
-          <p>
-            <p></p>
-          </p>
-          <MDBCol md="4" tag="form">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id=""
-              name="firstName"
-              value={employee["user"] && employee["user"]["firstName"]}
-              placeholder="Imię"
-              readonly
-            />
-          </MDBCol>
-          {employee["user"] && employee["user"]["middleName"] ? (
-            <MDBCol md="4">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="floatingInput"
-                name="middleName"
-                value={employee["user"] && employee["user"]["middleName"]}
-                placeholder="Drugie imię"
-                readonly
-              />
-            </MDBCol>
-          ) : null}{" "}
-          <MDBCol md="5">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="floatingInput"
-              name="lastName"
-              value={employee["user"] && employee["user"]["lastName"]}
-              placeholder="Nazwisko"
-              readonly
-              required
-            />
-          </MDBCol>{" "}
-          <div className="row"></div>
-          <MDBCol md="3">
-            <MDBInput
-              type="text"
-              className="form-control"
-              id="floatingInput"
-              name="username"
-              value={employee["user"] && employee["user"]["username"]}
-              readonly
-              placeholder="Nazwa użytkownika"
-            />
-          </MDBCol>
-          <MDBCol md="5">
-            <MDBInput
-              type="email"
-              className="form-control"
-              id="floatingInput"
-              name="email"
-              value={employee["user"] && employee["user"]["email"]}
-              readonly
-              placeholder="nazwa@przyklad.com"
-            />
-          </MDBCol>
-        </MDBRow>
-      </div>
-    </div>
-  );
   const adressInfo = () => (
     <div className="user-container top-space bottom-space">
       <div className="d-flex justify-content-end">

@@ -3,25 +3,17 @@ import { connect } from "react-redux";
 import NavBar from "../../Components/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
 
-import {
-  checkAuthenticated,
-  loadUser,
-  // RolesLoad,
-  // signup,
-} from "../../Actions/auth";
+import { checkAuthenticated, loadUser } from "../../Actions/auth";
 
 const Layout = ({
   checkAuthenticated,
   loadUser,
-  // RolesLoad,
-  // signup,
+
   children,
 }) => {
   useEffect(() => {
     checkAuthenticated();
     loadUser();
-    // RolesLoad();
-    // signup();
   }, []);
 
   console.log(window.location.pathname === "/blank");
@@ -42,6 +34,4 @@ const Layout = ({
 export default connect(null, {
   checkAuthenticated,
   loadUser,
-  // RolesLoad,
-  // signup,
 })(Layout);

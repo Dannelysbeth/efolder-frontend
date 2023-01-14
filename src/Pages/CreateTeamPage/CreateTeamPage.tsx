@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { createTeam } from "../../Actions/auth";
-import { MDBInput, MDBBtn, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import { MDBInput, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 
 const RegisterPage = ({

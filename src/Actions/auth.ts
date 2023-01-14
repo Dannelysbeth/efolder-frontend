@@ -253,7 +253,6 @@ export const uploadFile =
         Accept: "*/*",
       },
     };
-    const body = new URLSearchParams({});
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_REMOTE_URL}/api/document/upload/${fileType}/${username}`,
@@ -289,9 +288,6 @@ export const uploadOwnFile = (fileType: string, file) => async (dispatch) => {
     },
   };
 
-  const body = new URLSearchParams({
-    // file: document,
-  });
   // console.log(document);
   try {
     const res = await axios.post(
@@ -326,7 +322,6 @@ export const uploadOwnProfilePic = (file) => async (dispatch) => {
     },
   };
 
-  const body = new URLSearchParams({});
   try {
     const res = await axios.post(
       `${process.env.REACT_APP_REMOTE_URL}/api/profilePicture/upload`,

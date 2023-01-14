@@ -1,18 +1,9 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
-// import "./UserPage.css";
-import { uploadFile, extendedSignup } from "../../../Actions/auth";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { connect } from "react-redux";
-import {
-  MDBInput,
-  MDBBtn,
-  MDBCheckbox,
-  MDBRow,
-  MDBCol,
-  MDBListGroupItem,
-} from "mdb-react-ui-kit";
+import { MDBListGroupItem } from "mdb-react-ui-kit";
 
 const ViewDocumentsPage = () => {
   const { username } = useParams();

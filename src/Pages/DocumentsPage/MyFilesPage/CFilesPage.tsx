@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { MDBListGroupItem } from "mdb-react-ui-kit";
 
-const CFilesPage = ({ user }) => {
+const CFilesPage = ({}) => {
   const { username } = useParams();
   const [documents, setDocuments] = useState([
     {
@@ -140,13 +140,6 @@ const CFilesPage = ({ user }) => {
                     >
                       <i className="fas fa-download"></i>
                     </button>
-                    {/* <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={(e) => deleteItem(document)}
-                >
-                  <i className="fas fa-trash-alt"></i>
-                </button> */}
                   </div>
                 </MDBListGroupItem>
               </div>

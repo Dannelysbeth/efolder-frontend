@@ -9,8 +9,6 @@ import { connect } from "react-redux";
 import {
   MDBInput,
   MDBBtn,
-  MDBCheckbox,
-  MDBRow,
   MDBCol,
   MDBListGroup,
   MDBListGroupItem,
@@ -19,7 +17,6 @@ import {
   MDBModalContent,
   MDBModalDialog,
   MDBModal,
-  MDBBtnGroup,
   MDBModalHeader,
 } from "mdb-react-ui-kit";
 

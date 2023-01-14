@@ -8,7 +8,7 @@ import Layout from "./hocs/Layout/Layout";
 import store from "./store";
 import HomePage from "./Pages/MainPage/MainPage";
 import PageNotFound from "./Pages/NotFoundPage/NotFoundPage";
-import AboutUsPage from "./Pages/AboutUsPage/AboutUsPage";
+// import AboutUsPage from "./Pages/AboutUsPage/AboutUsPage";
 import UserInfoPage from "./Pages/UserPage/UserPage";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
@@ -51,7 +51,6 @@ const routing = (
             {/* Protected routes */}
             <Route>
               <Route path="/forbidden" element={<ForbiddenPage />} />
-              <Route path="/o-nas" element={<AboutUsPage />} />{" "}
               <Route path="/createTeam" element={<CreateTeamPage />} />
               <Route path="/viewTeams" element={<TeamViewPage />} />
               <Route path="/viewMyTeams" element={<ViewMyTeamspage />} />
@@ -60,7 +59,6 @@ const routing = (
               </Route>
               <Route path="/:profil" element={<ProfilePage />}>
                 <Route path="info" element={<PersonalInfoPage />} />
-                {/* <Route path="kartoteka/" element={<DocumentsPage />}> */}
                 <Route path="dokumenty" element={<MyFilesPage />}>
                   <Route path="A" element={<AFilesPage />} />
                   <Route path="B" element={<BFilePage />} />

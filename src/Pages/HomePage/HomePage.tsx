@@ -1,25 +1,5 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 // import "./HomePage.css";
-import MyNavbar from "../../Components/NavBar/MainNavbar";
-import MyFooter from "../../Components/Footer/Footer";
-
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  Form,
-  Input,
-  // InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
 
 const HomePage = () => {
   document.documentElement.classList.remove("nav-open");

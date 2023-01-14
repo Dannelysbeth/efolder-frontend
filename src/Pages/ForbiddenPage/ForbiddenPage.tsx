@@ -1,11 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { useRive, Layout, Fit, Alignment } from "@rive-app/react-canvas";
-import { Link, Navigate, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { addPropertyControls } from "framer";
 import "../css/app.css";
-import MyFooter from "../../Components/Footer/Footer";
 
 const ForbiddenPage = () => {
   const { RiveComponent } = useRive({

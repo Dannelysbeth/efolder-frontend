@@ -1,10 +1,8 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { useState } from "react";
 import "../css/app.css";
 import { login, checkAuthenticated, loadUser } from "../../Actions/auth";
 import { connect } from "react-redux";
-import axios from "axios";
 
 const LoginPage = ({ login, isAuthenticated, errors, user }) => {
   const [formData, setFormData] = useState({

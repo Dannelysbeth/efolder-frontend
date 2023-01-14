@@ -1,22 +1,8 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate, Outlet, useParams } from "react-router-dom";
-// import "./UserPage.css";
+import { useEffect, useState } from "react";
+import { Link, Outlet, useParams } from "react-router-dom";
 
 import { connect } from "react-redux";
-import {
-  MDBInput,
-  MDBBtn,
-  MDBCheckbox,
-  MDBRow,
-  MDBCol,
-  MDBTabs,
-  MDBTabsItem,
-  MDBTabsLink,
-  MDBTabsContent,
-  MDBTabsPane,
-  MDBListGroupItem,
-} from "mdb-react-ui-kit";
 
 const ViewDocumentsPage = () => {
   const [info, setInfo] = useState([]);

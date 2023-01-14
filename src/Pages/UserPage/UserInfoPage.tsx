@@ -2,14 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 // import "./UserPage.css";
-import a_documents from "../../Data/documentsA";
-import List from "../MyDocumentsPage/DocumentList";
 
 import { connect } from "react-redux";
 
 const AnotherUserPage = ({ user }) => {
   const { username } = useParams();
-  const [aFiles, setAFiles] = useState(a_documents);
+  // const [aFiles, setAFiles] = useState(a_documents);
   const [employee, setEmployee] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
@@ -341,9 +339,9 @@ const AnotherUserPage = ({ user }) => {
                     </span>
                   </a>
                   <ul className="nested">
-                    <li className="list-unstyled treeview-animated-items">
+                    {/* <li className="list-unstyled treeview-animated-items">
                       <List documents={aFiles} />
-                    </li>
+                    </li> */}
                   </ul>
                 </li>
               </ul>

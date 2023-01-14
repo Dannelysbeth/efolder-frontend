@@ -1,27 +1,13 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import documents from "../../Data/documentsA";
 import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
-import LoginPage from "../LoginPage/LoginPage";
-import { saveAs } from "file-saver";
 import "../css/app.css";
 import {
-  MDBBadge,
-  MDBBtn,
-  MDBBtnGroup,
   MDBCardHeader,
-  MDBCol,
-  MDBInput,
   MDBListGroup,
   MDBListGroupItem,
-  MDBModal,
-  MDBModalBody,
-  MDBModalContent,
-  MDBModalDialog,
-  MDBModalFooter,
-  MDBModalHeader,
 } from "mdb-react-ui-kit";
 
 const TeamViewPage = ({ user }) => {

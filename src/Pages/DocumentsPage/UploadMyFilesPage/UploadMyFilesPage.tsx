@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { extendedSignup, uploadOwnFile } from "../../../Actions/auth";
 import { MDBRow } from "mdb-react-ui-kit";
-import ForbiddenPage from "../../ForbiddenPage/ForbiddenPage";
 
 const UploadMyFilesPage = ({ user, errors, uploadOwnFile, successMessage }) => {
   const [errMsg, setErrMsg] = useState("");

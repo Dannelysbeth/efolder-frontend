@@ -213,27 +213,6 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="navbar-nav ms-auto mx-5 pe-3 gap-3">
-            {/* <li className="nav-item shadow">
-              <Link to="/o-nas" className="nav-link link-light active">
-                O nas
-              </Link>
-            </li> */}
-            {/* <li className="nav-item shadow center-text-2 ">
-              <Link to="/aktualnosci" className="nav-link link-light active">
-                Aktualności
-              </Link>
-            </li>
-            <li className="nav-item center-text-2">
-              <Link to="/" className="nav-link link-light active">
-                O nas
-              </Link>
-            </li> */}
-
-            {/* <li className="nav-item shadow">
-              <Link to="/pomoc" className="nav-link link-light active">
-                Pomoc
-              </Link>
-            </li> */}
             {isAuthenticated ? authLink() : guestLink()}
           </ul>
         </div>

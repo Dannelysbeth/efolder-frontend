@@ -1,68 +1,10 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import {
-  Link,
-  useNavigate,
-  useParams,
-  Outlet,
-  Navigate,
-} from "react-router-dom";
-// import Avatar from 'react-avatar-edit';
-// import "./UserPage.css";
+import { Link, Outlet, Navigate } from "react-router-dom";
 
 import { connect } from "react-redux";
-import {
-  MDBInput,
-  MDBBtn,
-  MDBCheckbox,
-  MDBRow,
-  MDBCol,
-} from "mdb-react-ui-kit";
 import { loadUser } from "../../../Actions/auth";
 
-const DocumentsPage = ({ user, isAuthenticated }) => {
-  const { username } = useParams();
-  const [employee, setEmployee] = useState([]);
-  const [documents, setDocuments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(true);
-  const [documentsA, setDocumentsA] = useState([
-    {
-      id: 0,
-      name: "",
-      category: "",
-      size: 0,
-      uploadFile: "",
-    },
-  ]);
-  const [documentsB, setDocumentsB] = useState([
-    {
-      id: 0,
-      name: "",
-      category: "",
-      size: 0,
-      uploadFile: "",
-    },
-  ]);
-  const [documentsC, setDocumentsC] = useState([
-    {
-      id: 0,
-      name: "",
-      category: "",
-      size: 0,
-      uploadFile: "",
-    },
-  ]);
-  const [documentsD, setDocumentsD] = useState([
-    {
-      id: 0,
-      name: "",
-      category: "",
-      size: 0,
-      uploadFile: "",
-    },
-  ]);
-
+const DocumentsPage = ({ user }) => {
   function checkIfRegularEmployee(): boolean {
     loadUser();
     if (user != null && user.roles != null)

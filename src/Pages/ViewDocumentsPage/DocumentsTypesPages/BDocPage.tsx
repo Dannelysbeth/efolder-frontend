@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 import { connect } from "react-redux";
-import { MDBListGroupItem, MDBRow } from "mdb-react-ui-kit";
+import { MDBListGroupItem } from "mdb-react-ui-kit";
 import { useParams } from "react-router-dom";
 
 const ViewDocumentsPage = () => {

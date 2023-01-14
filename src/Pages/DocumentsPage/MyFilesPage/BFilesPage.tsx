@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { MDBListGroupItem } from "mdb-react-ui-kit";
 
-const BFilesPage = ({ user }) => {
+const BFilesPage = () => {
   const { username } = useParams();
   const [documents, setDocuments] = useState([
     {
@@ -18,11 +18,6 @@ const BFilesPage = ({ user }) => {
   ]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
-
-  function deleteItem(document) {
-    deleteDocument(document);
-    setDocuments((oldDocs) => oldDocs.filter((d) => d.id !== document.id));
-  }
 
   const onDocumentSubmit = (document: any, e) => {
     e.preventDefault();
@@ -44,7 +39,7 @@ const BFilesPage = ({ user }) => {
         setDocuments(responseJson);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
         setError(true);
       });
@@ -66,7 +61,7 @@ const BFilesPage = ({ user }) => {
         setDocuments(responseJson);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
         setError(true);
       });
@@ -114,7 +109,7 @@ const BFilesPage = ({ user }) => {
         </div>
       ) : (
         <div className="documents-container ">
-          {documents.map((document, index) => {
+          {documents.map((document) => {
             return (
               <div key={document.id}>
                 <MDBListGroupItem className="d-flex justify-content-between align-items-center">
@@ -140,13 +135,6 @@ const BFilesPage = ({ user }) => {
                     >
                       <i className="fas fa-download"></i>
                     </button>
-                    {/* <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={(e) => deleteItem(document)}
-                  >
-                    <i className="fas fa-trash-alt"></i>
-                  </button> */}
                   </div>
                 </MDBListGroupItem>
               </div>

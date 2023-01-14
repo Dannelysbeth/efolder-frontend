@@ -1,16 +1,8 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import documents from "../../Data/documentsA";
-import { saveAs } from "file-saver";
-import {
-  MDBBadge,
-  MDBBtn,
-  MDBListGroup,
-  MDBListGroupItem,
-} from "mdb-react-ui-kit";
-import LoginPage from "../LoginPage/LoginPage";
+import { MDBListGroup, MDBListGroupItem } from "mdb-react-ui-kit";
 import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 
 const EmployeeListPage = ({ user }) => {
