@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import "./UserPage.css";
 import { connect } from "react-redux";
 import { MDBCol, MDBInput, MDBRow } from "mdb-react-ui-kit";
 
@@ -12,8 +11,6 @@ const UserPage = () => {
   const [isEmpEditable, setIsEmpEditable] = useState(false);
   const [hrAdmins, setHrAdmins] = useState([]);
   const [teams, setTeams] = useState([]);
-  // const [files, setFiles] = useState(documents);
-  const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
   const [addressData, setAddressData] = useState({
@@ -575,19 +572,7 @@ const UserPage = () => {
               />
             </MDBCol>
             <div className="row"></div>
-            {/* <MDBCol md="5">
-              <MDBInput
-                type="text"
-                className="form-control"
-                id="hrManager"
-                name="hrManager"
-                value={
-                  employee["employment"] && employee["employment"]["hrManager"]
-                }
-                placeholder="Administrator kadr"
-                readOnly
-              />
-            </MDBCol> */}
+
             <div className="row"></div>
             <MDBCol md="2">
               <MDBInput

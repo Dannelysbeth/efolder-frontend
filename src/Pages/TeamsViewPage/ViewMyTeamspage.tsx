@@ -1,13 +1,9 @@
 import React from "react";
-import { Component, ReactNode, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
-import LoginPage from "../LoginPage/LoginPage";
-import { saveAs } from "file-saver";
 import {
-  MDBBadge,
-  MDBBtn,
   MDBCardHeader,
   MDBListGroup,
   MDBListGroupItem,

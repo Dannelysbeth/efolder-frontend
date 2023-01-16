@@ -3,13 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { extendedSignup, uploadFile } from "../../Actions/auth";
-import {
-  MDBInput,
-  MDBBtn,
-  MDBCheckbox,
-  MDBRow,
-  MDBCol,
-} from "mdb-react-ui-kit";
+import { MDBRow } from "mdb-react-ui-kit";
 
 const UploadDocumentPage = ({ errors, uploadFile, successMessage }) => {
   const { username } = useParams();

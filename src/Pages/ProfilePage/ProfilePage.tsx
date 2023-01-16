@@ -37,7 +37,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
         setEmployee(responseJson);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
         setError(true);
       });
@@ -151,7 +151,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
                           </p>
                           <button
                             className="btn btn-lg button-blue-2"
-                            onClick={(e) => submitPic()}
+                            onClick={() => submitPic()}
                           >
                             Wybierz
                           </button>

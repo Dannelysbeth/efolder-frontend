@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import "./UserPage.css";
 
 import { connect } from "react-redux";
 import {

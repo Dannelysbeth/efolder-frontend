@@ -8,7 +8,6 @@ import Layout from "./hocs/Layout/Layout";
 import store from "./store";
 import HomePage from "./Pages/MainPage/MainPage";
 import PageNotFound from "./Pages/NotFoundPage/NotFoundPage";
-// import AboutUsPage from "./Pages/AboutUsPage/AboutUsPage";
 import UserInfoPage from "./Pages/UserPage/UserPage";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
@@ -20,7 +19,6 @@ import PasswordChangePage from "./Pages/PasswordChangePage/PasswordChangePage";
 import ForbiddenPage from "./Pages/ForbiddenPage/ForbiddenPage";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import ChangeOwnPasswordPage from "./Pages/ChangeOwnPasswordPage/ChangeOwnPasswordPage";
-import DocumentsPage from "./Pages/DocumentsPage/DocumentsPage";
 import MyFilesPage from "./Pages/DocumentsPage/MyFilesPage/MyFilesPage";
 import AFilesPage from "./Pages/DocumentsPage/MyFilesPage/AFilesPage";
 import BFilePage from "./Pages/DocumentsPage/MyFilesPage/BFilesPage";
@@ -89,8 +87,6 @@ const routing = (
                   <Route path="zmienHaslo" element={<PasswordChangePage />} />
                 </Route>
               </Route>
-              <Route path="/uploadFile" element={<UploadDocumentPage />} />
-              <Route path="/mojeDocumenty" element={<DocumentsPage />} />
             </Route>
             {/* route that doesnt exist */}
             <Route path="*" element={<PageNotFound />}></Route>
