@@ -63,7 +63,7 @@ const routing = (
                   <Route path="C" element={<CFilesPage />} />
                   <Route path="D" element={<DFilesPage />} />
                 </Route>
-                {/* </Route> */}
+                {/* </Routes> */}
                 <Route path="dodajDokumenty" element={<UploadMyFilesPage />} />
                 <Route path="zmienHaslo" element={<ChangeOwnPasswordPage />} />
               </Route>
