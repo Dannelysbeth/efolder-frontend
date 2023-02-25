@@ -109,7 +109,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
   };
   const onBeforeFileLoad = (view) => {
     if (view.target.files[0].size > 10000000) {
-      alert("Plik jest za duży!");
+      alert("The file is too big!");
       view.target.value = "";
     }
   };
@@ -145,7 +145,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
           </p>
         )}
       </div>
-      <h1 className="caption">Infomacje adresowe</h1>
+      <h1 className="caption">Address information</h1>
       <hr></hr>
       <div className="row">
         {isAddrEditable ? (
@@ -157,7 +157,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                 id="country"
                 name="country"
                 onChange={(e) => onAddrChange(e)}
-                placeholder="Kraj"
+                placeholder="Country"
                 required
               />
             </MDBCol>
@@ -168,7 +168,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                 id="country"
                 name="county"
                 onChange={(e) => onAddrChange(e)}
-                placeholder="Województwo/Prowincja"
+                placeholder="State/Province"
               />
             </MDBCol>
             <div className="row"></div>
@@ -179,7 +179,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                 id="street"
                 name="street"
                 onChange={(e) => onAddrChange(e)}
-                placeholder="Ulica"
+                placeholder="Street"
               />
             </MDBCol>
             <MDBCol md="2">
@@ -189,7 +189,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                 id="buildingNumber"
                 name="buildingNumber"
                 onChange={(e) => onAddrChange(e)}
-                placeholder="Nr domu"
+                placeholder="Building nr"
                 required
               />
             </MDBCol>
@@ -200,7 +200,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                 id="flatNumber"
                 name="flatNumber"
                 onChange={(e) => onAddrChange(e)}
-                placeholder="Nr mieszkania"
+                placeholder="Apartment nr"
               />
             </MDBCol>
             <div className="row"></div>
@@ -222,7 +222,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                 id="city"
                 name="city"
                 onChange={(e) => onAddrChange(e)}
-                placeholder="Miasto"
+                placeholder="City"
                 required
               />
             </MDBCol>
@@ -234,7 +234,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                   className="btn btn-primary "
                   id="emp-primary-edit-btn"
                 >
-                  Zapisz
+                  Save
                 </button>
               </div>
               <div className="d-flex justify-content-end center-text-3">
@@ -244,7 +244,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                   id="emp-danger-edit-btn"
                   onClick={() => onAddrCancel()}
                 >
-                  Anuluj
+                  Cancel
                 </button>
               </div>
             </div>
@@ -258,7 +258,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                 id="country"
                 name="country"
                 value={employee["address"] && employee["address"]["country"]}
-                placeholder="Kraj"
+                placeholder="Country"
                 readOnly
               />
             </MDBCol>
@@ -273,7 +273,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                     ? employee["address"]["county"]
                     : "-"
                 }
-                placeholder="Województwo/Prowincja"
+                placeholder="State/Province"
                 readOnly
               />
             </MDBCol>
@@ -285,7 +285,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                 id="street"
                 name="street"
                 value={employee["address"] && employee["address"]["street"]}
-                placeholder="Ulica"
+                placeholder="Street"
                 readOnly
               />
             </MDBCol>
@@ -298,7 +298,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                 value={
                   employee["address"] && employee["address"]["buildingNumber"]
                 }
-                placeholder="Nr domu"
+                placeholder="Building nr"
                 readOnly
               />
             </MDBCol>
@@ -309,7 +309,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                 id="flatNumber"
                 name="flatNumber"
                 value={employee["address"] && employee["address"]["flatNumber"]}
-                placeholder="Nr mieszkania"
+                placeholder="Apartment nr"
                 readOnly
               />
             </MDBCol>
@@ -333,7 +333,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                 id="city"
                 name="city"
                 value={employee["address"] && employee["address"]["city"]}
-                placeholder="Miasto"
+                placeholder="City"
                 readOnly
               />
             </MDBCol>
@@ -366,7 +366,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
               value={
                 employee["employment"] && employee["employment"]["teamName"]
               }
-              placeholder="Nazwa działu"
+              placeholder="Team name"
               readOnly
             />
           </MDBCol>
@@ -379,7 +379,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
               value={
                 employee["employment"] && employee["employment"]["supervisor"]
               }
-              placeholder="Województwo/Prowincja"
+              placeholder="Supervisor"
               readOnly
             />
           </MDBCol>
@@ -395,7 +395,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
               value={
                 employee["employment"] && employee["employment"]["positionName"]
               }
-              placeholder="Stanowisko"
+              placeholder="Position"
               readOnly
             />
           </MDBCol>
@@ -409,7 +409,7 @@ const PersonalInfoPage = ({ user, uploadOwnProfilePic }) => {
                 employee["employment"] &&
                 employee["employment"]["positionDescription"]
               }
-              placeholder="Opis stanowiska"
+              placeholder="Position description"
               readOnly
             />
           </MDBCol>

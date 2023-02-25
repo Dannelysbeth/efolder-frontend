@@ -60,7 +60,7 @@ const DocumentsPage = ({ user }) => {
                   to={{ pathname: `/kartoteka/dokumenty` }}
                 >
                   {" "}
-                  Dokumenty{" "}
+                  Documents{" "}
                 </Link>
               </li>
               <li className="center  ">
@@ -69,7 +69,7 @@ const DocumentsPage = ({ user }) => {
                   to={{ pathname: `/kartoteka/dodajDokumenty` }}
                 >
                   {" "}
-                  Dodaj dokument{" "}
+                  Add document{" "}
                 </Link>
               </li>
             </ul>

@@ -490,7 +490,7 @@ team-inner-container {
   width: 100%;
   right: 0;
   height: 57px;
-  content: " przeciągnij i upuść, aby dodać. ";
+  content: " drag and drop to add. ";
   display: block;
   margin: 0 auto;
   color: #1d2223;

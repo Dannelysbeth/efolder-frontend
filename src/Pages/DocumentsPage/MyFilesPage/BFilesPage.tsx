@@ -105,7 +105,7 @@ const BFilesPage = () => {
     <div className=" ">
       {documents == null || documents.length === 0 ? (
         <div className="documents-container-noScroll center">
-          <h2 className=" text-white text-bold">Brak dokumentów</h2>
+          <h2 className=" text-white text-bold">No documents</h2>
         </div>
       ) : (
         <div className="documents-container ">

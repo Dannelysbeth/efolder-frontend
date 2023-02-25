@@ -33,9 +33,9 @@ const UploadMyFilesPage = ({ user, errors, uploadOwnFile, successMessage }) => {
     if (fileCategory != "" && file != null) {
       uploadOwnFile(fileCategory, file);
     } else if (fileCategory != "") {
-      setErrMsg("Proszę wybierz plik");
+      setErrMsg("Please, choose a file!");
     } else {
-      setErrMsg("Proszę wybierz kategorię dokumentu");
+      setErrMsg("Please, choose a file category!");
     }
   }
 
@@ -79,7 +79,7 @@ const UploadMyFilesPage = ({ user, errors, uploadOwnFile, successMessage }) => {
 
             <div className="form-document-upload ">
               <MDBRow className="">
-                <h4 className="  center">Dodaj dokument</h4>
+                <h4 className="  center">Add documents</h4>
                 <p>
                   <p></p>
                 </p>
@@ -91,7 +91,7 @@ const UploadMyFilesPage = ({ user, errors, uploadOwnFile, successMessage }) => {
                     name="fileCategory"
                     onChange={(e) => onCatChange(e)}
                   >
-                    <option value="">Wybierz kategorię dokumentu</option>
+                    <option value="">Choose a document category</option>
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="C">C</option>
@@ -121,7 +121,7 @@ const UploadMyFilesPage = ({ user, errors, uploadOwnFile, successMessage }) => {
                   type="submit"
                   onClick={(e) => submitDocument(e)}
                 >
-                  Prześlij dokument{" "}
+                  Send document{" "}
                 </button>
               </MDBRow>
             </div>

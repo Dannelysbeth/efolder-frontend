@@ -201,8 +201,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         errors: null,
-        fileSuccessMessage: "Dokument został poprawnie dodany",
-        message: "Dokument został poprawnie dodany",
+        fileSuccessMessage: "Document was successfully added",
+        message: "Document was successfully added",
       };
     case FILE_UPLOAD_FILE_FAIL:
       return {
@@ -216,7 +216,7 @@ export default function (state = initialState, action) {
         ...state,
         errors: null,
         fileSuccessMessage: null,
-        message: "Haslo zostało zmienione",
+        message: "The password was changed",
       };
     case PASSWORD_CHANGE_FAIL:
       return {

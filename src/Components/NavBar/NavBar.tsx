@@ -82,7 +82,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                 to="/profil/info"
                 className="nav-link link-light dropdown-item "
               >
-                <MDBIcon far icon="user-circle" /> Profil
+                <MDBIcon far icon="user-circle" /> Profile
               </Link>
             </li>
             <li>
@@ -91,7 +91,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                   to="/profil/dokumenty/A"
                   className="nav-link link-light dropdown-item "
                 >
-                  <MDBIcon fas icon="id-card" /> Moja kartoteka
+                  <MDBIcon fas icon="id-card" /> My files
                 </Link>
               ) : null}
             </li>
@@ -100,7 +100,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                 to="/profil/zmienHaslo"
                 className="nav-link link-light dropdown-item "
               >
-                <MDBIcon fas icon="key" /> Zmień hasło
+                <MDBIcon fas icon="key" /> Change password
               </Link>
             </li>
             {
@@ -110,7 +110,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                     to="/createUser"
                     className="nav-link link-light dropdown-item "
                   >
-                    <MDBIcon fas icon="user-plus" /> Utwórz konto
+                    <MDBIcon fas icon="user-plus" /> Create account
                   </Link>
                 ) : null}
               </li>
@@ -122,7 +122,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                     to="/pracownicy"
                     className="nav-link link-light dropdown-item "
                   >
-                    <MDBIcon fas icon="user-tag" /> Pracownicy
+                    <MDBIcon fas icon="user-tag" /> Employees
                   </Link>
                 ) : null}
               </li>
@@ -134,7 +134,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                     to="/viewTeams"
                     className="nav-link link-light dropdown-item "
                   >
-                    <MDBIcon fas icon="users" /> Zespoły
+                    <MDBIcon fas icon="users" /> Teams
                   </Link>
                 ) : null}
               </li>
@@ -146,7 +146,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                     to="/viewMyTeams"
                     className="nav-link link-light dropdown-item "
                   >
-                    <MDBIcon fas icon="user-friends" /> Moje zespoły
+                    <MDBIcon fas icon="user-friends" /> My teams
                   </Link>
                 ) : null}
               </li>
@@ -158,7 +158,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                     to="/createTeam"
                     className="nav-link link-light dropdown-item "
                   >
-                    <MDBIcon fas icon="users-cog" /> Stwórz zespół
+                    <MDBIcon fas icon="users-cog" /> Create team
                   </Link>
                 ) : null}
               </li>
@@ -170,7 +170,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
                 onClick={logout_user}
               >
                 <MDBIcon fas icon="sign-out-alt" /> {}
-                Wyloguj
+                Log out
               </Link>
             </li>
           </ul>
@@ -182,7 +182,7 @@ const NavBar = ({ logout, isAuthenticated, user }) => {
   const guestLink = () => (
     <li className="nav-item shadow">
       <Link to="/login" className="nav-link link-light active">
-        Zaloguj
+        Sign in
       </Link>
     </li>
   );

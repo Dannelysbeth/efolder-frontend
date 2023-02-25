@@ -134,7 +134,7 @@ const TeamViewPage = ({ user }) => {
       <div className="team-container ">
         <div className="team-inner-container ">
           <MDBCardHeader>
-            <h1 className="center">Zespoły</h1>
+            <h1 className="center">Teams</h1>
           </MDBCardHeader>
           {checkIfAdmin() ? (
             <MDBListGroup
@@ -143,7 +143,7 @@ const TeamViewPage = ({ user }) => {
               className=" scrollable-container"
             >
               {teams.length === 0 ? (
-                <h3>Brak zespołów w systemie</h3>
+                <h3>No teams in the system</h3>
               ) : (
                 teams != null &&
                 teams.map((team) => (
@@ -165,14 +165,14 @@ const TeamViewPage = ({ user }) => {
                         />
                         <div className="ms-3">
                           <p className="fw-bold mb-1">
-                            Lider zespołu: {team.teamLeader.firstName}
+                            Team leader: {team.teamLeader.firstName}
                             {team.teamLeader.middleName != null
                               ? " " + team.teamLeader.middleName
                               : null}{" "}
                             {team.teamLeader.lastName}
                           </p>
                           <p className="text-muted mb-0">
-                            Ilość pracowników w zespole: {team.teamSize}
+                            Team members: {team.teamSize}
                           </p>
                         </div>
                       </div>

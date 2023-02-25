@@ -130,7 +130,6 @@ const SuperAdminPermPage = ({
     )
       .then((response) => response.json())
       .then((responseJson) => {
-        // setEmployee(responseJson);
         setLoading(false);
       })
       .catch((error) => {
@@ -154,7 +153,7 @@ const SuperAdminPermPage = ({
                   className="w-100 btn btn-bold text-center-dark btn-danger btn-lg "
                   onClick={takePermToggleShow}
                 >
-                  Odbierz uprawnienia administratora
+                  Revoke administrator privileges
                 </button>
                 <MDBModal
                   show={takePermModal}
@@ -171,18 +170,18 @@ const SuperAdminPermPage = ({
                         ></button>
                       </MDBModalHeader>
                       <MDBModalBody>
-                        Czy na pewno odebrać prawa administratora?
+                        Are you sure to revoke administrator rights?
                       </MDBModalBody>
 
                       <MDBModalFooter>
                         <button color="secondary" onClick={takePermToggleShow}>
-                          Anuluj
+                          Cancel
                         </button>
                         <button
                           color="danger"
                           onClick={(e) => takeAdminPermissions()}
                         >
-                          Tak
+                          Yes
                         </button>
                       </MDBModalFooter>
                     </MDBModalContent>
@@ -213,7 +212,7 @@ const SuperAdminPermPage = ({
                       className="w-100 btn-bold btn-lg button-blue-3"
                       onClick={givePermToggleShow}
                     >
-                      Nadaj rolę administratora
+                      Grant administrator privileges
                     </button>
                     <MDBModal
                       show={givePermModal}
@@ -230,7 +229,7 @@ const SuperAdminPermPage = ({
                             ></button>
                           </MDBModalHeader>
                           <MDBModalBody>
-                            Czy na pewno nadać prawa administratora?
+                            Are you sure to grant administrator privileges?
                           </MDBModalBody>
 
                           <MDBModalFooter>
@@ -238,13 +237,13 @@ const SuperAdminPermPage = ({
                               color="secondary"
                               onClick={givePermToggleShow}
                             >
-                              Anuluj
+                              Cancel
                             </button>
                             <button
                               color="primary"
                               onClick={(e) => giveAdminPermissions()}
                             >
-                              Tak
+                              Yes
                             </button>
                           </MDBModalFooter>
                         </MDBModalContent>
@@ -280,7 +279,7 @@ const SuperAdminPermPage = ({
                 className="btn shadow w-100 btn-danger text-center-dark  btn-lg "
                 onClick={deleteUserToggleShow}
               >
-                <MDBIcon fas icon="trash-alt" /> Usuń użytkownika
+                <MDBIcon fas icon="trash-alt" /> Delete user
               </button>
               <MDBModal
                 show={deleteUserModal}
@@ -297,19 +296,19 @@ const SuperAdminPermPage = ({
                       ></button>
                     </MDBModalHeader>
                     <MDBModalBody>
-                      Zamierzasz usunąć użytkownika. Tej czynności nie można
-                      cofnąć. Czy na pewno chcesz kontynuować?
+                      You intend to delete a user. This action cannot be undone.
+                      Are you sure you want to continue?
                     </MDBModalBody>
 
                     <MDBModalFooter>
                       <button color="secondary" onClick={deleteUserToggleShow}>
-                        Anuluj
+                        Cancel
                       </button>
                       <button
                         color="danger"
                         onClick={(e) => onDeleteUserAccount()}
                       >
-                        Tak
+                        Yes
                       </button>
                     </MDBModalFooter>
                   </MDBModalContent>
@@ -323,7 +322,7 @@ const SuperAdminPermPage = ({
               color="danger"
               className=" text-danger fw-bold text-center-light flex-center"
             >
-              Użytkownik jest Super Administratorem
+              The user is a Super Administrator
             </h2>
           </div>
         )}
@@ -342,14 +341,14 @@ const SuperAdminPermPage = ({
                 ></button>
               </MDBModalHeader>
               <MDBModalBody>
-                Podany pracownik nie może zostać usunięty, ponieważ jest liderem
-                przynajmniej jednego zespołu! Aby usunąć użytkonika, ustaw
-                nowych kieroników zespołów.
+                The given employee cannot be deleted because they is the leader
+                of of at least one team! To remove a user, set up new team
+                leaders.
               </MDBModalBody>
 
               <MDBModalFooter>
                 <button color="secondary" onClick={deleteFailInfoToggleShow}>
-                  Rozumiem
+                  Understand
                 </button>
               </MDBModalFooter>
             </MDBModalContent>

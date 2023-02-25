@@ -187,7 +187,7 @@ const UserPage = () => {
           </p>
         )}
       </div>
-      <h1 className="caption">Infomacje adresowe</h1>
+      <h1 className="caption">Address information</h1>
       <hr></hr>
       <div className="row">
         {isAddrEditable ? (
@@ -199,7 +199,7 @@ const UserPage = () => {
                 id="country"
                 name="country"
                 onChange={(e) => onAddrChange(e)}
-                placeholder="Kraj"
+                placeholder="Country"
                 required
               />
             </MDBCol>
@@ -210,7 +210,7 @@ const UserPage = () => {
                 id="country"
                 name="county"
                 onChange={(e) => onAddrChange(e)}
-                placeholder="Województwo/Prowincja"
+                placeholder="State/Province"
               />
             </MDBCol>
             <div className="row"></div>
@@ -221,7 +221,7 @@ const UserPage = () => {
                 id="street"
                 name="street"
                 onChange={(e) => onAddrChange(e)}
-                placeholder="Ulica"
+                placeholder="Street"
               />
             </MDBCol>
             <MDBCol md="2">
@@ -231,7 +231,7 @@ const UserPage = () => {
                 id="buildingNumber"
                 name="buildingNumber"
                 onChange={(e) => onAddrChange(e)}
-                placeholder="Nr domu"
+                placeholder="Building nr"
                 required
               />
             </MDBCol>
@@ -242,7 +242,7 @@ const UserPage = () => {
                 id="flatNumber"
                 name="flatNumber"
                 onChange={(e) => onAddrChange(e)}
-                placeholder="Nr mieszkania"
+                placeholder="Apartment nr"
               />
             </MDBCol>
             <div className="row"></div>
@@ -264,7 +264,7 @@ const UserPage = () => {
                 id="city"
                 name="city"
                 onChange={(e) => onAddrChange(e)}
-                placeholder="Miasto"
+                placeholder="City"
                 required
               />
             </MDBCol>
@@ -275,10 +275,8 @@ const UserPage = () => {
                   type="submit"
                   className="btn btn-primary "
                   id="emp-primary-edit-btn"
-
-                  // onClick={() => onSave()}
                 >
-                  Zapisz
+                  Save
                 </button>
               </div>
               <div className="d-flex justify-content-end center-text-3">
@@ -288,7 +286,7 @@ const UserPage = () => {
                   id="emp-danger-edit-btn"
                   onClick={() => onAddrCancel()}
                 >
-                  Anuluj
+                  Cancel
                 </button>
               </div>
             </div>
@@ -302,7 +300,7 @@ const UserPage = () => {
                 id="country"
                 name="country"
                 value={employee["address"] && employee["address"]["country"]}
-                placeholder="Kraj"
+                placeholder="Country"
                 readOnly
               />
             </MDBCol>
@@ -317,7 +315,7 @@ const UserPage = () => {
                     ? employee["address"]["county"]
                     : "-"
                 }
-                placeholder="Województwo/Prowincja"
+                placeholder="State/Province"
                 readOnly
               />
             </MDBCol>
@@ -329,7 +327,7 @@ const UserPage = () => {
                 id="street"
                 name="street"
                 value={employee["address"] && employee["address"]["street"]}
-                placeholder="Ulica"
+                placeholder="Street"
                 readOnly
               />
             </MDBCol>
@@ -342,7 +340,7 @@ const UserPage = () => {
                 value={
                   employee["address"] && employee["address"]["buildingNumber"]
                 }
-                placeholder="Nr domu"
+                placeholder="Building nr"
                 readOnly
               />
             </MDBCol>
@@ -353,7 +351,7 @@ const UserPage = () => {
                 id="flatNumber"
                 name="flatNumber"
                 value={employee["address"] && employee["address"]["flatNumber"]}
-                placeholder="Nr mieszkania"
+                placeholder="Apartment nr"
                 readOnly
               />
             </MDBCol>
@@ -377,7 +375,7 @@ const UserPage = () => {
                 id="city"
                 name="city"
                 value={employee["address"] && employee["address"]["city"]}
-                placeholder="Miasto"
+                placeholder="City"
                 readOnly
               />
             </MDBCol>
@@ -407,7 +405,7 @@ const UserPage = () => {
           </p>
         )}
       </div>
-      <h1 className="caption">Infomacje o zatrudnieniu</h1>
+      <h1 className="caption">Employment information</h1>
       <hr></hr>
       <div className="row">
         {isEmpEditable ? (
@@ -418,12 +416,11 @@ const UserPage = () => {
                   className="form-select"
                   id="teamName"
                   name="teamName"
-                  // value={teamName}
                   onChange={(e) => onEmpChange(e)}
-                  placeholder="Zespół"
+                  placeholder="Team"
                 >
                   <option value="" disabled selected>
-                    Brak zespołów HR w systemie
+                    No teams in the system
                   </option>
                 </select>
               ) : (
@@ -433,11 +430,11 @@ const UserPage = () => {
                   name="teamName"
                   // value={teamName}
                   onChange={(e) => onEmpChange(e)}
-                  placeholder="Zespół"
+                  placeholder="Team"
                   required
                 >
                   <option selected disabled value="">
-                    Wybierz dział
+                    Choose team
                   </option>
                   {teams.map((team) => (
                     <option value={team["name"]}>
@@ -456,47 +453,12 @@ const UserPage = () => {
                 value={
                   employee["employment"] && employee["employment"]["supervisor"]
                 }
-                placeholder="Przełożony"
+                placeholder="Supervisor"
                 readonly
               />
             </MDBCol>
             <div className="row"></div>
-            {/* <MDBCol md="5">
-              {hrAdmins.length === 0 ? (
-                <select
-                  className="form-select"
-                  id="hrManager"
-                  name="hrManager"
-                  // value={hrManager}
-                  onChange={(e) => onEmpChange(e)}
-                  aria-label="Administartor HR"
-                >
-                  <option value="" disabled selected>
-                    Brak managerów HR w systemie
-                  </option>
-                </select>
-              ) : (
-                <select
-                  className="form-select"
-                  id="hrManager"
-                  name="hrManager"
-                  // value={hrManager}
-                  onChange={(e) => onEmpChange(e)}
-                  placeholder="Administartor HR"
-                  required
-                >
-                  <option selected disabled value="">
-                    Wybierz administratora HR
-                  </option>
-                  {hrAdmins.map((hrAdmin) => (
-                    <option value={hrAdmin["username"]}>
-                      {hrAdmin["firstName"]} {hrAdmin["lastName"]} (
-                      {hrAdmin["username"]})
-                    </option>
-                  ))}
-                </select>
-              )}
-            </MDBCol> */}
+
             <div className="row"></div>
             <MDBCol md="2">
               <MDBInput
@@ -505,7 +467,7 @@ const UserPage = () => {
                 id="positionName"
                 name="positionName"
                 onChange={(e) => onEmpChange(e)}
-                placeholder="Stanowisko"
+                placeholder="Position"
                 required
               />
             </MDBCol>
@@ -516,7 +478,7 @@ const UserPage = () => {
                 id="positionDescription"
                 name="positionDescription"
                 onChange={(e) => onEmpChange(e)}
-                placeholder="Opis stanowiska"
+                placeholder="Position description"
               />
             </MDBCol>
 
@@ -528,7 +490,7 @@ const UserPage = () => {
                   className="btn btn-primary "
                   id="emp-primary-edit-btn"
                 >
-                  Zapisz
+                  Save
                 </button>
               </div>
               <div className="d-flex justify-content-end center-text-3">
@@ -538,7 +500,7 @@ const UserPage = () => {
                   id="emp-danger-edit-btn"
                   onClick={() => onEmpCancel()}
                 >
-                  Anuluj
+                  Cancel
                 </button>
               </div>
             </div>
@@ -554,7 +516,7 @@ const UserPage = () => {
                 value={
                   employee["employment"] && employee["employment"]["teamName"]
                 }
-                placeholder="Nazwa działu"
+                placeholder="Team name"
                 readOnly
               />
             </MDBCol>
@@ -567,7 +529,7 @@ const UserPage = () => {
                 value={
                   employee["employment"] && employee["employment"]["supervisor"]
                 }
-                placeholder="Województwo/Prowincja"
+                placeholder="State/Province"
                 readOnly
               />
             </MDBCol>
@@ -584,7 +546,7 @@ const UserPage = () => {
                   employee["employment"] &&
                   employee["employment"]["positionName"]
                 }
-                placeholder="Stanowisko"
+                placeholder="Position"
                 readOnly
               />
             </MDBCol>
@@ -598,7 +560,7 @@ const UserPage = () => {
                   employee["employment"] &&
                   employee["employment"]["positionDescription"]
                 }
-                placeholder="Opis stanowiska"
+                placeholder="Position description"
                 readOnly
               />
             </MDBCol>
@@ -614,8 +576,8 @@ const UserPage = () => {
 
   return (
     <div className=" d-flex flex-column min-vh-100">
-      {employee && employee["user"] ? adressInfo() : "Osoba niezalogowana "}
-      {employee && employee["user"] ? employmentInfo() : "Osoba niezalogowana "}
+      {employee && employee["user"] ? adressInfo() : "Not logged user "}
+      {employee && employee["user"] ? employmentInfo() : "Not logged user "}
     </div>
   );
 };

@@ -34,8 +34,6 @@ const RegisterPage = ({
     createTeam(name, description, teamLeader);
     if (teamCreated) window.location.replace(`/team/${name}`);
   };
-  console.log(isAuthenticated);
-  console.log(`User created: ${accountCreated}`);
 
   const checkIfTeamCreated = () => (
     <div>
@@ -106,7 +104,7 @@ const RegisterPage = ({
                   onSubmit={(e) => onSubmit(e)}
                 >
                   <div className="row"></div>
-                  <h4 className="center">Utwórz zespół</h4>
+                  <h4 className="center">Create team</h4>
                   <div className="row"></div>
                   <MDBCol md="7">
                     <MDBInput
@@ -116,7 +114,7 @@ const RegisterPage = ({
                       name="name"
                       value={name}
                       onChange={(e) => onChange(e)}
-                      placeholder="Nazwa zespołu"
+                      placeholder="Team name"
                       required
                     />
                   </MDBCol>
@@ -128,7 +126,7 @@ const RegisterPage = ({
                       name="description"
                       value={description}
                       onChange={(e) => onChange(e)}
-                      placeholder="Opis zespołu"
+                      placeholder="Team description"
                       required
                     />
                   </MDBCol>
@@ -140,7 +138,7 @@ const RegisterPage = ({
                         name="teamLeader"
                         value={teamLeader}
                         onChange={(e) => onChange(e)}
-                        aria-label="Administartor HR"
+                        aria-label="Team leader"
                       >
                         <option value="" disabled selected>
                           Brak użytkonwników w systemie
@@ -153,11 +151,11 @@ const RegisterPage = ({
                         name="teamLeader"
                         value={teamLeader}
                         onChange={(e) => onChange(e)}
-                        placeholder="Leader zespołu"
+                        placeholder="Team leader"
                         required
                       >
                         <option selected disabled value="">
-                          Wybierz lidera zespołu
+                          Choose the team leader
                         </option>
                         {!loading &&
                           !error &&
@@ -175,7 +173,7 @@ const RegisterPage = ({
                     className="w-100 btn btn-lg button-blue-2"
                     type="submit"
                   >
-                    Utwórz zespół
+                    Create team
                   </button>
                 </MDBRow>
               </div>

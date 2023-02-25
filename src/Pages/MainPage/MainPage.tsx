@@ -68,7 +68,7 @@ const MainPage = () => {
             className="carousel-control-prev-icon"
             aria-hidden="true"
           ></span>
-          <span className="sr-only">Poprzedni</span>
+          <span className="sr-only">Previous</span>
         </a>
         <a
           className="carousel-control-next"
@@ -80,18 +80,16 @@ const MainPage = () => {
             className="carousel-control-next-icon"
             aria-hidden="true"
           ></span>
-          <span className="sr-only">Następny</span>
+          <span className="sr-only">Next</span>
         </a>
       </div>
       <div className="container top-space bottom-space">
         <div className="row justify-content-center">
           <div className="col-md-5">
-            <h2 className="featurette-heading">
-              Poznaj wartości naszej firmy!
-            </h2>
+            <h2 className="featurette-heading">Discover our company values!</h2>
             <p className="lead">
-              Nasze osobiste wyzwanie i misja: przenosimy konkurencyjność
-              naszych klientów w świecie cyfrowym na wyższy poziom.
+              Our personal challenge and mission: we take the competitiveness of
+              of our customers in the digital world to the next level.
             </p>
           </div>
           <div className="col-md-5">
@@ -110,12 +108,12 @@ const MainPage = () => {
         <div className="row justify-content-center">
           <div className="col-md-5 order-md-2">
             <p className="lead">
-              Dzięki naszemu zaawansowanemu systemowi zarządzania dokumentami,
-              pracodawcy mogą łatwo przechowywać i udostępniać dokumenty
-              pracownicze, takie jak umowy o pracę, świadectwa pracy,
-              zaświadczenia o zatrudnieniu i inne ważne dokumenty. Nasz system
-              umożliwia również łatwe wyszukiwanie i filtrowanie dokumentów, co
-              pozwala na szybkie znalezienie potrzebnych informacji.
+              With our advanced document management system, employers can easily
+              store and share employee documents such as employment contracts,
+              certificates of employment, employment certificates and other
+              important documents. Our system also allows documents to be easily
+              searched and filtered, enabling the information needed to be found
+              quickly. allows you to quickly find the information you need.
             </p>
           </div>
           <div className="col-md-5 order-md-1">
