@@ -115,7 +115,7 @@ const AnotherUserPage = ({ user }) => {
                         to={{ pathname: `/user/${username}/daneOsobowe` }}
                       >
                         {" "}
-                        Personal data{" "}
+                        Dane osobowe{" "}
                       </Link>
                     </li>
                     <li className="center">
@@ -124,7 +124,7 @@ const AnotherUserPage = ({ user }) => {
                         to={{ pathname: `/user/${username}/kartoteka` }}
                       >
                         {" "}
-                        Files{" "}
+                        Kartoteka{" "}
                       </Link>
                     </li>
                     <li className="center">
@@ -133,7 +133,7 @@ const AnotherUserPage = ({ user }) => {
                         to={{ pathname: `/user/${username}/dodajDokumenty` }}
                       >
                         {" "}
-                        Add documents{" "}
+                        Dodaj dokumenty{" "}
                       </Link>
                     </li>
                     <li className="center">
@@ -143,8 +143,8 @@ const AnotherUserPage = ({ user }) => {
                       >
                         {" "}
                         {user != null && user.username !== username
-                          ? "Reset password"
-                          : `Change password`}
+                          ? "Zmień hasło"
+                          : `Zresetuj hasło`}
                       </Link>
                     </li>
                     <li className="center">
@@ -152,7 +152,7 @@ const AnotherUserPage = ({ user }) => {
                         className="btn btn-lg button-blue-3"
                         to={{ pathname: `/user/${username}/adminRole` }}
                       >
-                        Administrator tools
+                        Narzędzia Administratora
                       </Link>
                     </li>
                   </ul>

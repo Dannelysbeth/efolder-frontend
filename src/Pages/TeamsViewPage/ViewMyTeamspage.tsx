@@ -86,12 +86,12 @@ const ViewMyTeamspage = ({ user }) => {
     <div className="backgd-2 padding-employee">
       <div className=" team-container">
         <MDBCardHeader>
-          <h1 className="text-center">My teams</h1>
+          <h1 className="text-center">Moje zespoły</h1>
         </MDBCardHeader>
         {checkIfTeamLeader() ? (
           <MDBListGroup style={{ minWidth: "22rem" }} light>
             {teams.length === 0 ? (
-              <h3>No teams in the system</h3>
+              <h3>Brak zespołów w systemie</h3>
             ) : (
               teams != null &&
               teams.map((team) => (
@@ -107,14 +107,14 @@ const ViewMyTeamspage = ({ user }) => {
                     <div className="d-flex align-items-center">
                       <div className="ms-3">
                         <p className="fw-bold mb-1">
-                          Team leader: {team.teamLeader.firstName}
+                          Lider zespołu: {team.teamLeader.firstName}
                           {team.teamLeader.middleName != null
                             ? " " + team.teamLeader.middleName
                             : null}{" "}
                           {team.teamLeader.lastName}
                         </p>
                         <p className="text-muted mb-0">
-                          Team members: {team.teamSize}
+                          Ilość pracowników w zespole: {team.teamSize}
                         </p>
                       </div>
                     </div>

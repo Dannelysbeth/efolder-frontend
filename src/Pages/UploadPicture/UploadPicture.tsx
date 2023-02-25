@@ -37,7 +37,7 @@ const UploadPicture = ({ uploadOwnProfilePic }) => {
   };
   const onBeforeFileLoad = (view) => {
     if (view.target.files[0].size > 10000000) {
-      alert("File is too big!");
+      alert("Plik jest za duży!");
       view.target.value = "";
     }
   };
@@ -47,11 +47,11 @@ const UploadPicture = ({ uploadOwnProfilePic }) => {
   }, [file]);
 
   const containerStyles = {
-    backgroundColor: "#ffff",
+    backgroundColor: "#ffff", // zielony kolor tła
     width: "500px",
     height: "500px",
-    margin: "auto",
-    borderRadius: "10px",
+    margin: "auto", // wyśrodkowanie w obu płaszczyznach
+    borderRadius: "10px", // zaokrąglenie krawędzi o promieniu 10px
   };
 
   return (
@@ -65,7 +65,7 @@ const UploadPicture = ({ uploadOwnProfilePic }) => {
           height={500}
           onCrop={onCrop}
           onClose={onClose}
-          label="Choose photo"
+          label="Wybierz zdjęcie"
           onBeforeFileLoad={onBeforeFileLoad}
           src={src}
         />
@@ -76,7 +76,7 @@ const UploadPicture = ({ uploadOwnProfilePic }) => {
             <p>
               <p></p>
             </p>
-            <MDBBtn onClick={(e) => onSubmit()}>Choose</MDBBtn>
+            <MDBBtn onClick={(e) => onSubmit()}>Wybierz</MDBBtn>
           </div>
         ) : null}
       </div>

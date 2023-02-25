@@ -38,7 +38,7 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
                   className="alert alert-danger alert-dismissible fade show"
                   role="alert"
                 >
-                  <strong>Username or password is incorrect</strong>
+                  <strong>Nazwa użytkownika lub hasło są niepoprawne</strong>
                 </div>
               ) : null}
             </div>
@@ -55,7 +55,7 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
                   <div className="form-signin ">
                     <form onSubmit={(e) => onSubmit(e)}>
                       <h1 className="h3 mb-3 fw-normal center-text-2">
-                        Sign in
+                        Zaloguj się
                       </h1>
 
                       <div className="form-floating">
@@ -68,7 +68,7 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
                           value={name}
                           onChange={(e) => onChange(e)}
                         />
-                        <label>Username</label>
+                        <label>Nazwa użytkownika</label>
                       </div>
                       <div className="form-floating form-myBox">
                         <input
@@ -80,12 +80,12 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
                           value={password}
                           onChange={(e) => onChange(e)}
                         />
-                        <label>Password</label>
+                        <label>Hasło</label>
                       </div>
                       <p>
                         <p>
                           {errors != null && errors.message != null
-                            ? "Username or password is incorrect"
+                            ? "Nazwa użytkownika lub hasło są niepoprawne"
                             : ""}
                         </p>
                       </p>
@@ -93,7 +93,7 @@ const LoginPage = ({ login, isAuthenticated, errors, user }) => {
                         className="w-100 button-blue-lp btn btn-lg btn-white  btn-bold"
                         type="submit"
                       >
-                        Sign in
+                        Zaloguj się
                       </button>
                     </form>
                   </div>

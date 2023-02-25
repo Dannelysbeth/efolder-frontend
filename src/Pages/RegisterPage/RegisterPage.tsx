@@ -102,6 +102,12 @@ const RegisterPage = ({
 
   if (accountCreated) {
     window.location.replace(`/user/${username}/daneOsobowe`);
+    // <div
+    //   className="alert alert-warning alert-dismissible fade show"
+    //   role="alert"
+    // >
+    //   <strong>User created</strong>
+    // </div>;
   }
   const getHRUsers = () => {
     return fetch(`${process.env.REACT_APP_REMOTE_URL}/api/user/employee/all`, {
@@ -195,7 +201,7 @@ const RegisterPage = ({
                           name="firstName"
                           value={firstName}
                           onChange={(e) => onChange(e)}
-                          placeholder="First name"
+                          placeholder="Imię"
                           required
                         />
                       </MDBCol>
@@ -207,7 +213,7 @@ const RegisterPage = ({
                           name="middleName"
                           value={middleName}
                           onChange={(e) => onChange(e)}
-                          placeholder="Middle name"
+                          placeholder="Drugie imię"
                         />
                       </MDBCol>
                       <div className="row"></div>
@@ -219,7 +225,7 @@ const RegisterPage = ({
                           name="lastName"
                           value={lastName}
                           onChange={(e) => onChange(e)}
-                          placeholder="Last name"
+                          placeholder="Nazwisko"
                           required
                         />
                       </MDBCol>{" "}
@@ -231,7 +237,7 @@ const RegisterPage = ({
                           name="email"
                           value={email}
                           onChange={(e) => onChange(e)}
-                          placeholder="name@example.com"
+                          placeholder="nazwa@przyklad.com"
                           required
                         />
                       </MDBCol>
@@ -244,7 +250,7 @@ const RegisterPage = ({
                           name="username"
                           value={username}
                           onChange={(e) => onChange(e)}
-                          placeholder="Username"
+                          placeholder="Nazwa użytkownika"
                           required
                         />
                       </MDBCol>
@@ -256,7 +262,7 @@ const RegisterPage = ({
                           name="password"
                           value={password}
                           onChange={(e) => onChange(e)}
-                          placeholder="Password"
+                          placeholder="Hasło"
                           required
                         />
                       </MDBCol>
@@ -268,13 +274,13 @@ const RegisterPage = ({
                           name="re_password"
                           value={re_password}
                           onChange={(e) => onChange(e)}
-                          placeholder="Repeat password"
+                          placeholder="Powtórz hasło"
                           required
                         />
                       </MDBCol>
                       <div className="row"></div>
                       <h3 className="h3  fw-normal text-center-dark">
-                        Address information
+                        Infomacje adresowe
                       </h3>
                       <MDBCol md="4">
                         <MDBInput
@@ -284,7 +290,7 @@ const RegisterPage = ({
                           name="country"
                           value={country}
                           onChange={(e) => onChange(e)}
-                          placeholder="Country"
+                          placeholder="Kraj"
                           required
                         />
                       </MDBCol>
@@ -296,7 +302,7 @@ const RegisterPage = ({
                           name="county"
                           value={county}
                           onChange={(e) => onChange(e)}
-                          placeholder="State/Province"
+                          placeholder="Województwo/Prowincja"
                         />
                       </MDBCol>
                       <div className="row"></div>
@@ -308,7 +314,7 @@ const RegisterPage = ({
                           name="street"
                           value={street}
                           onChange={(e) => onChange(e)}
-                          placeholder="Street"
+                          placeholder="Ulica"
                         />
                       </MDBCol>
                       <MDBCol md="2">
@@ -319,7 +325,7 @@ const RegisterPage = ({
                           name="buildingNumber"
                           value={buildingNumber}
                           onChange={(e) => onChange(e)}
-                          placeholder="Building nr"
+                          placeholder="Nr domu"
                           required
                         />
                       </MDBCol>
@@ -331,7 +337,7 @@ const RegisterPage = ({
                           name="flatNumber"
                           value={flatNumber}
                           onChange={(e) => onChange(e)}
-                          placeholder="Apartment nr"
+                          placeholder="Nr mieszkania"
                         />
                       </MDBCol>
                       <div className="row"></div>
@@ -345,6 +351,8 @@ const RegisterPage = ({
                           value={zipcode}
                           onChange={(e) => onChange(e)}
                           placeholder="NN-NNN"
+                          // required
+                          // label="Kod pocztowy"
                         />
                       </MDBCol>
                       <MDBCol md="5">
@@ -355,13 +363,14 @@ const RegisterPage = ({
                           name="city"
                           value={city}
                           onChange={(e) => onChange(e)}
-                          placeholder="City"
+                          placeholder="Miasto"
                           required
+                          // label="Miasto"
                         />
                       </MDBCol>
                       <div className="row"></div>
                       <h1 className="h3  fw-normal text-center-dark">
-                        Employment information
+                        Infomacje o zatrudnieniu
                       </h1>
                       <MDBCol md="6">
                         {teams.length === 0 ? (
@@ -371,10 +380,10 @@ const RegisterPage = ({
                             name="teamName"
                             value={teamName}
                             onChange={(e) => onChange(e)}
-                            placeholder="Team"
+                            placeholder="Zespół"
                           >
                             <option value="" disabled selected>
-                              There are no teams in the system
+                              Brak zespołów w systemie
                             </option>
                           </select>
                         ) : (
@@ -384,11 +393,11 @@ const RegisterPage = ({
                             name="teamName"
                             value={teamName}
                             onChange={(e) => onChange(e)}
-                            placeholder="Team"
+                            placeholder="Zespół"
                             required
                           >
                             <option selected disabled value="">
-                              Choose team
+                              Wybierz dział
                             </option>
                             {!loading &&
                               !error &&
@@ -409,16 +418,54 @@ const RegisterPage = ({
                           name="positionName"
                           value={positionName}
                           onChange={(e) => onChange(e)}
-                          placeholder="Position"
+                          placeholder="Stanowisko"
                           required
                         />
                       </MDBCol>
+                      {/* <MDBCol md="5">
+                        {hrAdmins.length === 0 ? (
+                          <select
+                            className="form-select"
+                            id="hrManager"
+                            name="hrManager"
+                            value={hrManager}
+                            onChange={(e) => onChange(e)}
+                            aria-label="Administartor HR"
+                          >
+                            <option value="" disabled selected>
+                              Brak managerów HR w systemie
+                            </option>
+                          </select>
+                        ) : (
+                          <select
+                            className="form-select"
+                            id="hrManager"
+                            name="hrManager"
+                            value={hrManager}
+                            onChange={(e) => onChange(e)}
+                            placeholder="Administartor HR"
+                            required
+                          >
+                            <option selected disabled value="">
+                              Wybierz administratora HR
+                            </option>
+                            {!loading &&
+                              !error &&
+                              hrAdmins.map((hrAdmin) => (
+                                <option value={hrAdmin["username"]}>
+                                  {hrAdmin["firstName"]} {hrAdmin["lastName"]} (
+                                  {hrAdmin["username"]})
+                                </option>
+                              ))}
+                          </select>
+                        )}
+                      </MDBCol> */}
                       <div className="row"></div>
                       <button
                         className="w-100 btn btn-lg button-blue-2 top-space"
                         type="submit"
                       >
-                        Create account
+                        Stwórz konto
                       </button>
                     </MDBRow>
                   </div>

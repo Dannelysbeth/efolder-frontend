@@ -75,7 +75,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
   };
   const onBeforeFileLoad = (view) => {
     if (view.target.files[0].size > 10000000) {
-      alert("The file is too bigy!");
+      alert("Plik jest za duży!");
       view.target.value = "";
     }
   };
@@ -138,7 +138,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
                         height={500}
                         onCrop={onCrop}
                         onClose={onClose}
-                        label="Select photo"
+                        label="Wybierz zdjęcie"
                         onBeforeFileLoad={onBeforeFileLoad}
                         src={src}
                       />
@@ -153,7 +153,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
                             className="btn btn-lg button-blue-2"
                             onClick={() => submitPic()}
                           >
-                            Choose
+                            Wybierz
                           </button>
                         </div>
                       ) : null}
@@ -202,7 +202,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
                   to={{ pathname: `/profil/info` }}
                 >
                   {" "}
-                  Personal data{" "}
+                  Dane osobowe{" "}
                 </Link>
               </li>
             ) : null}
@@ -213,7 +213,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
                   to={{ pathname: `/profil/dokumenty` }}
                 >
                   {" "}
-                  Files{" "}
+                  Kartoteka{" "}
                 </Link>
               </li>
             ) : null}
@@ -224,7 +224,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
                   to={{ pathname: `/profil/dodajDokumenty` }}
                 >
                   {" "}
-                  <text className="center-text-2">Add documents </text>
+                  <text className="center-text-2">Dodaj dokumenty </text>
                 </Link>
               </li>
             ) : null}
@@ -234,7 +234,7 @@ const ProfilePage = ({ user, uploadOwnProfilePic }) => {
                 className="btn btn-lg button-blue-3"
                 to={{ pathname: `/profil/zmienHaslo` }}
               >
-                Change password
+                Zmień hasło
               </Link>
             </li>
           </ul>

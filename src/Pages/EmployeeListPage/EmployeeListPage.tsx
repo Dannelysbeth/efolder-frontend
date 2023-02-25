@@ -72,7 +72,7 @@ const EmployeeListPage = ({ user }) => {
           className="team-members-container"
         >
           {users.length === 0 ? (
-            <h3>No users available in the system</h3>
+            <h3>Brak użytkowników w systemie</h3>
           ) : (
             users.map((user) => (
               <MDBListGroupItem className="d-flex justify-content-between align-items-center">

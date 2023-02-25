@@ -126,7 +126,7 @@ const AnotherUserPage = ({ user }) => {
           <MDBAccordion borderless initialActive={1}>
             <MDBAccordionItem collapseId={1} headerTitle="A">
               {documents.length === 0 ? (
-                <h3>No documents</h3>
+                <h3>Brak dokumentów</h3>
               ) : (
                 documents.map((document, index) => {
                   return (
@@ -172,7 +172,7 @@ const AnotherUserPage = ({ user }) => {
           <MDBAccordion borderless alwaysOpen initialActive={1}>
             <MDBAccordionItem collapseId={1} headerTitle="B">
               {documents.length === 0 ? (
-                <h3>No documents in the system</h3>
+                <h3>Brak użytkowników w systemie</h3>
               ) : (
                 documents.map((document) => (
                   <MDBListGroupItem className="d-flex justify-content-between align-items-center">

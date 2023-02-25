@@ -103,6 +103,7 @@ const TeamPage = ({ user, updateTeam }) => {
     )
       .then((response) => response.json())
       .then((responseJson) => {
+        // setHrAdmins(responseJson);
         setLoading(false);
       })
       .catch((error) => {
@@ -142,6 +143,7 @@ const TeamPage = ({ user, updateTeam }) => {
     if (user != null && user.roles != null)
       for (var i of user.roles) {
         if (i == "ROLE_SUPER_ADMIN" || i == "ROLE_HR_ADMIN") {
+          //   getHRUsers();
           return true;
         }
       }
@@ -226,7 +228,7 @@ const TeamPage = ({ user, updateTeam }) => {
                     </div>
                     <div className=" ms-3">
                       <p className="fw-bold mb-2 center-text-2">
-                        Team leader:{" "}
+                        Lider zespołu:{" "}
                         {team["teamLeader"] && team["teamLeader"]["firstName"]}{" "}
                         {team["teamLeader"] &&
                         team["teamLeader"]["middleName"] != null
@@ -235,7 +237,7 @@ const TeamPage = ({ user, updateTeam }) => {
                         {team["teamLeader"] && team["teamLeader"]["lastName"]}
                       </p>
                       <p className="text-muted mb-0 center-text-2">
-                        Team members: {team["teamSize"]}
+                        Ilość pracowników w zespole: {team["teamSize"]}
                       </p>
                     </div>
                   </div>{" "}
@@ -247,7 +249,9 @@ const TeamPage = ({ user, updateTeam }) => {
                       {" "}
                       <div className="center  d-flex flex-col  ">
                         <button
+                          // size="sm"
                           className="btn button-blue-2 d-flex flex-col team-button-container center"
+                          // rounded
                           onClick={editTeamToggleShow}
                         >
                           <span className="fa fa-pencil fa-little"></span>
@@ -276,7 +280,7 @@ const TeamPage = ({ user, updateTeam }) => {
                                   name="name"
                                   value={team["name"]}
                                   onChange={(e) => onChange(e)}
-                                  placeholder="Team name"
+                                  placeholder="Nazwa zespołu"
                                   required
                                 />
                               </MDBCol>
@@ -288,7 +292,7 @@ const TeamPage = ({ user, updateTeam }) => {
                                   name="description"
                                   value={description}
                                   onChange={(e) => onChange(e)}
-                                  placeholder="Team description"
+                                  placeholder="Opis zespołu"
                                   required
                                 />
                               </MDBCol>
@@ -300,10 +304,10 @@ const TeamPage = ({ user, updateTeam }) => {
                                     name="teamLeader"
                                     value={teamLeader}
                                     onChange={(e) => onChange(e)}
-                                    aria-label="Team leader"
+                                    aria-label="Administartor HR"
                                   >
                                     <option value="" disabled selected>
-                                      No users in the system
+                                      Brak użytkowników w systemie
                                     </option>
                                   </select>
                                 ) : (
@@ -313,11 +317,11 @@ const TeamPage = ({ user, updateTeam }) => {
                                     name="teamLeader"
                                     value={teamLeader}
                                     onChange={(e) => onChange(e)}
-                                    placeholder="Team leader"
+                                    placeholder="Leader zespołu"
                                     required
                                   >
                                     <option selected disabled value="">
-                                      Choose team leader
+                                      Wybierz lidera zespołu
                                     </option>
                                     {hrAdmins.map((hrAdmin) => (
                                       <option value={hrAdmin["username"]}>
@@ -337,14 +341,14 @@ const TeamPage = ({ user, updateTeam }) => {
                                 color="secondary"
                                 onClick={editTeamToggleShow}
                               >
-                                Cancel
+                                Anuluj
                               </button>
                               <button
                                 className="btn btn-primary"
                                 color="primary"
                                 onClick={(e) => onUpdateTeam(e)}
                               >
-                                Save
+                                Zapisz
                               </button>
                             </MDBModalFooter>
                           </MDBModalContent>
@@ -355,7 +359,7 @@ const TeamPage = ({ user, updateTeam }) => {
                   {team["employees"] && team["employees"].length === 0 ? (
                     <div className="team-empty-container center">
                       <h3 className=" center">
-                        This team has no members assigned
+                        Ten zepół nie posiada pracowników
                       </h3>
                     </div>
                   ) : (
@@ -445,8 +449,8 @@ const TeamPage = ({ user, updateTeam }) => {
                             ></MDBBtn>
                           </MDBModalHeader>
                           <MDBModalBody>
-                            You intend to delete a team. This action cannot be
-                            undone. Are you sure you want to continue?
+                            Zamierzasz usunąć zespół. Tej czynności nie można
+                            cofnąć. Czy na pewno chcesz kontynuować?
                           </MDBModalBody>
 
                           <MDBModalFooter>
@@ -454,13 +458,13 @@ const TeamPage = ({ user, updateTeam }) => {
                               color="secondary"
                               onClick={deleteTeamToggleShow}
                             >
-                              Cancel
+                              Anuluj
                             </MDBBtn>
                             <MDBBtn
                               color="danger"
                               onClick={(e) => onDeleteTeam()}
                             >
-                              Yes
+                              Tak
                             </MDBBtn>
                           </MDBModalFooter>
                         </MDBModalContent>
@@ -486,8 +490,8 @@ const TeamPage = ({ user, updateTeam }) => {
                         ></MDBBtn>
                       </MDBModalHeader>
                       <MDBModalBody>
-                        The specified team cannot be removed because there are
-                        employees are assigned to it!
+                        Podany zespół nie może być usunięty, ponieważ są do
+                        niego przypisani pracownicy!
                       </MDBModalBody>
 
                       <MDBModalFooter>
@@ -496,7 +500,7 @@ const TeamPage = ({ user, updateTeam }) => {
                           color="secondary"
                           onClick={deleteTeamFailToggleShow}
                         >
-                          I understand
+                          Rozumiem
                         </MDBBtn>
                       </MDBModalFooter>
                     </MDBModalContent>
@@ -517,7 +521,7 @@ const TeamPage = ({ user, updateTeam }) => {
                         ></MDBBtn>
                       </MDBModalHeader>
                       <MDBModalBody>
-                        The specified team has been successfully deleted!
+                        Podany zespół został poprawnie usunięty!
                       </MDBModalBody>
 
                       <MDBModalFooter>
@@ -525,7 +529,7 @@ const TeamPage = ({ user, updateTeam }) => {
                           color="secondary"
                           onClick={(e) => onSuccesDeleteTeam()}
                         >
-                          I understand
+                          Rozumiem
                         </MDBBtn>
                       </MDBModalFooter>
                     </MDBModalContent>

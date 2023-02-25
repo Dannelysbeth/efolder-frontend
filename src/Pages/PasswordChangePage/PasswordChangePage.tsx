@@ -22,12 +22,12 @@ const PasswordChangePage = ({ changePassword }) => {
     setInfoMessage("");
     setErrMsg("");
     if (password == null || password == "") {
-      setErrMsg("Field 'Password' cannot be blank ");
+      setErrMsg("Pole 'Hasło' nie może byc puste ");
     } else if (password != repeatPassword) {
-      setErrMsg("Provided passwords do not match");
+      setErrMsg("Wprowadzone hasła nie są identyczne");
     } else {
       changePassword(password, repeatPassword, username);
-      setInfoMessage("The password was updated successfully");
+      setInfoMessage("Hasło zostało poprawnie zmienione");
       setFormData({ ...formData, password: "", repeatPassword: "" });
     }
   }
@@ -57,7 +57,7 @@ const PasswordChangePage = ({ changePassword }) => {
         ) : null}
         <div className="form-password-change ">
           <MDBRow className="g-3">
-            <h4 className="center">Change password</h4>
+            <h4 className="center">Zmien haslo</h4>
 
             <MDBInput
               type="password"
@@ -65,7 +65,7 @@ const PasswordChangePage = ({ changePassword }) => {
               id="floatingPassword"
               name="password"
               onChange={(e) => onChange(e)}
-              placeholder="Password"
+              placeholder="Hasło"
             />
 
             <MDBInput
@@ -74,14 +74,14 @@ const PasswordChangePage = ({ changePassword }) => {
               id="floatingRepeatPassword"
               name="repeatPassword"
               onChange={(e) => onChange(e)}
-              placeholder="Repeat password"
+              placeholder="Powtórz hasło"
             />
             <button
               className="w-100 btn btn-lg button-blue-2 top-space"
               type="submit"
               onClick={() => submitNewPasswd()}
             >
-              Change password
+              Zmień hasło
             </button>
           </MDBRow>
         </div>
